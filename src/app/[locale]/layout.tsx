@@ -1,25 +1,32 @@
-import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server';
-import { Inter } from "next/font/google";
-import "@/app/globals.css"; // CSS 경로 주의
+import type { Metadata } from "next";
+import localFont from 'next/font/local'; // (기존 폰트 설정 유지)
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import "@/app/globals.css";
+import ChatBot from '@/components/feature/ChatBot'; // 챗봇 컴포넌트
 
-const inter = Inter({ subsets: ["latin"] });
+// ... (폰트나 메타데이터 설정은 기존 코드 유지) ...
+
+// ✅ 타입 수정: params를 Promise로 감싸야 합니다.
+type Props = {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>; 
+};
 
 export default async function LocaleLayout({
   children,
-  params: {locale}
-}: {
-  children: React.ReactNode;
-  params: {locale: string};
-}) {
-  // 현재 언어에 맞는 메시지 가져오기
+  params
+}: Props) {
+  const { locale } = await params;
+
   const messages = await getMessages();
 
   return (
     <html lang={locale}>
-      <body className={inter.className}>
+      <body>
         <NextIntlClientProvider messages={messages}>
           {children}
+          <ChatBot />
         </NextIntlClientProvider>
       </body>
     </html>
