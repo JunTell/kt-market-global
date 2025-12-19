@@ -1,53 +1,70 @@
-'use client'; // 클라이언트 컴포넌트 예시
-
 import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
-import Link from 'next/link';
-import { createClient } from '@/lib/supabase/client';
+import LanguageSelector from '@/components/common/LanguageSelector';
 import ChatBot from '@/components/feature/ChatBot';
+import EligibilityChecker from '@/components/feature/EligibilityChecker';
+import ProcessGuide from '@/components/feature/ProcessGuide';
+import TargetAudience from '@/components/feature/TargetAudience';
+import WhyChooseUs from '@/components/feature/WhyChooseUs';
 
-export default function HomePage() {
-  // json 파일의 'Index' 키를 바라봄
-  const t = useTranslations('Index');
-  const supabase = createClient();
-
-  useEffect(() => {
-    // Supabase 연결 테스트
-    const checkSupabase = async () => {
-      const { data, error } = await supabase.from('test').select('*');
-      console.log('Supabase Check:', data, error);
-    };
-    checkSupabase();
-  }, []);
+export default function Home() {
+  const t = useTranslations('Home');
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-gray-50">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm flex mb-10">
-        <p className="text-xl font-bold text-blue-600">
-          KT Market Global
-        </p>
-        <div className="flex gap-4">
-            {/* 언어 변경 버튼 (실제로는 Select 박스로 구현) */}
-            <Link href="/ko" className="hover:underline">🇰🇷 KO</Link>
-            <Link href="/en" className="hover:underline">🇺🇸 EN</Link>
-            <Link href="/ja" className="hover:underline">🇯🇵 JA</Link>
-            <Link href="/zh" className="hover:underline">🇨🇳 ZH</Link>
-        </div>
-      </div>
+    <main className="min-h-screen bg-background font-sans">
+      <LanguageSelector />
 
-      <div className="text-center">
-        <h1 className="text-4xl font-extrabold mb-4 text-slate-900">
-          {t('title')} 
+      {/* Hero Section */}
+      <section className="pt-12 pb-8 px-5 text-center">
+        <h1 className="text-2xl font-bold text-label-900 mb-3 leading-tight">
+          {t('Hero.title_1')}<br />
+          <span className="text-primary">{t('Hero.title_highlight')}</span>
         </h1>
-        <p className="text-lg text-slate-600">
-          {t('desc')}
+        <p className="text-label-700 text-sm mb-6 max-w-xs mx-auto leading-relaxed">
+          {t('Hero.desc')}
         </p>
-      </div>
-      <ChatBot />
+      </section>
+      <TargetAudience />
+      <ProcessGuide />
+
+      <section className="py-10 bg-background-alt px-4 border-y border-line-200/50">
+        <div className="max-w-md mx-auto text-center mb-6">
+          <span className="text-primary font-bold tracking-wider uppercase text-[10px] mb-1.5 block">
+            {t('Eligibility.badge')}
+          </span>
+          <h2 className="text-xl font-bold text-label-900 mb-2">
+            {t('Eligibility.title')}
+          </h2>
+          <p className="text-label-700 text-xs whitespace-pre-line leading-relaxed">
+            {t('Eligibility.desc')}
+          </p>
+        </div>
+        <EligibilityChecker />
+      </section>
+      <WhyChooseUs />
+
+      <section className="py-12 px-5 bg-background">
+        <div className="grid gap-4 text-center">
+          <div className="p-5 rounded-2xl bg-background-alt border border-transparent hover:border-line-200 transition-colors">
+            <div className="text-3xl mb-2">🚫</div>
+            <h3 className="font-bold text-base mb-1 text-label-900">{t('Features.feat1_title')}</h3>
+            <p className="text-label-500 text-xs whitespace-pre-line leading-relaxed">{t('Features.feat1_desc')}</p>
+          </div>
+          
+          <div className="p-5 rounded-2xl bg-background-alt border border-transparent hover:border-line-200 transition-colors">
+            <div className="text-3xl mb-2">📱</div>
+            <h3 className="font-bold text-base mb-1 text-label-900">{t('Features.feat2_title')}</h3>
+            <p className="text-label-500 text-xs whitespace-pre-line leading-relaxed">{t('Features.feat2_desc')}</p>
+          </div>
+          
+          <div className="p-5 rounded-2xl bg-background-alt border border-transparent hover:border-line-200 transition-colors">
+            <div className="text-3xl mb-2">💬</div>
+            <h3 className="font-bold text-base mb-1 text-label-900">{t('Features.feat3_title')}</h3>
+            <p className="text-label-500 text-xs whitespace-pre-line leading-relaxed">{t('Features.feat3_desc')}</p>
+          </div>
+        </div>
+      </section>
       
-      <button className="mt-10 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition">
-        Get Started
-      </button>
+      <ChatBot />
     </main>
   );
 }

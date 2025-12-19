@@ -1,13 +1,22 @@
 import type { Metadata } from "next";
-import localFont from 'next/font/local'; // (기존 폰트 설정 유지)
+import localFont from 'next/font/local'; 
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import "@/app/globals.css";
-import ChatBot from '@/components/feature/ChatBot'; // 챗봇 컴포넌트
+import ChatBot from '@/components/feature/ChatBot'; 
 
-// ... (폰트나 메타데이터 설정은 기존 코드 유지) ...
+const pretendard = localFont({
+  src: '../fonts/PretendardVariable.woff2', 
+  display: 'swap',
+  weight: "45 920",
+  variable: '--font-pretendard',
+});
 
-// ✅ 타입 수정: params를 Promise로 감싸야 합니다.
+export const metadata: Metadata = {
+  title: "KT Market Admin",
+  description: "KT Market Admin Page",
+};
+
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>; 
@@ -18,16 +27,21 @@ export default async function LocaleLayout({
   params
 }: Props) {
   const { locale } = await params;
-
   const messages = await getMessages();
 
   return (
     <html lang={locale}>
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          {children}
-          <ChatBot />
-        </NextIntlClientProvider>
+      <body 
+        className={`${pretendard.variable} antialiased`}
+        suppressHydrationWarning={true}
+      >
+        
+          <NextIntlClientProvider messages={messages}>
+          <div className="w-full h-full max-w-[440px] min-w-[360px] bg-white min-h-screen shadow-2xl overflow-x-hidden font-sans relative overflow-y-auto scrollbar-hide">
+            {children}
+            <ChatBot />
+          </div>
+          </NextIntlClientProvider>
       </body>
     </html>
   );
