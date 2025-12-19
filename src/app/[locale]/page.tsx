@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
+import ChatBot from '@/components/feature/ChatBot';
 
 export default function HomePage() {
   // json 파일의 'Index' 키를 바라봄
@@ -42,6 +43,7 @@ export default function HomePage() {
           {t('desc')}
         </p>
       </div>
+      <ChatBot />
       
       <button className="mt-10 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition">
         Get Started
