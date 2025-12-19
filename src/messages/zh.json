@@ -1,10 +1,169 @@
 {
-  "Index": {
-    "title": "KT全球市场",
-    "desc": "在世界各地发现最好的智能手机。"
+  "Home": {
+    "Hero": {
+      "title_1": "在韩国开通手机，",
+      "title_highlight": "外国人也可以后付",
+      "desc": "无需复杂材料，只要有外国人登录证，即可办理和韩国人一样的后付套餐。"
+    },
+    "Eligibility": {
+      "badge": "Eligibility Check",
+      "title": "外国人专用套餐计算器",
+      "desc": "只需告知签证种类和滞留时间，10秒内即可查询开通资格和分期额度。"
+    },
+    "Features": {
+      "feat1_title": "拒绝预付卡",
+      "feat1_desc": "告别数据中断的预付卡，使用持续连通的后付套餐。",
+      "feat2_title": "最新手机分期",
+      "feat2_desc": "根据签证条件，可以分期支付设备费用。",
+      "feat3_title": "多语言咨询支持",
+      "feat3_desc": "韩语不流利也没关系，专业顾问为您提供帮助。"
+    }
   },
-  "Nav": {
-    "login": "登录",
-    "cart": "购物车"
+  "Checker": {
+    "Steps": {
+      "arc": "登录证",
+      "visa": "签证",
+      "duration": "期间",
+      "device": "设备"
+    },
+    "ARC": {
+      "title": "您持有<br/>外国人登录证(ARC)吗？",
+      "desc": "必须持有实体登录证才能查询。",
+      "yes": "是的，我有",
+      "no": "没有"
+    },
+    "Visa": {
+      "title": "请选择签证类型",
+      "placeholder": "例如: E7, 留学, D2",
+      "Categories": {
+        "all": "全部",
+        "student": "🎓 留学",
+        "work": "💼 就业",
+        "resident": "🏠 居住",
+        "official": "🤝 公务",
+        "other": "其他"
+      },
+      "no_result": "没有搜索结果"
+    },
+    "Duration": {
+      "title": "剩余滞留期间是？",
+      "options": {
+        "short": "6个月以下",
+        "medium": "6个月 ~ 1年",
+        "long": "1年以上"
+      }
+    },
+    "Device": {
+      "title": "您需要哪种设备？",
+      "desc": "为您寻找最适合的套餐。",
+      "Opt1": {
+        "title": "购买最新智能手机",
+        "desc": "iPhone 16, Galaxy S25 等"
+      },
+      "Opt2": {
+        "title": "购买普及型手机",
+        "desc": "价格低廉性能好的型号"
+      },
+      "Opt3": {
+        "title": "仅开通SIM卡",
+        "desc": "使用现有手机，只办套餐"
+      }
+    },
+    "Result": {
+      "possible": "可以开通",
+      "impossible": "无法开通",
+      "title_suffix": "签证诊断结果",
+      "plan_label": "选择选项",
+      "plan_sim": "仅开通SIM卡 (USIM)",
+      "plan_device": "购买手机设备",
+      "installment_label": "设备分期",
+      "installment_ok": "可以 (OK)",
+      "installment_no": "不可 (NO)",
+      "cta_kakao": "KakaoTalk 咨询",
+      "reset": "重新开始"
+    },
+    "Fail": {
+      "title": "无法查询",
+      "desc": "必须持有外国人登录证<br/>才能进行准确查询。",
+      "retry": "返回首页"
+    }
+  },
+  "Process": {
+    "title": "<span class=\"text-primary\">外国人后付开通，</span><br/>流程如下",
+    "step1_title": "确认外国人登录证(ARC)",
+    "step1_desc": "确认滞留资格 / 有效期\n判断是否可开通后付业务",
+    "step2_title": "手机 + 套餐咨询",
+    "step2_desc": "机型 / 容量 / 使用习惯指南\n推荐外国人专用套餐",
+    "step3_title": "进行后付开通",
+    "step3_desc": "购买手机\n后付套餐开通完成",
+    "badge1": "拒绝\n预付卡",
+    "badge2": "外国人标准\n合法程序",
+    "badge3": "官方通信社\n合作伙伴"
+  },
+  "Target": {
+    "title": "专为这类人群\n提供的服务",
+    "check1": "已持有外国人登录证(ARC)的外国人",
+    "check2": "想在韩国购买手机的人",
+    "check3": "不想用预付卡，只想使用后付套餐的人",
+    "check4": "无需携号转网，希望办理新入网/变更机型/后付的人",
+    "footer": "仅在符合外国人开通标准时提供准确指引"
+  },
+  "WhyUs": {
+    "title": "为什么外国人\n选择在这里开通？",
+    "check1": "拥有丰富的外国人后付开通经验",
+    "check2": "可一次性完成手机购买",
+    "check3": "提前告知不可开通的条件",
+    "check4": "绝无强制附加服务",
+    "check5": "正规通信公司合作伙伴运营",
+    "footer": "相比价格，我们更优先考虑\n安全开通和零失败率"
+  },
+  "Form": {
+    "title": "咨询申请",
+    "subtitle": "请输入您的信息以便我们为您服务",
+    "Steps": {
+      "name": "姓名",
+      "phone": "电话",
+      "carrier": "运营商",
+      "region": "地区",
+      "device": "设备"
+    },
+    "Name": {
+      "label": "请输入您的姓名",
+      "placeholder": "张三"
+    },
+    "Phone": {
+      "label": "请输入您的联系方式",
+      "placeholder": "010-1234-5678",
+      "error": "电话号码格式不正确"
+    },
+    "Carrier": {
+      "label": "当前使用的运营商是？",
+      "options": {
+        "KT": "KT",
+        "SKT": "SKT",
+        "LG": "LG U+",
+        "MVNO": "虚拟运营商(MVNO)",
+        "NONE": "无"
+      }
+    },
+    "Region": {
+      "label": "您居住在哪个地区？",
+      "toggle_manual": "手动输入",
+      "toggle_select": "列表选择",
+      "placeholder_manual": "例如: 首尔 江南区",
+      "placeholder_select": "选择地区"
+    },
+    "Device": {
+      "label": "您有想要的机型吗？",
+      "placeholder": "例如: iPhone 16, Galaxy S25",
+      "hint": "如未填写，我们将为您推荐。"
+    },
+    "Buttons": {
+      "next": "下一步",
+      "submit": "提交申请"
+    },
+    "Toast": {
+      "success": "申请已提交！"
+    }
   }
 }
