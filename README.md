@@ -1,1 +1,1 @@
-# kt-market-global
+# 케이티마켓 글로벌
