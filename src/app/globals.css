@@ -74,51 +74,33 @@
   --radius-xl: var(--radius-xl);
   --radius-2xl: var(--radius-2xl);
 }
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --bg-default: #191F28;
-    --bg-alternative: #111111;
-    --label-900: #FFFFFF;
-    --label-800: #E5E8EB;
-    --label-700: #B0B8C1;
-    --line-200: #333D4B;
-  }
-} */
-
-/* ✅ PC화면에서 앱처럼 보이게 배경색 처리 (선택사항) */
 html {
-  background-color: #F2F4F6; /* 브라우저 배경은 회색 (앱 영역 강조) */
+  background-color: #F2F4F6;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* 브라우저 스크롤 원천 차단 */
+}
+
+/* ✅ 2. body: Flex 중앙 정렬 및 높이 고정 */
+body {
+  background-color: #F2F4F6;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* 이중 차단 */
   display: flex;
   justify-content: center;
-  min-height: 100vh;
-}
-
-body {
-  /* 기존 설정 유지 */
-  background: var(--bg-default);
-  color: var(--label-900);
+  align-items: flex-start; /* top 정렬 (중요) */
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  /* ✅ 반응형 레이아웃 설정 (Desktop 940px / Mobile 360px) */
-  width: 100%;
-  max-width: 940px;      /* 최대 너비 제한 (Desktop) */
-  min-width: 360px;      /* 최소 너비 제한 (Mobile Fold 방지) */
-  margin-inline: auto;   /* 화면 중앙 정렬 */
-  min-height: 100vh;     /* 세로 꽉 채우기 */
-  
-  /* 큰 화면에서 앱 영역 구분감 주기 (그림자) */
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-/* 파이어폭스, IE용 스크롤바 숨김 */
 .scrollbar-hide {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }

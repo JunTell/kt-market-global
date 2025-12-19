@@ -1,10 +1,169 @@
 {
-  "Index": {
-    "title": "KTマーケットグローバル",
-    "desc": "世界中どこでも最高のスマートフォンに出会いましょう。"
+  "Home": {
+    "Hero": {
+      "title_1": "韓国での携帯契約、",
+      "title_highlight": "外国人でも後払い可能です",
+      "desc": "複雑な書類は不要。外国人登録証があれば、韓国人と同じ後払いプランで契約できます。"
+    },
+    "Eligibility": {
+      "badge": "Eligibility Check",
+      "title": "外国人専用プラン診断",
+      "desc": "ビザの種類と滞在期間を入力するだけ。10秒で契約可否と分割払いの限度額を診断します。"
+    },
+    "Features": {
+      "feat1_title": "プリペイドは卒業",
+      "feat1_desc": "データが途切れるプリペイド携帯の代わりに、ずっと使える後払いプランを。",
+      "feat2_title": "最新スマホの分割払い",
+      "feat2_desc": "ビザの条件に応じて、端末代金を分割で支払うことができます。",
+      "feat3_title": "多言語サポート",
+      "feat3_desc": "韓国語が苦手でも大丈夫です。専門の相談員がサポートします。"
+    }
   },
-  "Nav": {
-    "login": "ログイン",
-    "cart": "カート"
+  "Checker": {
+    "Steps": {
+      "arc": "登録証",
+      "visa": "ビザ",
+      "duration": "期間",
+      "device": "端末"
+    },
+    "ARC": {
+      "title": "外国人登録証(ARC)を<br/>お持ちですか？",
+      "desc": "実物の登録証がないと照会できません。",
+      "yes": "はい、あります",
+      "no": "いいえ"
+    },
+    "Visa": {
+      "title": "ビザを選択してください",
+      "placeholder": "例: E7, 留学, D2",
+      "Categories": {
+        "all": "全体",
+        "student": "🎓 留学",
+        "work": "💼 就業",
+        "resident": "🏠 居住",
+        "official": "🤝 公務",
+        "other": "その他"
+      },
+      "no_result": "検索結果がありません"
+    },
+    "Duration": {
+      "title": "残りの滞在期間は？",
+      "options": {
+        "short": "6ヶ月未満",
+        "medium": "6ヶ月 ~ 1年",
+        "long": "1年以上"
+      }
+    },
+    "Device": {
+      "title": "ご希望の端末は？",
+      "desc": "状況に合わせた最適なプランを探します。",
+      "Opt1": {
+        "title": "最新スマホ購入",
+        "desc": "iPhone 16, Galaxy S25 など"
+      },
+      "Opt2": {
+        "title": "格安スマホ購入",
+        "desc": "低価格で性能の良いモデル"
+      },
+      "Opt3": {
+        "title": "SIMのみ契約",
+        "desc": "今のスマホそのままでプランのみ"
+      }
+    },
+    "Result": {
+      "possible": "契約可能",
+      "impossible": "契約不可",
+      "title_suffix": "ビザ診断結果",
+      "plan_label": "選択オプション",
+      "plan_sim": "SIMのみ契約 (USIM)",
+      "plan_device": "携帯電話購入",
+      "installment_label": "端末分割",
+      "installment_ok": "可能 (OK)",
+      "installment_no": "不可 (NO)",
+      "cta_kakao": "カカオトーク相談",
+      "reset": "やり直す"
+    },
+    "Fail": {
+      "title": "照会不可",
+      "desc": "外国人登録証がないと<br/>正確な照会ができません。",
+      "retry": "最初に戻る"
+    }
+  },
+  "Process": {
+    "title": "<span class=\"text-primary\">外国人後払い契約、</span><br/>このような流れで進みます",
+    "step1_title": "外国人登録証(ARC)確認",
+    "step1_desc": "在留資格・有効期限の確認\n後払い契約の可否を判断",
+    "step2_title": "端末 ＋ プラン相談",
+    "step2_desc": "機種・容量・使用パターンの案内\n外国人基準のおすすめプラン提案",
+    "step3_title": "後払い開通手続き",
+    "step3_desc": "携帯電話の購入\n後払いプランの開通完了",
+    "badge1": "プリペイド\nなし",
+    "badge2": "外国人基準\n合法手続き",
+    "badge3": "公式キャリア\nパートナー進行"
+  },
+  "Target": {
+    "title": "このような方に\nおすすめのサービスです",
+    "check1": "外国人登録証(ARC)を既に保有している方",
+    "check2": "韓国で携帯電話を購入したい方",
+    "check3": "プリペイドではなく、後払いプランのみ使いたい方",
+    "check4": "MNPなしで新規・機種変更・後払い契約をご希望の方",
+    "footer": "外国人基準で可能な場合のみ、正確にご案内します"
+  },
+  "WhyUs": {
+    "title": "なぜ外国人は\nここで契約するのですか？",
+    "check1": "外国人の後払い開通実績が多数",
+    "check2": "携帯電話の購入まで一度に可能",
+    "check3": "不可能な条件は事前にご案内",
+    "check4": "不要な付加サービスの強要なし",
+    "check5": "公式通信キャリアパートナー運営",
+    "footer": "価格よりも安全な開通と\n失敗のない進行を優先します"
+  },
+  "Form": {
+    "title": "相談受付",
+    "subtitle": "スムーズな案内のために情報を入力してください",
+    "Steps": {
+      "name": "氏名",
+      "phone": "連絡先",
+      "carrier": "通信会社",
+      "region": "地域",
+      "device": "端末"
+    },
+    "Name": {
+      "label": "お名前を入力してください",
+      "placeholder": "山田 太郎"
+    },
+    "Phone": {
+      "label": "連絡先を入力してください",
+      "placeholder": "010-1234-5678",
+      "error": "正しい電話番号の形式ではありません"
+    },
+    "Carrier": {
+      "label": "現在ご利用中の通信会社は？",
+      "options": {
+        "KT": "KT",
+        "SKT": "SKT",
+        "LG": "LG U+",
+        "MVNO": "格安SIM",
+        "NONE": "なし"
+      }
+    },
+    "Region": {
+      "label": "お住まいの地域は？",
+      "toggle_manual": "直接入力",
+      "toggle_select": "リストから選択",
+      "placeholder_manual": "例: ソウル 江南区",
+      "placeholder_select": "地域を選択"
+    },
+    "Device": {
+      "label": "ご希望の機種はありますか？",
+      "placeholder": "例: iPhone 16, Galaxy S25",
+      "hint": "未入力の場合、おすすめをご案内します。"
+    },
+    "Buttons": {
+      "next": "次へ",
+      "submit": "申し込む"
+    },
+    "Toast": {
+      "success": "申し込みが完了しました！"
+    }
   }
 }
