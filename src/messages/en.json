@@ -1,0 +1,169 @@
+{
+  "Home": {
+    "Hero": {
+      "title_1": "Mobile Plans in Korea,",
+      "title_highlight": "Postpaid Available for Foreigners",
+      "desc": "No complex paperwork. Just your ARC, and you can get the same postpaid plans as locals."
+    },
+    "Eligibility": {
+      "badge": "Eligibility Check",
+      "title": "Plan Calculator for Foreigners",
+      "desc": "Tell us your Visa type and duration. We check eligibility and installment limits in 10 seconds."
+    },
+    "Features": {
+      "feat1_title": "No Prepaid Needed",
+      "feat1_desc": "Switch to a continuous postpaid plan instead of prepaid ones that cut off data.",
+      "feat2_title": "Installments Available",
+      "feat2_desc": "Pay for the latest devices in installments depending on your visa conditions.",
+      "feat3_title": "Multi-language Support",
+      "feat3_desc": "No Korean? No problem. Professional agents are here to help."
+    }
+  },
+  "Checker": {
+    "Steps": {
+      "arc": "ARC",
+      "visa": "Visa",
+      "duration": "Duration",
+      "device": "Device"
+    },
+    "ARC": {
+      "title": "Do you have an<br/>Alien Registration Card?",
+      "desc": "Physical ARC is required for check.",
+      "yes": "Yes, I have",
+      "no": "No"
+    },
+    "Visa": {
+      "title": "Select Visa Type",
+      "placeholder": "Ex: E7, D2, Student...",
+      "Categories": {
+        "all": "All",
+        "student": "🎓 Student",
+        "work": "💼 Work",
+        "resident": "🏠 Resident",
+        "official": "🤝 Official",
+        "other": "Other"
+      },
+      "no_result": "No results found"
+    },
+    "Duration": {
+      "title": "Remaining Stay Duration?",
+      "options": {
+        "short": "Less than 6 months",
+        "medium": "6 months ~ 1 year",
+        "long": "More than 1 year"
+      }
+    },
+    "Device": {
+      "title": "Select Device Option",
+      "desc": "We find the best plan for you.",
+      "Opt1": {
+        "title": "New Flagship Phone",
+        "desc": "iPhone 16, Galaxy S25, etc."
+      },
+      "Opt2": {
+        "title": "Budget Phone",
+        "desc": "Affordable price, good specs"
+      },
+      "Opt3": {
+        "title": "SIM Only (BYOD)",
+        "desc": "Use your own phone"
+      }
+    },
+    "Result": {
+      "possible": "Available",
+      "impossible": "Unavailable",
+      "title_suffix": "Result",
+      "plan_label": "Selected Option",
+      "plan_sim": "SIM Only Plan",
+      "plan_device": "Device Purchase",
+      "installment_label": "Installment",
+      "installment_ok": "Allowed (OK)",
+      "installment_no": "Not Allowed (NO)",
+      "cta_kakao": "Chat on KakaoTalk",
+      "reset": "Start Over"
+    },
+    "Fail": {
+      "title": "Check Unavailable",
+      "desc": "Valid ARC is required<br/>for accurate check.",
+      "retry": "Go Back"
+    }
+  },
+  "Process": {
+    "title": "<span class=\"text-primary\">Postpaid Activation,</span><br/>Process Flow",
+    "step1_title": "Check ARC Validity",
+    "step1_desc": "Verify Visa Type & Expiry\nCheck Postpaid Eligibility",
+    "step2_title": "Device & Plan Consult",
+    "step2_desc": "Guide on Model / Capacity\nRecommend Plans for Foreigners",
+    "step3_title": "Activation Complete",
+    "step3_desc": "Purchase Device\nPostpaid Plan Activated",
+    "badge1": "No Prepaid\nSIMs",
+    "badge2": "100% Legal\nProcess",
+    "badge3": "Official\nPartner"
+  },
+  "Target": {
+    "title": "Recommended For\nThese People",
+    "check1": "Foreigners who already have an ARC",
+    "check2": "Who want to buy a phone in Korea",
+    "check3": "Who want Postpaid (Not Prepaid)",
+    "check4": "Want New/Change Device without porting",
+    "footer": "We only guide cases that are legally possible."
+  },
+  "WhyUs": {
+    "title": "Why Choose Us?",
+    "check1": "Expert in Foreigner Postpaid Plans",
+    "check2": "One-stop Device Purchase",
+    "check3": "Pre-check for Impossible Cases",
+    "check4": "No Forced Add-on Services",
+    "check5": "Official Carrier Partner",
+    "footer": "We prioritize safety and\nsuccessful activation over price."
+  },
+  "Form": {
+    "title": "Application",
+    "subtitle": "Please enter your info for counseling",
+    "Steps": {
+      "name": "Name",
+      "phone": "Phone",
+      "carrier": "Carrier",
+      "region": "Region",
+      "device": "Device"
+    },
+    "Name": {
+      "label": "What is your name?",
+      "placeholder": "John Doe"
+    },
+    "Phone": {
+      "label": "Your phone number?",
+      "placeholder": "010-1234-5678",
+      "error": "Invalid phone number format"
+    },
+    "Carrier": {
+      "label": "Current Carrier?",
+      "options": {
+        "KT": "KT",
+        "SKT": "SKT",
+        "LG": "LG U+",
+        "MVNO": "MVNO",
+        "NONE": "None"
+      }
+    },
+    "Region": {
+      "label": "Where do you live?",
+      "toggle_manual": "Type Manually",
+      "toggle_select": "Select List",
+      "placeholder_manual": "Ex: Seoul Gangnam",
+      "placeholder_select": "Select Region"
+    },
+    "Device": {
+      "label": "Preferred Device?",
+      "placeholder": "Ex: iPhone 16, Galaxy S25",
+      "hint": "We can recommend one if left blank."
+    },
+    "Buttons": {
+      "next": "Next",
+      "submit": "Submit"
+    },
+    "Toast": {
+      "success": "Application submitted successfully!"
+    }
+  }
+}
