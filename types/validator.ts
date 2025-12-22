@@ -21,7 +21,7 @@ type AppPageConfig<Route extends AppRoutes = AppRoutes> = {
 }
 
 type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
-  default: React.ComponentType<LayoutProps<Route>> | ((props: LayoutProps<Route>) => React.ReactNode | Promise<React.ReactNode> | never | void | Promise<void>)
+  default: React.ComponentType<{ params: Promise<ParamMap[Route]> } & any> | ((props: { params: Promise<ParamMap[Route]> } & any) => React.ReactNode | Promise<React.ReactNode> | never | void | Promise<void>)
   generateStaticParams?: (props: { params: ParamMap[Route] }) => Promise<any[]> | any[]
   generateMetadata?: (
     props: { params: Promise<ParamMap[Route]> } & any,
@@ -39,7 +39,8 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 // Validate ../../app/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/">> = Specific
-  const handler = {} as typeof import("../../app/page.js")
+  // @ts-expect-error If the import fails, lint should show an error
+  const handler = {} as typeof import("../../app/page")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -54,7 +55,8 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 // Validate ../../app/layout.tsx
 {
   type __IsExpected<Specific extends LayoutConfig<"/">> = Specific
-  const handler = {} as typeof import("../../app/layout.js")
+  // @ts-expect-error If the import fails, lint should show an error
+  const handler = {} as typeof import("../../app/layout")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
