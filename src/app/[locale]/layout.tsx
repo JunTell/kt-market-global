@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import "@/app/globals.css";
 import ChatBot from '@/components/feature/ChatBot'; 
+import Header from "@/components/layout/Header";
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2', 
@@ -38,7 +39,10 @@ export default async function LocaleLayout({
         
           <NextIntlClientProvider messages={messages}>
           <div className="w-full h-full max-w-[440px] min-w-[360px] bg-white min-h-screen shadow-2xl overflow-x-hidden font-sans relative overflow-y-auto scrollbar-hide">
-            {children}
+            <Header />
+            <main>
+              {children}
+            </main>
             <ChatBot />
           </div>
           </NextIntlClientProvider>
