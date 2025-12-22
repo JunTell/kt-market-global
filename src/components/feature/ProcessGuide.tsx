@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
+import { motion, Variants } from 'framer-motion';
 
 export default function ProcessGuide() {
   const t = useTranslations('Process');
@@ -14,28 +15,79 @@ export default function ProcessGuide() {
 
   const badges = ['badge1', 'badge2', 'badge3'];
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15, // 자식 요소 간 0.15초 간격
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+
+  const badgeContainerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.6,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const badgeVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.4,
+        ease: "backOut" as const, // 뱃지는 살짝 튕기는 느낌으로 등장
+      },
+    },
+  };
+
   return (
-    <section className="py-10 px-5 bg-background-alt">
-      <h2 
+    <section className="py-10 px-5 bg-background-alt overflow-hidden">
+      <motion.h2 
+        initial={{ opacity: 0, y: -10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         className="text-xl font-bold text-label-900 mb-8 whitespace-pre-line leading-tight text-center"
         dangerouslySetInnerHTML={{ __html: t.raw('title') }}
       />
 
-      {/* Steps */}
-      <div className="space-y-3 mb-12">
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="space-y-3 mb-12"
+      >
         {steps.map((step) => (
-          <div 
+          <motion.div 
             key={step.id} 
-            // 원이 60px이므로 전체 카드 높이는 자연스럽게 늘어납니다 (padding 포함 약 76~80px)
+            variants={itemVariants}
             className="bg-background rounded-[32px] py-2 px-3 flex items-center gap-4 shadow-sm border border-line-200/50"
           >
-            {/* ✅ STEP Circle: 60px로 수정 */}
             <div className="shrink-0 w-[60px] h-[60px] rounded-full bg-[#5681E8] text-white flex flex-col items-center justify-center shadow-sm leading-none">
               <span className="text-[11px] font-medium opacity-90 mb-0.5">STEP</span>
               <span className="text-xl font-bold">{step.id}</span>
             </div>
             
-            {/* Text Content */}
             <div className="flex-1 py-1">
               <h3 className="font-bold text-sm text-label-900 mb-1 leading-none">
                 {step.title}
@@ -44,12 +96,17 @@ export default function ProcessGuide() {
                 {step.desc}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
-      {/* Badges: 100px 유지 */}
-      <div className="flex justify-center gap-3">
+      <motion.div 
+        variants={badgeContainerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="flex justify-center gap-3"
+      >
         {badges.map((badge, idx) => {
           let badgeStyle = "";
           if (idx === 0) badgeStyle = "bg-background border-[2.5px] border-[#5681E8] text-label-900"; 
@@ -57,10 +114,12 @@ export default function ProcessGuide() {
           else if (idx === 2) badgeStyle = "bg-[#4A7AFF] text-white border-none"; 
 
           return (
-            <div 
+            <motion.div 
               key={badge} 
+              variants={badgeVariants}
+              whileTap={{ scale: 0.95 }}
               className={cn(
-                "flex flex-col items-center justify-center rounded-full shadow-md text-center p-2 shrink-0",
+                "flex flex-col items-center justify-center rounded-full shadow-md text-center p-2 shrink-0 cursor-pointer",
                 badgeStyle
               )}
               style={{ width: '100px', height: '100px' }} 
@@ -71,10 +130,10 @@ export default function ProcessGuide() {
               )}>
                 {t(`${badge}`)}
               </span>
-            </div>
+            </motion.div>
           );
         })}
-      </div>
+      </motion.div>
     </section>
   );
 }

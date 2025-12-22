@@ -65,7 +65,7 @@ export default function ChatBot() {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-primary text-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_40px_rgba(0,102,255,0.3)] hover:scale-105 transition-all duration-300 flex items-center justify-center group"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-primary text-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_40px_rgba(0,102,255,0.3)] hover:scale-105 transition-all duration-300 flex items-center justify-center group cursor-pointer"
       >
         <MessageCircle size={28} className="group-hover:rotate-12 transition-transform" />
       </button>
@@ -91,7 +91,7 @@ export default function ChatBot() {
           </div>
           <button 
             onClick={() => setIsOpen(false)} 
-            className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors cursor-pointer"
           >
             <X size={18} />
           </button>
@@ -144,14 +144,13 @@ export default function ChatBot() {
             >
               {m.content}
               
-              {/* ✅ [추가] 웰컴 메시지일 경우, 말풍선 안에 버튼 띄우기 */}
               {m.id === 'welcome' && (
                 <div className="mt-4 flex flex-col gap-2">
                   {FAQ_LIST.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => handleSend(item.question)}
-                      className="w-full text-left px-3 py-2.5 bg-gray-50 hover:bg-blue-50 hover:text-primary rounded-xl text-[13px] font-medium transition-colors flex items-center justify-between group"
+                      className="w-full text-left px-3 py-2.5 bg-gray-50 hover:bg-blue-50 hover:text-primary rounded-xl text-[13px] font-medium transition-colors flex items-center justify-between group cursor-pointer"
                     >
                       <span>{item.question}</span>
                       <ChevronRight size={14} className="text-gray-400 group-hover:text-primary transition-colors" />
@@ -167,7 +166,7 @@ export default function ChatBot() {
         <div className="p-4 bg-white border-t border-line-200 relative z-20">
           <div className="relative w-full mb-3 group/chips">
             <div className="absolute top-0 right-0 bottom-0 w-12 bg-linear-to-l from-white to-transparent z-10 pointer-events-none" />
-            <div className="flex gap-2 overflow-x-auto pb-1 px-1 scrollbar-hide snap-x">
+            <div className="flex gap-2 overflow-x-auto py-1 px-1 scrollbar-hide snap-x">
               {FAQ_LIST.map((item) => (
                 <button
                   key={item.id}
@@ -177,7 +176,7 @@ export default function ChatBot() {
                     "bg-white border border-line-200 shadow-sm",
                     "text-[13px] font-medium text-gray-700",
                     "transition-all duration-300 ease-out",
-                    "hover:border-primary hover:text-primary hover:shadow-md hover:-translate-y-0.5 active:scale-95 active:bg-gray-50"
+                    "hover:border-primary hover:text-primary hover:shadow-md hover:-translate-y-0.5 active:scale-95 active:bg-gray-50 cursor-pointer"
                   )}
                 >
                   <span className="text-[10px] opacity-70">✨</span> 
@@ -203,7 +202,7 @@ export default function ChatBot() {
               className={cn(
                 "absolute right-2 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200",
                 input.trim() 
-                  ? "bg-primary text-white shadow-lg shadow-primary/30 hover:scale-110 active:scale-90" 
+                  ? "bg-primary text-white shadow-lg shadow-primary/30 hover:scale-110 active:scale-90 cursor-pointer" 
                   : "bg-gray-200 text-gray-400 cursor-not-allowed"
               )}
               disabled={!input.trim()}
