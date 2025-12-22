@@ -1,5 +1,4 @@
 import { useTranslations } from 'next-intl';
-import LanguageSelector from '@/components/common/LanguageSelector';
 import ChatBot from '@/components/feature/ChatBot';
 import EligibilityChecker from '@/components/feature/EligibilityChecker';
 import ProcessGuide from '@/components/feature/ProcessGuide';
@@ -11,8 +10,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background font-sans">
-      <LanguageSelector />
-
       {/* Hero Section */}
       <section className="pt-12 pb-8 px-5 text-center">
         <h1 className="text-2xl font-bold text-label-900 mb-3 leading-tight">
