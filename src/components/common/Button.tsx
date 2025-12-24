@@ -36,7 +36,8 @@ export const Button = ({
     'bg-cheeseYellow text-white border border-cheeseYellow':
       color === 'cheeseYellow',
     'bg-buttonGrayWhite text-gray1': color === 'grayWhite',
-    'bg-disabledGrayWhite text-gray1': color === 'disabled'
+    'bg-disabledGrayWhite text-gray1': color === 'disabled',
+    'bg-[var(--primary)] text-white border border-[var(--primary)] hover:bg-[var(--secondary)]': color === 'primary',
   });
   const sizeClasses = classNames({
     'px-2 py-0.5 text-xs': size === 'xsmall',

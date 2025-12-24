@@ -23,14 +23,29 @@ type Message = {
   content: string;
 };
 
-export default function ChatBot() {
-  const [isOpen, setIsOpen] = useState(false);
+interface ChatBotProps {
+  externalIsOpen?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
+}
+
+export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) {
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
     { id: 'welcome', role: 'bot', content: '안녕하세요! KT 마켓 글로벌입니다.\n궁금하신 내용을 선택해주세요. 👇' }
   ]);
+
+  const isControlled = externalIsOpen !== undefined;
+  const isOpen = isControlled ? externalIsOpen : internalIsOpen;
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleOpenChange = (value: boolean) => {
+    if (!isControlled) {
+      setInternalIsOpen(value);
+    }
+    onOpenChange?.(value);
+  };
 
   useEffect(() => {
     if (isOpen) setIsAnimating(true);
@@ -64,7 +79,7 @@ export default function ChatBot() {
   if (!isOpen && !isAnimating) {
     return (
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={() => handleOpenChange(true)}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-primary text-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_40px_rgba(0,102,255,0.3)] hover:scale-105 transition-all duration-300 flex items-center justify-center group cursor-pointer"
       >
         <MessageCircle size={28} className="group-hover:rotate-12 transition-transform" />
@@ -90,7 +105,7 @@ export default function ChatBot() {
             </div>
           </div>
           <button 
-            onClick={() => setIsOpen(false)} 
+            onClick={() => handleOpenChange(false)}
             className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors cursor-pointer"
           >
             <X size={18} />

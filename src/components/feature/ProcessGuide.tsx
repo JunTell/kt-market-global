@@ -66,7 +66,7 @@ export default function ProcessGuide() {
         initial={{ opacity: 0, y: -10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-xl font-bold text-label-900 mb-8 whitespace-pre-line leading-tight text-center"
+        className="text-xl font-bold text-label-900 mb-8 leading-tight text-center"
         dangerouslySetInnerHTML={{ __html: t.raw('title') }}
       />
 

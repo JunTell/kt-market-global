@@ -374,7 +374,7 @@ export default function EligibilityChecker() {
                             </motion.div>
                           )}
                           <div className={cn(
-                            "w-10 h-10 rounded-lg flex items-center justify-center transition-colors flex-shrink-0",
+                            "w-10 h-10 rounded-lg flex items-center justify-center transition-colors shrink-0",
                             isSelected ? "bg-primary/10 text-primary" : "bg-background-alt text-label-500 group-hover:bg-primary/10 group-hover:text-primary"
                           )}>
                             {getDeviceIcon(opt.key)}
