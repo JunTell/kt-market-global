@@ -89,7 +89,7 @@
     }
   },
   "Process": {
-    "title": "<span class=\"text-primary\">외국인 후불 개통,</span><br/>이렇게 진행됩니다",
+    "title": "<span class=\"text-primary\">외국인 후불 개통,</span> 이렇게 진행됩니다",
     "step1_title": "외국인등록증(ARC) 확인",
     "step1_desc": "체류자격 / 유효기간 확인\n외국인 후불 개통 가능 여부 판단",
     "step2_title": "휴대폰 + 요금제 상담",
@@ -109,7 +109,7 @@
     "footer": "외국인 기준으로 가능한 경우만 정확히 안내합니다"
   },
   "WhyUs": {
-    "title": "왜 외국인은\n여기서 개통하나요?",
+    "title": "왜 외국인은 여기서 개통하나요?",
     "check1": "외국인 후불 개통 경험 다수",
     "check2": "휴대폰 구매까지 한 번에 가능",
     "check3": "불가능한 조건은 미리 안내",
@@ -165,5 +165,13 @@
     "Toast": {
       "success": "신청이 완료되었습니다!"
     }
+  },
+  "ServiceGuide": {
+    "label": "KT공식대리점 온라인몰",
+    "title": "한국에서 휴대폰 구매,\n외국인도 처음부터\n후불로 가능합니다",
+    "sub_arc": "외국인등록증(ARC) 기준",
+    "sub_benefit": "휴대폰 구매 + 후불 요금제까지 한 번에",
+    "btn_check": "내 상황으로 가능 여부 확인하기",
+    "btn_consult": "외국인 상담 바로하기"
   }
 }

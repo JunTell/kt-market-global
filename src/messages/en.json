@@ -89,7 +89,7 @@
     }
   },
   "Process": {
-    "title": "<span class=\"text-primary\">Postpaid Activation,</span><br/>Process Flow",
+    "title": "<span class=\"text-primary\">Postpaid Activation,</span> Process Flow",
     "step1_title": "Check ARC Validity",
     "step1_desc": "Verify Visa Type & Expiry\nCheck Postpaid Eligibility",
     "step2_title": "Device & Plan Consult",
@@ -165,5 +165,13 @@
     "Toast": {
       "success": "Application submitted successfully!"
     }
+  },
+  "ServiceGuide": {
+    "label": "KT Official Online Store",
+    "title": "Buy a phone in Korea,\nForeigners can use\npostpaid plans from the start",
+    "sub_arc": "Based on Alien Registration Card (ARC)",
+    "sub_benefit": "Phone purchase + Postpaid plan at once",
+    "btn_check": "Check Eligibility",
+    "btn_consult": "Consultation for Foreigners"
   }
 }

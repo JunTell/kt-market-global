@@ -89,7 +89,7 @@
     }
   },
   "Process": {
-    "title": "<span class=\"text-primary\">外国人后付开通，</span><br/>流程如下",
+    "title": "<span class=\"text-primary\">外国人后付开通，</span> 流程如下",
     "step1_title": "确认外国人登录证(ARC)",
     "step1_desc": "确认滞留资格 / 有效期\n判断是否可开通后付业务",
     "step2_title": "手机 + 套餐咨询",
@@ -109,7 +109,7 @@
     "footer": "仅在符合外国人开通标准时提供准确指引"
   },
   "WhyUs": {
-    "title": "为什么外国人\n选择在这里开通？",
+    "title": "为什么外国人 选择在这里开通？",
     "check1": "拥有丰富的外国人后付开通经验",
     "check2": "可一次性完成手机购买",
     "check3": "提前告知不可开通的条件",
@@ -165,5 +165,13 @@
     "Toast": {
       "success": "申请已提交！"
     }
+  },
+  "ServiceGuide": {
+    "label": "KT 官方在线商城",
+    "title": "在韩国购买手机，\n外国人也可以\n一开始就使用后付制",
+    "sub_arc": "基于外国人登录证 (ARC)",
+    "sub_benefit": "手机购买 + 后付套餐一次搞定",
+    "btn_check": "确认是否符合条件",
+    "btn_consult": "外国人咨询"
   }
 }
