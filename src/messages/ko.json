@@ -173,5 +173,31 @@
     "sub_benefit": "휴대폰 구매 + 후불 요금제까지 한 번에",
     "btn_check": "내 상황으로 가능 여부 확인하기",
     "btn_consult": "외국인 상담 바로하기"
+  },
+  "Phone": {
+    "Common": {
+      "loading": "로딩중...",
+      "won": "원",
+      "default_color": "기본색상",
+      "model_loading": "모델명 로딩 중"
+    },
+    "Page": {
+      "select_plan_button": "요금제 선택하고 혜택 확인하기",
+      "submit_application": "신청서 작성하기"
+    },
+    "Order": {
+      "default_country": "Republic of Korea",
+      "join_type_change": "기기변경",
+      "join_type_mnp": "번호이동",
+      "contract_24": "24개월",
+      "telecom_kt": "KT",
+      "funnel_asamo": "asamo",
+      "installment_price": "할부원금",
+      "release_price": "출고가",
+      "monthly_price": "월",
+      "default_requirements": "기존요금제로 기변",
+      "confirm_info_title": "아래 정보가 맞는지\n확인해주세요",
+      "form_alert": "성함과 연락처를 모두 입력해주세요."
+    }
   }
 }

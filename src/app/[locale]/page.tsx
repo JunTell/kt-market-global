@@ -29,9 +29,9 @@ export default function Home() {
         onConsultClick={() => setIsChatOpen(true)}
       />
       
-      <div className="px-5 py-10">
+      <div className="px-4 py-10">
         <ModelList
-          sectionTitle="오늘의 공구" 
+          sectionTitle="휴대폰 모델" 
           planId="ppllistobj_0808" 
         />
       </div>

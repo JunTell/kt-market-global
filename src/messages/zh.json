@@ -173,5 +173,31 @@
     "sub_benefit": "手机购买 + 后付套餐一次搞定",
     "btn_check": "确认是否符合条件",
     "btn_consult": "外国人咨询"
+  },
+  "Phone": {
+    "Common": {
+      "loading": "加载中...",
+      "won": "韩元",
+      "default_color": "默认颜色",
+      "model_loading": "型号加载中"
+    },
+    "Page": {
+      "select_plan_button": "选择套餐并确认优惠",
+      "submit_application": "填写申请表"
+    },
+    "Order": {
+      "default_country": "Republic of Korea",
+      "join_type_change": "更换设备",
+      "join_type_mnp": "携号转网",
+      "contract_24": "24个月",
+      "telecom_kt": "KT",
+      "funnel_asamo": "asamo",
+      "installment_price": "分期本金",
+      "release_price": "出厂价",
+      "monthly_price": "月",
+      "default_requirements": "使用现有套餐更换设备",
+      "confirm_info_title": "请确认以下信息\n是否正确",
+      "form_alert": "请输入您的姓名和联系方式。"
+    }
   }
 }

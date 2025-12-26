@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { MessageCircle, X, Send, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { FAQ_LIST } from '@/lib/faq-data';
 
-// --- 아이콘 컴포넌트 ---
 const KakaoIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
     <path d="M12 3C6.48 3 2 6.48 2 10.77C2 13.54 3.79 16 6.6 17.47L5.6 21.08C5.55 21.28 5.76 21.46 5.95 21.34L10.3 18.52C10.85 18.61 11.42 18.66 12 18.66C17.52 18.66 22 15.18 22 10.89C22 6.6 17.52 3 12 3Z" />
@@ -29,6 +29,9 @@ interface ChatBotProps {
 }
 
 export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) {
+  // ✅ [추가] 현재 경로 가져오기
+  const pathname = usePathname();
+
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [input, setInput] = useState('');
@@ -75,6 +78,11 @@ export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) 
       setMessages((prev) => [...prev, botMsg]);
     }, 600);
   };
+
+  // ✅ [추가] 경로에 '/phone'이 포함되어 있으면 렌더링하지 않음 (null 반환)
+  if (pathname?.includes('/phone')) {
+    return null;
+  }
 
   if (!isOpen && !isAnimating) {
     return (
