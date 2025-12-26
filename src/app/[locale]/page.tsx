@@ -1,4 +1,4 @@
-'use client'; // ✅ Client Component 선언
+'use client';
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
@@ -9,6 +9,7 @@ import TargetAudience from '@/components/feature/TargetAudience';
 import WhyChooseUs from '@/components/feature/WhyChooseUs';
 import { ServiceGuideCard } from '@/components/feature/ServiceGuideCard';
 import { Notice } from '@/components/feature/Notice';
+import ModelList from '@/components/feature/ModelList';
 
 export default function Home() {
   const t = useTranslations('Home');
@@ -28,6 +29,12 @@ export default function Home() {
         onConsultClick={() => setIsChatOpen(true)}
       />
       
+      <div className="px-5 py-10">
+        <ModelList
+          sectionTitle="오늘의 공구" 
+          planId="ppllistobj_0808" 
+        />
+      </div>
       <TargetAudience />
       <ProcessGuide />
       <section 
