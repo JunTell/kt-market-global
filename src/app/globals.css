@@ -74,24 +74,22 @@
   --radius-xl: var(--radius-xl);
   --radius-2xl: var(--radius-2xl);
 }
+
 html {
   background-color: #F2F4F6;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
-  overflow: hidden; /* 브라우저 스크롤 원천 차단 */
 }
 
-/* ✅ 2. body: Flex 중앙 정렬 및 높이 고정 */
 body {
   background-color: #F2F4F6;
   margin: 0;
   padding: 0;
-  height: 100%;
   width: 100%;
-  overflow: hidden; /* 이중 차단 */
+  
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* top 정렬 (중요) */
+  align-items: flex-start;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }

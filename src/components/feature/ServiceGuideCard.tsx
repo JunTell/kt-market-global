@@ -22,7 +22,7 @@ export const ServiceGuideCard = ({
       style={{ backgroundColor: '#3C83EC' }}
     >
       {/* Logo */}
-      <div className="absolute top-4 left-4 bg-white rounded-full px-4 py-1.5 flex justify-start gap-2">
+      {/* <div className="absolute top-4 left-4 bg-white rounded-full px-4 py-1.5 flex justify-start gap-2">
         <Image 
           src="/images/logo.svg"
           alt="KT Market Logo" 
@@ -30,7 +30,7 @@ export const ServiceGuideCard = ({
           height={40}          
           priority             
         />
-      </div>
+      </div> */}
 
       {/* Main Content */}
       <div className="flex flex-col items-center text-center text-white space-y-4 mt-20">

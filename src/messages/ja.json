@@ -173,5 +173,109 @@
     "sub_benefit": "端末購入 + 後払いプランまで一度に",
     "btn_check": "自分の状況を確認する",
     "btn_consult": "外国人相談へ"
+  },
+  "Phone": {
+    "Common": {
+      "loading": "読み込み中...",
+      "won": "ウォン",
+      "default_color": "基本色",
+      "model_loading": "モデル名読み込み中"
+    },
+    "Page": {
+      "select_plan_button": "プランを選択して特典を確認",
+      "submit_application": "申込書作成"
+    },
+    "Order": {
+      "default_country": "Republic of Korea",
+      "join_type_change": "機種変更",
+      "join_type_mnp": "番号ポータビリティ",
+      "contract_24": "24ヶ月",
+      "telecom_kt": "KT",
+      "funnel_asamo": "asamo",
+      "installment_price": "分割払い元金",
+      "release_price": "発売価格",
+      "monthly_price": "月",
+      "default_requirements": "既存プランで機種変更",
+      "confirm_info_title": "以下の情報が正しいか\nご確認ください",
+      "form_alert": "お名前と連絡先を両方入力してください。"
+    },
+    "Carousel": {
+      "no_image": "画像がありません"
+    },
+    "OptionSelector": {
+      "title": "オプション選択",
+      "sold_out": "売り切れ"
+    },
+    "StickyBar": {
+      "final_price_label": "最終特典価格",
+      "submit_button": "申込書を作成する"
+    },
+    "PlanSelector": {
+      "discount_method_title": "割引方法を選択してください",
+      "device_discount": "端末割引",
+      "plan_discount": "プラン割引",
+      "device_discount_info": "KT公示支援金とKTマーケットグローバル追加割引を一緒に受け取れます",
+      "plan_discount_info": "毎月のプラン割引(25%)とKTマーケットグローバル追加割引を一緒に受け取れます",
+      "select_plan_title": "プランを選択してください",
+      "discount_badge": "25% 割引",
+      "data_on_video": "データON ビデオ",
+      "simple_110gb": "5G シンプル 110GB",
+      "discount_suffix": "割引",
+      "release_price": "発売価格",
+      "disclosure_subsidy": "共通支援金 (KT)",
+      "market_subsidy": "KTマーケットグローバル追加支援金",
+      "special_discount": "KTマーケットグローバル年末特価 (番号移行)",
+      "final_purchase_price": "最終購入価格（実感価格）",
+      "plan_info_title": "プラン情報",
+      "plan_name": "名前",
+      "plan_data": "データ",
+      "plan_calls": "通話",
+      "plan_texts": "メッセージ",
+      "monthly_fee": "月額料金",
+      "data_on_video_notice": "データONビデオプランは現在新規加入不可のプランで、既存加入者のみ維持され、新規加入者はデータONビデオプラスに加入されます"
+    },
+    "OrderForm": {
+      "subscriber_info_input": "加入者情報入力",
+      "name_label": "名前",
+      "dob_label": "生年月日 (6桁)",
+      "dob_placeholder": "例: 900101",
+      "dob_error": "生年月日6桁を入力してください",
+      "phone_label": "携帯電話番号 (数字のみ)",
+      "phone_placeholder": "01012345678",
+      "phone_error": "携帯電話番号11桁を入力してください",
+      "country_label": "国籍 (Country)",
+      "requirements_label": "要望事項 (任意)",
+      "requirements_placeholder": "例: 既存のSIMカードをそのまま使用したいです",
+      "save_button": "保存",
+      "subscriber_info_title": "加入者情報",
+      "date_of_birth": "生年月日",
+      "phone_number": "携帯電話番号",
+      "country": "国籍",
+      "requirements": "要望事項",
+      "edit_button": "修正",
+      "input_button": "入力",
+      "activation_info_title": "開通情報",
+      "discount_type": "割引タイプ",
+      "contract": "約定",
+      "join_type": "加入タイプ",
+      "plan_info_title": "プラン情報",
+      "plan_name": "名前",
+      "plan_data": "データ",
+      "monthly_amount": "月額金額",
+      "plan_maintenance_warning_title": "最低6ヶ月間プランを維持してください。",
+      "plan_maintenance_warning_desc": "6ヶ月後にはLTE/5G 47,000ウォン以上のプランに変更できます。",
+      "confirm_button": "確認しました",
+      "terms_title": "個人情報収集及び利用同意 (必須)",
+      "terms_alert": "必須約款に同意してください。",
+      "processing_button": "処理中...",
+      "next_button": "次へ",
+      "discount_type_plan": "選択約定 (プラン割引)",
+      "discount_type_device": "公示支援金 (端末割引)",
+      "terms_description": "1. [必須] 個人情報収集利用同意<br />お客様が入力した個人情報は、KTマーケットが収集、利用及び処理委託時にご本人の同意を得る必要がある情報です。<br />",
+      "terms_purpose": "収集目的",
+      "terms_purpose_value": "商品申込及び相談、開通、配送",
+      "terms_retention": "保有期間",
+      "terms_retention_value": "6ヶ月保管後廃棄"
+    }
   }
 }
