@@ -117,7 +117,7 @@ export default function OrderUserForm(props: OrderUserFormProps) {
   // --- 렌더링: 편집 모드 ---
   if (isEditing) {
     return (
-      <div style={{ ...containerStyle, ...animationStyle, minHeight: '100vh', zIndex: 50, position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, maxWidth: '430px', margin: '0 auto' }}>
+      <div style={{ ...containerStyle, ...animationStyle, minHeight: '100vh', zIndex: 50, position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, maxWidth: '480px', margin: '0 auto', overflowY: 'auto' }}>
         <div style={editHeaderStyle}>
           <div style={backIconStyle} onClick={() => setIsEditing(false)}><ChevronLeft /></div>
           <div style={headerTitleStyle}>가입자 정보 입력</div>

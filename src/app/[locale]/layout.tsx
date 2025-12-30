@@ -38,9 +38,9 @@ export default async function LocaleLayout({
         suppressHydrationWarning={true}
       >
         <NextIntlClientProvider messages={messages}>
-          <div 
-            id="main-scroll-container" 
-            className="w-full h-full max-w-[440px] min-w-[360px] bg-white min-h-screen shadow-2xl overflow-x-hidden font-sans relative overflow-y-auto scrollbar-hide"
+          <div
+            id="main-scroll-container"
+            className="w-full h-full max-w-[480px] min-w-[360px] bg-white min-h-screen shadow-2xl overflow-x-hidden font-sans relative overflow-y-auto scrollbar-hide"
           >
             <ScrollToTop /> 
             

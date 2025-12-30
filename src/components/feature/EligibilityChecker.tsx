@@ -64,7 +64,7 @@ const TapMotion = ({ children, className, onClick }: { children: React.ReactNode
   </motion.button>
 );
 
-type Step = 'arc' | 'visa' | 'duration' | 'device' | 'result' | 'fail';
+type Step = 'arc' | 'visa' | 'duration' | 'device' | 'result' | 'fail' | 'phoneSelection';
 
 export default function EligibilityChecker() {
   const t = useTranslations('Checker');
@@ -174,8 +174,46 @@ export default function EligibilityChecker() {
     return <Smartphone size={20} className="text-primary" />;
   };
 
+  // 휴대폰 기종 데이터 (5종) - GONGGU_MODELS
+  const PHONE_MODELS = [
+    {
+      id: 'aip17-256',
+      name: 'iPhone 17',
+      capacity: '256GB',
+      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/aip17/mist_blue/01.png'
+    },
+    {
+      id: 'sm-m366k',
+      name: 'Jump4',
+      capacity: '128GB',
+      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/sm-m366k/black/01.png'
+    },
+    {
+      id: 'aip16e-128',
+      name: 'iPhone 16e',
+      capacity: '128GB',
+      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/aip16e/white/01.png'
+    },
+    {
+      id: 'sm-s931nk',
+      name: 'Galaxy S25',
+      capacity: '256GB',
+      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/sm-s931nk/ice_blue/01.png'
+    },
+    {
+      id: 'aip17p-256',
+      name: 'iPhone 17 Pro',
+      capacity: '256GB',
+      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/aip17p/silver/01.png'
+    }
+  ];
+
+  const handlePhoneSelect = (modelId: string) => {
+    router.push(`/${locale}/phone?model=${modelId}`);
+  };
+
   return (
-    <div className="w-full max-w-3xl mx-auto my-12 font-sans px-4 md:px-0">
+    <div className="w-full max-w-[480px] mx-auto my-12 font-sans px-4 md:px-0">
       {/* 컨테이너: 높이 축소 (min-h-[460px]), Radius, Shadow 적용 */}
       <div 
         className="bg-background rounded-[24px] shadow-2xl shadow-line-400/20 border border-line-200 overflow-hidden relative min-h-[460px] flex flex-col"
@@ -459,20 +497,79 @@ export default function EligibilityChecker() {
                   </div>
 
                   <div className="space-y-2">
-                    <TapMotion 
-                      onClick={() => router.push('/inquiry')}
-                      className="w-full py-3.5 bg-[#FEE500] text-[#191919] rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-[#FDD835] transition-all shadow-md hover:shadow-lg"
+                    <TapMotion
+                      onClick={() => {
+                        setDirection(1);
+                        setStep('phoneSelection');
+                      }}
+                      className="w-full py-3.5 bg-primary text-label-100 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-secondary transition-all shadow-md hover:shadow-lg"
                     >
-                      <span className="text-lg">📝</span> {t('Result.cta_kakao')} <ChevronRight size={16} />
+                      <Smartphone size={18} /> 휴대폰 기종 고르기 <ChevronRight size={16} />
                     </TapMotion>
-                    <button 
-                      type="button" 
-                      onClick={reset} 
+                    <TapMotion
+                      onClick={() => router.push('/inquiry')}
+                      className="w-full py-3 bg-[#FEE500] text-[#191919] rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-[#FDD835] transition-all"
+                    >
+                      <span className="text-lg">📝</span> {t('Result.cta_kakao')}
+                    </TapMotion>
+                    <button
+                      type="button"
+                      onClick={reset}
                       className="text-[11px] text-label-500 flex items-center justify-center gap-1 mx-auto hover:text-label-700 transition-colors py-1.5 cursor-pointer"
                     >
                       <RotateCcw size={10}/> {t('Result.reset')}
                     </button>
                   </div>
+                </div>
+              </SlideView>
+            )}
+
+            {/* STEP 7: PHONE SELECTION */}
+            {step === 'phoneSelection' && (
+              <SlideView key="phoneSelection" direction={direction}>
+                <div className="flex flex-col h-full">
+                  <div className="text-center mb-5">
+                    <h2 className="text-xl font-bold text-label-900 mb-1.5">휴대폰 기종을 선택하세요</h2>
+                    <p className="text-label-500 text-xs">원하시는 기종을 선택하면 상세 페이지로 이동합니다</p>
+                  </div>
+
+                  <div className="grid gap-3 flex-1 content-start overflow-y-auto pr-1 -mx-1 px-1">
+                    {PHONE_MODELS.map((phone) => (
+                      <TapMotion
+                        key={phone.id}
+                        onClick={() => handlePhoneSelect(phone.id)}
+                        className="w-full p-4 rounded-xl border border-line-200 hover:border-primary hover:bg-tertiary/20 transition-all bg-background shadow-sm flex items-center gap-4 group"
+                      >
+                        <div className="w-20 h-20 rounded-lg bg-background-alt flex items-center justify-center overflow-hidden shrink-0 group-hover:bg-primary/5 transition-colors">
+                          <img
+                            src={phone.image}
+                            alt={phone.name}
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                        <div className="flex-1 text-left">
+                          <div className="font-bold text-base text-label-900 mb-1 group-hover:text-primary transition-colors">
+                            {phone.name}
+                          </div>
+                          <div className="text-xs text-label-500">
+                            {phone.capacity}
+                          </div>
+                        </div>
+                        <ChevronRight size={20} className="text-label-400 group-hover:text-primary transition-colors" />
+                      </TapMotion>
+                    ))}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setDirection(-1);
+                      setStep('result');
+                    }}
+                    className="text-xs text-label-500 flex items-center justify-center gap-1 mx-auto hover:text-label-700 transition-colors py-3 cursor-pointer mt-4"
+                  >
+                    <ChevronRight size={12} className="rotate-180" /> 이전으로
+                  </button>
                 </div>
               </SlideView>
             )}

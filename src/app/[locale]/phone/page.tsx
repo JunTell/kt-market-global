@@ -255,7 +255,7 @@ function PhoneContent() {
     }
 
     return (
-        <div className="w-full max-w-[430px] mx-auto bg-white min-h-screen pb-24">
+        <div className="w-full max-w-[480px] mx-auto bg-white min-h-screen pb-24">
             <JunCarousel urls={store.imageUrls} />
 
             <div className="px-5">

@@ -9,7 +9,7 @@ interface Props {
 
 export default function StickyBar({ finalPrice, onClick, disabled = false, label = "신청서 작성하기" }: Props) {
   return (
-    <div className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[430px] bg-white border-t border-gray-200 p-4 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] z-50">
+    <div className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[480px] bg-white border-t border-gray-200 p-4 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] z-50">
       <div className="flex items-center justify-between gap-4">
         {finalPrice && (
             <div className="flex flex-col">
