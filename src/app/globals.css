@@ -73,25 +73,47 @@
   --radius-lg: var(--radius-lg);
   --radius-xl: var(--radius-xl);
   --radius-2xl: var(--radius-2xl);
-}
-html {
-  background-color: #F2F4F6;
-  height: 100%;
-  width: 100%;
-  overflow: hidden; /* 브라우저 스크롤 원천 차단 */
+
+  /* 🎬 Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  --animate-fadeInUp: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slideUp: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* ✅ 2. body: Flex 중앙 정렬 및 높이 고정 */
+html {
+  background-color: #F2F4F6;
+  min-height: 100%;
+  width: 100%;
+}
+
 body {
   background-color: #F2F4F6;
   margin: 0;
   padding: 0;
-  height: 100%;
   width: 100%;
-  overflow: hidden; /* 이중 차단 */
+  
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* top 정렬 (중요) */
+  align-items: flex-start;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
