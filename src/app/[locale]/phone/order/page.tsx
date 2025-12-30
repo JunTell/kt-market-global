@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { createClient } from "@/lib/supabase/client"
-import { COLOR_MAP, PLAN_DETAILS } from "@/constants/phonedata"
+import { getPlanDetails, getColorMap } from "@/constants/phonedata"
 import OrderProductSummary from "@/components/feature/phone/order/OrderProductSummary"
 import OrderUserForm from "@/components/feature/phone/order/OrderUserForm"
 
@@ -13,6 +13,10 @@ export default function OrderPage() {
   const params = useParams()
   const locale = params.locale as string
   const supabase = createClient()
+
+  // 다국어 데이터
+  const PLAN_DETAILS = getPlanDetails(t)
+  const COLOR_MAP = getColorMap(t)
 
   // 통합 State
   const [store, setStore] = useState({
@@ -189,9 +193,7 @@ export default function OrderPage() {
         phone: finalInput.userPhone,
         device: deviceName,
         funnel: store.funnel || t('Phone.Order.funnel_asamo'),
-
-        country: finalInput.country, // ✅ asamoId 대신 country 저장
-
+        country: finalInput.country,
         company: companyName,
         birthday: finalInput.userDob,
         capacity: store.deviceCapacity,
@@ -203,6 +205,9 @@ export default function OrderPage() {
         planName: finalInput.planName,
         contract: store.contract,
         discountType: store.discountType,
+        ...(sessionData?.['eligibility_data'] && {
+          'eligibility_data': sessionData['eligibility_data']
+        }),
       }
 
       const insertPayload = {
@@ -215,11 +220,19 @@ export default function OrderPage() {
         phone: finalInput.userPhone,
         funnel: store.funnel,
         is_agreed_tos: true,
-        form_data: formDataJson, // 여기에 country 정보 포함됨
+        
+        // ✅ [추가된 컬럼 매핑]
+        country: finalInput.country,       // 국적
+        plan_name: finalInput.planName,    // 요금제
+        join_type: store.joinType,         // 가입유형
+        contract: store.contract,          // 약정
+        discount_type: store.discountType, // 할인유형
+        requirements: finalInput.requirements, // 요청사항
+        
+        form_data: formDataJson, 
       }
-
-      // ✅ [변경] 'foreigner' 테이블 사용
-      const { error } = await supabase.from("foreigner").insert([insertPayload])
+      
+      const { error } = await supabase.from("foreigner_order").insert([insertPayload])
       if (error) throw error
 
       // 세션 저장

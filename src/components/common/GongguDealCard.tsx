@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
+import { useTranslations, useLocale } from "next-intl"
 
 type Mode = "device" | "plan"
 
@@ -20,13 +21,10 @@ interface Props {
   imageUrls?: string[]
 }
 
-const formatPrice = (value: number) =>
-  new Intl.NumberFormat("ko-KR").format(value)
-
 export default function GongguDealCard(props: Props) {
   const {
     title,
-    // capacity, 
+    // capacity,
     originPrice,
     disclosureSubsidy,
     ktmarketDiscount,
@@ -40,6 +38,11 @@ export default function GongguDealCard(props: Props) {
   } = props
 
   const router = useRouter()
+  const t = useTranslations()
+  const locale = useLocale()
+
+  const formatPrice = (value: number) =>
+    new Intl.NumberFormat(locale === 'ko' ? 'ko-KR' : 'en-US').format(value)
 
   // ✅ [수정] specialDiscount(7만원) 제외
   const totalDeviceDiscount =
@@ -53,13 +56,13 @@ export default function GongguDealCard(props: Props) {
       ? Math.max(0, originPrice - totalDeviceDiscount)
       : Math.max(0, originPrice - totalPlanDiscount)
 
-  const originPriceText = `${formatPrice(originPrice)}원`
-  const salePriceText = `${formatPrice(salePrice)}원`
+  const originPriceText = `${formatPrice(originPrice)}${t('Phone.Common.won')}`
+  const salePriceText = `${formatPrice(salePrice)}${t('Phone.Common.won')}`
 
   const description =
     mode === "device"
-      ? `총 ${formatPrice(totalDeviceDiscount)}원 할인\n(공통+KT마켓 글로벌)`
-      : `+ 선택약정 요금할인25%`
+      ? `${t('Phone.GongguDealCard.total_discount')} ${formatPrice(totalDeviceDiscount)}${t('Phone.Common.won')} ${t('Phone.GongguDealCard.discount_suffix')}\n${t('Phone.GongguDealCard.discount_source')}`
+      : t('Phone.GongguDealCard.plan_discount_desc')
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault()
@@ -122,12 +125,12 @@ export default function GongguDealCard(props: Props) {
           </div>
 
           <div className="text-[12px] text-label-500 line-through mt-0.5">
-            정가 {originPriceText}
+            {t('Phone.GongguDealCard.original_price')} {originPriceText}
           </div>
 
           <div className="mt-1 flex items-center gap-1.5 flex-wrap">
             <div className="text-[10px] font-bold px-1.5 py-[3px] rounded-md bg-status-error text-white whitespace-nowrap">
-              Global 특가
+              {t('Phone.GongguDealCard.global_special')}
             </div>
             <span className="text-[20px] font-bold text-label-900 tracking-[-0.5px]">
               {salePriceText}

@@ -4,7 +4,8 @@ import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { MessageCircle, X, Send, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { FAQ_LIST } from '@/lib/faq-data';
+import { getFAQList } from '@/lib/faq-data';
+import { useTranslations } from 'next-intl';
 
 const KakaoIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -29,14 +30,16 @@ interface ChatBotProps {
 }
 
 export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) {
-  // ✅ [추가] 현재 경로 가져오기
+  const t = useTranslations();
   const pathname = usePathname();
+
+  const FAQ_LIST = getFAQList(t);
 
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
-    { id: 'welcome', role: 'bot', content: '안녕하세요! KT 마켓 글로벌입니다.\n궁금하신 내용을 선택해주세요. 👇' }
+    { id: 'welcome', role: 'bot', content: t('ChatBot.welcome_message') }
   ]);
 
   const isControlled = externalIsOpen !== undefined;
@@ -71,9 +74,9 @@ export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) 
       const found = FAQ_LIST.find((item) => 
         item.keywords.some((k) => text.includes(k)) || text === item.question
       );
-      const botContent = found 
-        ? found.answer 
-        : "죄송합니다. 관련된 정보를 찾지 못했어요. 😅\n아래 칩을 눌러보시거나 '요금', '지원금' 등으로 질문해주세요.";
+      const botContent = found
+        ? found.answer
+        : t('ChatBot.not_found');
       const botMsg: Message = { id: (Date.now() + 1).toString(), role: 'bot', content: botContent };
       setMessages((prev) => [...prev, botMsg]);
     }, 600);
@@ -106,10 +109,10 @@ export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) 
         {/* 1. Header */}
         <div className="px-5 py-4 border-b border-line-200 flex justify-between items-center bg-white/50 backdrop-blur-sm sticky top-0 z-10">
           <div className="flex flex-col">
-            <span className="font-bold text-gray-900 text-[17px]">KT Market Support</span>
+            <span className="font-bold text-gray-900 text-[17px]">{t('ChatBot.header_title')}</span>
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-status-correct animate-pulse" />
-              <span className="text-xs text-gray-500 font-medium">평균 30분 내 응답</span>
+              <span className="text-xs text-gray-500 font-medium">{t('ChatBot.response_time')}</span>
             </div>
           </div>
           <button 
@@ -132,13 +135,13 @@ export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) 
                 <KakaoIcon />
               </div>
               <div className="flex flex-col">
-                <span className="text-[11px] font-semibold text-black/60 leading-none mb-0.5">카톡 상담</span>
-                <span className="text-xs font-bold text-[#191919]">카카오톡</span>
+                <span className="text-[11px] font-semibold text-black/60 leading-none mb-0.5">{t('ChatBot.kakao_chat')}</span>
+                <span className="text-xs font-bold text-[#191919]">{t('ChatBot.kakao_name')}</span>
               </div>
             </a>
 
-            <a 
-              href="https://wa.me/821012345678" 
+            <a
+              href="https://wa.me/821012345678"
               target="_blank" rel="noreferrer"
               className="flex items-center gap-3 p-3 rounded-2xl bg-[#25D366] hover:bg-[#20bd5a] transition-all shadow-sm hover:shadow-md cursor-pointer group"
             >
@@ -146,8 +149,8 @@ export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) 
                 <WhatsAppIcon />
               </div>
               <div className="flex flex-col">
-                <span className="text-[11px] font-semibold text-white/80 leading-none mb-0.5">Global</span>
-                <span className="text-xs font-bold text-white">WhatsApp</span>
+                <span className="text-[11px] font-semibold text-white/80 leading-none mb-0.5">{t('ChatBot.global_label')}</span>
+                <span className="text-xs font-bold text-white">{t('ChatBot.whatsapp_name')}</span>
               </div>
             </a>
           </div>
@@ -218,7 +221,7 @@ export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) 
               className="w-full h-12 bg-gray-50 rounded-[18px] pl-5 pr-12 text-[14px] text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all border border-transparent focus:border-primary/50 shadow-inner"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="궁금한 내용을 입력해주세요..."
+              placeholder={t('ChatBot.input_placeholder')}
             />
             <button 
               type="submit" 

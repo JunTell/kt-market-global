@@ -10,6 +10,7 @@ import {
 } from "@/lib/asamo-utils"
 import GongguDealCard from "../common/GongguDealCard"
 import { motion, AnimatePresence } from "framer-motion"
+import { useTranslations } from "next-intl"
 
 // --- Constants ---
 const GONGGU_MODELS = [
@@ -47,13 +48,14 @@ interface Props {
 }
 
 export default function ModelList({
-  sectionTitle = "오늘의 공구",
+  sectionTitle,
   planId = "ppllistobj_0808",
   userCarrier: initialCarrier,
   registrationType: initialRegType,
 }: Props) {
+  const t = useTranslations()
   const supabase = createClient()
-  
+
   // 브랜드 선택 상태 (기본값: iphone)
   const [brand, setBrand] = React.useState<Brand>("iphone")
   
@@ -125,7 +127,7 @@ export default function ModelList({
         setError(null)
       } catch (err: any) {
         console.error("Fetch Error:", err)
-        setError("공구 정보를 불러오지 못했습니다.")
+        setError(t('Phone.ModelList.error'))
       } finally {
         setLoading(false)
       }
@@ -230,7 +232,7 @@ export default function ModelList({
       {/* 섹션 타이틀 */}
       <div className="text-left">
         <h2 className="text-[26px] font-bold text-label-900 m-0 mb-4">
-          {sectionTitle}
+          {sectionTitle || t('Phone.ModelList.section_title')}
         </h2>
       </div>
 
@@ -245,15 +247,15 @@ export default function ModelList({
       <div className="text-[13px] text-label-700 mt-2 flex items-center">
         <span>
           {registrationType === "chg"
-            ? "이용중인 KT 번호 그대로 핸드폰만 바꿀 수 있어요"
-            : `쓰던 번호 그대로 ${selectedCarrier} 통신사를 KT로 바꿀 수 있어요`}
+            ? t('Phone.ModelList.kt_device_change_desc')
+            : t('Phone.ModelList.mnp_desc', { carrier: selectedCarrier })}
         </span>
       </div>
 
       {/* 2. 브랜드 선택 (iPhone vs Galaxy) */}
       <div className="mt-[30px] mb-[10px]">
         <h3 className="text-[20px] font-bold text-label-900 mb-3 mt-0">
-          원하는 모델을 선택해주세요
+          {t('Phone.ModelList.select_model_title')}
         </h3>
 
         <div className="w-full h-[50px] rounded-xl bg-background-alt p-1 flex box-border">
@@ -281,7 +283,7 @@ export default function ModelList({
 
         <div className="text-[13px] text-label-700 mt-2 flex items-center">
           <span className="mr-1">ℹ️</span>
-          공통지원금과 KT마켓 글로벌 지원금을 함께 받아요
+          {t('Phone.ModelList.subsidy_info')}
         </div>
       </div>
 
@@ -289,7 +291,7 @@ export default function ModelList({
       <div className="flex flex-col gap-4 mt-[30px]">
         {loading && (
           <div className="text-center p-10 text-label-500 text-sm">
-            정보를 불러오는 중...
+            {t('Phone.ModelList.loading')}
           </div>
         )}
         {error && (
@@ -299,7 +301,7 @@ export default function ModelList({
         )}
         {!loading && !error && filteredDeals.length === 0 && (
            <div className="text-center p-10 text-label-500 text-sm">
-             해당하는 모델이 없습니다.
+             {t('Phone.ModelList.no_models')}
            </div>
         )}
         {!loading &&
@@ -328,8 +330,8 @@ export default function ModelList({
 
 function CarrierSelector({
   selected,
-  isOpen, 
-  onToggle, 
+  isOpen,
+  onToggle,
   onChange,
 }: {
   selected: string
@@ -337,6 +339,7 @@ function CarrierSelector({
   onToggle: () => void
   onChange: (v: string) => void
 }) {
+  const t = useTranslations()
 
   const handleSelect = (val: string) => {
     onChange(val)
@@ -350,9 +353,9 @@ function CarrierSelector({
         className="w-full h-[60px] bg-background rounded-[20px] border border-line-200 flex items-center justify-between px-6 cursor-pointer transition-all duration-200 hover:bg-background-alt hover:border-line-400 hover:shadow-sm active:scale-[0.99]"
       >
         <div className="flex gap-2 text-[16px]">
-          <span className="text-label-500 font-medium">현재 통신사</span>
+          <span className="text-label-500 font-medium">{t('Phone.ModelList.current_carrier')}</span>
           <span className="text-label-900 font-bold">
-            {selected} 사용 중
+            {selected} {t('Phone.ModelList.using_carrier')}
           </span>
         </div>
         <svg width="14" height="8" viewBox="0 0 14 8" fill="none">
@@ -398,8 +401,8 @@ function CarrierSelector({
               onClick={(e) => e.stopPropagation()}
             >
               <div className="text-center pt-1">
-                <h2 className="text-[22px] font-bold text-label-900 mb-1.5">통신사를 선택해주세요</h2>
-                <p className="text-[14px] text-label-500">현재 이용 중인 통신사를 선택해주세요</p>
+                <h2 className="text-[22px] font-bold text-label-900 mb-1.5">{t('Phone.ModelList.select_carrier_title')}</h2>
+                <p className="text-[14px] text-label-500">{t('Phone.ModelList.select_carrier_desc')}</p>
               </div>
               
               <div className="flex flex-col gap-2.5">

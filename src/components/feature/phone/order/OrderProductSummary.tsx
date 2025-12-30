@@ -11,68 +11,19 @@ interface Props {
 
 export default function OrderProductSummary({ image, title, spec, price }: Props) {
   return (
-    <div style={summaryContainerStyle}>
-      <div style={imageWrapperStyle}>
+    <div className="w-full rounded-[20px] flex items-center gap-5 box-border py-2.5">
+      <div className="w-20 h-20 flex items-center justify-center bg-white rounded-xl overflow-hidden shrink-0 shadow-sm border border-[#E5E8EB]">
         {image ? (
-          <img src={image} alt={title} style={imgStyle} />
+          <img src={image} alt={title} className="w-[90%] h-[90%] object-contain" />
         ) : (
-          <div style={{ width: "100%", height: "100%", backgroundColor: "#eee" }} />
+          <div className="w-full h-full bg-[#eee]" />
         )}
       </div>
-      <div style={infoContainerStyle}>
-        <div style={titleStyle}>{title}</div>
-        <div style={specStyle}>{spec}</div>
-        <div style={priceStyle}>{price}</div>
+      <div className="flex flex-col justify-center gap-1">
+        <div className="text-lg font-bold text-[#1d1d1f]">{title}</div>
+        <div className="text-sm text-[#86868b] font-medium">{spec}</div>
+        <div className="text-base font-bold text-blue-500 mt-0.5">{price}</div>
       </div>
     </div>
   )
-}
-
-// --- Styles ---
-const summaryContainerStyle: React.CSSProperties = {
-  width: "100%",
-  borderRadius: "20px",
-  display: "flex",
-  alignItems: "center",
-  gap: "20px",
-  boxSizing: "border-box",
-}
-const imageWrapperStyle: React.CSSProperties = {
-  width: "80px",
-  height: "80px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundColor: "#FFFFFF",
-  borderRadius: "12px",
-  overflow: "hidden",
-  flexShrink: 0,
-  boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
-}
-const imgStyle: React.CSSProperties = {
-  width: "90%",
-  height: "90%",
-  objectFit: "contain",
-}
-const infoContainerStyle: React.CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  gap: "4px",
-}
-const titleStyle: React.CSSProperties = {
-  fontSize: "18px",
-  fontWeight: 700,
-  color: "#1d1d1f",
-}
-const specStyle: React.CSSProperties = {
-  fontSize: "14px",
-  color: "#86868b",
-  fontWeight: 500,
-}
-const priceStyle: React.CSSProperties = {
-  fontSize: "16px",
-  fontWeight: 700,
-  color: "#3B82F6",
-  marginTop: "2px",
 }

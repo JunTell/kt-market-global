@@ -504,7 +504,7 @@ export default function EligibilityChecker() {
                       }}
                       className="w-full py-3.5 bg-primary text-label-100 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-secondary transition-all shadow-md hover:shadow-lg"
                     >
-                      <Smartphone size={18} /> 휴대폰 기종 고르기 <ChevronRight size={16} />
+                      <Smartphone size={18} /> {t('ChatBot.select_phone')} <ChevronRight size={16} />
                     </TapMotion>
                     <TapMotion
                       onClick={() => router.push('/inquiry')}

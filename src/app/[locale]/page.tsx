@@ -12,7 +12,7 @@ import { Notice } from '@/components/feature/Notice';
 import ModelList from '@/components/feature/ModelList';
 
 export default function Home() {
-  const t = useTranslations('Home');
+  const t = useTranslations();
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   const scrollToChecker = () => {
@@ -31,8 +31,8 @@ export default function Home() {
       
       <div className="px-4 py-10">
         <ModelList
-          sectionTitle="휴대폰 모델" 
-          planId="ppllistobj_0808" 
+          sectionTitle={t('Phone.ModelList.section_title')}
+          planId="ppllistobj_0808"
         />
       </div>
       <TargetAudience />
@@ -43,13 +43,13 @@ export default function Home() {
       >
         <div className="max-w-md mx-auto text-center mb-6">
           <span className="text-primary font-bold tracking-wider uppercase text-[10px] mb-1.5 block">
-            {t('Eligibility.badge')}
+            {t('Home.Eligibility.badge')}
           </span>
           <h2 className="text-xl font-bold text-label-900 mb-2">
-            {t('Eligibility.title')}
+            {t('Home.Eligibility.title')}
           </h2>
           <p className="text-label-700 text-xs whitespace-pre-line leading-relaxed">
-            {t('Eligibility.desc')}
+            {t('Home.Eligibility.desc')}
           </p>
         </div>
         <EligibilityChecker />

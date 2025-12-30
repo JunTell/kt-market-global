@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useCallback, useEffect } from "react"
+import { useTranslations } from "next-intl"
 
 // SVG 아이콘
 const ArrowLeftSVG = () => (
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export default function JunCarousel({ urls = [] }: Props) {
+  const t = useTranslations()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [touchStartX, setTouchStartX] = useState<number | null>(null)
   const [touchStartY, setTouchStartY] = useState<number | null>(null)
@@ -86,7 +88,7 @@ export default function JunCarousel({ urls = [] }: Props) {
   }
 
   if (urls.length === 0) {
-    return <div className="w-full h-[300px] bg-gray-100 flex items-center justify-center text-gray-400">이미지가 없습니다</div>
+    return <div className="w-full h-[300px] bg-gray-100 flex items-center justify-center text-gray-400">{t('Phone.Carousel.no_image')}</div>
   }
 
   return (

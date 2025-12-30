@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
+import { useTranslations } from "next-intl"
 
 export interface ColorOption {
   label: string
@@ -33,6 +34,7 @@ export default function OptionSelector({
   onSelectCapacity,
   onSelectColor,
 }: Props) {
+  const t = useTranslations()
 
   // 품절 로직 계산
   const processedOptions = useMemo(() => {
@@ -71,7 +73,7 @@ export default function OptionSelector({
 
   return (
     <div className="w-full flex flex-col gap-3 py-6 box-border">
-      <h3 className="text-[20px] font-bold text-[#1d1d1f] mb-2 mt-0">옵션 선택</h3>
+      <h3 className="text-[20px] font-bold text-[#1d1d1f] mb-2 mt-0">{t('Phone.OptionSelector.title')}</h3>
 
       {/* 용량 선택 */}
       <div className="flex bg-[#F3F4F6] p-1 rounded-[14px] mb-4 w-full box-border">
@@ -124,7 +126,7 @@ export default function OptionSelector({
 
               <div className="flex items-center justify-end min-w-[60px]">
                 {isDisabled ? (
-                  <span className="bg-[#F3F4F6] text-[#86868b] text-[13px] px-2.5 py-1.5 rounded-lg font-semibold">품절</span>
+                  <span className="bg-[#F3F4F6] text-[#86868b] text-[13px] px-2.5 py-1.5 rounded-lg font-semibold">{t('Phone.OptionSelector.sold_out')}</span>
                 ) : isSelected ? (
                   <div className="w-7 h-7 rounded-full bg-[#0071e3] flex items-center justify-center">
                     <svg width="14" height="10" viewBox="0 0 14 10" fill="none">

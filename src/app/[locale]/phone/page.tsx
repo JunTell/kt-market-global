@@ -11,7 +11,7 @@ import OptionSelector, { CapacityOption, ColorOption } from "@/components/featur
 import PlanSelector from "@/components/feature/phone/PlanSelector"
 import StickyBar from "@/components/feature/phone/StickyBar"
 import { usePhoneStore } from "@/store/usePhoneStore"
-import { COLOR_MAP, MODEL_VARIANTS, PLAN_METADATA } from "@/constants/phonedata"
+import { MODEL_VARIANTS, getPlanMetadata, getColorMap } from "@/constants/phonedata"
 
 export default function PhonePage() {
   const t = useTranslations()
@@ -34,8 +34,12 @@ function PhoneContent() {
 
     const [step, setStep] = useState<1 | 2>(1)
     const [loading, setLoading] = useState(true)
-    
-    const lastFetchedKey = useRef<string>("") 
+
+    const lastFetchedKey = useRef<string>("")
+
+    // 다국어 데이터
+    const PLAN_METADATA = getPlanMetadata(t)
+    const COLOR_MAP = getColorMap(t) 
 
     const [availableColors, setAvailableColors] = useState<string[]>([])
     const [colorImages, setColorImages] = useState<Record<string, string[]>>({})
