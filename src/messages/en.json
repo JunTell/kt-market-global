@@ -376,5 +376,22 @@
     "faq_holy_q": "Official Store vs 'Holy Land' Shops",
     "faq_holy_a": "🏢 [Official vs Holy Land]\n\n• Official Store: Full price, high trust, freebies (case, etc.)\n• Holy Land: Very cheap by giving sales commission to customers as cash-back. Requires visiting shops and prefers cash payment.",
     "select_phone": "Select Phone Model"
+  },
+  "Footer": {
+    "terms_of_service": "Terms of Service",
+    "privacy_policy": "Privacy Policy",
+    "customer_center": "Support",
+    "company_name": "Juntell Co., Ltd.",
+    "ceo_label": "CEO",
+    "ceo_name": "Gildong Hong",
+    "business_no_label": "Registration No",
+    "business_no_value": "000-00-00000",
+    "address_label": "Address",
+    "address_value": "1F Juntell Bldg, Seoul, Korea",
+    "cs_label": "CS Center",
+    "cs_phone": "02-0000-0000",
+    "email_label": "Email",
+    "email_value": "help@ktmarket.co.kr",
+    "cs_hours": "Hours: Mon-Fri 10:00 - 19:00"
   }
 }

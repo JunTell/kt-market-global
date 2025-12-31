@@ -376,5 +376,22 @@
     "faq_holy_q": "공식 대리점과 성지의 차이",
     "faq_holy_a": "🏢 [대리점 vs 성지]\n\n• 공식 대리점: 정가 판매, 신뢰도 높음, 사은품(케이스 등) 증정.\n• 성지: 판매 수당을 고객에게 현금(페이백)으로 돌려줘서 기기값이 매우 쌈. 다만 발품을 팔아야 하고 현금 완납을 선호함.",
     "select_phone": "휴대폰 기종 고르기"
+  },
+  "Footer": {
+    "terms_of_service": "이용약관",
+    "privacy_policy": "개인정보처리방침",
+    "customer_center": "고객센터",
+    "company_name": "(주)준텔",
+    "ceo_label": "대표",
+    "ceo_name": "홍길동",
+    "business_no_label": "사업자등록번호",
+    "business_no_value": "000-00-00000",
+    "address_label": "주소",
+    "address_value": "서울특별시 어딘가 준텔 빌딩 1층",
+    "cs_label": "고객센터",
+    "cs_phone": "02-0000-0000",
+    "email_label": "이메일",
+    "email_value": "help@ktmarket.co.kr",
+    "cs_hours": "운영시간: 평일 10:00 - 19:00 (주말/공휴일 휴무)"
   }
 }
