@@ -14,8 +14,8 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-line-200 px-5 py-2">
       <div className="flex justify-between items-center">
         <Link href={`/${locale}`} className="flex items-center transition-opacity hover:opacity-80">
-          <Image 
-            src="images/logo.svg"      
+          <Image
+            src="/images/logo.svg"
             alt="KT Market Logo" 
             width={80}          
             height={60}          
