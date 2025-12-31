@@ -3,6 +3,8 @@
 import * as React from "react"
 import { useRouter } from "next/navigation"
 import { useTranslations, useLocale } from "next-intl"
+import { formatPrice } from "@/utils/format"
+import { calculateTotalPlanDiscount } from "@/utils/priceCalculation"
 
 type Mode = "device" | "plan"
 
@@ -41,9 +43,6 @@ export default function GongguDealCard(props: Props) {
   const t = useTranslations()
   const locale = useLocale()
 
-  const formatPrice = (value: number) =>
-    new Intl.NumberFormat(locale === 'ko' ? 'ko-KR' : 'en-US').format(value)
-
   // ✅ [수정] specialDiscount(7만원) 제외
   const totalDeviceDiscount =
     disclosureSubsidy + ktmarketDiscount 
@@ -56,12 +55,12 @@ export default function GongguDealCard(props: Props) {
       ? Math.max(0, originPrice - totalDeviceDiscount)
       : Math.max(0, originPrice - totalPlanDiscount)
 
-  const originPriceText = `${formatPrice(originPrice)}${t('Phone.Common.won')}`
-  const salePriceText = `${formatPrice(salePrice)}${t('Phone.Common.won')}`
+  const originPriceText = `${formatPrice(originPrice, locale)}${t('Phone.Common.won')}`
+  const salePriceText = `${formatPrice(salePrice, locale)}${t('Phone.Common.won')}`
 
   const description =
     mode === "device"
-      ? `${t('Phone.GongguDealCard.total_discount')} ${formatPrice(totalDeviceDiscount)}${t('Phone.Common.won')} ${t('Phone.GongguDealCard.discount_suffix')}\n${t('Phone.GongguDealCard.discount_source')}`
+      ? `${t('Phone.GongguDealCard.total_discount')} ${formatPrice(totalDeviceDiscount, locale)}${t('Phone.Common.won')} ${t('Phone.GongguDealCard.discount_suffix')}\n${t('Phone.GongguDealCard.discount_source')}`
       : t('Phone.GongguDealCard.plan_discount_desc')
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {

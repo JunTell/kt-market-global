@@ -30,11 +30,28 @@ export default function ResultPage() {
     image: ""
   }
 
-  const userInfo = orderData?.user || {
+  // user-info에서 저장된 사용자 정보를 우선 사용
+  const getSavedUserInfo = () => {
+    if (typeof window !== 'undefined') {
+      try {
+        const userInfoStr = sessionStorage.getItem("user-info")
+        if (userInfoStr) {
+          return JSON.parse(userInfoStr)
+        }
+      } catch (e) {
+        console.error("Failed to load user-info:", e)
+      }
+    }
+    return null
+  }
+
+  const savedUserInfo = getSavedUserInfo()
+  const userInfo = savedUserInfo || orderData?.user || {
     userName: "",
     userDob: "",
     userPhone: "",
     country: t('Phone.Order.default_country'),
+    requirements: "",
   }
 
   const planInfo = orderData?.plan || {
@@ -72,6 +89,7 @@ export default function ResultPage() {
             userDob={userInfo.userDob}
             userPhone={userInfo.userPhone}
             country={userInfo.country}
+            requirements={userInfo.requirements}
             // 기타 props
             joinType={orderData?.joinType || t('Phone.Order.join_type_change')}
             contract={orderData?.contract || t('Phone.Order.contract_24')}
