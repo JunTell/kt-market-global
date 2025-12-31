@@ -6,7 +6,7 @@ import { createClient } from "@/lib/supabase/client"
 import { calcKTmarketSubsidy } from "@/lib/asamo-utils"
 import { useTranslations } from "next-intl"
 import { formatPrice } from "@/utils/format"
-import { parsePhoneModel, getDBModelKey, isSpecialDiscountModel } from "@/utils/phoneModel"
+import { parsePhoneModel, getDBModelKey } from "@/utils/phoneModel"
 import { calculateFinalDevicePrice } from "@/utils/priceCalculation"
 
 import JunCarousel from "@/components/feature/phone/JunCarousel"
@@ -101,7 +101,7 @@ function PhoneContent() {
                 const mergedPlans = PLAN_METADATA.map(meta => {
                     const dbData = dbPlans.find(p => p.plan_id === meta.dbId)
                     const price = meta.fixedPrice || dbData?.price || 0
-                    let marketSubsidy = calcKTmarketSubsidy(meta.dbId, price, subsidies, dbModelKey, regType)
+                    const marketSubsidy = calcKTmarketSubsidy(meta.dbId, price, subsidies, dbModelKey, regType)
                     
                     return {
                         id: meta.uuid,
@@ -160,6 +160,7 @@ function PhoneContent() {
         }
 
         fetchData()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [urlModel, prefix, capacity, colorFromUrl])
 
     // --- 핸들러 ---

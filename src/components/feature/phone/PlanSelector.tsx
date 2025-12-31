@@ -3,7 +3,7 @@
 import React from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { formatPrice, formatManWon } from "@/utils/format"
-import { calculateFinalDevicePrice, calculatePlanMonthlyDiscount, calculateDiscountedMonthlyPrice, calculateTotalDeviceDiscount } from "@/utils/priceCalculation"
+import { calculateFinalDevicePrice, calculateDiscountedMonthlyPrice, calculateTotalDeviceDiscount } from "@/utils/priceCalculation"
 
 export interface PlanData {
   id: string
@@ -48,7 +48,6 @@ export default function PlanSelector({
 
   // 가격 계산
   const currentPlanPrice = selectedPlan?.price ?? 0
-  const currentMonthlyDiscount = calculatePlanMonthlyDiscount(currentPlanPrice)
   const currentDiscountedPrice = calculateDiscountedMonthlyPrice(currentPlanPrice, discountMode)
   const currentDisclosureSubsidy = selectedPlan?.disclosureSubsidy ?? 0
   const currentMarketSubsidy = ktMarketDiscount
@@ -112,7 +111,6 @@ export default function PlanSelector({
             const is69PlanGroup = plan.id === "plan_69" || plan.price === 69000
             const isSelected = plan.id === selectedPlanId || (is69PlanGroup && (selectedPlanId === "plan_69_v" || selectedPlanId === "plan_69"))
 
-            const mDiscount = calculatePlanMonthlyDiscount(plan.price)
             const discountedMonthly = calculateDiscountedMonthlyPrice(plan.price, discountMode)
             const rightTextValue = calculateTotalDeviceDiscount({
               plan,

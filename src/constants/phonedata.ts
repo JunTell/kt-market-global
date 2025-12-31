@@ -12,8 +12,16 @@ export const getPlanMetadata = (t: TranslationFunction) => [
   { uuid: "plan_90_v", dbId: "ppllistobj_0811", data: t('Phone.Plans.unlimited'), name: t('Phone.Plans.plan_90_v_name'), description: t('Phone.Plans.plan_90_v_desc'), calls: t('Phone.Plans.unlimited'), texts: t('Phone.Plans.unlimited'), fixedPrice: 90000 },
 ]
 
+interface PlanDetails {
+  name: string
+  data: string
+  calls: string
+  texts: string
+  price: number
+}
+
 // 다국어 요금제 상세 정보 생성 함수
-export const getPlanDetails = (t: TranslationFunction): Record<string, any> => ({
+export const getPlanDetails = (t: TranslationFunction): Record<string, PlanDetails> => ({
   plan_59: { name: t('Phone.Plans.plan_59_name'), data: "25GB + 5Mbps", calls: `200${t('Phone.Plans.minutes')}`, texts: `200${t('Phone.Plans.messages')}`, price: 59000 },
   plan_69: { name: t('Phone.Plans.plan_69_name'), data: "100GB + 5Mbps", calls: t('Phone.Plans.unlimited'), texts: t('Phone.Plans.unlimited'), price: 69000 },
   plan_69_v: { name: t('Phone.Plans.plan_69_v_name'), data: "110GB + 5Mbps", calls: t('Phone.Plans.unlimited'), texts: t('Phone.Plans.unlimited'), price: 69000 },
@@ -42,7 +50,7 @@ export const PLAN_METADATA = [
   { uuid: "plan_90_v", dbId: "ppllistobj_0811", data: "무제한", name: "넷플릭스 초이스 베이직", description: "완전 무제한 ", calls: "무제한", texts: "무제한", fixedPrice: 90000 },
 ]
 
-export const PLAN_DETAILS: Record<string, any> = {
+export const PLAN_DETAILS: Record<string, PlanDetails> = {
   plan_59: { name: "5G 웰컴 5", data: "25GB + 5Mbps", calls: "200분", texts: "200건", price: 59000 },
   plan_69: { name: "데이터ON 비디오", data: "100GB + 5Mbps", calls: "무제한", texts: "무제한", price: 69000 },
   plan_69_v: { name: "5G 심플 110GB", data: "110GB + 5Mbps", calls: "무제한", texts: "무제한", price: 69000 },

@@ -142,8 +142,8 @@ export function toKorean(key: MappingKey, value: string): string {
  * @param data - 변환할 데이터 객체
  * @returns 한국어로 변환된 데이터 객체
  */
-export function toKoreanBatch(data: Record<string, any>): Record<string, any> {
-  const result: Record<string, any> = { ...data }
+export function toKoreanBatch(data: Record<string, unknown>): Record<string, unknown> {
+  const result: Record<string, unknown> = { ...data }
 
   const keyMapping: Record<string, MappingKey> = {
     company: 'company',

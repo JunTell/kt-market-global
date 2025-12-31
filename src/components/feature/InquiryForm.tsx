@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft } from 'lucide-react';
@@ -21,7 +21,6 @@ export default function InquiryForm() {
   
   const [step, setStep] = useState(1);
   const [direction, setDirection] = useState(1);
-  const [isMounted, setIsMounted] = useState(false);
 
   // Form States
   const [name, setName] = useState("");
@@ -29,26 +28,22 @@ export default function InquiryForm() {
   const [carrier, setCarrier] = useState("");
   const [region, setRegion] = useState("");
   const [isManualRegion, setIsManualRegion] = useState(false);
-  const [device, setDevice] = useState("");
-
-  // 초기 로드 시 sessionStorage에서 기기 정보 가져오기
-  useEffect(() => {
-    setIsMounted(true);
-    const storedData = sessionStorage.getItem('eligibility_data');
-    if (storedData) {
-      try {
+  const [device, setDevice] = useState(() => {
+    // 초기 로드 시 sessionStorage에서 기기 정보 가져오기
+    try {
+      const storedData = sessionStorage.getItem('eligibility_data');
+      if (storedData) {
         const parsed = JSON.parse(storedData);
         // 저장된 devicePlan이 'sim_only'가 아니라면 초기값으로 설정
         if (parsed.devicePlan && !parsed.devicePlan.includes('sim')) {
-          setDevice(parsed.devicePlan);
+          return parsed.devicePlan;
         }
-      } catch (e) {
-        console.error('Session parse error', e);
       }
+    } catch (e) {
+      console.error('Session parse error', e);
     }
-  }, []);
-
-  if (!isMounted) return null;
+    return "";
+  });
 
   // 유효성 검사
   const isStepValid = () => {

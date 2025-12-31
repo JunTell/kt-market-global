@@ -3,6 +3,19 @@ import { create } from 'zustand'
 export type DiscountMode = "device" | "plan"
 export type RegistrationType = "chg" | "mnp"
 
+export interface Plan {
+  id: string
+  dbId: string
+  data: string
+  name: string
+  description: string
+  calls: string
+  texts: string
+  price: number
+  disclosureSubsidy: number
+  marketSubsidy: number
+}
+
 interface PhoneState {
   // 기본 정보
   model: string
@@ -10,15 +23,15 @@ interface PhoneState {
   capacity: string
   color: string
   originPrice: number
-  
+
   // 이미지
   imageUrl: string
   imageUrls: string[]
-  
+
   // 데이터
-  plans: any[]
+  plans: Plan[]
   selectedPlanId: string
-  subsidies: any
+  subsidies: unknown
   
   // 설정
   discountMode: DiscountMode
