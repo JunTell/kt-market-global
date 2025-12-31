@@ -7,36 +7,36 @@ export default function Footer() {
 
   return (
     // 배경색을 테마 변수(bg-alternative)로 변경하여 라이트/다크 모드 모두 대응
-    <footer className="w-full bg-[var(--bg-alternative)] border-t border-[var(--line-200)] pt-10 pb-12">
+    <footer className="w-full bg-background-alt border-t border-line-200 pt-10 pb-12">
       <div className="max-w-[1200px] mx-auto px-5">
         
         {/* 상단: 약관 및 정책 링크 */}
         <div className="flex flex-wrap gap-x-6 gap-y-2 mb-6 text-sm">
-          <Link href="/terms" className="text-[var(--label-700)] hover:text-[var(--label-900)] transition-colors">
+          <Link href="/terms" className="text-label-700 hover:text-label-900 transition-colors">
             {t('terms_of_service')}
           </Link>
-          <Link href="/privacy" className="text-[var(--label-900)] font-bold hover:underline transition-colors">
+          <Link href="/privacy" className="text-label-900 font-bold hover:underline transition-colors">
             {t('privacy_policy')}
           </Link>
-          <Link href="/inquiry" className="text-[var(--label-700)] hover:text-[var(--label-900)] transition-colors">
+          <Link href="/inquiry" className="text-label-700 hover:text-label-900 transition-colors">
             {t('customer_center')}
           </Link>
         </div>
 
-        <div className="h-[1px] bg-[var(--line-200)] w-full mb-6" />
+        <div className="h-px bg-line-200 w-full mb-6" />
 
         {/* 중단: 회사 정보 (로고 + 텍스트) */}
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
           
           {/* 회사 상세 정보 */}
-          <div className="flex flex-col gap-1 text-xs text-[var(--label-700)] leading-relaxed">
+          <div className="flex flex-col gap-1 text-xs text-label-700 leading-relaxed">
             <div className="mb-2">
-              <span className="font-bold text-[var(--label-800)] text-sm">{t('company_name')}</span>
+              <span className="font-bold text-label-800 text-sm">{t('company_name')}</span>
             </div>
             
             <p>
               <span>{t('ceo_label')}: {t('ceo_name')}</span>
-              <span className="mx-2 text-[var(--line-400)]">|</span>
+              <span className="mx-2 text-line-400">|</span>
               <span>{t('business_no_label')}: {t('business_no_value')}</span>
             </p>
             
@@ -46,11 +46,11 @@ export default function Footer() {
             
             <p>
               <span>{t('cs_label')}: {t('cs_phone')}</span>
-              <span className="mx-2 text-[var(--line-400)]">|</span>
+              <span className="mx-2 text-line-400">|</span>
               <span>{t('email_label')}: {t('email_value')}</span>
             </p>
             
-            <p className="mt-1 text-[var(--label-500)]">
+            <p className="mt-1 text-label-500">
               {t('cs_hours')}
             </p>
           </div>
@@ -68,7 +68,7 @@ export default function Footer() {
         </div>
 
         {/* 하단: Copyright */}
-        <div className="mt-8 text-[11px] text-[var(--label-500)]">
+        <div className="mt-8 text-[11px] text-label-500">
           {/* Hydration Error 방지를 위해 연도를 2025로 고정 */}
           COPYRIGHT © 2025 KT MARKET GLOBAL. ALL RIGHTS RESERVED.
         </div>
