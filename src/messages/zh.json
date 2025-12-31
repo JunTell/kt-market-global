@@ -178,6 +178,7 @@
     "Common": {
       "loading": "加载中...",
       "won": "韩元",
+      "man": "万韩元",
       "default_color": "默认颜色",
       "model_loading": "型号加载中"
     },

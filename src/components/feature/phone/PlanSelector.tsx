@@ -47,7 +47,9 @@ export default function PlanSelector({
   const selectedPlan = plans.find((p) => p.id === selectedPlanId)
 
   // 가격 계산
-  const currentPlanPrice = selectedPlan?.price ?? 0
+  const isNetflixSelected = selectedPlanId === "plan_90_v"
+  const additionalNetflixCost = isNetflixSelected ? 4450 : 0
+  const currentPlanPrice = (selectedPlan?.price ?? 0) + additionalNetflixCost
   const currentDiscountedPrice = calculateDiscountedMonthlyPrice(currentPlanPrice, discountMode)
   const currentDisclosureSubsidy = selectedPlan?.disclosureSubsidy ?? 0
   const currentMarketSubsidy = ktMarketDiscount
@@ -111,7 +113,12 @@ export default function PlanSelector({
             const is69PlanGroup = plan.id === "plan_69" || plan.price === 69000
             const isSelected = plan.id === selectedPlanId || (is69PlanGroup && (selectedPlanId === "plan_69_v" || selectedPlanId === "plan_69"))
 
-            const discountedMonthly = calculateDiscountedMonthlyPrice(plan.price, discountMode)
+            // 넷플릭스 초이스 베이직이면 4,450원 추가
+            const isNetflixPlan = plan.id === "plan_90_v"
+            const additionalCost = isNetflixPlan ? 4450 : 0
+            const totalPlanPrice = plan.price + additionalCost
+
+            const discountedMonthly = calculateDiscountedMonthlyPrice(totalPlanPrice, discountMode)
             const rightTextValue = calculateTotalDeviceDiscount({
               plan,
               discountMode,
@@ -120,6 +127,7 @@ export default function PlanSelector({
               ktMarketDiscount
             })
             const formattedPrice = formatPrice(plan.price, locale)
+            const formattedAdditionalCost = formatPrice(additionalCost, locale)
             const formattedDiscountedMonthly = formatPrice(discountedMonthly, locale)
             const formattedRightTextValue = formatManWon(rightTextValue, t('Phone.Common.man'), t('Phone.Common.won'), locale)
 
@@ -143,7 +151,9 @@ export default function PlanSelector({
                     {isSelected && <div className="w-2.5 h-2.5 rounded-full bg-white" />}
                   </div>
                   <div className="flex flex-col gap-1">
-                    <div className="text-xl font-bold text-[#1d1d1f]">{formattedPrice}{t('Phone.Common.won')}</div>
+                    <div className="text-xl font-bold text-[#1d1d1f]">
+                      {isNetflixPlan ? `${formattedPrice}${t('Phone.Common.won')}+${formattedAdditionalCost}${t('Phone.Common.won')}` : `${formattedPrice}${t('Phone.Common.won')}`}
+                    </div>
 
                     {is69PlanGroup ? (
                       <div onClick={(e) => e.stopPropagation()}>

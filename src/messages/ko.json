@@ -178,6 +178,7 @@
     "Common": {
       "loading": "로딩중...",
       "won": "원",
+      "man": "만원",
       "default_color": "기본색상",
       "model_loading": "모델명 로딩 중"
     },
