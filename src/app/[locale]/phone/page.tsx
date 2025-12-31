@@ -5,6 +5,9 @@ import { useRouter, useSearchParams, useParams } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 import { calcKTmarketSubsidy } from "@/lib/asamo-utils"
 import { useTranslations } from "next-intl"
+import { formatPrice } from "@/utils/format"
+import { parsePhoneModel, getDBModelKey, isSpecialDiscountModel } from "@/utils/phoneModel"
+import { calculateFinalDevicePrice } from "@/utils/priceCalculation"
 
 import JunCarousel from "@/components/feature/phone/JunCarousel"
 import OptionSelector, { CapacityOption, ColorOption } from "@/components/feature/phone/OptionSelector"
@@ -46,23 +49,11 @@ function PhoneContent() {
 
     // URL 파싱
     const urlModel = searchParams.get("model") || "aip17-256"
-    const parts = urlModel.split("-")
-    
-    let prefix = parts[0]
-    let capacityIndex = 1
-
-    if (prefix === "sm") {
-        prefix = `${parts[0]}-${parts[1]}` 
-        capacityIndex = 2
-    }
-
-    const defaultCapacity = MODEL_VARIANTS[prefix]?.[0] || "256"
-    const capacity = parts[capacityIndex] || defaultCapacity
-    const colorFromUrl = parts.slice(capacityIndex + 1).join("-")
+    const { prefix, capacity, color: colorFromUrl } = parsePhoneModel(urlModel)
 
     useEffect(() => {
         const fetchData = async () => {
-            const dbModelKey = `${prefix}-${capacity}`
+            const dbModelKey = getDBModelKey(prefix, capacity)
 
             if (lastFetchedKey.current === dbModelKey && availableColors.length > 0) {
                 const selectedColor = colorFromUrl && availableColors.includes(colorFromUrl) 
@@ -90,23 +81,15 @@ function PhoneContent() {
                 const carrier = pref.userCarrier || ""
                 const planTable = regType === "chg" ? "device_plans_chg" : "device_plans_mnp"
 
-                // 삼성 모델 예외 처리
-                let queryModelKey = dbModelKey
-                if (prefix === "sm-m366k") {
-                    queryModelKey = "sm-m366k"
-                } else if (prefix === "sm-s931nk") {
-                    if (capacity === "512") queryModelKey = "sm-s931nk512"
-                    else queryModelKey = "sm-s931nk"
-                }
-
+                // DB 쿼리 (getDBModelKey에서 이미 예외 처리됨)
                 const [deviceRes, subsidyRes, planRes] = await Promise.all([
-                    supabase.from("devices").select("*").eq("model", queryModelKey).maybeSingle(),
-                    supabase.from("ktmarket_subsidy").select("*").eq("model", queryModelKey).maybeSingle(),
-                    supabase.from(planTable).select("plan_id, price, disclosure_subsidy").eq("model", queryModelKey).in("plan_id", PLAN_METADATA.map(p => p.dbId))
+                    supabase.from("devices").select("*").eq("model", dbModelKey).maybeSingle(),
+                    supabase.from("ktmarket_subsidy").select("*").eq("model", dbModelKey).maybeSingle(),
+                    supabase.from(planTable).select("plan_id, price, disclosure_subsidy").eq("model", dbModelKey).in("plan_id", PLAN_METADATA.map(p => p.dbId))
                 ])
 
                 if (!deviceRes.data) {
-                    console.error("Device not found for:", queryModelKey)
+                    console.error("Device not found for:", dbModelKey)
                     throw new Error("Device not found")
                 }
 
@@ -239,20 +222,16 @@ function PhoneContent() {
 
     // --- 가격 계산 ---
     const currentPlan = store.plans.find(p => p.id === store.selectedPlanId)
-    const isSpecial = prefix.startsWith("aip17") || prefix.startsWith("aipa")
-    const specialDiscount = isSpecial && store.registrationType === "mnp" ? 70000 : 0
-    
-    let finalPriceInfo = { finalDevicePrice: 0 } 
-    if (currentPlan) {
-       const mSubsidy = currentPlan.marketSubsidy || 0
-       const dSubsidy = currentPlan.disclosureSubsidy || 0
-       
-       if (store.discountMode === 'device') {
-           finalPriceInfo.finalDevicePrice = Math.max(0, store.originPrice - mSubsidy - dSubsidy - specialDiscount)
-       } else {
-           finalPriceInfo.finalDevicePrice = Math.max(0, store.originPrice - mSubsidy - specialDiscount)
-       }
-    }
+
+    const finalDevicePrice = calculateFinalDevicePrice({
+        originPrice: store.originPrice,
+        plan: currentPlan,
+        discountMode: store.discountMode,
+        registrationType: store.registrationType,
+        modelPrefix: prefix
+    })
+
+    const finalPriceInfo = { finalDevicePrice }
 
     if (loading && !store.title) {
         return <div className="min-h-screen flex items-center justify-center">{t('Phone.Common.loading')}</div>
@@ -289,19 +268,19 @@ function PhoneContent() {
 
                 {step === 2 && (
                     <>
-                         <PlanSelector 
+                         <PlanSelector
                              plans={store.plans}
                              selectedPlanId={store.selectedPlanId}
                              discountMode={store.discountMode}
                              originPrice={store.originPrice}
                              ktMarketDiscount={0}
                              registrationType={store.registrationType}
-                             isSpecialModel={isSpecial}
+                             modelPrefix={prefix}
                              onSelectPlan={(id) => store.setStore({ selectedPlanId: id })}
                              onChangeMode={(mode) => store.setStore({ discountMode: mode })}
                          />
                          <StickyBar
-                            finalPrice={`${new Intl.NumberFormat(locale === 'ko' ? 'ko-KR' : 'en-US').format(finalPriceInfo.finalDevicePrice)}${t('Phone.Common.won')}`}
+                            finalPrice={`${formatPrice(finalPriceInfo.finalDevicePrice, locale)}${t('Phone.Common.won')}`}
                             label={t('Phone.Page.submit_application')}
                             onClick={handleOrder}
                          />

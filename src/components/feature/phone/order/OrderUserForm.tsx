@@ -170,8 +170,8 @@ export default function OrderUserForm(props: OrderUserFormProps) {
       </div>
       <div className="flex flex-col gap-4 mb-2.5 pl-1">
         <InfoRow label={t('Phone.OrderForm.name_label')} value={formData.userName} hasButton={!props.isReadOnly} buttonLabel={infoButtonLabel} onEdit={() => setIsEditing(true)} />
-        <InfoRow label={t('Phone.OrderForm.date_of_birth')} value={isDobValid ? formData.userDob : null} />
-        <InfoRow label={t('Phone.OrderForm.phone_number')} value={isPhoneValid ? formData.userPhone : null} />
+        <InfoRow label={t('Phone.OrderForm.date_of_birth')} value={props.isReadOnly ? formData.userDob : (isDobValid ? formData.userDob : null)} />
+        <InfoRow label={t('Phone.OrderForm.phone_number')} value={props.isReadOnly ? formData.userPhone : (isPhoneValid ? formData.userPhone : null)} />
         <InfoRow label={t('Phone.OrderForm.country')} value={formData.country} />
         {formData.requirements && <InfoRow label={t('Phone.OrderForm.requirements')} value={formData.requirements} />}
       </div>

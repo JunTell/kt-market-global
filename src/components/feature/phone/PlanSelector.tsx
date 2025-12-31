@@ -2,6 +2,8 @@
 
 import React from "react"
 import { useTranslations, useLocale } from "next-intl"
+import { formatPrice, formatManWon } from "@/utils/format"
+import { calculateFinalDevicePrice, calculatePlanMonthlyDiscount, calculateDiscountedMonthlyPrice, calculateTotalDeviceDiscount } from "@/utils/priceCalculation"
 
 export interface PlanData {
   id: string
@@ -24,11 +26,8 @@ interface Props {
   onSelectPlan: (id: string) => void
   onChangeMode: (mode: "device" | "plan") => void
   registrationType: "chg" | "mnp"
-  isSpecialModel: boolean
+  modelPrefix: string
 }
-
-const formatPrice = (n: number, locale: string) => new Intl.NumberFormat(locale === 'ko' ? 'ko-KR' : 'en-US').format(n)
-const formatManWon = (n: number, t: any, locale: string) => n >= 10000 ? `${Math.floor(n / 10000)}` : `${formatPrice(n, locale)}${t('Phone.Common.won')}`
 
 export default function PlanSelector({
   plans,
@@ -39,7 +38,7 @@ export default function PlanSelector({
   onSelectPlan,
   onChangeMode,
   registrationType,
-  isSpecialModel
+  modelPrefix
 }: Props) {
   const t = useTranslations()
   const locale = useLocale()
@@ -49,21 +48,20 @@ export default function PlanSelector({
 
   // 가격 계산
   const currentPlanPrice = selectedPlan?.price ?? 0
-  const currentMonthlyDiscount = Math.floor((currentPlanPrice * 0.25) / 10) * 10
-  const currentDiscountedPrice = currentPlanPrice - currentMonthlyDiscount
-
+  const currentMonthlyDiscount = calculatePlanMonthlyDiscount(currentPlanPrice)
+  const currentDiscountedPrice = calculateDiscountedMonthlyPrice(currentPlanPrice, discountMode)
   const currentDisclosureSubsidy = selectedPlan?.disclosureSubsidy ?? 0
-  const currentMarketSubsidy = selectedPlan?.marketSubsidy ?? ktMarketDiscount
-  
-  // ✅ [수정] MNP 7만원 추가 할인 제거 (항상 0으로 설정)
-  const specialDiscount = 0 
+  const currentMarketSubsidy = ktMarketDiscount
+  const specialDiscount = 0 // 특별 할인은 현재 적용하지 않음
 
-  let finalPrice = 0
-  if (isDeviceMode) {
-    finalPrice = Math.max(0, originPrice - currentDisclosureSubsidy - currentMarketSubsidy - specialDiscount)
-  } else {
-    finalPrice = Math.max(0, originPrice - currentMarketSubsidy - specialDiscount)
-  }
+  const finalPrice = calculateFinalDevicePrice({
+    originPrice,
+    plan: selectedPlan,
+    discountMode,
+    registrationType,
+    modelPrefix,
+    ktMarketDiscount
+  })
 
   // 69 요금제 필터링 (화면엔 하나만 표시하고 내부에서 select로 분기)
   const visiblePlans = plans.filter((p) => p.id !== "plan_69_v")
@@ -113,13 +111,19 @@ export default function PlanSelector({
           {visiblePlans.map((plan) => {
             const is69PlanGroup = plan.id === "plan_69" || plan.price === 69000
             const isSelected = plan.id === selectedPlanId || (is69PlanGroup && (selectedPlanId === "plan_69_v" || selectedPlanId === "plan_69"))
-            
-            const mDiscount = Math.floor((plan.price * 0.25) / 10) * 10
-            const discountedMonthly = plan.price - mDiscount
-            const rightTextValue = isDeviceMode ? (plan.disclosureSubsidy || 0) + (plan.marketSubsidy || 0) + specialDiscount : (plan.marketSubsidy || 0)
+
+            const mDiscount = calculatePlanMonthlyDiscount(plan.price)
+            const discountedMonthly = calculateDiscountedMonthlyPrice(plan.price, discountMode)
+            const rightTextValue = calculateTotalDeviceDiscount({
+              plan,
+              discountMode,
+              registrationType,
+              modelPrefix,
+              ktMarketDiscount
+            })
             const formattedPrice = formatPrice(plan.price, locale)
             const formattedDiscountedMonthly = formatPrice(discountedMonthly, locale)
-            const formattedRightTextValue = formatManWon(rightTextValue, t, locale)
+            const formattedRightTextValue = formatManWon(rightTextValue, t('Phone.Common.man'), t('Phone.Common.won'), locale)
 
             let dropdownValue = "video"
             if (selectedPlanId === "plan_69_v") dropdownValue = "simple"

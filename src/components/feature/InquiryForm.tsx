@@ -5,14 +5,7 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-
-// 전화번호 포맷팅 유틸리티 (간단 버전)
-const formatPhoneNumber = (value: string) => {
-  const numbers = value.replace(/[^\d]/g, '');
-  if (numbers.length <= 3) return numbers;
-  if (numbers.length <= 7) return `${numbers.slice(0, 3)}-${numbers.slice(3)}`;
-  return `${numbers.slice(0, 3)}-${numbers.slice(3, 7)}-${numbers.slice(7, 11)}`;
-};
+import { formatPhoneNumber } from '@/utils/format';
 
 const CARRIERS = ['KT', 'SKT', 'LG', 'MVNO', 'NONE'];
 

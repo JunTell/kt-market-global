@@ -6,6 +6,7 @@ import "@/app/globals.css";
 import ChatBot from '@/components/feature/ChatBot'; 
 import Header from "@/components/layout/Header";
 import ScrollToTop from "@/components/common/ScrollToTop";
+import Footer from "@/components/layout/Footer";
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2', 
@@ -40,7 +41,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <div
             id="main-scroll-container"
-            className="w-full h-full max-w-[480px] min-w-[360px] bg-white min-h-screen shadow-2xl overflow-x-hidden font-sans relative overflow-y-auto scrollbar-hide"
+            className="w-full h-full max-w-[480px] min-w-[360px] min-h-screen shadow-2xl overflow-x-hidden font-sans relative overflow-y-auto scrollbar-hide"
           >
             <ScrollToTop /> 
             
@@ -48,6 +49,7 @@ export default async function LocaleLayout({
             <main>
               {children}
             </main>
+            <Footer />
             <ChatBot />
           </div>
         </NextIntlClientProvider>

@@ -5,6 +5,9 @@ import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { createClient } from "@/lib/supabase/client"
 import { getPlanDetails, getColorMap } from "@/constants/phonedata"
+import { toKorean } from "@/utils/toKorean"
+import { formatPrice } from "@/utils/format"
+import { parsePhoneModel, getDBModelKey } from "@/utils/phoneModel"
 import OrderProductSummary from "@/components/feature/phone/order/OrderProductSummary"
 import OrderUserForm from "@/components/feature/phone/order/OrderUserForm"
 
@@ -104,14 +107,13 @@ export default function OrderPage() {
 
   // 데이터 적용 헬퍼
   const applyDataToStore = (data: any) => {
-    const format = (n: number) => new Intl.NumberFormat(locale === 'ko' ? 'ko-KR' : 'en-US').format(n)
     const colorKey = data.color || "random"
     const colorName = COLOR_MAP[colorKey] || colorKey || t('Phone.Common.default_color')
     const planId = data.selectedPlanId || "plan_69"
     const joinTypeKr = data.registrationType === "mnp" ? t('Phone.Order.join_type_mnp') : t('Phone.Order.join_type_change')
     const discountTypeKr = data.discountType || data.discountMode || data.mode || "device"
-    const modelParts = (data.model || "").split("-")
-    const modelBase = modelParts.length >= 2 ? `${modelParts[0]}-${modelParts[1]}` : data.model
+    const { prefix } = parsePhoneModel(data.model || "")
+    const modelBase = prefix
 
     setStore(prev => ({
       ...prev,
@@ -119,8 +121,8 @@ export default function OrderPage() {
       title: data.title || t('Phone.Common.model_loading'),
       spec: `${data.capacity || ""} · ${colorName}`,
       price: data.finalDevicePrice
-        ? `${t('Phone.Order.installment_price')} ${format(data.finalDevicePrice)}${t('Phone.Common.won')}`
-        : `${t('Phone.Order.release_price')} ${format(data.originPrice || 0)}${t('Phone.Common.won')}`,
+        ? `${t('Phone.Order.installment_price')} ${formatPrice(data.finalDevicePrice, locale)}${t('Phone.Common.won')}`
+        : `${t('Phone.Order.release_price')} ${formatPrice(data.originPrice || 0, locale)}${t('Phone.Common.won')}`,
       deviceModel: data.model,
       modelBase: modelBase,
       deviceCapacity: data.capacity,
@@ -133,10 +135,9 @@ export default function OrderPage() {
   }
 
   const fetchFromDB = async (fullModelStr: string) => {
-    const parts = fullModelStr.split("-")
-    const dbModelKey = parts.length >= 2 ? `${parts[0]}-${parts[1]}` : fullModelStr
-    const colorKey = parts.length >= 3 ? parts.slice(2).join("-") : "black"
-    const colorName = COLOR_MAP[colorKey] || colorKey
+    const { prefix, capacity, color: colorKey } = parsePhoneModel(fullModelStr)
+    const dbModelKey = getDBModelKey(prefix, capacity)
+    const colorName = COLOR_MAP[colorKey] || colorKey || "black"
 
     const { data: device } = await supabase
       .from("devices")
@@ -145,7 +146,6 @@ export default function OrderPage() {
       .single()
 
     if (device) {
-      const format = (n: number) => new Intl.NumberFormat(locale === 'ko' ? 'ko-KR' : 'en-US').format(n)
       const imageFile = device.images?.[colorKey]?.[0] || "01"
       const imageUrl = `https://juntell.s3.ap-northeast-2.amazonaws.com/phone/${device.category}/${colorKey}/${imageFile}.png`
 
@@ -154,7 +154,7 @@ export default function OrderPage() {
         imageUrl: imageUrl,
         title: device.pet_name,
         spec: `${device.capacity} · ${colorName}`,
-        price: `${t('Phone.Order.release_price')} ${format(device.price)}${t('Phone.Common.won')}`,
+        price: `${t('Phone.Order.release_price')} ${formatPrice(device.price, locale)}${t('Phone.Common.won')}`,
         deviceModel: fullModelStr,
         modelBase: dbModelKey,
         deviceCapacity: device.capacity,
@@ -189,49 +189,49 @@ export default function OrderPage() {
       const formDataJson = {
         ...sessionData,
         name: finalInput.userName,
-        color: store.deviceColor,
+        color: toKorean('color', store.deviceColor),
         phone: finalInput.userPhone,
         device: deviceName,
-        funnel: store.funnel || t('Phone.Order.funnel_asamo'),
-        country: finalInput.country,
-        company: companyName,
+        funnel: toKorean('funnel', store.funnel || t('Phone.Order.funnel_asamo')),
+        country: toKorean('country', finalInput.country),
+        company: toKorean('company', companyName),
         birthday: finalInput.userDob,
         capacity: store.deviceCapacity,
         pet_name: store.modelBase,
-        register: store.joinType,
+        register: toKorean('join_type', store.joinType),
         sub_phone: finalInput.userPhone,
         isAgreedTOS: true,
         requirements: finalInput.requirements || t('Phone.Order.default_requirements'),
-        planName: finalInput.planName,
-        contract: store.contract,
-        discountType: store.discountType,
+        planName: toKorean('plan_name', finalInput.planName),
+        contract: toKorean('contract', store.contract),
+        discountType: toKorean('discount_type', store.discountType),
         ...(sessionData?.['eligibility_data'] && {
           'eligibility_data': sessionData['eligibility_data']
         }),
       }
 
       const insertPayload = {
-        company: companyName,
+        company: toKorean('company', companyName),
         device: deviceName,
         capacity: store.deviceCapacity,
-        color: store.deviceColor,
+        color: toKorean('color', store.deviceColor),
         name: finalInput.userName,
         birthday: finalInput.userDob,
         phone: finalInput.userPhone,
-        funnel: store.funnel,
+        funnel: toKorean('funnel', store.funnel),
         is_agreed_tos: true,
-        
-        // ✅ [추가된 컬럼 매핑]
-        country: finalInput.country,       // 국적
-        plan_name: finalInput.planName,    // 요금제
-        join_type: store.joinType,         // 가입유형
-        contract: store.contract,          // 약정
-        discount_type: store.discountType, // 할인유형
+
+        // ✅ [추가된 컬럼 매핑] - 한국어로 변환
+        country: toKorean('country', finalInput.country),       // 국적
+        plan_name: toKorean('plan_name', finalInput.planName),    // 요금제
+        join_type: toKorean('join_type', store.joinType),         // 가입유형
+        contract: toKorean('contract', store.contract),          // 약정
+        discount_type: toKorean('discount_type', store.discountType), // 할인유형
         requirements: finalInput.requirements, // 요청사항
-        
-        form_data: formDataJson, 
+
+        form_data: formDataJson,
       }
-      
+
       const { error } = await supabase.from("foreigner_order").insert([insertPayload])
       if (error) throw error
 
@@ -257,7 +257,7 @@ export default function OrderPage() {
   if (!store.isReady) return <div className="min-h-screen flex items-center justify-center bg-white">{t('Phone.Common.loading')}</div>
 
   const planInfo = PLAN_DETAILS[store.selectedPlanId] || PLAN_DETAILS["plan_69"]
-  const planPriceText = `${t('Phone.Order.monthly_price')} ${new Intl.NumberFormat(locale === 'ko' ? 'ko-KR' : 'en-US').format(planInfo.price)}${t('Phone.Common.won')}`
+  const planPriceText = `${t('Phone.Order.monthly_price')} ${formatPrice(planInfo.price, locale)}${t('Phone.Common.won')}`
 
   return (
     <div className="flex flex-col gap-5 w-full max-w-[480px] mx-auto min-h-screen pb-10">

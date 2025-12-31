@@ -376,5 +376,22 @@
     "faq_holy_q": "公式代理店と聖地の違い",
     "faq_holy_a": "🏢 [代理店 vs 聖地]\n\n• 公式代理店: 定価販売、信頼度高、景品(ケースなど)提供。\n• 聖地: 販売手数料を顧客に現金(キャッシュバック)で還元するため端末代が非常に安い。ただし足を運ぶ必要があり、現金一括を好む。",
     "select_phone": "携帯機種を選ぶ"
+  },
+  "Footer": {
+    "terms_of_service": "利用規約",
+    "privacy_policy": "個人情報処理方針",
+    "customer_center": "カスタマーセンター",
+    "company_name": "(株)Juntell",
+    "ceo_label": "代表",
+    "ceo_name": "ホン・ギルドン",
+    "business_no_label": "事業者番号",
+    "business_no_value": "000-00-00000",
+    "address_label": "住所",
+    "address_value": "ソウル特別市 ○○区 Juntellビル 1階",
+    "cs_label": "カスタマーセンター",
+    "cs_phone": "02-0000-0000",
+    "email_label": "メール",
+    "email_value": "help@ktmarket.co.kr",
+    "cs_hours": "営業時間: 平日 10:00 - 19:00 (週末・祝日休業)"
   }
 }
