@@ -1,16 +1,16 @@
 "use client"
 
 import * as React from "react"
-import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useTranslations, useLocale } from "next-intl"
 import { formatPrice } from "@/utils/format"
+import { calculateTotalPlanDiscount } from "@/utils/priceCalculation"
 
 type Mode = "device" | "plan"
 
 interface Props {
   title: string
-  capacity?: string // capacity가 선택적일 수 있어 ? 추가
+  capacity: string
   originPrice: number
   disclosureSubsidy: number
   ktmarketDiscount: number
@@ -26,11 +26,12 @@ interface Props {
 export default function GongguDealCard(props: Props) {
   const {
     title,
+    // capacity,
     originPrice,
     disclosureSubsidy,
     ktmarketDiscount,
     planMonthlyDiscount,
-    // specialDiscount = 0, // 사용하지 않으므로 주석 처리
+    specialDiscount = 0, // 값은 받아오지만, 아래 계산식에서 사용하지 않음
     mode,
     detailPath,
     model,
@@ -42,25 +43,19 @@ export default function GongguDealCard(props: Props) {
   const t = useTranslations()
   const locale = useLocale()
 
-  // ✅ [수정] 넷플릭스 요금제(plan_90_v)일 경우 월 4,450원 * 24개월 추가
-  const isNetflixPlan = model === 'plan_90_v'
-  const netflixAddon = isNetflixPlan ? 4450 * 24 : 0
-
-  // ✅ [수정] 원금에 넷플릭스 추가금 반영
-  const adjustedOriginPrice = originPrice + netflixAddon
-
-  // ✅ [수정] specialDiscount(7만원) 제외된 총 할인액
-  const totalDeviceDiscount = disclosureSubsidy + ktmarketDiscount 
+  // ✅ [수정] specialDiscount(7만원) 제외
+  const totalDeviceDiscount =
+    disclosureSubsidy + ktmarketDiscount 
+    // + specialDiscount (제거됨)
 
   const totalPlanDiscount = planMonthlyDiscount * 24
 
-  // ✅ [수정] adjustedOriginPrice를 기준으로 할인가 계산
   const salePrice =
     mode === "device"
-      ? Math.max(0, adjustedOriginPrice - totalDeviceDiscount)
-      : Math.max(0, adjustedOriginPrice - totalPlanDiscount)
+      ? Math.max(0, originPrice - totalDeviceDiscount)
+      : Math.max(0, originPrice - totalPlanDiscount)
 
-  const originPriceText = `${formatPrice(adjustedOriginPrice, locale)}${t('Phone.Common.won')}`
+  const originPriceText = `${formatPrice(originPrice, locale)}${t('Phone.Common.won')}`
   const salePriceText = `${formatPrice(salePrice, locale)}${t('Phone.Common.won')}`
 
   const description =
@@ -75,12 +70,12 @@ export default function GongguDealCard(props: Props) {
       const payload = {
         model: model ?? null,
         title,
-        originPrice: adjustedOriginPrice, // 저장 시에도 조정된 가격 저장
+        originPrice,
         disclosureSubsidy,
         ktmarketDiscount,
-        specialDiscount: 0, 
+        specialDiscount: 0, // 저장 시에도 0으로 고정
         totalDeviceDiscount,
-        finalDevicePrice: salePrice, // 최종 할인가
+        finalDevicePrice: Math.max(0, originPrice - totalDeviceDiscount),
         planMonthlyDiscount,
         mode,
         imageUrl,
@@ -110,11 +105,9 @@ export default function GongguDealCard(props: Props) {
         {/* 썸네일 */}
         <div className="w-20 h-20 rounded-[14px] bg-background-alt flex items-center justify-center shrink-0 overflow-hidden p-2 transition-colors group-hover:bg-gray-50">
           {imageUrl ? (
-            <Image
+            <img
               src={imageUrl}
               alt={title}
-              width={80}
-              height={80}
               className="w-full h-full object-contain"
             />
           ) : (

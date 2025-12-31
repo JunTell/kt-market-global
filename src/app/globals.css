@@ -100,17 +100,15 @@
 }
 
 html {
-  background-color: #F2F4F6;
   min-height: 100%;
   width: 100%;
 }
 
 body {
-  background-color: #F2F4F6;
   margin: 0;
   padding: 0;
   width: 100%;
-  
+
   display: flex;
   justify-content: center;
   align-items: flex-start;

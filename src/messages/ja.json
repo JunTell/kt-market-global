@@ -178,6 +178,7 @@
     "Common": {
       "loading": "読み込み中...",
       "won": "ウォン",
+      "man": "万ウォン",
       "default_color": "基本色",
       "model_loading": "モデル名読み込み中"
     },
