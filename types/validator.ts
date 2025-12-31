@@ -6,33 +6,33 @@ import type { AppRoutes, LayoutRoutes, ParamMap } from "./routes.js"
 import type { ResolvingMetadata, ResolvingViewport } from "next/types.js"
 
 type AppPageConfig<Route extends AppRoutes = AppRoutes> = {
-  default: React.ComponentType<{ params: Promise<ParamMap[Route]> } & any> | ((props: { params: Promise<ParamMap[Route]> } & any) => React.ReactNode | Promise<React.ReactNode> | never | void | Promise<void>)
-  generateStaticParams?: (props: { params: ParamMap[Route] }) => Promise<any[]> | any[]
+  default: React.ComponentType<{ params: Promise<ParamMap[Route]> } & Record<string, unknown>> | ((props: { params: Promise<ParamMap[Route]> } & Record<string, unknown>) => React.ReactNode | Promise<React.ReactNode> | never | void | Promise<void>)
+  generateStaticParams?: (props: { params: ParamMap[Route] }) => Promise<unknown[]> | unknown[]
   generateMetadata?: (
-    props: { params: Promise<ParamMap[Route]> } & any,
+    props: { params: Promise<ParamMap[Route]> } & Record<string, unknown>,
     parent: ResolvingMetadata
-  ) => Promise<any> | any
+  ) => Promise<unknown> | unknown
   generateViewport?: (
-    props: { params: Promise<ParamMap[Route]> } & any,
+    props: { params: Promise<ParamMap[Route]> } & Record<string, unknown>,
     parent: ResolvingViewport
-  ) => Promise<any> | any
-  metadata?: any
-  viewport?: any
+  ) => Promise<unknown> | unknown
+  metadata?: unknown
+  viewport?: unknown
 }
 
 type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
-  default: React.ComponentType<{ params: Promise<ParamMap[Route]> } & any> | ((props: { params: Promise<ParamMap[Route]> } & any) => React.ReactNode | Promise<React.ReactNode> | never | void | Promise<void>)
-  generateStaticParams?: (props: { params: ParamMap[Route] }) => Promise<any[]> | any[]
+  default: React.ComponentType<{ params: Promise<ParamMap[Route]> } & Record<string, unknown>> | ((props: { params: Promise<ParamMap[Route]> } & Record<string, unknown>) => React.ReactNode | Promise<React.ReactNode> | never | void | Promise<void>)
+  generateStaticParams?: (props: { params: ParamMap[Route] }) => Promise<unknown[]> | unknown[]
   generateMetadata?: (
-    props: { params: Promise<ParamMap[Route]> } & any,
+    props: { params: Promise<ParamMap[Route]> } & Record<string, unknown>,
     parent: ResolvingMetadata
-  ) => Promise<any> | any
+  ) => Promise<unknown> | unknown
   generateViewport?: (
-    props: { params: Promise<ParamMap[Route]> } & any,
+    props: { params: Promise<ParamMap[Route]> } & Record<string, unknown>,
     parent: ResolvingViewport
-  ) => Promise<any> | any
-  metadata?: any
-  viewport?: any
+  ) => Promise<unknown> | unknown
+  metadata?: unknown
+  viewport?: unknown
 }
 
 
@@ -42,7 +42,6 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   // @ts-expect-error If the import fails, lint should show an error
   const handler = {} as typeof import("../../app/page")
   type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
   type __Unused = __Check
 }
 
@@ -58,6 +57,5 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   // @ts-expect-error If the import fails, lint should show an error
   const handler = {} as typeof import("../../app/layout")
   type __Check = __IsExpected<typeof handler>
-  // @ts-ignore
   type __Unused = __Check
 }

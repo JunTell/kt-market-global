@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useCallback, useEffect } from "react"
+import React, { useState, useCallback } from "react"
 import { useTranslations } from "next-intl"
 
 // SVG 아이콘
@@ -30,17 +30,13 @@ export default function JunCarousel({ urls = [] }: Props) {
   const [dragOffset, setDragOffset] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   const [isHorizontalScroll, setIsHorizontalScroll] = useState(false)
-  
-  // URL이 변경되면 인덱스 초기화
-  useEffect(() => {
-    setCurrentIndex(0)
-  }, [urls])
+  const [prevUrls, setPrevUrls] = useState(urls)
 
-  useEffect(() => {
-    if (!isDragging) {
-      setDragOffset(0)
-    }
-  }, [isDragging])
+  // URL이 변경되면 인덱스 초기화 (렌더링 중 상태 업데이트)
+  if (urls !== prevUrls) {
+    setCurrentIndex(0)
+    setPrevUrls(urls)
+  }
 
   const goToNext = useCallback(() => {
     if (currentIndex < urls.length - 1) {

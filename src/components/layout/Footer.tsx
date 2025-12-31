@@ -6,7 +6,8 @@ export default function Footer() {
   const t = useTranslations('Footer');
 
   return (
-    <footer className="w-full bg-[#0D0E0E] border-t border-line-200 pt-10 pb-12">
+    // 배경색을 테마 변수(bg-alternative)로 변경하여 라이트/다크 모드 모두 대응
+    <footer className="w-full bg-background-alt border-t border-line-200 pt-10 pb-12">
       <div className="max-w-[1200px] mx-auto px-5">
         
         {/* 상단: 약관 및 정책 링크 */}
@@ -54,9 +55,8 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* 로고 (우측 혹은 하단 배치) */}
+          {/* 로고 */}
           <div className="opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
-             {/* 로고 파일 경로에 맞게 수정해주세요 */}
              <Image 
                src="/images/logo.svg" 
                alt="KT Market Global" 
@@ -69,7 +69,8 @@ export default function Footer() {
 
         {/* 하단: Copyright */}
         <div className="mt-8 text-[11px] text-label-500">
-          COPYRIGHT © {new Date().getFullYear()} KT MARKET GLOBAL. ALL RIGHTS RESERVED.
+          {/* Hydration Error 방지를 위해 연도를 2025로 고정 */}
+          COPYRIGHT © 2025 KT MARKET GLOBAL. ALL RIGHTS RESERVED.
         </div>
       </div>
     </footer>

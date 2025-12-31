@@ -70,7 +70,7 @@ export default function OrderPage() {
     const fetchData = async () => {
       const params = new URLSearchParams(window.location.search)
       const modelFromUrl = params.get("model")
-      
+
       // 1. 세션에서 제품 정보 로드
       let sessionData = null
       try {
@@ -94,7 +94,7 @@ export default function OrderPage() {
             userName: userInfo.userName || prev.userName,
             userDob: userInfo.userDob || prev.userDob,
             userPhone: userInfo.userPhone || prev.userPhone,
-            country: userInfo.country || prev.country, // ✅ country 로드
+            country: userInfo.country || prev.country,
             requirements: userInfo.requirements || prev.requirements,
           }))
           setIsReadOnly(true)
@@ -103,29 +103,30 @@ export default function OrderPage() {
     }
 
     fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // 데이터 적용 헬퍼
-  const applyDataToStore = (data: any) => {
-    const colorKey = data.color || "random"
+  const applyDataToStore = (data: Record<string, unknown>) => {
+    const colorKey = String(data.color || "random")
     const colorName = COLOR_MAP[colorKey] || colorKey || t('Phone.Common.default_color')
-    const planId = data.selectedPlanId || "plan_69"
+    const planId = String(data.selectedPlanId || "plan_69")
     const joinTypeKr = data.registrationType === "mnp" ? t('Phone.Order.join_type_mnp') : t('Phone.Order.join_type_change')
-    const discountTypeKr = data.discountType || data.discountMode || data.mode || "device"
-    const { prefix } = parsePhoneModel(data.model || "")
+    const discountTypeKr = String(data.discountType || data.discountMode || data.mode || "device")
+    const { prefix } = parsePhoneModel(String(data.model || ""))
     const modelBase = prefix
 
     setStore(prev => ({
       ...prev,
-      imageUrl: data.imageUrl || "",
-      title: data.title || t('Phone.Common.model_loading'),
-      spec: `${data.capacity || ""} · ${colorName}`,
+      imageUrl: String(data.imageUrl || ""),
+      title: String(data.title || t('Phone.Common.model_loading')),
+      spec: `${String(data.capacity || "")} · ${colorName}`,
       price: data.finalDevicePrice
-        ? `${t('Phone.Order.installment_price')} ${formatPrice(data.finalDevicePrice, locale)}${t('Phone.Common.won')}`
-        : `${t('Phone.Order.release_price')} ${formatPrice(data.originPrice || 0, locale)}${t('Phone.Common.won')}`,
-      deviceModel: data.model,
+        ? `${t('Phone.Order.installment_price')} ${formatPrice(Number(data.finalDevicePrice), locale)}${t('Phone.Common.won')}`
+        : `${t('Phone.Order.release_price')} ${formatPrice(Number(data.originPrice) || 0, locale)}${t('Phone.Common.won')}`,
+      deviceModel: String(data.model || ""),
       modelBase: modelBase,
-      deviceCapacity: data.capacity,
+      deviceCapacity: String(data.capacity || ""),
       deviceColor: colorName,
       joinType: joinTypeKr,
       discountType: discountTypeKr,
@@ -167,16 +168,25 @@ export default function OrderPage() {
     }
   }
 
-  const handleConfirm = async (userInput: any) => {
+  interface UserFormData {
+    userName: string
+    userDob: string
+    userPhone: string
+    country: string
+    requirements: string
+    planName?: string
+  }
+
+  const handleConfirm = async (userInput: UserFormData) => {
     try {
-      const finalInput = userInput || store
+      const finalInput = userInput
 
       if (!finalInput || !finalInput.userName || !finalInput.userPhone) {
         alert(t('Phone.Order.form_alert'))
         return
       }
 
-      let sessionData: any = {}
+      let sessionData: Record<string, unknown> = {}
       try {
         const stored = sessionStorage.getItem("asamoDeal")
         if (stored) sessionData = JSON.parse(stored)
@@ -202,12 +212,12 @@ export default function OrderPage() {
         sub_phone: finalInput.userPhone,
         isAgreedTOS: true,
         requirements: finalInput.requirements || t('Phone.Order.default_requirements'),
-        planName: toKorean('plan_name', finalInput.planName),
+        planName: toKorean('plan_name', finalInput.planName || ''),
         contract: toKorean('contract', store.contract),
         discountType: toKorean('discount_type', store.discountType),
-        ...(sessionData?.['eligibility_data'] && {
+        ...(sessionData?.['eligibility_data'] ? {
           'eligibility_data': sessionData['eligibility_data']
-        }),
+        } : {}),
       }
 
       const insertPayload = {
@@ -221,13 +231,12 @@ export default function OrderPage() {
         funnel: toKorean('funnel', store.funnel),
         is_agreed_tos: true,
 
-        // ✅ [추가된 컬럼 매핑] - 한국어로 변환
-        country: toKorean('country', finalInput.country),       // 국적
-        plan_name: toKorean('plan_name', finalInput.planName),    // 요금제
-        join_type: toKorean('join_type', store.joinType),         // 가입유형
-        contract: toKorean('contract', store.contract),          // 약정
-        discount_type: toKorean('discount_type', store.discountType), // 할인유형
-        requirements: finalInput.requirements, // 요청사항
+        country: toKorean('country', finalInput.country),
+        plan_name: toKorean('plan_name', finalInput.planName || ''),
+        join_type: toKorean('join_type', store.joinType),
+        contract: toKorean('contract', store.contract),
+        discount_type: toKorean('discount_type', store.discountType),
+        requirements: finalInput.requirements,
 
         form_data: formDataJson,
       }
@@ -240,7 +249,7 @@ export default function OrderPage() {
         userName: finalInput.userName,
         userDob: finalInput.userDob,
         userPhone: finalInput.userPhone,
-        country: finalInput.country, // ✅ country 저장
+        country: finalInput.country,
         requirements: finalInput.requirements,
       }
       sessionStorage.setItem("user-info", JSON.stringify(userInfoToSave))
@@ -248,16 +257,21 @@ export default function OrderPage() {
       const currentQueryParams = window.location.search
       window.location.href = `/${locale}/phone/result` + currentQueryParams
 
-    } catch (e: any) {
+    } catch (e) {
       console.error("DB Error:", e)
-      alert(`접수 실패: ${e.message}`)
+      alert(`접수 실패: ${e instanceof Error ? e.message : String(e)}`)
     }
   }
 
   if (!store.isReady) return <div className="min-h-screen flex items-center justify-center bg-white">{t('Phone.Common.loading')}</div>
 
   const planInfo = PLAN_DETAILS[store.selectedPlanId] || PLAN_DETAILS["plan_69"]
-  const planPriceText = `${t('Phone.Order.monthly_price')} ${formatPrice(planInfo.price, locale)}${t('Phone.Common.won')}`
+  
+  // ✅ [수정] 넷플릭스 요금제(plan_90_v)일 경우 4,450원 추가
+  const additionalCost = store.selectedPlanId === 'plan_90_v' ? 4450 : 0
+  const finalPlanPrice = planInfo.price + additionalCost
+
+  const planPriceText = `${t('Phone.Order.monthly_price')} ${formatPrice(finalPlanPrice, locale)}${t('Phone.Common.won')}`
 
   return (
     <div className="flex flex-col gap-5 w-full max-w-[480px] mx-auto min-h-screen pb-10">

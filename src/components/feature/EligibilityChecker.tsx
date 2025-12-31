@@ -87,6 +87,7 @@ export default function EligibilityChecker() {
   const [activeCategory, setActiveCategory] = useState<string>('all');
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 

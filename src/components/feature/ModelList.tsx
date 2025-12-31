@@ -23,8 +23,7 @@ const GONGGU_MODELS = [
 
 const CARRIERS = ["SKT", "KT", "LG U+", "알뜰폰"]
 
-// 할인 모드는 'device'로 고정, 브랜드 타입 정의
-type Mode = "device" | "plan"
+// 브랜드 타입 정의
 type Brand = "iphone" | "galaxy"
 
 interface ModelList {
@@ -96,8 +95,8 @@ export default function ModelList({
   }, [initialCarrier, initialRegType])
 
   // --- 2. 데이터 페칭 ---
-  const [rawDevices, setRawDevices] = React.useState<any[]>([])
-  const [rawSubsidies, setRawSubsidies] = React.useState<any[]>([])
+  const [rawDevices, setRawDevices] = React.useState<unknown[]>([])
+  const [rawSubsidies, setRawSubsidies] = React.useState<unknown[]>([])
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -125,7 +124,7 @@ export default function ModelList({
         setRawDevices(devicesData ?? [])
         setRawSubsidies(subsidiesData ?? [])
         setError(null)
-      } catch (err: any) {
+      } catch (err) {
         console.error("Fetch Error:", err)
         setError(t('Phone.ModelList.error'))
       } finally {
@@ -134,7 +133,7 @@ export default function ModelList({
     }
 
     fetchData()
-  }, [planId, registrationType, supabase])
+  }, [planId, registrationType, supabase, t])
 
   // --- 3. 데이터 가공 ---
   React.useEffect(() => {
@@ -144,39 +143,40 @@ export default function ModelList({
       registrationType === "chg" ? "device_plans_chg" : "device_plans_mnp"
 
     const mapped: ModelList[] = rawDevices
-      .map((device: any) => {
-        const planList = device[planTableKey] || []
-        const plan = planList[0]
+      .map((device) => {
+        const deviceData = device as Record<string, unknown>
+        const planList = (deviceData[planTableKey] as unknown[] | undefined) || []
+        const plan = planList[0] as Record<string, unknown> | undefined
         if (!plan) return null
 
-        const originPrice = device.price ?? 0
-        const disclosureSubsidy = plan.disclosure_subsidy ?? 0
-        const subsidyRow = rawSubsidies?.find((s) => s.model === device.model)
+        const originPrice = (deviceData.price as number) ?? 0
+        const disclosureSubsidy = (plan.disclosure_subsidy as number) ?? 0
+        const subsidyRow = rawSubsidies?.find((s) => (s as Record<string, unknown>).model === deviceData.model) as Record<string, unknown> | undefined
 
         const ktmarketDiscount = calcKTmarketSubsidy(
           planId,
-          plan.price ?? 0,
+          (plan.price as number) ?? 0,
           subsidyRow,
-          device.model,
+          deviceData.model as string,
           registrationType
         )
 
         // ✅ [수정] MNP 7만원 추가 할인 제거 (항상 0)
         const specialDiscount = 0
 
-        const planMonthlyDiscount = Math.floor((plan.price ?? 0) * 0.25)
-        const imageUrls = getDeviceImageUrls(device)
+        const planMonthlyDiscount = Math.floor(((plan.price as number) ?? 0) * 0.25)
+        const imageUrls = getDeviceImageUrls(deviceData)
 
         return {
-          model: device.model,
-          title: device.pet_name ?? device.model,
-          capacity: device.capacity ?? "",
+          model: deviceData.model as string,
+          title: (deviceData.pet_name as string) ?? (deviceData.model as string),
+          capacity: (deviceData.capacity as string) ?? "",
           originPrice,
           disclosureSubsidy,
           ktmarketDiscount,
           specialDiscount, // 0 전달
           planMonthlyDiscount,
-          imageUrl: getDeviceImageUrl(device),
+          imageUrl: getDeviceImageUrl(deviceData),
           imageUrls: imageUrls,
         }
       })

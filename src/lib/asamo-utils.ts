@@ -1,21 +1,31 @@
 export type RegType = "chg" | "mnp"
 
-export function getDeviceImageUrl(device: any): string {
+interface Device {
+  category?: string
+  thumbnail?: string
+  [key: string]: unknown
+}
+
+interface SubsidyRow {
+  [key: string]: unknown
+}
+
+export function getDeviceImageUrl(device: Device): string {
   if (!device?.category || !device?.thumbnail) return ""
-  
+
   return `${process.env.NEXT_PUBLIC_CDN_URL}/phone/${device.category}/${device.thumbnail}/01.png`
 }
 
-export function getDeviceImageUrls(device: any): string[] {
+export function getDeviceImageUrls(device: Device): string[] {
   const mainImage = getDeviceImageUrl(device)
   // 추가 이미지가 있다면(02.png, 03.png 등) 여기에 로직 추가 가능
-  return [mainImage] 
+  return [mainImage]
 }
 
 export function calcKTmarketSubsidy(
   planId: string,
   planPrice: number,
-  subsidyRow: any,
+  subsidyRow: SubsidyRow | undefined,
   model: string,
   registrationType: RegType
 ): number {
@@ -53,7 +63,7 @@ export function calcKTmarketSubsidy(
     }
   }
 
-  let subsidy = subsidyRow[matchedKey] ?? 0
+  let subsidy = Number(subsidyRow[matchedKey]) || 0
 
   if (planId === "ppllistobj_0769") {
     const is16e = model && model.includes("aip16e")

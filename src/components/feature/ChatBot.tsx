@@ -45,6 +45,7 @@ export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) 
   const isControlled = externalIsOpen !== undefined;
   const isOpen = isControlled ? externalIsOpen : internalIsOpen;
   const scrollRef = useRef<HTMLDivElement>(null);
+  const messageIdCounter = useRef(0);
 
   const handleOpenChange = (value: boolean) => {
     if (!isControlled) {
@@ -54,6 +55,7 @@ export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) 
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (isOpen) setIsAnimating(true);
     else setTimeout(() => setIsAnimating(false), 300);
   }, [isOpen]);
@@ -66,18 +68,20 @@ export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) 
 
   const handleSend = (text: string) => {
     if (!text.trim()) return;
-    const userMsg: Message = { id: Date.now().toString(), role: 'user', content: text };
+    messageIdCounter.current += 1;
+    const userMsg: Message = { id: `msg-${messageIdCounter.current}`, role: 'user', content: text };
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
 
     setTimeout(() => {
-      const found = FAQ_LIST.find((item) => 
+      const found = FAQ_LIST.find((item) =>
         item.keywords.some((k) => text.includes(k)) || text === item.question
       );
       const botContent = found
         ? found.answer
         : t('ChatBot.not_found');
-      const botMsg: Message = { id: (Date.now() + 1).toString(), role: 'bot', content: botContent };
+      messageIdCounter.current += 1;
+      const botMsg: Message = { id: `msg-${messageIdCounter.current}`, role: 'bot', content: botContent };
       setMessages((prev) => [...prev, botMsg]);
     }, 600);
   };

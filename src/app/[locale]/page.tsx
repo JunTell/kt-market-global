@@ -10,6 +10,7 @@ import WhyChooseUs from '@/components/feature/WhyChooseUs';
 import { ServiceGuideCard } from '@/components/feature/ServiceGuideCard';
 import { Notice } from '@/components/feature/Notice';
 import ModelList from '@/components/feature/ModelList';
+import Footer from '@/components/layout/Footer';
 
 export default function Home() {
   const t = useTranslations();
@@ -75,6 +76,7 @@ export default function Home() {
         className="mt-6"
       />
       
+      <Footer />
       <ChatBot 
         externalIsOpen={isChatOpen} 
         onOpenChange={setIsChatOpen} 

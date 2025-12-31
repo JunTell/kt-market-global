@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useRouter, useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import IntroOverlay from "@/components/feature/phone/result/IntroOverlay"
@@ -12,18 +12,35 @@ export default function ResultPage() {
   const router = useRouter()
   const params = useParams()
   const locale = params.locale as string
-  const [orderData, setOrderData] = useState<any>(null)
-
-  useEffect(() => {
-    // sessionStorage에서 데이터 로드 (OrderPage에서 저장한 키값 사용)
+  const [orderData] = useState<Record<string, unknown> | null>(() => {
+    if (typeof window === 'undefined') return null
     const data = sessionStorage.getItem("asamoDeal")
-    if (data) {
-      setOrderData(JSON.parse(data))
-    }
-  }, [router])
+    return data ? JSON.parse(data) : null
+  })
+
+  interface ProductInfo {
+    title: string
+    spec: string
+    price: string
+    image: string
+  }
+
+  interface UserInfo {
+    userName: string
+    userDob: string
+    userPhone: string
+    country: string
+    requirements: string
+  }
+
+  interface PlanInfo {
+    planName: string
+    planData: string
+    planPrice: string
+  }
 
   // 데이터가 없을 때의 기본값 (Loading or Fallback)
-  const productInfo = orderData?.product || {
+  const productInfo: ProductInfo = (orderData?.product as ProductInfo) || {
     title: "iPhone 17",
     spec: "256GB · Lavender",
     price: "-",
@@ -31,12 +48,12 @@ export default function ResultPage() {
   }
 
   // user-info에서 저장된 사용자 정보를 우선 사용
-  const getSavedUserInfo = () => {
+  const getSavedUserInfo = (): UserInfo | null => {
     if (typeof window !== 'undefined') {
       try {
         const userInfoStr = sessionStorage.getItem("user-info")
         if (userInfoStr) {
-          return JSON.parse(userInfoStr)
+          return JSON.parse(userInfoStr) as UserInfo
         }
       } catch (e) {
         console.error("Failed to load user-info:", e)
@@ -46,7 +63,7 @@ export default function ResultPage() {
   }
 
   const savedUserInfo = getSavedUserInfo()
-  const userInfo = savedUserInfo || orderData?.user || {
+  const userInfo: UserInfo = savedUserInfo || (orderData?.user as UserInfo) || {
     userName: "",
     userDob: "",
     userPhone: "",
@@ -54,7 +71,7 @@ export default function ResultPage() {
     requirements: "",
   }
 
-  const planInfo = orderData?.plan || {
+  const planInfo: PlanInfo = (orderData?.plan as PlanInfo) || {
     planName: t('Phone.Plans.plan_69_v_name'),
     planData: t('Phone.Plans.plan_69_v_desc'),
     planPrice: "69,000 " + t('Phone.Common.won')
@@ -91,9 +108,9 @@ export default function ResultPage() {
             country={userInfo.country}
             requirements={userInfo.requirements}
             // 기타 props
-            joinType={orderData?.joinType || t('Phone.Order.join_type_change')}
-            contract={orderData?.contract || t('Phone.Order.contract_24')}
-            discountType={orderData?.discountType || "device"}
+            joinType={String(orderData?.joinType || t('Phone.Order.join_type_change'))}
+            contract={String(orderData?.contract || t('Phone.Order.contract_24'))}
+            discountType={String(orderData?.discountType || "device")}
             planName={planInfo.planName}
             planData={planInfo.planData}
             planPrice={planInfo.planPrice}
