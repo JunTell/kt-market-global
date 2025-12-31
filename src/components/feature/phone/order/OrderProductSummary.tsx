@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+import Image from "next/image"
 
 interface Props {
   image: string
@@ -14,7 +15,7 @@ export default function OrderProductSummary({ image, title, spec, price }: Props
     <div className="w-full rounded-[20px] flex items-center gap-5 box-border py-2.5">
       <div className="w-20 h-20 flex items-center justify-center bg-white rounded-xl overflow-hidden shrink-0 shadow-sm border border-[#E5E8EB]">
         {image ? (
-          <img src={image} alt={title} className="w-[90%] h-[90%] object-contain" />
+          <Image src={image} alt={title} width={72} height={72} className="w-[90%] h-[90%] object-contain" />
         ) : (
           <div className="w-full h-full bg-[#eee]" />
         )}
