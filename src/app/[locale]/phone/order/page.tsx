@@ -75,12 +75,19 @@ export default function OrderPage() {
       let sessionData = null
       try {
         const sessionDataStr = sessionStorage.getItem("asamoDeal")
-        if (sessionDataStr) sessionData = JSON.parse(sessionDataStr)
+        if (sessionDataStr) {
+          sessionData = JSON.parse(sessionDataStr)
+          console.log("🔍 세션 데이터 로드됨:", sessionData)
+        } else {
+          console.log("⚠️ asamoDeal 세션 데이터 없음")
+        }
       } catch (e) { console.error(e) }
 
       if (sessionData && modelFromUrl && sessionData.model === modelFromUrl) {
+        console.log("✅ 세션 데이터 사용 (모델 일치)")
         applyDataToStore(sessionData)
       } else if (modelFromUrl) {
+        console.log("📚 DB에서 데이터 가져오기:", modelFromUrl)
         await fetchFromDB(modelFromUrl)
       }
 
@@ -108,6 +115,8 @@ export default function OrderPage() {
 
   // 데이터 적용 헬퍼
   const applyDataToStore = (data: Record<string, unknown>) => {
+    console.log("📦 applyDataToStore 호출 데이터:", data)
+
     const colorKey = String(data.color || "random")
     const colorName = COLOR_MAP[colorKey] || colorKey || t('Phone.Common.default_color')
     const planId = String(data.selectedPlanId || "plan_69")
@@ -116,14 +125,22 @@ export default function OrderPage() {
     const { prefix } = parsePhoneModel(String(data.model || ""))
     const modelBase = prefix
 
+    // 가격 계산 로직
+    let priceText = ""
+    if (data.finalDevicePrice) {
+      priceText = `${t('Phone.Order.installment_price')} ${formatPrice(Number(data.finalDevicePrice), locale)}${t('Phone.Common.won')}`
+      console.log("💰 할부가 사용 (finalDevicePrice):", data.finalDevicePrice, "→", priceText)
+    } else {
+      priceText = `${t('Phone.Order.release_price')} ${formatPrice(Number(data.originPrice) || 0, locale)}${t('Phone.Common.won')}`
+      console.log("💰 출고가 사용 (originPrice):", data.originPrice, "→", priceText)
+    }
+
     setStore(prev => ({
       ...prev,
       imageUrl: String(data.imageUrl || ""),
       title: String(data.title || t('Phone.Common.model_loading')),
       spec: `${String(data.capacity || "")} · ${colorName}`,
-      price: data.finalDevicePrice
-        ? `${t('Phone.Order.installment_price')} ${formatPrice(Number(data.finalDevicePrice), locale)}${t('Phone.Common.won')}`
-        : `${t('Phone.Order.release_price')} ${formatPrice(Number(data.originPrice) || 0, locale)}${t('Phone.Common.won')}`,
+      price: priceText,
       deviceModel: String(data.model || ""),
       modelBase: modelBase,
       deviceCapacity: String(data.capacity || ""),
@@ -138,7 +155,6 @@ export default function OrderPage() {
   const fetchFromDB = async (fullModelStr: string) => {
     const { prefix, capacity, color: colorKey } = parsePhoneModel(fullModelStr)
     const dbModelKey = getDBModelKey(prefix, capacity)
-    const colorName = COLOR_MAP[colorKey] || colorKey || "black"
 
     const { data: device } = await supabase
       .from("devices")
@@ -147,8 +163,16 @@ export default function OrderPage() {
       .single()
 
     if (device) {
-      const imageFile = device.images?.[colorKey]?.[0] || "01"
-      const imageUrl = `https://juntell.s3.ap-northeast-2.amazonaws.com/phone/${device.category}/${colorKey}/${imageFile}.png`
+      // 사용 가능한 색상 목록 확인
+      const availableColors = device.colors_en || []
+
+      // URL의 색상이 사용 가능한 색상 목록에 있는지 확인, 없으면 첫 번째 색상 사용
+      const selectedColor = availableColors.includes(colorKey) ? colorKey : availableColors[0] || "black"
+      const colorName = COLOR_MAP[selectedColor] || selectedColor
+
+      const cdnUrl = process.env.NEXT_PUBLIC_CDN_URL || ""
+      const imageFile = device.images?.[selectedColor]?.[0] || "01"
+      const imageUrl = `${cdnUrl}/phone/${device.category}/${selectedColor}/${imageFile}.png`
 
       setStore(prev => ({
         ...prev,

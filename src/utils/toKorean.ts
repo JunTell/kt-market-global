@@ -12,8 +12,8 @@ const KOREAN_MAPPINGS: Record<MappingKey, Record<string, string>> = {
   },
 
   funnel: {
-    'ASAMO': '아사모',
-    'asamo': '아사모'
+    'ASAMO': '외국인',
+    'asamo': '외국인'
   },
 
   join_type: {

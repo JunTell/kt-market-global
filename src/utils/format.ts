@@ -41,11 +41,15 @@ export function formatPhoneNumber(value: string): string {
  * @param manSymbol - '만' 문자 (다국어 지원)
  * @param wonSymbol - '원' 문자 (다국어 지원)
  * @param locale - 로케일 ('ko' 또는 'en')
- * @returns 포맷팅된 가격 문자열 (예: "12만" 또는 "9,000원")
+ * @returns 포맷팅된 가격 문자열 (예: "12만" 또는 "120K KRW")
  */
 export function formatManWon(value: number, manSymbol: string, wonSymbol: string, locale: string): string {
-  if (value >= 10000) {
+  if (locale === 'ko' && value >= 10000) {
+    // 한국어: 만 단위로 표시 (예: "87만")
     return `${Math.floor(value / 10000)}${manSymbol}`
+  } else if (locale === 'en' && value >= 1000) {
+    // 영어: 천 단위로 표시 (예: "871K KRW")
+    return `${Math.floor(value / 1000)}K ${wonSymbol}`
   }
   return `${formatPrice(value, locale)}${wonSymbol}`
 }
