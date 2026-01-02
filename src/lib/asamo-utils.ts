@@ -29,8 +29,14 @@ export function calcKTmarketSubsidy(
   model: string,
   registrationType: RegType
 ): number {
-  if (!subsidyRow) return 0
-  if (planPrice <= 0) return 0
+  if (!subsidyRow) {
+    console.log(`⚠️ calcKTmarketSubsidy: subsidyRow가 없음 (model: ${model})`)
+    return 0
+  }
+  if (planPrice <= 0) {
+    console.log(`⚠️ calcKTmarketSubsidy: planPrice가 0 이하 (${planPrice})`)
+    return 0
+  }
 
   const discount = "device"
   const register = registrationType
@@ -64,6 +70,17 @@ export function calcKTmarketSubsidy(
   }
 
   let subsidy = Number(subsidyRow[matchedKey]) || 0
+
+  console.log(`💵 KT Market 지원금 계산:`, {
+    planId,
+    planPrice,
+    model,
+    registrationType,
+    matchedKey,
+    subsidyValue: subsidyRow[matchedKey],
+    subsidy,
+    subsidyRowKeys: Object.keys(subsidyRow)
+  })
 
   if (planId === "ppllistobj_0769") {
     const is16e = model && model.includes("aip16e")

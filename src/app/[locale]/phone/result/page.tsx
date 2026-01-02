@@ -1,8 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter, useParams } from "next/navigation"
-import { useTranslations } from "next-intl"
+import { useTranslations, useLocale } from "next-intl"
+import { formatPrice } from "@/utils/format"
+import { getPlanDetails } from "@/constants/phonedata"
 import IntroOverlay from "@/components/feature/phone/result/IntroOverlay"
 import OrderProductSummary from "@/components/feature/phone/order/OrderProductSummary"
 import OrderUserForm from "@/components/feature/phone/order/OrderUserForm"
@@ -11,12 +13,17 @@ export default function ResultPage() {
   const t = useTranslations()
   const router = useRouter()
   const params = useParams()
-  const locale = params.locale as string
-  const [orderData] = useState<Record<string, unknown> | null>(() => {
-    if (typeof window === 'undefined') return null
+  const locale = useLocale()
+  const [orderData, setOrderData] = useState<Record<string, unknown> | null>(null)
+  const PLAN_DETAILS = getPlanDetails(t)
+
+  // 클라이언트에서만 sessionStorage 읽기 (Hydration 오류 방지)
+  useEffect(() => {
     const data = sessionStorage.getItem("asamoDeal")
-    return data ? JSON.parse(data) : null
-  })
+    if (data) {
+      setOrderData(JSON.parse(data))
+    }
+  }, [])
 
   interface ProductInfo {
     title: string
@@ -39,31 +46,36 @@ export default function ResultPage() {
     planPrice: string
   }
 
-  // 데이터가 없을 때의 기본값 (Loading or Fallback)
-  const productInfo: ProductInfo = (orderData?.product as ProductInfo) || {
-    title: "iPhone 17",
-    spec: "256GB · Lavender",
+  const [savedUserInfo, setSavedUserInfo] = useState<UserInfo | null>(null)
+
+  // user-info에서 저장된 사용자 정보를 우선 사용
+  useEffect(() => {
+    try {
+      const userInfoStr = sessionStorage.getItem("user-info")
+      if (userInfoStr) {
+        setSavedUserInfo(JSON.parse(userInfoStr) as UserInfo)
+      }
+    } catch (e) {
+      console.error("Failed to load user-info:", e)
+    }
+  }, [])
+
+  // asamoDeal에서 제품 정보 추출
+  const productInfo: ProductInfo = orderData ? {
+    title: String(orderData.title || ""),
+    spec: `${String(orderData.capacity || "")} · ${String(orderData.color || "")}`,
+    price: orderData.finalDevicePrice
+      ? `${t('Phone.Order.installment_price')} ${formatPrice(Number(orderData.finalDevicePrice), locale)}${t('Phone.Common.won')}`
+      : `${t('Phone.Order.release_price')} ${formatPrice(Number(orderData.originPrice) || 0, locale)}${t('Phone.Common.won')}`,
+    image: String(orderData.imageUrl || "")
+  } : {
+    title: "",
+    spec: "",
     price: "-",
     image: ""
   }
 
-  // user-info에서 저장된 사용자 정보를 우선 사용
-  const getSavedUserInfo = (): UserInfo | null => {
-    if (typeof window !== 'undefined') {
-      try {
-        const userInfoStr = sessionStorage.getItem("user-info")
-        if (userInfoStr) {
-          return JSON.parse(userInfoStr) as UserInfo
-        }
-      } catch (e) {
-        console.error("Failed to load user-info:", e)
-      }
-    }
-    return null
-  }
-
-  const savedUserInfo = getSavedUserInfo()
-  const userInfo: UserInfo = savedUserInfo || (orderData?.user as UserInfo) || {
+  const userInfo: UserInfo = savedUserInfo || {
     userName: "",
     userDob: "",
     userPhone: "",
@@ -71,10 +83,16 @@ export default function ResultPage() {
     requirements: "",
   }
 
-  const planInfo: PlanInfo = (orderData?.plan as PlanInfo) || {
-    planName: t('Phone.Plans.plan_69_v_name'),
-    planData: t('Phone.Plans.plan_69_v_desc'),
-    planPrice: "69,000 " + t('Phone.Common.won')
+  // 요금제 정보 추출
+  const selectedPlanId = String(orderData?.selectedPlanId || "plan_69")
+  const planData = PLAN_DETAILS[selectedPlanId] || PLAN_DETAILS["plan_69"]
+  const additionalCost = selectedPlanId === 'plan_90_v' ? 4450 : 0
+  const finalPlanPrice = planData.price + additionalCost
+
+  const planInfo: PlanInfo = {
+    planName: planData.name,
+    planData: planData.data,
+    planPrice: `${t('Phone.Order.monthly_price')} ${formatPrice(finalPlanPrice, locale)}${t('Phone.Common.won')}`
   }
 
   return (
@@ -92,7 +110,7 @@ export default function ResultPage() {
           image={productInfo.image}
           title={productInfo.title}
           spec={productInfo.spec}
-          price={planInfo.planPrice}
+          price={productInfo.price}
         />
 
         <div style={{ width: "100%", height: "1px", backgroundColor: "#F2F4F6", margin: "24px 0" }} />

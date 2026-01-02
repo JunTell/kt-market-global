@@ -102,8 +102,8 @@ function PhoneContent() {
                     const dbData = dbPlans.find(p => p.plan_id === meta.dbId)
                     const price = meta.fixedPrice || dbData?.price || 0
                     const marketSubsidy = calcKTmarketSubsidy(meta.dbId, price, subsidies, dbModelKey, regType)
-                    
-                    return {
+
+                    const planData = {
                         id: meta.uuid,
                         dbId: meta.dbId,
                         name: meta.name,
@@ -115,6 +115,15 @@ function PhoneContent() {
                         disclosureSubsidy: dbData?.disclosure_subsidy || 0,
                         marketSubsidy
                     }
+
+                    console.log(`📊 요금제 [${meta.dbId}]:`, {
+                        price,
+                        disclosureSubsidy: planData.disclosureSubsidy,
+                        marketSubsidy,
+                        subsidies
+                    })
+
+                    return planData
                 })
 
                 // 색상 및 이미지 처리
@@ -136,11 +145,17 @@ function PhoneContent() {
                 const currentImageUrls = imagesMap[selectedColor] || []
                 const currentImageUrl = currentImageUrls[0] || ""
 
+                // URL의 색상이 유효하지 않으면 URL 업데이트
+                if (colorFromUrl && !colors.includes(colorFromUrl)) {
+                    const correctedModel = `${prefix}-${capacity}-${selectedColor}`
+                    router.replace(`/${locale}/phone?model=${correctedModel}`, { scroll: false })
+                }
+
                 store.setStore({
                     model: urlModel,
                     title: device.pet_name,
                     capacity: device.capacity,
-                    originPrice: device.price, 
+                    originPrice: device.price,
                     color: selectedColor,
                     imageUrl: currentImageUrl,
                     imageUrls: currentImageUrls,
@@ -203,6 +218,13 @@ function PhoneContent() {
            registrationType: store.registrationType,
            savedAt: new Date().toISOString()
         }
+
+        console.log("💾 주문 페이지로 이동 - 저장할 데이터:", payload)
+        console.log("  - originPrice:", store.originPrice)
+        console.log("  - finalDevicePrice:", finalPriceInfo.finalDevicePrice)
+        console.log("  - discountMode:", store.discountMode)
+        console.log("  - selectedPlanId:", store.selectedPlanId)
+
         sessionStorage.setItem("asamoDeal", JSON.stringify(payload))
         router.push(`/${locale}/phone/order?model=${store.model}`)
     }
