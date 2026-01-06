@@ -6,6 +6,7 @@ import { MessageCircle, X, Send, ChevronRight } from 'lucide-react';
 import { cn } from '@/shared/lib/utils';
 import { getFAQList } from '@/features/inquiry/lib/faq-data';
 import { useTranslations } from 'next-intl';
+import { useUIStore } from '@/shared/model/useUIStore';
 
 const KakaoIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -18,41 +19,30 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
-type Message = {
+interface Message {
   id: string;
-  role: 'user' | 'bot';
-  content: string;
-};
-
-interface ChatBotProps {
-  externalIsOpen?: boolean;
-  onOpenChange?: (isOpen: boolean) => void;
+  type: 'bot' | 'user';
+  text: string;
+  options?: string[];
+  timestamp: Date;
 }
 
-export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) {
-  const t = useTranslations();
+export default function ChatBot() {
+  const t = useTranslations('ChatBot');
   const pathname = usePathname();
+  const { isChatOpen, setChatOpen } = useUIStore();
 
   const FAQ_LIST = getFAQList(t);
 
-  const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
-    { id: 'welcome', role: 'bot', content: t('ChatBot.welcome_message') }
+    { id: 'welcome', type: 'bot', text: t('ChatBot.welcome_message'), timestamp: new Date() }
   ]);
 
-  const isControlled = externalIsOpen !== undefined;
-  const isOpen = isControlled ? externalIsOpen : internalIsOpen;
+  const isOpen = isChatOpen;
   const scrollRef = useRef<HTMLDivElement>(null);
   const messageIdCounter = useRef(0);
-
-  const handleOpenChange = (value: boolean) => {
-    if (!isControlled) {
-      setInternalIsOpen(value);
-    }
-    onOpenChange?.(value);
-  };
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -69,7 +59,7 @@ export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) 
   const handleSend = (text: string) => {
     if (!text.trim()) return;
     messageIdCounter.current += 1;
-    const userMsg: Message = { id: `msg-${messageIdCounter.current}`, role: 'user', content: text };
+    const userMsg: Message = { id: `msg-${messageIdCounter.current}`, type: 'user', text: text, timestamp: new Date() };
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
 
@@ -81,7 +71,7 @@ export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) 
         ? found.answer
         : t('ChatBot.not_found');
       messageIdCounter.current += 1;
-      const botMsg: Message = { id: `msg-${messageIdCounter.current}`, role: 'bot', content: botContent };
+      const botMsg: Message = { id: `msg-${messageIdCounter.current}`, type: 'bot', text: botContent, timestamp: new Date() };
       setMessages((prev) => [...prev, botMsg]);
     }, 600);
   };
@@ -94,7 +84,7 @@ export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) 
   if (!isOpen && !isAnimating) {
     return (
       <button
-        onClick={() => handleOpenChange(true)}
+        onClick={() => setChatOpen(true)}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-primary text-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_40px_rgba(0,102,255,0.3)] hover:scale-105 transition-all duration-300 flex items-center justify-center group cursor-pointer"
       >
         <MessageCircle size={28} className="group-hover:rotate-12 transition-transform" />
@@ -120,7 +110,7 @@ export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) 
             </div>
           </div>
           <button
-            onClick={() => handleOpenChange(false)}
+            onClick={() => setChatOpen(false)}
             className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors cursor-pointer"
           >
             <X size={18} />
@@ -167,12 +157,12 @@ export default function ChatBot({ externalIsOpen, onOpenChange }: ChatBotProps) 
               key={m.id}
               className={cn(
                 "max-w-[85%] px-4 py-3 text-[14px] leading-relaxed shadow-sm animate-in slide-in-from-bottom-2 fade-in duration-300 whitespace-pre-wrap",
-                m.role === 'user'
+                m.type === 'user'
                   ? "bg-primary text-white rounded-[20px] rounded-tr-[4px] self-end ml-auto"
                   : "bg-white text-gray-800 border border-gray-100 rounded-[20px] rounded-tl-[4px] self-start"
               )}
             >
-              {m.content}
+              {m.text}
 
               {m.id === 'welcome' && (
                 <div className="mt-4 flex flex-col gap-2">

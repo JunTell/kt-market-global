@@ -1,6 +1,3 @@
-'use client';
-
-import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import ChatBot from '@/features/inquiry/components/ChatBot';
 import EligibilityChecker from '@/features/phone/components/EligibilityChecker';
@@ -9,29 +6,18 @@ import TargetAudience from '@/features/phone/components/TargetAudience';
 import WhyChooseUs from '@/features/phone/components/WhyChooseUs';
 import { ServiceGuideCard } from '@/features/phone/components/ServiceGuideCard';
 import { Notice } from '@/features/phone/components/Notice';
-import ModelList from '@/features/phone/components/ModelList';
+import ModelListContainer from '@/features/phone/components/ModelListContainer';
 import Footer from '@/shared/ui/layout/Footer';
 
 export default function Home() {
   const t = useTranslations();
-  const [isChatOpen, setIsChatOpen] = useState(false);
-
-  const scrollToChecker = () => {
-    const section = document.getElementById('eligibility-section');
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
 
   return (
     <main className="min-h-screen bg-background font-sans">
-      <ServiceGuideCard
-        onCheckClick={scrollToChecker}
-        onConsultClick={() => setIsChatOpen(true)}
-      />
+      <ServiceGuideCard />
 
       <div className="px-4 py-10">
-        <ModelList
+        <ModelListContainer
           sectionTitle={t('Phone.ModelList.section_title')}
           planId="ppllistobj_0808"
         />
@@ -77,10 +63,7 @@ export default function Home() {
       />
 
       <Footer />
-      <ChatBot
-        externalIsOpen={isChatOpen}
-        onOpenChange={setIsChatOpen}
-      />
+      <ChatBot />
     </main>
   );
 }
