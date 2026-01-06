@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react"
 import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
-import { createClient } from "@/lib/supabase/client"
-import { getPlanDetails, getColorMap } from "@/constants/phonedata"
-import { toKorean } from "@/utils/toKorean"
-import { formatPrice } from "@/utils/format"
-import { parsePhoneModel, getDBModelKey } from "@/utils/phoneModel"
-import OrderProductSummary from "@/components/feature/phone/order/OrderProductSummary"
-import OrderUserForm from "@/components/feature/phone/order/OrderUserForm"
+import { createClient } from "@/shared/api/supabase/client"
+import { getPlanDetails, getColorMap } from "@/features/phone/lib/phonedata"
+import { toKorean } from "@/shared/lib/toKorean"
+import { formatPrice } from "@/shared/lib/format"
+import { parsePhoneModel, getDBModelKey } from "@/features/phone/lib/phoneModel"
+import OrderProductSummary from "@/features/phone/components/order/OrderProductSummary"
+import OrderUserForm from "@/features/phone/components/order/OrderUserForm"
 
 export default function OrderPage() {
   const t = useTranslations()
@@ -290,7 +290,7 @@ export default function OrderPage() {
   if (!store.isReady) return <div className="min-h-screen flex items-center justify-center bg-white">{t('Phone.Common.loading')}</div>
 
   const planInfo = PLAN_DETAILS[store.selectedPlanId] || PLAN_DETAILS["plan_69"]
-  
+
   // ✅ [수정] 넷플릭스 요금제(plan_90_v)일 경우 4,450원 추가
   const additionalCost = store.selectedPlanId === 'plan_90_v' ? 4450 : 0
   const finalPlanPrice = planInfo.price + additionalCost
@@ -303,7 +303,7 @@ export default function OrderPage() {
         <p className="font-bold text-xl whitespace-pre-wrap text-label-900">{t('Phone.Order.confirm_info_title')}</p>
       </div>
       <div className="bg-white px-5 pt-4 pb-2">
-        <OrderProductSummary 
+        <OrderProductSummary
           image={store.imageUrl}
           title={store.title}
           spec={store.spec}
@@ -315,9 +315,9 @@ export default function OrderPage() {
         userName={store.userName}
         userDob={store.userDob}
         userPhone={store.userPhone}
-        
+
         country={store.country}
-        
+
         requirements={store.requirements}
         joinType={store.joinType}
         contract={store.contract}

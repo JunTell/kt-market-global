@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import localFont from 'next/font/local'; 
+import localFont from 'next/font/local';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import "@/app/globals.css";
-import ChatBot from '@/components/feature/ChatBot'; 
-import Header from "@/components/layout/Header";
-import ScrollToTop from "@/components/common/ScrollToTop";
+import ChatBot from '@/features/inquiry/components/ChatBot';
+import Header from "@/shared/ui/layout/Header";
+import ScrollToTop from "@/shared/ui/ScrollToTop";
 
 const pretendard = localFont({
-  src: '../fonts/PretendardVariable.woff2', 
+  src: '../fonts/PretendardVariable.woff2',
   display: 'swap',
   weight: "45 920",
   variable: '--font-pretendard',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 type Props = {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>; 
+  params: Promise<{ locale: string }>;
 };
 
 export default async function LocaleLayout({
@@ -33,7 +33,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body 
+      <body
         className={`${pretendard.variable} antialiased`}
         suppressHydrationWarning={true}
       >
@@ -42,8 +42,8 @@ export default async function LocaleLayout({
             id="main-scroll-container"
             className="w-full h-full max-w-[480px] min-w-[360px] min-h-screen shadow-2xl overflow-x-hidden font-sans relative overflow-y-auto scrollbar-hide"
           >
-            <ScrollToTop /> 
-            
+            <ScrollToTop />
+
             <Header />
             <main>
               {children}

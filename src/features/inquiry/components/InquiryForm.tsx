@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { formatPhoneNumber } from '@/utils/format';
+import { formatPhoneNumber } from '@/shared/lib/format';
 
 const CARRIERS = ['KT', 'SKT', 'LG', 'MVNO', 'NONE'];
 
@@ -18,7 +18,7 @@ const REGIONS = [
 export default function InquiryForm() {
   const t = useTranslations('Form');
   const router = useRouter();
-  
+
   const [step, setStep] = useState(1);
   const [direction, setDirection] = useState(1);
 
@@ -67,12 +67,12 @@ export default function InquiryForm() {
       // ✅ 최종 제출 로직
       const formData = { name, phone, carrier, region, device };
       console.log('Final Submission:', formData);
-      
+
       alert(t('Toast.success')); // 실제로는 Toast UI 사용 권장
-      
+
       // 세션 클리어 및 홈으로 이동
       sessionStorage.removeItem('eligibility_data');
-      router.push('/'); 
+      router.push('/');
     }
   };
 
@@ -109,15 +109,15 @@ export default function InquiryForm() {
           <ChevronLeft size={24} />
         </button>
         <div className="flex-1 text-center pr-8">
-           {/* Progress Dots (Optional) */}
-           <div className="flex justify-center gap-1.5">
-             {[1, 2, 3, 4, 5].map((s) => (
-               <div 
-                key={s} 
-                className={`w-1.5 h-1.5 rounded-full transition-colors ${s <= step ? 'bg-primary' : 'bg-gray-200'}`} 
-               />
-             ))}
-           </div>
+          {/* Progress Dots (Optional) */}
+          <div className="flex justify-center gap-1.5">
+            {[1, 2, 3, 4, 5].map((s) => (
+              <div
+                key={s}
+                className={`w-1.5 h-1.5 rounded-full transition-colors ${s <= step ? 'bg-primary' : 'bg-gray-200'}`}
+              />
+            ))}
+          </div>
         </div>
       </header>
 
@@ -130,7 +130,7 @@ export default function InquiryForm() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-             <h1 className="text-2xl font-bold text-gray-900 whitespace-pre-line leading-snug">
+            <h1 className="text-2xl font-bold text-gray-900 whitespace-pre-line leading-snug">
               {step === 1 && t('Name.label')}
               {step === 2 && t('Phone.label')}
               {step === 3 && t('Carrier.label')}
@@ -185,8 +185,8 @@ export default function InquiryForm() {
                       key={c}
                       onClick={() => setCarrier(c)}
                       className={`w-full py-4 px-6 text-left rounded-xl border-2 transition-all text-lg font-medium
-                        ${carrier === c 
-                          ? 'border-primary bg-blue-50 text-primary' 
+                        ${carrier === c
+                          ? 'border-primary bg-blue-50 text-primary'
                           : 'border-gray-100 bg-gray-50 text-gray-600 hover:bg-gray-100'
                         }`}
                     >
@@ -200,14 +200,14 @@ export default function InquiryForm() {
               {step === 4 && (
                 <div className="flex flex-col gap-4">
                   <div className="flex justify-end">
-                    <button 
+                    <button
                       onClick={() => { setIsManualRegion(!isManualRegion); setRegion(''); }}
                       className="text-sm text-gray-500 underline"
                     >
                       {isManualRegion ? t('Region.toggle_select') : t('Region.toggle_manual')}
                     </button>
                   </div>
-                  
+
                   {isManualRegion ? (
                     <input
                       autoFocus
@@ -218,21 +218,21 @@ export default function InquiryForm() {
                       className="w-full text-2xl border-b-2 border-gray-200 focus:border-primary py-2 outline-none placeholder:text-gray-300 bg-transparent"
                     />
                   ) : (
-                     <div className="grid grid-cols-2 gap-2 max-h-[400px] overflow-y-auto pr-2">
-                       {REGIONS.map((r) => (
-                         <button
-                           key={r}
-                           onClick={() => setRegion(r)}
-                           className={`py-3 px-2 text-sm rounded-lg border transition-all
-                             ${region === r 
-                               ? 'border-primary bg-blue-50 text-primary font-bold' 
-                               : 'border-gray-100 bg-white text-gray-600 hover:bg-gray-50'
-                             }`}
-                         >
-                           {r}
-                         </button>
-                       ))}
-                     </div>
+                    <div className="grid grid-cols-2 gap-2 max-h-[400px] overflow-y-auto pr-2">
+                      {REGIONS.map((r) => (
+                        <button
+                          key={r}
+                          onClick={() => setRegion(r)}
+                          className={`py-3 px-2 text-sm rounded-lg border transition-all
+                             ${region === r
+                              ? 'border-primary bg-blue-50 text-primary font-bold'
+                              : 'border-gray-100 bg-white text-gray-600 hover:bg-gray-50'
+                            }`}
+                        >
+                          {r}
+                        </button>
+                      ))}
+                    </div>
                   )}
                 </div>
               )}
@@ -262,8 +262,8 @@ export default function InquiryForm() {
           onClick={handleNext}
           disabled={!isStepValid()}
           className={`w-full py-4 rounded-xl text-lg font-bold transition-all transform active:scale-[0.98]
-            ${isStepValid() 
-              ? 'bg-primary text-white shadow-lg shadow-blue-500/30' 
+            ${isStepValid()
+              ? 'bg-primary text-white shadow-lg shadow-blue-500/30'
               : 'bg-gray-200 text-gray-400 cursor-not-allowed'
             }`}
         >

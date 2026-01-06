@@ -1,14 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { createClient } from "@/lib/supabase/client"
+import { createClient } from "@/shared/api/supabase/client"
 import {
   calcKTmarketSubsidy,
   getDeviceImageUrl,
   getDeviceImageUrls,
   type RegType,
-} from "@/lib/asamo-utils"
-import GongguDealCard from "../common/GongguDealCard"
+} from "@/features/phone/lib/asamo-utils"
+import GongguDealCard from "@/shared/ui/GongguDealCard"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 
@@ -57,7 +57,7 @@ export default function ModelList({
 
   // 브랜드 선택 상태 (기본값: iphone)
   const [brand, setBrand] = React.useState<Brand>("iphone")
-  
+
   const [deals, setDeals] = React.useState<ModelList[]>([])
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState<string | null>(null)
@@ -65,7 +65,7 @@ export default function ModelList({
   // --- 1. 통신사 & 가입유형 상태 관리 ---
   const [selectedCarrier, setSelectedCarrier] = React.useState<string>("KT")
   const [registrationType, setRegistrationType] = React.useState<RegType>("mnp")
-  
+
   // 팝업 열림 상태 (초기값 false)
   const [isSelectorOpen, setIsSelectorOpen] = React.useState(false)
 
@@ -79,7 +79,7 @@ export default function ModelList({
           if (pref.userCarrier) setSelectedCarrier(pref.userCarrier)
           if (pref.registrationType) setRegistrationType(pref.registrationType)
           else if (pref.userCarrier) {
-             setRegistrationType(pref.userCarrier === "KT" ? "chg" : "mnp")
+            setRegistrationType(pref.userCarrier === "KT" ? "chg" : "mnp")
           }
         } else {
           // 저장된 정보가 없으면(처음 방문) 팝업을 강제로 엽니다.
@@ -207,7 +207,7 @@ export default function ModelList({
           savedAt: new Date().toISOString(),
         }
         sessionStorage.setItem("asamo_user_preference", JSON.stringify(prefData))
-        
+
         // 기존 asamoDeal 업데이트
         const existing = sessionStorage.getItem("asamoDeal")
         const parsed = existing ? JSON.parse(existing) : {}
@@ -239,8 +239,8 @@ export default function ModelList({
       {/* 1. 통신사 선택 (모달 제어) */}
       <CarrierSelector
         selected={selectedCarrier}
-        isOpen={isSelectorOpen} 
-        onToggle={() => setIsSelectorOpen(!isSelectorOpen)} 
+        isOpen={isSelectorOpen}
+        onToggle={() => setIsSelectorOpen(!isSelectorOpen)}
         onChange={handleCarrierChange}
       />
 
@@ -260,21 +260,19 @@ export default function ModelList({
 
         <div className="w-full h-[50px] rounded-xl bg-background-alt p-1 flex box-border">
           <div
-            className={`flex-1 rounded-[9px] flex items-center justify-center text-[16px] font-medium cursor-pointer transition-all duration-200 select-none ${
-              brand === "iphone"
+            className={`flex-1 rounded-[9px] flex items-center justify-center text-[16px] font-medium cursor-pointer transition-all duration-200 select-none ${brand === "iphone"
                 ? "bg-background text-label-900 shadow-[0_2px_4px_rgba(0,0,0,0.08)]"
                 : "bg-transparent text-label-500 shadow-none"
-            }`}
+              }`}
             onClick={() => setBrand("iphone")}
           >
             iPhone
           </div>
           <div
-            className={`flex-1 rounded-[9px] flex items-center justify-center text-[16px] font-medium cursor-pointer transition-all duration-200 select-none ${
-              brand === "galaxy"
+            className={`flex-1 rounded-[9px] flex items-center justify-center text-[16px] font-medium cursor-pointer transition-all duration-200 select-none ${brand === "galaxy"
                 ? "bg-background text-label-900 shadow-[0_2px_4px_rgba(0,0,0,0.08)]"
                 : "bg-transparent text-label-500 shadow-none"
-            }`}
+              }`}
             onClick={() => setBrand("galaxy")}
           >
             Galaxy
@@ -300,9 +298,9 @@ export default function ModelList({
           </div>
         )}
         {!loading && !error && filteredDeals.length === 0 && (
-           <div className="text-center p-10 text-label-500 text-sm">
-             {t('Phone.ModelList.no_models')}
-           </div>
+          <div className="text-center p-10 text-label-500 text-sm">
+            {t('Phone.ModelList.no_models')}
+          </div>
         )}
         {!loading &&
           !error &&
@@ -318,7 +316,7 @@ export default function ModelList({
               planMonthlyDiscount={deal.planMonthlyDiscount}
               mode="device" // 무조건 기기 할인 모드로 고정
               model={deal.model}
-              detailPath="/phone" 
+              detailPath="/phone"
               imageUrl={deal.imageUrl}
               imageUrls={deal.imageUrls}
             />
@@ -391,11 +389,11 @@ function CarrierSelector({
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              transition={{ 
-                type: "spring", 
-                damping: 25, 
+              transition={{
+                type: "spring",
+                damping: 25,
                 stiffness: 350,
-                mass: 0.5 
+                mass: 0.5
               }}
               className="relative w-full max-w-[360px] bg-background rounded-[28px] shadow-2xl p-6 flex flex-col gap-5 overflow-hidden"
               onClick={(e) => e.stopPropagation()}
@@ -404,7 +402,7 @@ function CarrierSelector({
                 <h2 className="text-[22px] font-bold text-label-900 mb-1.5">{t('Phone.ModelList.select_carrier_title')}</h2>
                 <p className="text-[14px] text-label-500">{t('Phone.ModelList.select_carrier_desc')}</p>
               </div>
-              
+
               <div className="flex flex-col gap-2.5">
                 {CARRIERS.map((carrier) => (
                   <motion.button
@@ -416,15 +414,15 @@ function CarrierSelector({
                     <span className="text-[17px] font-semibold text-label-900 group-hover:text-black">
                       {carrier}
                     </span>
-                    
+
                     {selected === carrier ? (
                       <div className="w-6 h-6 rounded-full bg-status-correct flex items-center justify-center shadow-sm">
-                        <motion.svg 
-                          initial={{ scale: 0 }} 
-                          animate={{ scale: 1 }} 
+                        <motion.svg
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
                           width="14" height="10" viewBox="0 0 14 10" fill="none"
                         >
-                          <path d="M1 5L5 9L13 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M1 5L5 9L13 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </motion.svg>
                       </div>
                     ) : (

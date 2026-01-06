@@ -2,8 +2,8 @@
 
 import React from "react"
 import { useTranslations, useLocale } from "next-intl"
-import { formatPrice, formatManWon } from "@/utils/format"
-import { calculateFinalDevicePrice, calculateDiscountedMonthlyPrice, calculateTotalDeviceDiscount } from "@/utils/priceCalculation"
+import { formatPrice, formatManWon } from "@/shared/lib/format"
+import { calculateFinalDevicePrice, calculateDiscountedMonthlyPrice, calculateTotalDeviceDiscount } from "@/features/phone/lib/priceCalculation"
 
 export interface PlanData {
   id: string
@@ -82,7 +82,7 @@ export default function PlanSelector({
 
   return (
     <div className="w-full flex flex-col gap-8 py-4">
-      
+
       {/* 1. 할인 방법 탭 */}
       <div className="flex flex-col gap-3">
         <div className="text-[18px] font-semibold text-[#1d1d1f] flex items-center gap-2">
@@ -114,7 +114,7 @@ export default function PlanSelector({
           {t('Phone.PlanSelector.select_plan_title')}
           {!isDeviceMode && <span className="text-xs text-red-500 bg-red-50 px-1.5 py-0.5 rounded font-bold">{t('Phone.PlanSelector.discount_badge')}</span>}
         </div>
-        
+
         <div className="flex flex-col gap-3">
           {visiblePlans.map((plan) => {
             const is69PlanGroup = plan.id === "plan_69" || plan.price === 69000
@@ -142,14 +142,14 @@ export default function PlanSelector({
             if (selectedPlanId === "plan_69_v") dropdownValue = "simple"
 
             return (
-              <div 
+              <div
                 key={plan.id}
                 onClick={() => {
-                   if (is69PlanGroup) {
-                       if (!isSelected || selectedPlanId !== "plan_69") onSelectPlan("plan_69")
-                   } else {
-                       onSelectPlan(plan.id)
-                   }
+                  if (is69PlanGroup) {
+                    if (!isSelected || selectedPlanId !== "plan_69") onSelectPlan("plan_69")
+                  } else {
+                    onSelectPlan(plan.id)
+                  }
                 }}
                 className={`flex items-center justify-between p-6 rounded-2xl cursor-pointer transition-all border-2 bg-white ${isSelected ? 'border-blue-500' : 'border-gray-200'}`}
               >
@@ -230,39 +230,39 @@ export default function PlanSelector({
       <div className="flex flex-col gap-4 pt-6 border-t border-gray-200">
         <div className="text-[18px] font-semibold text-[#1d1d1f]">{t('Phone.PlanSelector.plan_info_title')}</div>
         {[
-            { label: t('Phone.PlanSelector.plan_name'), value: selectedPlan?.name },
-            { label: t('Phone.PlanSelector.plan_data'), value: selectedPlan?.description },
-            { label: t('Phone.PlanSelector.plan_calls'), value: selectedPlan?.calls },
-            { label: t('Phone.PlanSelector.plan_texts'), value: selectedPlan?.texts },
+          { label: t('Phone.PlanSelector.plan_name'), value: selectedPlan?.name },
+          { label: t('Phone.PlanSelector.plan_data'), value: selectedPlan?.description },
+          { label: t('Phone.PlanSelector.plan_calls'), value: selectedPlan?.calls },
+          { label: t('Phone.PlanSelector.plan_texts'), value: selectedPlan?.texts },
         ].map((item, idx) => (
-            <div key={idx} className="flex justify-between items-start">
-                <span className="w-20 text-[15px] text-gray-500">{item.label}</span>
-                <span className="flex-1 text-[15px] text-[#1d1d1f] text-right">{item.value}</span>
-            </div>
+          <div key={idx} className="flex justify-between items-start">
+            <span className="w-20 text-[15px] text-gray-500">{item.label}</span>
+            <span className="flex-1 text-[15px] text-[#1d1d1f] text-right">{item.value}</span>
+          </div>
         ))}
 
         <div className="flex justify-between items-start">
-           <span className="w-20 text-[15px] text-gray-500">{t('Phone.PlanSelector.monthly_fee')}</span>
-           <div className="flex flex-col items-end">
-              {!isDeviceMode && (
-                  <span className="text-[13px] text-gray-400 line-through mb-0.5">
-                      <span className="text-[#FF6B6B] font-semibold no-underline mr-1">25%</span>
-                      {formatPrice(currentPlanPrice, locale)}{t('Phone.Common.won')}
-                  </span>
-              )}
-              <span className="text-[15px] text-[#1d1d1f] font-semibold">
-                  {t('Phone.Order.monthly_price')} {formatPrice(!isDeviceMode ? currentDiscountedPrice : currentPlanPrice, locale)}{t('Phone.Common.won')}
+          <span className="w-20 text-[15px] text-gray-500">{t('Phone.PlanSelector.monthly_fee')}</span>
+          <div className="flex flex-col items-end">
+            {!isDeviceMode && (
+              <span className="text-[13px] text-gray-400 line-through mb-0.5">
+                <span className="text-[#FF6B6B] font-semibold no-underline mr-1">25%</span>
+                {formatPrice(currentPlanPrice, locale)}{t('Phone.Common.won')}
               </span>
-           </div>
+            )}
+            <span className="text-[15px] text-[#1d1d1f] font-semibold">
+              {t('Phone.Order.monthly_price')} {formatPrice(!isDeviceMode ? currentDiscountedPrice : currentPlanPrice, locale)}{t('Phone.Common.won')}
+            </span>
+          </div>
         </div>
 
         {selectedPlanId === "plan_69" && (
-           <div className="bg-gray-100 rounded-xl p-4 mt-2 flex gap-2.5 items-start">
-              <div className="w-[18px] h-[18px] rounded-full bg-gray-400 text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5 font-serif">i</div>
-              <div className="text-[11px] text-gray-600 leading-normal font-medium tracking-tight break-keep">
-                 {t('Phone.PlanSelector.data_on_video_notice')}
-              </div>
-           </div>
+          <div className="bg-gray-100 rounded-xl p-4 mt-2 flex gap-2.5 items-start">
+            <div className="w-[18px] h-[18px] rounded-full bg-gray-400 text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5 font-serif">i</div>
+            <div className="text-[11px] text-gray-600 leading-normal font-medium tracking-tight break-keep">
+              {t('Phone.PlanSelector.data_on_video_notice')}
+            </div>
+          </div>
         )}
       </div>
     </div>

@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import Image from 'next/image'; // Image 컴포넌트 임포트
 import { useParams } from 'next/navigation';
-import LanguageSelector from '../common/LanguageSelector';
+import LanguageSelector from '@/shared/ui/LanguageSelector';
 
 export default function Header() {
   const params = useParams();
@@ -16,10 +16,10 @@ export default function Header() {
         <Link href={`/${locale}`} className="flex items-center transition-opacity hover:opacity-80">
           <Image
             src="/images/logo.svg"
-            alt="KT Market Logo" 
-            width={80}          
-            height={60}          
-            priority             
+            alt="KT Market Logo"
+            width={80}
+            height={60}
+            priority
           />
         </Link>
         <LanguageSelector />
