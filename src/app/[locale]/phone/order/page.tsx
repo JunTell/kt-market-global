@@ -77,17 +77,12 @@ export default function OrderPage() {
         const sessionDataStr = sessionStorage.getItem("asamoDeal")
         if (sessionDataStr) {
           sessionData = JSON.parse(sessionDataStr)
-          console.log("🔍 세션 데이터 로드됨:", sessionData)
-        } else {
-          console.log("⚠️ asamoDeal 세션 데이터 없음")
         }
       } catch (e) { console.error(e) }
 
       if (sessionData && modelFromUrl && sessionData.model === modelFromUrl) {
-        console.log("✅ 세션 데이터 사용 (모델 일치)")
         applyDataToStore(sessionData)
       } else if (modelFromUrl) {
-        console.log("📚 DB에서 데이터 가져오기:", modelFromUrl)
         await fetchFromDB(modelFromUrl)
       }
 
@@ -115,8 +110,6 @@ export default function OrderPage() {
 
   // 데이터 적용 헬퍼
   const applyDataToStore = (data: Record<string, unknown>) => {
-    console.log("📦 applyDataToStore 호출 데이터:", data)
-
     const colorKey = String(data.color || "random")
     const colorName = COLOR_MAP[colorKey] || colorKey || t('Phone.Common.default_color')
     const planId = String(data.selectedPlanId || "plan_69")
@@ -129,10 +122,8 @@ export default function OrderPage() {
     let priceText = ""
     if (data.finalDevicePrice) {
       priceText = `${t('Phone.Order.installment_price')} ${formatPrice(Number(data.finalDevicePrice), locale)}${t('Phone.Common.won')}`
-      console.log("💰 할부가 사용 (finalDevicePrice):", data.finalDevicePrice, "→", priceText)
     } else {
       priceText = `${t('Phone.Order.release_price')} ${formatPrice(Number(data.originPrice) || 0, locale)}${t('Phone.Common.won')}`
-      console.log("💰 출고가 사용 (originPrice):", data.originPrice, "→", priceText)
     }
 
     setStore(prev => ({

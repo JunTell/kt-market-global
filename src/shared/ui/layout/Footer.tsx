@@ -20,10 +20,10 @@ export default function Footer() {
   return (
     <footer className="w-full">
       {/* Top Banner (Policy & Channels) */}
-      <div className="bg-[#eee] py-5 border-b border-gray-200">
-        <div className="max-w-[1200px] mx-auto px-5 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="bg-[#eee] border-b border-gray-200">
+        <div className="flex flex-col items-center justify-between">
           {/* Links */}
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-[#555] font-medium">
+          <div className="flex flex-wrap justify-center gap-2 py-4 text-sm text-[#555] bg-[#EAEBEC] font-medium">
             <Link href="/policy" className="hover:text-black hover:underline">{t('policy_privacy')}</Link>
             <span className="text-gray-300">|</span>
             <Link href="/policy" className="hover:text-black hover:underline">{t('policy_usage')}</Link>
@@ -34,7 +34,7 @@ export default function Footer() {
           </div>
 
           {/* Buttons */}
-          <div className="flex gap-3">
+          <div className="w-full flex justify-center gap-3 bg-[#FFFFFF] py-2">
             <Link href="https://www.youtube.com/" target="_blank" className="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm hover:shadow-md transition-all">
               <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
@@ -52,7 +52,7 @@ export default function Footer() {
       </div>
 
       {/* Top Section - Dark */}
-      <div className="bg-[#191919] text-white pt-10 pb-10">
+      <div className="bg-[#191919] text-white pt-4 pb-4">
         <div className="max-w-[1200px] mx-auto px-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           {/* Left */}
           <div className="flex flex-col gap-3">
@@ -147,7 +147,7 @@ export default function Footer() {
               </Link>
             </div>
             <p className="text-[#666] text-[11px]">
-              COPYRIGHT © 2025 KT MARKET GLOBAL. ALL RIGHTS RESERVED.
+              COPYRIGHT © 2026 KT MARKET GLOBAL. ALL RIGHTS RESERVED.
             </p>
           </div>
         </div>

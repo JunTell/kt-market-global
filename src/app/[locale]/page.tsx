@@ -42,19 +42,35 @@ export default function Home() {
 
       <WhyChooseUs />
       <Notice
-        title="유의사항"
+        title={t('Main.Notice.section_title')}
         items={[
           {
-            title: "작성하신 정보는 어디로 전달되나요?",
-            content: "작성해주신 모든 정보는 상담을 위해 담당 부서로 안전하게 전달되며, 상담 완료 후 파기됩니다."
+            title: t('Main.Notice.common_title'),
+            content: t('Main.Notice.common_content')
           },
           {
-            title: "답변은 언제 받을 수 있나요?",
-            content: "평일 기준 24시간 이내에 기재해주신 연락처로 안내해 드립니다.\n주말 및 공휴일에는 답변이 지연될 수 있습니다."
+            title: t('Main.Notice.kt_subsidy_title'),
+            content: t('Main.Notice.kt_subsidy_content')
           },
           {
-            title: "정보를 잘못 입력했어요.",
-            content: "이미 제출된 정보는 수정이 어렵습니다. 다시 작성하여 제출해주시면 최신 정보로 접수됩니다."
+            title: t('Main.Notice.public_subsidy_title'),
+            content: t('Main.Notice.public_subsidy_content')
+          },
+          {
+            title: t('Main.Notice.selective_contract_title'),
+            content: t('Main.Notice.selective_contract_content')
+          },
+          {
+            title: t('Main.Notice.payment_title'),
+            content: t('Main.Notice.payment_content')
+          },
+          {
+            title: t('Main.Notice.cancellation_title'),
+            content: t('Main.Notice.cancellation_content')
+          },
+          {
+            title: t('Main.Notice.application_guide_title'),
+            content: t('Main.Notice.application_guide_content')
           }
         ]}
       />

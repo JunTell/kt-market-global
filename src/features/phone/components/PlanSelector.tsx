@@ -55,13 +55,6 @@ export default function PlanSelector({
   const currentMarketSubsidy = selectedPlan?.marketSubsidy ?? ktMarketDiscount
   const specialDiscount = 0 // 특별 할인은 현재 적용하지 않음
 
-  console.log("💰 PlanSelector 가격 정보:", {
-    selectedPlanId,
-    selectedPlan,
-    currentMarketSubsidy,
-    ktMarketDiscount
-  })
-
   const finalPrice = calculateFinalDevicePrice({
     originPrice,
     plan: selectedPlan,

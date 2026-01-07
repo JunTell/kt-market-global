@@ -96,7 +96,6 @@ function PhoneContent() {
                 const device = deviceRes.data
                 const subsidies = subsidyRes.data || {}
                 const dbPlans = planRes.data || []
-                console.log(subsidies);
                 // 요금제 데이터 병합
                 const mergedPlans = PLAN_METADATA.map(meta => {
                     const dbData = dbPlans.find(p => p.plan_id === meta.dbId)
@@ -115,13 +114,6 @@ function PhoneContent() {
                         disclosureSubsidy: dbData?.disclosure_subsidy || 0,
                         marketSubsidy
                     }
-
-                    console.log(`📊 요금제 [${meta.dbId}]:`, {
-                        price,
-                        disclosureSubsidy: planData.disclosureSubsidy,
-                        marketSubsidy,
-                        subsidies
-                    })
 
                     return planData
                 })
@@ -218,12 +210,6 @@ function PhoneContent() {
             registrationType: store.registrationType,
             savedAt: new Date().toISOString()
         }
-
-        console.log("💾 주문 페이지로 이동 - 저장할 데이터:", payload)
-        console.log("  - originPrice:", store.originPrice)
-        console.log("  - finalDevicePrice:", finalPriceInfo.finalDevicePrice)
-        console.log("  - discountMode:", store.discountMode)
-        console.log("  - selectedPlanId:", store.selectedPlanId)
 
         sessionStorage.setItem("asamoDeal", JSON.stringify(payload))
         router.push(`/${locale}/phone/order?model=${store.model}`)
