@@ -2,7 +2,7 @@
  * 핸드폰 모델 관련 유틸리티 함수들
  */
 
-import { MODEL_VARIANTS } from "@/constants/phonedata"
+import { MODEL_VARIANTS } from "./phonedata"
 
 /**
  * 파싱된 모델 정보 인터페이스

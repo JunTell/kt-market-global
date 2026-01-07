@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/lib/utils';
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -16,10 +16,10 @@ interface NoticeProps {
   className?: string;
 }
 
-export const Notice = ({ 
-  title = "유의사항", 
-  items, 
-  className 
+export const Notice = ({
+  title = "유의사항",
+  items,
+  className
 }: NoticeProps) => {
   return (
     <div
@@ -38,7 +38,7 @@ export const Notice = ({
       )}
 
       {/* 아코디언 리스트 */}
-      <div className="flex flex-col divide-y divide-line-200/50"> 
+      <div className="flex flex-col divide-y divide-line-200/50">
         {/* divide-line-200/50: 아이템 간 얇은 구분선이 필요하면 유지, 없으면 삭제 */}
         {items.map((item, index) => (
           <AccordionItem key={index} item={item} />
@@ -55,7 +55,7 @@ const AccordionItem = ({ item }: { item: NoticeItemData }) => {
   return (
     <div className="flex flex-col">
       {/* 헤더 버튼: 양끝 정렬 (justify-between) */}
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center justify-between w-full py-3 text-left group cursor-pointer"
       >
@@ -68,12 +68,12 @@ const AccordionItem = ({ item }: { item: NoticeItemData }) => {
         </span>
 
         {/* 화살표 아이콘 (오른쪽/뒤쪽) */}
-        <ChevronDown 
-          size={16} 
+        <ChevronDown
+          size={16}
           className={cn(
-            "text-label-500 transition-transform duration-200 shrink-0", 
+            "text-label-500 transition-transform duration-200 shrink-0",
             isOpen && "rotate-180 text-label-900"
-          )} 
+          )}
         />
       </button>
 

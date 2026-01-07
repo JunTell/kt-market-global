@@ -1,19 +1,35 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { useUIStore } from '@/shared/model/useUIStore';
 
 interface ServiceGuideCardProps {
   className?: string;
-  onCheckClick?: () => void; 
-  onConsultClick?: () => void;
+  onCheckClick?: () => void;
 }
 
-export const ServiceGuideCard = ({ 
-  className, 
-  onCheckClick, 
-  onConsultClick 
+export const ServiceGuideCard = ({
+  className,
+  onCheckClick
 }: ServiceGuideCardProps) => {
   const t = useTranslations('ServiceGuide');
+  const openChat = useUIStore((state) => state.openChat);
+
+  const handleConsultClick = () => {
+    openChat();
+  };
+
+  const handleCheckClick = () => {
+    if (onCheckClick) {
+      onCheckClick();
+    } else {
+      // Default behavior: scroll to eligibility section if onCheckClick is not provided
+      const section = document.getElementById('eligibility-section');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
 
   return (
     <div
@@ -49,17 +65,17 @@ export const ServiceGuideCard = ({
 
       {/* Buttons */}
       <div className="w-full max-w-md space-y-3">
-        <button 
+        <button
           type="button"
-          onClick={onCheckClick}
+          onClick={handleCheckClick}
           className="w-full bg-white text-black text-base font-semibold py-3 rounded-full hover:bg-gray-100 transition-colors cursor-pointer"
         >
           {t('btn_check')}
         </button>
 
-        <button 
+        <button
           type="button"
-          onClick={onConsultClick}
+          onClick={handleConsultClick}
           className="w-full bg-black text-white text-base font-semibold py-3 rounded-full hover:bg-gray-900 transition-colors cursor-pointer"
         >
           {t('btn_consult')}

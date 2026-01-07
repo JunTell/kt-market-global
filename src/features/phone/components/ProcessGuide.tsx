@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/lib/utils';
 import { motion, Variants } from 'framer-motion';
 
 export default function ProcessGuide() {
@@ -62,7 +62,7 @@ export default function ProcessGuide() {
 
   return (
     <section className="py-10 px-5 bg-background-alt overflow-hidden">
-      <motion.h2 
+      <motion.h2
         initial={{ opacity: 0, y: -10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -70,7 +70,7 @@ export default function ProcessGuide() {
         dangerouslySetInnerHTML={{ __html: t.raw('title') }}
       />
 
-      <motion.div 
+      <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -78,8 +78,8 @@ export default function ProcessGuide() {
         className="space-y-3 mb-12"
       >
         {steps.map((step) => (
-          <motion.div 
-            key={step.id} 
+          <motion.div
+            key={step.id}
             variants={itemVariants}
             className="bg-background rounded-[32px] py-2 px-3 flex items-center gap-4 shadow-sm border border-line-200/50"
           >
@@ -87,7 +87,7 @@ export default function ProcessGuide() {
               <span className="text-[11px] font-medium opacity-90 mb-0.5">STEP</span>
               <span className="text-xl font-bold">{step.id}</span>
             </div>
-            
+
             <div className="flex-1 py-1">
               <h3 className="font-bold text-sm text-label-900 mb-1 leading-none">
                 {step.title}
@@ -100,7 +100,7 @@ export default function ProcessGuide() {
         ))}
       </motion.div>
 
-      <motion.div 
+      <motion.div
         variants={badgeContainerVariants}
         initial="hidden"
         whileInView="visible"
@@ -109,20 +109,20 @@ export default function ProcessGuide() {
       >
         {badges.map((badge, idx) => {
           let badgeStyle = "";
-          if (idx === 0) badgeStyle = "bg-background border-[2.5px] border-[#5681E8] text-label-900"; 
-          else if (idx === 1) badgeStyle = "bg-[#A9AFB9] text-white border-none"; 
-          else if (idx === 2) badgeStyle = "bg-[#4A7AFF] text-white border-none"; 
+          if (idx === 0) badgeStyle = "bg-background border-[2.5px] border-[#5681E8] text-label-900";
+          else if (idx === 1) badgeStyle = "bg-[#A9AFB9] text-white border-none";
+          else if (idx === 2) badgeStyle = "bg-[#4A7AFF] text-white border-none";
 
           return (
-            <motion.div 
-              key={badge} 
+            <motion.div
+              key={badge}
               variants={badgeVariants}
               whileTap={{ scale: 0.95 }}
               className={cn(
                 "flex flex-col items-center justify-center rounded-full shadow-md text-center p-2 shrink-0 cursor-pointer",
                 badgeStyle
               )}
-              style={{ width: '100px', height: '100px' }} 
+              style={{ width: '100px', height: '100px' }}
             >
               <span className={cn(
                 "text-[13px] font-bold leading-snug break-keep whitespace-pre-line",
