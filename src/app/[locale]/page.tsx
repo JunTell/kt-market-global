@@ -57,7 +57,6 @@ export default function Home() {
             content: "이미 제출된 정보는 수정이 어렵습니다. 다시 작성하여 제출해주시면 최신 정보로 접수됩니다."
           }
         ]}
-        className="mt-6"
       />
 
       <Footer />
