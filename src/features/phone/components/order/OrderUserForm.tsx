@@ -385,7 +385,7 @@ const InfoRow = ({ label, value, hasButton = false, onEdit, buttonLabel = "ìˆ˜ì 
   buttonLabel?: string
 }) => (
   <div className="flex items-start justify-between">
-    <span className="text-[15px] text-[#86868b] w-[100px] font-medium leading-snug">{label}</span>
+    <span className="text-[15px] text-[#86868b] w-[140px] font-medium leading-snug">{label}</span>
     <div className="flex items-center gap-2.5 flex-1">
       {value && <span className="text-[15px] font-semibold text-[#1d1d1f] leading-snug">{value}</span>}
       {hasButton && <button className="py-1.5 px-3 text-[13px] text-[#4B5563] bg-[#F3F4F6] border-none rounded-md cursor-pointer ml-auto" onClick={onEdit}>{buttonLabel}</button>}
