@@ -86,6 +86,9 @@
       "title": "Check Unavailable",
       "desc": "Valid ARC is required<br/>for accurate check.",
       "retry": "Go Back"
+    },
+    "ChatBot": {
+      "select_phone": "Select Phone Model"
     }
   },
   "Process": {

@@ -214,7 +214,7 @@ export default function EligibilityChecker() {
   };
 
   return (
-    <div className="w-full max-w-[480px] mx-auto my-12 font-sans px-4 md:px-0">
+    <div className="w-full max-w-[480px] mx-auto font-sans px-4 md:px-0">
       {/* 컨테이너: 높이 축소 (min-h-[460px]), Radius, Shadow 적용 */}
       <div
         className="bg-background rounded-[24px] shadow-2xl shadow-line-400/20 border border-line-200 overflow-hidden relative min-h-[460px] flex flex-col"

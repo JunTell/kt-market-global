@@ -38,7 +38,7 @@ export default function OrderUserForm(props: OrderUserFormProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [showTerms, setShowTerms] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [agreement, setAgreement] = useState(false)
+  const [agreement, setAgreement] = useState(true)
   const [isTermExpanded, setIsTermExpanded] = useState(false)
 
   const subscriberRef = useRef<HTMLDivElement>(null)

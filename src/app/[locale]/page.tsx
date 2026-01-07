@@ -1,6 +1,5 @@
 import { useTranslations } from 'next-intl';
 import ChatBot from '@/features/inquiry/components/ChatBot';
-import EligibilityChecker from '@/features/phone/components/EligibilityChecker';
 import ProcessGuide from '@/features/phone/components/ProcessGuide';
 import TargetAudience from '@/features/phone/components/TargetAudience';
 import WhyChooseUs from '@/features/phone/components/WhyChooseUs';
@@ -39,7 +38,6 @@ export default function Home() {
             {t('Home.Eligibility.desc')}
           </p>
         </div>
-        <EligibilityChecker />
       </section>
 
       <WhyChooseUs />

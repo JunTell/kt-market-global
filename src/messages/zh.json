@@ -86,6 +86,9 @@
       "title": "无法查询",
       "desc": "必须持有外国人登录证<br/>才能进行准确查询。",
       "retry": "返回首页"
+    },
+    "ChatBot": {
+      "select_phone": "选择手机型号"
     }
   },
   "Process": {
