@@ -7,6 +7,7 @@ import { ServiceGuideCard } from '@/features/phone/components/ServiceGuideCard';
 import { Notice } from '@/features/phone/components/Notice';
 import ModelListContainer from '@/features/phone/components/ModelListContainer';
 import Footer from '@/shared/ui/layout/Footer';
+import EligibilityChecker from '@/features/phone/components/EligibilityChecker';
 
 export default function Home() {
   const t = useTranslations();
@@ -38,6 +39,7 @@ export default function Home() {
             {t('Home.Eligibility.desc')}
           </p>
         </div>
+        <EligibilityChecker />
       </section>
 
       <WhyChooseUs />
