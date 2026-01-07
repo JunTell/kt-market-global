@@ -159,7 +159,7 @@ export default function PlanSelector({
                   </div>
                   <div className="flex flex-col gap-1">
                     <div className="text-xl font-bold text-[#1d1d1f]">
-                      {isNetflixPlan ? `${formattedPrice}${t('Phone.Common.won')}+${formattedAdditionalCost}${t('Phone.Common.won')}` : `${formattedPrice}${t('Phone.Common.won')}`}
+                      {isNetflixPlan ? `${formattedPrice}${t('Phone.Common.won')} + ${formattedAdditionalCost}${t('Phone.Common.won')}` : `${formattedPrice}${t('Phone.Common.won')}`}
                     </div>
 
                     {is69PlanGroup ? (
