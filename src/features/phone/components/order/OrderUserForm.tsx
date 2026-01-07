@@ -43,6 +43,30 @@ export default function OrderUserForm(props: OrderUserFormProps) {
 
   const subscriberRef = useRef<HTMLDivElement>(null)
 
+  // Refs for auto-focus/tabbing
+  const nameRef = useRef<HTMLInputElement>(null)
+  const dobRef = useRef<HTMLInputElement>(null)
+  const phoneRef = useRef<HTMLInputElement>(null)
+  const countryRef = useRef<HTMLSelectElement>(null)
+  const reqRef = useRef<HTMLInputElement>(null)
+
+  // Auto-focus Name when editing starts
+  React.useEffect(() => {
+    if (isEditing) {
+      setTimeout(() => {
+        nameRef.current?.focus()
+      }, 100)
+    }
+  }, [isEditing])
+
+  // Handle Enter key navigation
+  const handleKeyDown = (e: React.KeyboardEvent, nextRef: React.RefObject<HTMLElement | null>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      nextRef.current?.focus()
+    }
+  }
+
   const [formData, setFormData] = useState({
     userName: props.userName,
     userDob: props.userDob,
@@ -165,36 +189,63 @@ export default function OrderUserForm(props: OrderUserFormProps) {
           <div className="text-lg font-bold text-[#1d1d1f]">{t('Phone.OrderForm.subscriber_info_input')}</div>
         </div>
         <div className="flex flex-col px-5">
-          <InputGroup label={t('Phone.OrderForm.name_label')} value={formData.userName} onChange={(e) => handleChange("userName", e.target.value)} />
           <InputGroup
-            label={t('Phone.OrderForm.dob_label')} placeholder={t('Phone.OrderForm.dob_placeholder')} value={formData.userDob} maxLength={6}
-            onChange={(e) => handleChange("userDob", e.target.value)}
-            error={touched.userDob && !isDobValid ? t('Phone.OrderForm.dob_error') : undefined}
-            onBlur={() => setTouched(prev => ({...prev, userDob: true}))}
+            ref={nameRef}
+            name="name"
+            label={t('Phone.OrderForm.name_label')}
+            value={formData.userName}
+            onChange={(e) => handleChange("userName", e.target.value)}
+            onKeyDown={(e: React.KeyboardEvent) => handleKeyDown(e, dobRef)}
+            placeholder="English Name (ex: John Doe)"
           />
           <InputGroup
-            label={t('Phone.OrderForm.phone_label')} placeholder={t('Phone.OrderForm.phone_placeholder')} value={formData.userPhone} maxLength={11}
+            ref={dobRef}
+            label={t('Phone.OrderForm.dob_label')}
+            placeholder={t('Phone.OrderForm.dob_placeholder')}
+            value={formData.userDob}
+            maxLength={6}
+            onChange={(e) => handleChange("userDob", e.target.value)}
+            error={touched.userDob && !isDobValid ? t('Phone.OrderForm.dob_error') : undefined}
+            onBlur={() => setTouched(prev => ({ ...prev, userDob: true }))}
+            onKeyDown={(e: React.KeyboardEvent) => handleKeyDown(e, phoneRef)}
+          />
+          <InputGroup
+            ref={phoneRef}
+            label={t('Phone.OrderForm.phone_label')}
+            placeholder={t('Phone.OrderForm.phone_placeholder')}
+            value={formData.userPhone}
+            maxLength={11}
             onChange={(e) => handleChange("userPhone", e.target.value)}
             error={touched.userPhone && !isPhoneValid ? t('Phone.OrderForm.phone_error') : undefined}
-            onBlur={() => setTouched(prev => ({...prev, userPhone: true}))}
+            onBlur={() => setTouched(prev => ({ ...prev, userPhone: true }))}
+            onKeyDown={(e: React.KeyboardEvent) => handleKeyDown(e, countryRef)}
           />
           <div className="mb-6">
             <div className="text-[13px] text-[#86868b] mb-2 font-medium">{t('Phone.OrderForm.country_label')}</div>
             <select
-                className="w-full p-4 text-base rounded-xl border border-[#E5E7EB] bg-white text-[#1d1d1f] outline-none box-border"
-                value={formData.country}
-                onChange={(e) => handleChange("country", e.target.value)}
+              ref={countryRef}
+              className="w-full p-4 text-base rounded-xl border border-[#E5E7EB] bg-white text-[#1d1d1f] outline-none box-border"
+              value={formData.country}
+              onChange={(e) => handleChange("country", e.target.value)}
+              onKeyDown={(e) => handleKeyDown(e, reqRef)}
             >
-                <option value="Republic of Korea">Republic of Korea</option>
-                <option value="USA">USA</option>
-                <option value="China">China</option>
-                <option value="Japan">Japan</option>
-                <option value="Vietnam">Vietnam</option>
-                <option value="Thailand">Thailand</option>
-                <option value="Other">Other</option>
+              <option value="Republic of Korea">Republic of Korea</option>
+              <option value="USA">USA</option>
+              <option value="China">China</option>
+              <option value="Japan">Japan</option>
+              <option value="Vietnam">Vietnam</option>
+              <option value="Thailand">Thailand</option>
+              <option value="Other">Other</option>
             </select>
           </div>
-          <InputGroup label={t('Phone.OrderForm.requirements_label')} placeholder={t('Phone.OrderForm.requirements_placeholder')} value={formData.requirements} onChange={(e) => handleChange("requirements", e.target.value)} />
+          <InputGroup
+            ref={reqRef}
+            label={t('Phone.OrderForm.requirements_label')}
+            placeholder={t('Phone.OrderForm.requirements_placeholder')}
+            value={formData.requirements}
+            onChange={(e) => handleChange("requirements", e.target.value)}
+            onKeyDown={(e: React.KeyboardEvent) => { if (e.key === 'Enter') (e.currentTarget as HTMLElement).blur() }}
+          />
         </div>
         <div className="pt-10 mt-auto px-5 pb-10">
           <button className="w-full py-4.5 bg-[#4285F4] text-white text-[17px] font-bold border-none rounded-[14px] cursor-pointer shadow-[0_4px_10px_rgba(66,133,244,0.2)] transition-colors" onClick={() => setIsEditing(false)}>{t('Phone.OrderForm.save_button')}</button>
@@ -247,27 +298,27 @@ export default function OrderUserForm(props: OrderUserFormProps) {
             {props.isReadOnly ? t('Phone.OrderForm.application_success_title') : t('Phone.OrderForm.plan_maintenance_warning_title')}
           </div>
           <div className="text-[#6B7280] text-[13px]">
-             {props.isReadOnly ? t('Phone.OrderForm.application_success_desc') : t('Phone.OrderForm.plan_maintenance_warning_desc')}
+            {props.isReadOnly ? t('Phone.OrderForm.application_success_desc') : t('Phone.OrderForm.plan_maintenance_warning_desc')}
           </div>
         </div>
       </div>
 
       {!props.isReadOnly && (
         <div className="pt-10 mt-auto">
-            <button
+          <button
             className="w-full py-4.5 bg-[#4285F4] text-white text-[17px] font-bold border-none rounded-[14px] cursor-pointer shadow-[0_4px_10px_rgba(66,133,244,0.2)] transition-colors"
             onClick={() => {
-                if (!isUserInfoComplete) {
+              if (!isUserInfoComplete) {
                 setTouched({ userName: true, userDob: true, userPhone: true })
                 subscriberRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
                 setIsEditing(true)
                 return
-                }
-                setShowTerms(true)
+              }
+              setShowTerms(true)
             }}
-            >
+          >
             {t('Phone.OrderForm.confirm_button')}
-            </button>
+          </button>
         </div>
       )}
 
@@ -342,7 +393,7 @@ const InfoRow = ({ label, value, hasButton = false, onEdit, buttonLabel = "ìˆ˜ì 
   </div>
 )
 
-const InputGroup = ({ label, value, onChange, onBlur, placeholder, maxLength, error }: {
+const InputGroup = React.forwardRef<HTMLInputElement, {
   label: string
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -350,13 +401,27 @@ const InputGroup = ({ label, value, onChange, onBlur, placeholder, maxLength, er
   placeholder?: string
   maxLength?: number
   error?: string
-}) => (
+  name?: string
+  onKeyDown?: (e: React.KeyboardEvent) => void
+}>(({ label, value, onChange, onBlur, placeholder, maxLength, error, name, onKeyDown }, ref) => (
   <div className="mb-6">
     <div className="text-[13px] text-[#86868b] mb-2 font-medium">{label}</div>
-    <input className={`w-full p-4 text-base rounded-xl bg-white text-[#1d1d1f] outline-none box-border ${error ? 'border border-[#EF4444]' : 'border border-[#E5E7EB]'}`} value={value} onChange={onChange} onBlur={onBlur} placeholder={placeholder} maxLength={maxLength} />
+    <input
+      ref={ref}
+      name={name}
+      className={`w-full p-4 text-base rounded-xl bg-white text-[#1d1d1f] outline-none box-border ${error ? 'border border-[#EF4444]' : 'border border-[#E5E7EB]'}`}
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
+      onKeyDown={onKeyDown}
+      placeholder={placeholder}
+      maxLength={maxLength}
+      autoComplete="off"
+    />
     {error && <div className="text-[#EF4444] text-[13px] mt-1.5">{error}</div>}
   </div>
-)
+))
+InputGroup.displayName = "InputGroup"
 
 // Add animations to document
 if (typeof document !== "undefined") {
