@@ -155,7 +155,8 @@ export default function OrderPage() {
 
     if (device) {
       // 사용 가능한 색상 목록 확인
-      const availableColors = device.colors_en || []
+      // 사용 가능한 색상 목록 확인 (이미지가 없거나 빈 값인 색상 제외)
+      const availableColors = (device.colors_en || []).filter((c: string) => c && device.images?.[c]?.length > 0)
 
       // URL의 색상이 사용 가능한 색상 목록에 있는지 확인, 없으면 첫 번째 색상 사용
       const selectedColor = availableColors.includes(colorKey) ? colorKey : availableColors[0] || "black"
