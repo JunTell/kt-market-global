@@ -16,11 +16,13 @@ import StickyBar from "@/features/phone/components/StickyBar"
 import { usePhoneStore } from "@/features/phone/model/usePhoneStore"
 import { MODEL_VARIANTS, getPlanMetadata, getColorMap } from "@/features/phone/lib/phonedata"
 
+import PhoneDetailSkeleton from "@/features/phone/components/skeleton/PhoneDetailSkeleton"
+
 export default function PhonePage() {
     const t = useTranslations()
 
     return (
-        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">{t('Phone.Common.loading')}</div>}>
+        <Suspense fallback={<PhoneDetailSkeleton />}>
             <PhoneContent />
         </Suspense>
     )
@@ -243,7 +245,7 @@ function PhoneContent() {
     const finalPriceInfo = { finalDevicePrice }
 
     if (loading && !store.title) {
-        return <div className="min-h-screen flex items-center justify-center">{t('Phone.Common.loading')}</div>
+        return <PhoneDetailSkeleton />
     }
 
     return (

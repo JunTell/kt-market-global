@@ -10,6 +10,7 @@ import { formatPrice } from "@/shared/lib/format"
 import { parsePhoneModel, getDBModelKey } from "@/features/phone/lib/phoneModel"
 import OrderProductSummary from "@/features/phone/components/order/OrderProductSummary"
 import OrderUserForm from "@/features/phone/components/order/OrderUserForm"
+import OrderSkeleton from "@/features/phone/components/skeleton/OrderSkeleton"
 
 export default function OrderPage() {
   const t = useTranslations()
@@ -304,7 +305,7 @@ export default function OrderPage() {
     }
   }
 
-  if (!store.isReady) return <div className="min-h-screen flex items-center justify-center bg-white">{t('Phone.Common.loading')}</div>
+  if (!store.isReady) return <OrderSkeleton />
 
   const planInfo = PLAN_DETAILS[store.selectedPlanId] || PLAN_DETAILS["plan_69"]
 
