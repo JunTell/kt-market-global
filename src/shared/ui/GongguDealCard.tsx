@@ -3,8 +3,7 @@
 import * as React from "react"
 import { useRouter } from "next/navigation"
 import { useTranslations, useLocale } from "next-intl"
-import { formatPrice } from "@/utils/format"
-import { calculateTotalPlanDiscount } from "@/utils/priceCalculation"
+import { formatPrice } from "@/shared/lib/format"
 
 type Mode = "device" | "plan"
 
@@ -45,8 +44,8 @@ export default function GongguDealCard(props: Props) {
 
   // ✅ [수정] specialDiscount(7만원) 제외
   const totalDeviceDiscount =
-    disclosureSubsidy + ktmarketDiscount 
-    // + specialDiscount (제거됨)
+    disclosureSubsidy + ktmarketDiscount
+  // + specialDiscount (제거됨)
 
   const totalPlanDiscount = planMonthlyDiscount * 24
 
@@ -96,7 +95,7 @@ export default function GongguDealCard(props: Props) {
     >
       {/* 테두리 그라데이션 효과 (Hover시 나타남) */}
       <div className="absolute inset-0 rounded-[20px] p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 -z-10 pointer-events-none" />
-      
+
       {/* 배경색 유지 (내부 컨텐츠 배경) */}
       <div className="absolute inset-px rounded-[19px] bg-background z-0" />
 
@@ -137,11 +136,10 @@ export default function GongguDealCard(props: Props) {
           </div>
 
           <div
-            className={`mt-1 text-[12px] font-semibold break-keep leading-[1.4] whitespace-pre-wrap min-[400px]:whitespace-normal ${
-              mode === "device"
+            className={`mt-1 text-[12px] font-semibold break-keep leading-[1.4] whitespace-pre-wrap min-[400px]:whitespace-normal ${mode === "device"
                 ? "text-status-correct"
                 : "text-primary"
-            }`}
+              }`}
           >
             {description}
           </div>

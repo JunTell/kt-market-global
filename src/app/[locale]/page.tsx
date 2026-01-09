@@ -1,45 +1,31 @@
-'use client';
-
-import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import ChatBot from '@/components/feature/ChatBot';
-import EligibilityChecker from '@/components/feature/EligibilityChecker';
-import ProcessGuide from '@/components/feature/ProcessGuide';
-import TargetAudience from '@/components/feature/TargetAudience';
-import WhyChooseUs from '@/components/feature/WhyChooseUs';
-import { ServiceGuideCard } from '@/components/feature/ServiceGuideCard';
-import { Notice } from '@/components/feature/Notice';
-import ModelList from '@/components/feature/ModelList';
-import Footer from '@/components/layout/Footer';
+import ChatBot from '@/features/inquiry/components/ChatBot';
+import EligibilityChecker from '@/features/phone/components/EligibilityChecker';
+import ProcessGuide from '@/features/phone/components/ProcessGuide';
+import TargetAudience from '@/features/phone/components/TargetAudience';
+import WhyChooseUs from '@/features/phone/components/WhyChooseUs';
+import { ServiceGuideCard } from '@/features/phone/components/ServiceGuideCard';
+import { Notice } from '@/features/phone/components/Notice';
+import ModelListContainer from '@/features/phone/components/ModelListContainer';
+import Footer from '@/shared/ui/layout/Footer';
 
 export default function Home() {
   const t = useTranslations();
-  const [isChatOpen, setIsChatOpen] = useState(false);
-
-  const scrollToChecker = () => {
-    const section = document.getElementById('eligibility-section');
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
 
   return (
     <main className="min-h-screen bg-background font-sans">
-      <ServiceGuideCard 
-        onCheckClick={scrollToChecker}         
-        onConsultClick={() => setIsChatOpen(true)}
-      />
-      
+      <ServiceGuideCard />
+
       <div className="px-4 py-10">
-        <ModelList
+        <ModelListContainer
           sectionTitle={t('Phone.ModelList.section_title')}
           planId="ppllistobj_0808"
         />
       </div>
       <TargetAudience />
       <ProcessGuide />
-      <section 
-        id="eligibility-section" 
+      <section
+        id="eligibility-section"
         className="py-10 bg-background-alt px-4 border-y border-line-200/50"
       >
         <div className="max-w-md mx-auto text-center mb-6">
@@ -75,12 +61,9 @@ export default function Home() {
         ]}
         className="mt-6"
       />
-      
+
       <Footer />
-      <ChatBot 
-        externalIsOpen={isChatOpen} 
-        onOpenChange={setIsChatOpen} 
-      />
+      <ChatBot />
     </main>
   );
 }

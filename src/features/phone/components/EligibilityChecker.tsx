@@ -2,18 +2,18 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Check, X, Search, ChevronRight, RotateCcw, Smartphone, Cpu, 
-  CreditCard, Calendar, UserCheck, CheckCircle2 
+import {
+  Check, X, Search, ChevronRight, RotateCcw, Smartphone, Cpu,
+  CreditCard, Calendar, UserCheck, CheckCircle2
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { 
-  VISA_FULL_LIST, 
-  getFullVisaResult, 
-  VISA_CATEGORIES, 
-  DURATION_OPTIONS, 
-  DEVICE_OPTIONS 
-} from '@/lib/visa-data';
+import { cn } from '@/shared/lib/utils';
+import {
+  VISA_FULL_LIST,
+  getFullVisaResult,
+  VISA_CATEGORIES,
+  DURATION_OPTIONS,
+  DEVICE_OPTIONS
+} from '@/features/phone/lib/visa-data';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
@@ -28,7 +28,7 @@ const slideVariants = {
     opacity: 1,
     transition: {
       duration: 0.35,
-      ease: [0.25, 0.1, 0.25, 1.0] as const, 
+      ease: [0.25, 0.1, 0.25, 1.0] as const,
     },
   },
   exit: (direction: number) => ({
@@ -36,7 +36,7 @@ const slideVariants = {
     opacity: 0,
     transition: {
       duration: 0.25,
-      ease: [0.25, 0.1, 0.25, 1.0] as const, 
+      ease: [0.25, 0.1, 0.25, 1.0] as const,
     },
   }),
 };
@@ -68,19 +68,19 @@ type Step = 'arc' | 'visa' | 'duration' | 'device' | 'result' | 'fail' | 'phoneS
 
 export default function EligibilityChecker() {
   const t = useTranslations('Checker');
-  const locale = useLocale(); 
+  const locale = useLocale();
   const currentLocale = (['ko', 'en', 'zh', 'ja'].includes(locale) ? locale : 'ko') as 'ko' | 'en' | 'zh' | 'ja';
   const router = useRouter();
 
   const [step, setStep] = useState<Step>('arc');
   const [direction, setDirection] = useState(1);
   const [mounted, setMounted] = useState(false);
-  
+
   const [selection, setSelection] = useState({
     hasARC: false,
     visaCode: '',
     duration: '',
-    devicePlan: '', 
+    devicePlan: '',
   });
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -95,8 +95,8 @@ export default function EligibilityChecker() {
 
   const filteredVisas = VISA_FULL_LIST.filter((visa) => {
     const visaName = visa.labels[currentLocale] || visa.name;
-    const matchesSearch = 
-      visa.code.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    const matchesSearch =
+      visa.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
       visaName.includes(searchTerm);
     const matchesCategory = activeCategory === 'all' || visa.category === activeCategory;
     return matchesSearch && matchesCategory;
@@ -125,9 +125,9 @@ export default function EligibilityChecker() {
   };
 
   const handleDevice = (devicePlanValue: string) => {
-    const finalSelection = { 
-      ...selection, 
-      devicePlan: devicePlanValue 
+    const finalSelection = {
+      ...selection,
+      devicePlan: devicePlanValue
     };
     setSelection(finalSelection);
 
@@ -141,24 +141,24 @@ export default function EligibilityChecker() {
 
   const reset = () => {
     setDirection(-1);
-    setStep('arc'); 
-    
+    setStep('arc');
+
     setTimeout(() => {
       setSelection({ hasARC: false, visaCode: '', duration: '', devicePlan: '' });
       setSearchTerm('');
       setActiveCategory('all');
       setDirection(1);
-      
+
       if (typeof window !== 'undefined') {
         sessionStorage.removeItem('eligibility_data');
       }
-    }, 500); 
+    }, 500);
   };
 
   const isSimOnly = selection.devicePlan === 'sim_only';
 
-  const result = selection.visaCode 
-    ? getFullVisaResult(selection.visaCode, currentLocale, isSimOnly) 
+  const result = selection.visaCode
+    ? getFullVisaResult(selection.visaCode, currentLocale, isSimOnly)
     : null;
 
   const stepsInfo = [
@@ -216,7 +216,7 @@ export default function EligibilityChecker() {
   return (
     <div className="w-full max-w-[480px] mx-auto my-12 font-sans px-4 md:px-0">
       {/* 컨테이너: 높이 축소 (min-h-[460px]), Radius, Shadow 적용 */}
-      <div 
+      <div
         className="bg-background rounded-[24px] shadow-2xl shadow-line-400/20 border border-line-200 overflow-hidden relative min-h-[460px] flex flex-col"
       >
         {/* Progress Bar: 높이 및 아이콘 크기 축소 */}
@@ -224,7 +224,7 @@ export default function EligibilityChecker() {
           <div className="px-5 pt-5 pb-10 bg-background z-10">
             <div className="flex items-center justify-between relative">
               <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[2px] bg-line-200 rounded-full -z-10" />
-              <motion.div 
+              <motion.div
                 className="absolute left-0 top-1/2 -translate-y-1/2 h-[2px] bg-primary rounded-full -z-10 origin-left"
                 initial={{ width: '0%' }}
                 animate={{ width: `${(currentStepIndex / (stepsInfo.length - 1)) * 100}%` }}
@@ -238,7 +238,7 @@ export default function EligibilityChecker() {
 
                 return (
                   <div key={s.id} className="flex flex-col items-center gap-1 relative z-10">
-                    <motion.div 
+                    <motion.div
                       className={cn(
                         "w-7 h-7 rounded-full flex items-center justify-center border transition-colors bg-background",
                         isCompleted || isActive ? "border-primary text-primary" : "border-line-400 text-label-500",
@@ -269,7 +269,7 @@ export default function EligibilityChecker() {
         {/* Content Area: 패딩 축소 (p-5) */}
         <div className="flex-1 flex flex-col p-5 pt-3 relative">
           <AnimatePresence mode='wait' custom={direction}>
-            
+
             {/* STEP 1: ARC */}
             {step === 'arc' && (
               <SlideView key="arc" direction={direction}>
@@ -277,9 +277,9 @@ export default function EligibilityChecker() {
                   <div className="w-14 h-14 bg-background-alt rounded-2xl flex items-center justify-center mb-4 text-primary">
                     <UserCheck size={28} />
                   </div>
-                  <h2 
+                  <h2
                     className="text-xl font-bold text-label-900 text-center mb-1.5 leading-snug"
-                    dangerouslySetInnerHTML={{ __html: t.raw('ARC.title') }} 
+                    dangerouslySetInnerHTML={{ __html: t.raw('ARC.title') }}
                   />
                   <p className="text-label-700 text-xs mb-6 text-center">{t('ARC.desc')}</p>
                   <div className="w-full space-y-2.5 max-w-xs">
@@ -302,10 +302,10 @@ export default function EligibilityChecker() {
                     <h2 className="text-lg font-bold text-label-900 mb-0.5">{t('Visa.title')}</h2>
                     <p className="text-label-500 text-[11px]">비자 코드를 검색하거나 카테고리를 선택하세요.</p>
                   </div>
-                  
+
                   <div className="relative mb-2.5">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-label-500" size={16} />
-                    <input 
+                    <input
                       type="text"
                       placeholder={t('Visa.placeholder')}
                       value={searchTerm}
@@ -320,8 +320,8 @@ export default function EligibilityChecker() {
                         onClick={() => setActiveCategory(cat.id)}
                         className={cn(
                           "shrink-0 px-3 py-1.5 rounded-full text-[11px] font-bold transition-all border",
-                          activeCategory === cat.id 
-                            ? "bg-primary text-label-100 border-primary shadow-sm" 
+                          activeCategory === cat.id
+                            ? "bg-primary text-label-100 border-primary shadow-sm"
                             : "bg-background text-label-700 border-line-200 hover:bg-background-alt"
                         )}
                       >
@@ -337,7 +337,7 @@ export default function EligibilityChecker() {
                           onClick={() => handleVisaSelect(visa.code)}
                           className="flex flex-col items-center justify-center p-2.5 rounded-xl border border-line-200 hover:border-primary/50 hover:bg-tertiary/20 transition-all bg-background shadow-sm relative group"
                         >
-                           <div className="absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-opacity text-primary">
+                          <div className="absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-opacity text-primary">
                             <CheckCircle2 size={14} />
                           </div>
                           <span className="text-base font-black text-primary mb-0.5">{visa.code}</span>
@@ -367,9 +367,9 @@ export default function EligibilityChecker() {
                   <h2 className="text-xl font-bold mb-1.5 text-label-900">{t('Duration.title')}</h2>
                   <div className="grid gap-2.5 max-w-xs mx-auto w-full flex-1 content-center">
                     {DURATION_OPTIONS.map((opt) => (
-                      <TapMotion 
-                        key={opt.key} 
-                        onClick={() => handleDuration(opt.value)} 
+                      <TapMotion
+                        key={opt.key}
+                        onClick={() => handleDuration(opt.value)}
                         className="w-full p-3.5 bg-background border border-line-200 rounded-xl flex items-center justify-between hover:border-primary hover:bg-tertiary/20 hover:shadow-sm transition-all group"
                       >
                         <span className="font-bold text-sm text-label-800 group-hover:text-primary transition-colors">
@@ -389,23 +389,23 @@ export default function EligibilityChecker() {
                 <div className="pt-2 text-center h-full flex flex-col">
                   <h2 className="text-xl font-bold mb-1.5 text-label-900">{t('Device.title')}</h2>
                   <p className="text-label-500 mb-5 text-xs">{t('Device.desc')}</p>
-                  
+
                   <div className="grid gap-2.5 flex-1 content-start">
                     {DEVICE_OPTIONS.map((opt) => {
                       const isSelected = selection.devicePlan === opt.value;
                       return (
-                        <TapMotion 
+                        <TapMotion
                           key={opt.key}
-                          onClick={() => handleDevice(opt.value)} 
+                          onClick={() => handleDevice(opt.value)}
                           className={cn(
                             "w-full p-3.5 rounded-xl border transition-all flex items-center gap-3 text-left relative overflow-hidden group bg-background",
-                            isSelected 
-                              ? "border-primary bg-tertiary/30 shadow-sm" 
+                            isSelected
+                              ? "border-primary bg-tertiary/30 shadow-sm"
                               : "border-line-200 hover:border-primary/50 hover:bg-tertiary/10 hover:shadow-sm"
                           )}
                         >
-                           {isSelected && (
-                            <motion.div 
+                          {isSelected && (
+                            <motion.div
                               layoutId="device-check"
                               className="absolute top-2.5 right-2.5 text-primary"
                             >
@@ -438,7 +438,7 @@ export default function EligibilityChecker() {
             {step === 'fail' && (
               <SlideView key="fail" direction={direction}>
                 <div className="flex flex-col items-center justify-center h-full py-4 text-center">
-                  <motion.div 
+                  <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     className="w-16 h-16 bg-status-error/10 text-status-error rounded-full flex items-center justify-center mb-4 shadow-sm"
@@ -446,7 +446,7 @@ export default function EligibilityChecker() {
                     <X size={32} strokeWidth={3} />
                   </motion.div>
                   <h3 className="text-lg font-bold mb-2 text-label-900">{t('Fail.title')}</h3>
-                  <p 
+                  <p
                     className="text-label-500 mb-8 text-xs leading-relaxed"
                     dangerouslySetInnerHTML={{ __html: t.raw('Fail.desc') }}
                   />
@@ -461,28 +461,28 @@ export default function EligibilityChecker() {
             {step === 'result' && result && (
               <SlideView key="result" direction={direction}>
                 <div className="text-center pt-3 flex flex-col h-full">
-                  <motion.div 
+                  <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 260, damping: 20 }}
                     className={cn(
-                      "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold mb-3 mx-auto shadow-sm", 
-                      result.possible 
-                        ? "bg-status-correct/10 text-status-correct" 
+                      "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold mb-3 mx-auto shadow-sm",
+                      result.possible
+                        ? "bg-status-correct/10 text-status-correct"
                         : "bg-status-error/10 text-status-error"
                     )}
                   >
                     {result.possible ? <CheckCircle2 size={14} /> : <X size={14} />}
                     {result.possible ? t('Result.possible') : t('Result.impossible')}
                   </motion.div>
-                  
+
                   <h2 className="text-xl font-extrabold mb-1 text-label-900">
                     <span className="text-primary">[{selection.visaCode}]</span> {t('Result.title_suffix')}
                   </h2>
                   <p className="text-xs text-label-500 mb-5">
-                     {t('Result.plan_label')}: <span className="font-bold text-label-900 ml-1">{isSimOnly ? t('Result.plan_sim') : t('Result.plan_device')}</span>
+                    {t('Result.plan_label')}: <span className="font-bold text-label-900 ml-1">{isSimOnly ? t('Result.plan_sim') : t('Result.plan_device')}</span>
                   </p>
-                  
+
                   <div className="bg-background-alt p-4 rounded-xl text-left mb-5 space-y-3 border border-line-200 shadow-inner flex-1 overflow-y-auto">
                     <div className="flex justify-between items-center pb-2.5 border-b border-line-400/30">
                       <span className="text-label-700 font-medium text-sm">{t('Result.installment_label')}</span>
@@ -491,7 +491,7 @@ export default function EligibilityChecker() {
                         {result.installment ? t('Result.installment_ok') : t('Result.installment_no')}
                       </div>
                     </div>
-                    
+
                     <p className="text-xs text-label-800 leading-relaxed whitespace-pre-wrap pt-0.5">
                       {result.message}
                     </p>
@@ -518,7 +518,7 @@ export default function EligibilityChecker() {
                       onClick={reset}
                       className="text-[11px] text-label-500 flex items-center justify-center gap-1 mx-auto hover:text-label-700 transition-colors py-1.5 cursor-pointer"
                     >
-                      <RotateCcw size={10}/> {t('Result.reset')}
+                      <RotateCcw size={10} /> {t('Result.reset')}
                     </button>
                   </div>
                 </div>

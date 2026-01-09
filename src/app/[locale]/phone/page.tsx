@@ -2,28 +2,28 @@
 
 import { useEffect, useState, useRef, Suspense } from "react"
 import { useRouter, useSearchParams, useParams } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
-import { calcKTmarketSubsidy } from "@/lib/asamo-utils"
+import { createClient } from "@/shared/api/supabase/client"
+import { calcKTmarketSubsidy } from "@/features/phone/lib/asamo-utils"
 import { useTranslations } from "next-intl"
-import { formatPrice } from "@/utils/format"
-import { parsePhoneModel, getDBModelKey } from "@/utils/phoneModel"
-import { calculateFinalDevicePrice } from "@/utils/priceCalculation"
+import { formatPrice } from "@/shared/lib/format"
+import { parsePhoneModel, getDBModelKey } from "@/features/phone/lib/phoneModel"
+import { calculateFinalDevicePrice } from "@/features/phone/lib/priceCalculation"
 
-import JunCarousel from "@/components/feature/phone/JunCarousel"
-import OptionSelector, { CapacityOption, ColorOption } from "@/components/feature/phone/OptionSelector"
-import PlanSelector from "@/components/feature/phone/PlanSelector"
-import StickyBar from "@/components/feature/phone/StickyBar"
-import { usePhoneStore } from "@/store/usePhoneStore"
-import { MODEL_VARIANTS, getPlanMetadata, getColorMap } from "@/constants/phonedata"
+import JunCarousel from "@/features/phone/components/JunCarousel"
+import OptionSelector, { CapacityOption, ColorOption } from "@/features/phone/components/OptionSelector"
+import PlanSelector from "@/features/phone/components/PlanSelector"
+import StickyBar from "@/features/phone/components/StickyBar"
+import { usePhoneStore } from "@/features/phone/model/usePhoneStore"
+import { MODEL_VARIANTS, getPlanMetadata, getColorMap } from "@/features/phone/lib/phonedata"
 
 export default function PhonePage() {
-  const t = useTranslations()
+    const t = useTranslations()
 
-  return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">{t('Phone.Common.loading')}</div>}>
-      <PhoneContent />
-    </Suspense>
-  )
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">{t('Phone.Common.loading')}</div>}>
+            <PhoneContent />
+        </Suspense>
+    )
 }
 
 function PhoneContent() {
@@ -42,7 +42,7 @@ function PhoneContent() {
 
     // 다국어 데이터
     const PLAN_METADATA = getPlanMetadata(t)
-    const COLOR_MAP = getColorMap(t) 
+    const COLOR_MAP = getColorMap(t)
 
     const [availableColors, setAvailableColors] = useState<string[]>([])
     const [colorImages, setColorImages] = useState<Record<string, string[]>>({})
@@ -56,10 +56,10 @@ function PhoneContent() {
             const dbModelKey = getDBModelKey(prefix, capacity)
 
             if (lastFetchedKey.current === dbModelKey && availableColors.length > 0) {
-                const selectedColor = colorFromUrl && availableColors.includes(colorFromUrl) 
-                    ? colorFromUrl 
+                const selectedColor = colorFromUrl && availableColors.includes(colorFromUrl)
+                    ? colorFromUrl
                     : availableColors[0]
-                
+
                 const newImageUrls = colorImages[selectedColor] || []
                 const newImageUrl = newImageUrls[0] || store.imageUrl
 
@@ -69,11 +69,11 @@ function PhoneContent() {
                     imageUrl: newImageUrl,
                     imageUrls: newImageUrls,
                 })
-                return 
+                return
             }
 
-            if (!store.title) setLoading(true) 
-            
+            if (!store.title) setLoading(true)
+
             try {
                 const prefStr = sessionStorage.getItem("asamo_user_preference")
                 const pref = prefStr ? JSON.parse(prefStr) : {}
@@ -132,10 +132,10 @@ function PhoneContent() {
 
                 const cdnUrl = process.env.NEXT_PUBLIC_CDN_URL || ""
                 const imagesMap: Record<string, string[]> = {}
-                
+
                 colors.forEach((c: string) => {
                     const files = device.images?.[c] || []
-                    imagesMap[c] = files.map((f: string) => 
+                    imagesMap[c] = files.map((f: string) =>
                         `${cdnUrl}/phone/${device.category}/${c}/${f}.png`
                     )
                 })
@@ -205,18 +205,18 @@ function PhoneContent() {
 
     const handleOrder = () => {
         const payload = {
-           model: store.model,
-           title: store.title,
-           capacity: store.capacity,
-           color: store.color,
-           originPrice: store.originPrice,
-           imageUrl: store.imageUrl,
-           selectedPlanId: store.selectedPlanId,
-           discountMode: store.discountMode,
-           finalDevicePrice: finalPriceInfo.finalDevicePrice,
-           userCarrier: store.userCarrier,
-           registrationType: store.registrationType,
-           savedAt: new Date().toISOString()
+            model: store.model,
+            title: store.title,
+            capacity: store.capacity,
+            color: store.color,
+            originPrice: store.originPrice,
+            imageUrl: store.imageUrl,
+            selectedPlanId: store.selectedPlanId,
+            discountMode: store.discountMode,
+            finalDevicePrice: finalPriceInfo.finalDevicePrice,
+            userCarrier: store.userCarrier,
+            registrationType: store.registrationType,
+            savedAt: new Date().toISOString()
         }
 
         console.log("💾 주문 페이지로 이동 - 저장할 데이터:", payload)
@@ -272,14 +272,14 @@ function PhoneContent() {
 
                 {step === 1 && (
                     <>
-                        <OptionSelector 
-                           modelPrefix={prefix}
-                           selectedCapacity={capacity}
-                           selectedColorValue={store.color}
-                           capacityOptions={capacityOpts}
-                           colorOptions={colorOpts} 
-                           onSelectCapacity={handleCapacityChange}
-                           onSelectColor={handleColorChange}
+                        <OptionSelector
+                            modelPrefix={prefix}
+                            selectedCapacity={capacity}
+                            selectedColorValue={store.color}
+                            capacityOptions={capacityOpts}
+                            colorOptions={colorOpts}
+                            onSelectCapacity={handleCapacityChange}
+                            onSelectColor={handleColorChange}
                         />
                         <StickyBar
                             finalPrice=""
@@ -291,22 +291,22 @@ function PhoneContent() {
 
                 {step === 2 && (
                     <>
-                         <PlanSelector
-                             plans={store.plans}
-                             selectedPlanId={store.selectedPlanId}
-                             discountMode={store.discountMode}
-                             originPrice={store.originPrice}
-                             ktMarketDiscount={0}
-                             registrationType={store.registrationType}
-                             modelPrefix={prefix}
-                             onSelectPlan={(id) => store.setStore({ selectedPlanId: id })}
-                             onChangeMode={(mode) => store.setStore({ discountMode: mode })}
-                         />
-                         <StickyBar
+                        <PlanSelector
+                            plans={store.plans}
+                            selectedPlanId={store.selectedPlanId}
+                            discountMode={store.discountMode}
+                            originPrice={store.originPrice}
+                            ktMarketDiscount={0}
+                            registrationType={store.registrationType}
+                            modelPrefix={prefix}
+                            onSelectPlan={(id) => store.setStore({ selectedPlanId: id })}
+                            onChangeMode={(mode) => store.setStore({ discountMode: mode })}
+                        />
+                        <StickyBar
                             finalPrice={`${formatPrice(finalPriceInfo.finalDevicePrice, locale)}${t('Phone.Common.won')}`}
                             label={t('Phone.Page.submit_application')}
                             onClick={handleOrder}
-                         />
+                        />
                     </>
                 )}
             </div>
