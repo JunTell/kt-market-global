@@ -86,6 +86,9 @@
       "title": "Check Unavailable",
       "desc": "Valid ARC is required<br/>for accurate check.",
       "retry": "Go Back"
+    },
+    "ChatBot": {
+      "select_phone": "Select Phone Model"
     }
   },
   "Process": {
@@ -320,7 +323,7 @@
       "plan_69_v_desc": "Data 110GB + 5Mbps",
       "plan_90_name": "Choice Basic",
       "plan_90_desc": "Truly Unlimited",
-      "plan_90_v_name": "Netflix Choice Basic",
+      "plan_90_v_name": "Youtube Choice Basic",
       "plan_90_v_desc": "Truly Unlimited",
       "unlimited": "Unlimited",
       "included": "Included",
@@ -378,21 +381,56 @@
     "faq_holy_a": "🏢 [Official vs Holy Land]\n\n• Official Store: Full price, high trust, freebies (case, etc.)\n• Holy Land: Very cheap by giving sales commission to customers as cash-back. Requires visiting shops and prefers cash payment.",
     "select_phone": "Select Phone Model"
   },
+  "Main": {
+    "Notice": {
+      "section_title": "Notice",
+      "common_title": "Common notices",
+      "common_content": "- These benefits and notices are based on the assumption that your current carrier is SKT/LGU+/MVNO. If you are currently using KT, please refer to the agency's guidance after completing the reception.\n- Due to operational circumstances, shortages of device, capacity, or color may occur.\n- For Apple products such as iPhones, exchange eligibility depends on the activation date, and all exchanges are handled only at Apple service centers, not at the agency. (Within 10 days of activation: Refund or new product exchange possible. 11~30 days after activation: Refund not possible, exchange possible. After 31 days: Partial repair or refurbished product exchange only.)\n- After receiving the new phone, you must insert the USIM after applying for activation.\n- A minimum of 5 calls and 10 minutes of talk time per month must be made after activation.",
+      "kt_subsidy_title": "KT Market Exclusive Subsidy Guide",
+      "kt_subsidy_content": "- When subscribing to a 5G plan (LTE unavailable for the first 6 months) such as 5G Simple 30GB or higher, KT Market exclusive subsidy is provided, which may vary depending on the plan you subscribe to.\n- KT Market exclusive subsidy is provided on the condition that the activated plan is maintained for 6 months (184 days).\n- If you change plan/cancel/change device/change name/suspend within 6 months (184 days) of activation, you must return the full amount of the KT Market exclusive subsidy.\n- You cannot resell the device or insert another person's USIM within 6 months (180 days).\n- You can freely move to another carrier after 24 months from the activation date. However, depending on the remaining contract period, a penalty for the KT Market exclusive subsidy and plan discount may occur.\n- Cancellation within 6 months (184 days): Full return of KT Market exclusive subsidy, After 6 months (184 days): Partial return according to the remaining contract period",
+      "public_subsidy_title": "Public Subsidy Course Guide",
+      "public_subsidy_content": "• If you received the public subsidy benefit, you can join the 25% selective contract discount after 24 months.\n\n• Please maintain the plan selected at the time of activation for 6 months (184 days) after device activation. If this period is not kept, the full amount of the public subsidy received may be charged as a penalty.\n\n• After 6 months, you can freely change your plan, and the public subsidy you already received remains the same.\n\n• However, if the changed plan is less than 50,000 won per month (less than 47,000 won for those under 19), a penalty may occur if the contract period remains. The penalty may vary depending on the plan selected at activation, contract conditions, and discount type.\n\n• Even after 6 months, you cannot change to the following plans:\n1. No-contract plan 2. Yogo/Direct plan 3. MVNO plan\n\n• The public subsidy benefit applies based on a 24-month contract. The suspension period is not included in the contract period, and if canceled mid-term within the contract period, a penalty for the remaining period may be charged.\n\n• If you have used it for more than 18 months after activation with a 24-month contract, the public subsidy penalty for device change is deferred and not charged. (Penalty deferred for device change after 18 months) However, the deferral applies only if maintained until the contract period (24 months).",
+      "selective_contract_title": "Selective Contract Discount Guide",
+      "selective_contract_content": "- Selective contract (plan discount) is a method of receiving a 25% discount on monthly communication fees instead of a public subsidy (device discount), and a total of 24-month contract applies.\n- You can freely change your plan anytime after 6 months (184 days) of activation, and you must promise to maintain a plan of at least 47,000 won. If you lower it below 47,000 won, a penalty may occur.\n- Make a promise to use KT as your carrier for 24 months instead of receiving a 25% monthly fee discount. If you change carriers before 24 months pass, a penalty may occur.\n- The suspension period is not included in the contract period, and the contract may be extended by the suspension period.\n- Even after 6 months, you cannot change to KT Yogo or Direct plans, and changing to a KT network MVNO plan may result in a penalty.\n- Public subsidy benefits and selective contract benefits do not apply simultaneously.",
+      "payment_title": "Payment and Installment Guide",
+      "payment_content": "• For carrier phones, device delivery starts when you fill out the KT application form even if you do not pay for the device. If the application is successfully received and there are no issues with activation, we will send the device first after confirmation.\n\n• If you purchase a phone in installments, the device price and communication fee will be billed together every month. A 5.9% installment interest calculated by the equal principal and interest method is added here.\n\n• If you are curious about the installment interest, search for 'loan calculator' on Naver and enter the discounted device price and the desired number of installment months. You can easily check the total installment interest.\n\n• You can pay the installment amount at any time even after activation with carrier installment. Full payment as well as partial payment is possible. Pay comfortably when you want.\n\n• If you wish to pay in full, please pay via My KT (App), 114 (Customer Center), or a nearby KT store within the month of activation using a payment method (Cash/Card/Naver Pay/Kakao Pay).\n\n• The number of interest-free installment months for credit cards is the same as the number of interest-free installment months provided by card companies at general merchants. Interest-free installments are possible for 2~5 months, and up to 10~12 months depending on the card company, so please contact your card company for detailed conditions.\n\n• You can check payment details and receipts at any time on the My KT app or KT homepage for full payment.",
+      "cancellation_title": "Cancellation and Exchange/Refund Guide",
+      "cancellation_content": "[ Order Cancellation ]\n• Order cancellation is possible at any time before delivery preparation.\n• Once you complete the electronic signature on the KT application form, the contract is established, and withdrawal is not possible for any reason thereafter.\n• It may be automatically canceled due to system circumstances, lack of stock, change in subsidy, etc., and in this case, we will inform you separately.\n\n[ Activation Cancellation ]\n• Cancellation is not possible after activation even if it is unopened.\n• However, in case of device defect or call quality defect, cancellation is possible within 14 days from the activation date (including delivery period).\n• Plans that cannot be re-subscribed upon cancellation of activation are difficult to restore, and incurred charges are calculated on a pro-rata basis.\n\n\n[ Exchange/Refund Criteria ]\n• In case of device defect or wrong delivery, exchange/refund is possible within 7 days based on the computerized activation date.\n\n• Apple products follow Apple policy.\n1. Within 7 days of activation: Refund or new product exchange possible\n2. 7~30 days: Refund not possible, new product exchange only\n3. After 31 days: Refund and exchange impossible, refurbishment or repair only\n\n• Cases where exchange/refund is not possible\n1. If products and components are missing or damaged\n2. If the value of the product has significantly decreased due to use or consumption\n3. If the value has decreased to the extent that resale is difficult due to the passage of time\n4. If the packaging of a product that can be copied is damaged\n5. If a custom-made product has already been produced\n\n• For Samsung devices, you must receive a defect confirmation from the manufacturer's A/S center to be eligible for exchange, and you must return the defect confirmation and the phone normally to KT Market.\n\n• Return/Exchange Method\n1. All components (body, box, etc.) must be included in their original state.\n2. Returns must be sent via Post Office Parcel, and additional costs may occur when using other couriers.\n3. If you want an exchange/return, please contact 1522-6562 within 7 days of receipt.",
+      "application_guide_title": "Guide for Filling Out KT Application Form",
+      "application_guide_content": "Application form error!\n- If it doesn't move to the next screen, it might be due to browser popup blocking.\n- Please disable popup blocking or try again with Chrome/Edge/Naver App.\n- If it still doesn't work, we will help you with phone application (1522-6562).\n\nIdentity Verification Preparation\n- Identity verification is essential for users of other carriers.\n- Recommendation: PASS certificate or Naver certificate\n- Please install the PASS app and issue a certificate before applying.\n(Search PASS in App Store → Select Carrier → Enter Name/Resident Number → Issue Certificate)\n\nContract Complete with Electronic Signature!\n- If you sign electronically with mobile phone authentication, PASS, Naver certificate, etc.\n- It has the same legal effect as an offline contract.\n- Withdrawal or change is not possible after application, so please fill it out carefully.\n\nCheck Application Type\n- Existing KT Customer → Device Change\n- SK/LG/MVNO Customer → Number Portability\n- New subscription is only available for teenagers under 19\n\n5G Coverage\n- It is an agreement to use a 5G plan. Please click the agree button after entering your address.\n\nUSIM and Plan Guide\n- Existing KT customers can reuse USIM\n- Other carrier customers incur a one-time fee of 7,700 won for USIM or 2,750 won for eSIM installation\n\nDon't worry if discount items are not shown on the application form\n- KT Market subsidy, combination discount, and welfare discount may not be displayed on the application form.\n- It is automatically applied based on the KT Market price list at the time of activation.\n- Combination/welfare discount rates may vary depending on plan changes.\n\nInsurance subscription is possible even after activation\n- You can subscribe within 60 days after activation in the My KT app.\n- Please omit the insurance item when filling out the application form.\n\nChanges are possible only before activation!\n- Application details can be changed until activation.\n- Please inform KT Market Customer Center (1522-6562) of any changes.\n- Insurance, plan, discount, delivery address, etc. cannot be changed after activation.\n\nCaution for Duplicate Application!\n- If you fill out the application form more than twice, only the last application form is valid, and the previous ones are automatically canceled.\n- Please be careful as there is a risk of double billing/activation if you verify duplicate orders on other KT sites/stores after applying to KT Market.\n\nApplication withdrawal is possible only before filling out the official application form\n- Withdrawal or change is not possible after filling out the official application form."
+    }
+  },
   "Footer": {
     "terms_of_service": "Terms of Service",
     "privacy_policy": "Privacy Policy",
     "customer_center": "Support",
     "company_name": "Juntell Co., Ltd.",
+    "company_name_full": "KT Official Partner | Juntell Co., Ltd.",
     "ceo_label": "CEO",
-    "ceo_name": "Gildong Hong",
+    "ceo_name": "Baek Jae-jun",
     "business_no_label": "Registration No",
-    "business_no_value": "000-00-00000",
+    "business_no_value": "436-81-00474",
+    "telecom_license_label": "Telecom License",
+    "telecom_license_value": "2023-ChangwonSeongsan-0137",
+    "privacy_officer_label": "Privacy Officer",
+    "privacy_officer_name": "Jung Woo-seung",
     "address_label": "Address",
-    "address_value": "1F Juntell Bldg, Seoul, Korea",
+    "address_value": "4F KT Market HQ, 12 Madimi-ro 22beon-gil, Seongsan-gu, Changwon-si, Gyeongsangnam-do",
     "cs_label": "CS Center",
     "cs_phone": "02-0000-0000",
     "email_label": "Email",
     "email_value": "help@ktmarket.co.kr",
-    "cs_hours": "Hours: Mon-Fri 10:00 - 19:00"
+    "cs_hours": "Hours: Mon-Fri 10:00 ~ 17:00",
+    "tagline": "Foreigner Postpaid Phone Specialist",
+    "partner_support": "Official telecom partner support",
+    "business_info_title": "KT Market Business Info",
+    "cert_kt_official": "Online Official Certified",
+    "cert_kait": "Korea Association for ICT Promotion",
+    "policy_privacy": "Privacy Policy",
+    "policy_usage": "Usage History",
+    "policy_notice": "Notice",
+    "policy_company": "Company Intro",
+    "channel_youtube": "Youtube Channel",
+    "channel_kakao": "Kakao Channel"
   }
 }

@@ -8,6 +8,7 @@ import { getPlanDetails } from "@/features/phone/lib/phonedata"
 import IntroOverlay from "@/features/phone/components/result/IntroOverlay"
 import OrderProductSummary from "@/features/phone/components/order/OrderProductSummary"
 import OrderUserForm from "@/features/phone/components/order/OrderUserForm"
+import EligibilityChecker from "@/features/phone/components/EligibilityChecker"
 
 export default function ResultPage() {
   const t = useTranslations()
@@ -96,12 +97,15 @@ export default function ResultPage() {
   }
 
   return (
-    <main style={{ minHeight: "100vh", backgroundColor: "#fff" }}>
+    <main className="min-h-screen bg-white">
+      <div className="p-4">
+        <EligibilityChecker />
+      </div>
       {/* 1. 성공 오버레이 */}
       <IntroOverlay />
 
-      <div style={{ maxWidth: "480px", margin: "0 auto", padding: "20px 20px 120px 20px" }}>
-        <h1 style={{ fontSize: "24px", fontWeight: "bold", color: "#191F28", marginBottom: "24px", marginTop: "10px", whiteSpace: "pre-line" }}>
+      <div className="max-w-[480px] mx-auto px-5 pt-5 pb-[120px]">
+        <h1 className="text-2xl font-bold text-[#191F28] mb-6 mt-2.5 whitespace-pre-line">
           {t('Phone.Result.application_complete_title')}
         </h1>
 
@@ -113,11 +117,11 @@ export default function ResultPage() {
           price={productInfo.price}
         />
 
-        <div style={{ width: "100%", height: "1px", backgroundColor: "#F2F4F6", margin: "24px 0" }} />
+        <div className="w-full h-px bg-[#F2F4F6] my-6" />
 
         {/* 3. 신청 정보 확인 (Read Only) */}
         {/* 스타일 여백 제거를 위해 -20px margin 사용 혹은 컴포넌트 내부 padding 조절 필요 */}
-        <div style={{ margin: "0 -20px" }}>
+        <div className="-mx-5">
           <OrderUserForm
             isReadOnly={true}
             userName={userInfo.userName}
@@ -136,19 +140,9 @@ export default function ResultPage() {
         </div>
 
         {/* 4. 홈으로 돌아가기 버튼 */}
-        <div style={{ marginTop: "20px" }}>
+        <div className="mt-5">
           <button
-            style={{
-              width: "100%",
-              padding: "16px",
-              backgroundColor: "#F2F4F6",
-              color: "#4B5563",
-              fontSize: "16px",
-              fontWeight: "700",
-              border: "none",
-              borderRadius: "14px",
-              cursor: "pointer"
-            }}
+            className="w-full p-4 bg-[#F2F4F6] text-[#4B5563] text-base font-bold rounded-[14px] hover:bg-gray-200 transition-colors cursor-pointer"
             onClick={() => router.push(`/${locale}`)}
           >
             {t('Phone.Result.go_home_button')}

@@ -66,7 +66,6 @@ export default function InquiryForm() {
     } else {
       // ✅ 최종 제출 로직
       const formData = { name, phone, carrier, region, device };
-      console.log('Final Submission:', formData);
 
       alert(t('Toast.success')); // 실제로는 Toast UI 사용 권장
 
