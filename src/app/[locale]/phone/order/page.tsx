@@ -8,8 +8,12 @@ import { getPlanDetails, getColorMap } from "@/features/phone/lib/phonedata"
 import { toKorean } from "@/shared/lib/toKorean"
 import { formatPrice } from "@/shared/lib/format"
 import { parsePhoneModel, getDBModelKey } from "@/features/phone/lib/phoneModel"
+import { DEFAULT_COUNTRY } from "@/shared/constants/options"
+import { checkIsSoldOut } from "@/features/phone/lib/stock"
+
 import OrderProductSummary from "@/features/phone/components/order/OrderProductSummary"
 import OrderUserForm from "@/features/phone/components/order/OrderUserForm"
+import OrderSkeleton from "@/features/phone/components/skeleton/OrderSkeleton"
 
 export default function OrderPage() {
   const t = useTranslations()
@@ -32,7 +36,7 @@ export default function OrderPage() {
     userName: "",
     userDob: "",
     userPhone: "",
-    country: t('Phone.Order.default_country'),
+    country: DEFAULT_COUNTRY,
     requirements: "",
     // 신청 정보
     joinType: t('Phone.Order.join_type_change'),
@@ -143,6 +147,10 @@ export default function OrderPage() {
     }))
   }
 
+  // (removed)
+
+  // ... imports
+
   const fetchFromDB = async (fullModelStr: string) => {
     const { prefix, capacity, color: colorKey } = parsePhoneModel(fullModelStr)
     const dbModelKey = getDBModelKey(prefix, capacity)
@@ -154,37 +162,15 @@ export default function OrderPage() {
       .single()
 
     if (device) {
-      // 사용 가능한 색상 목록 확인
-      // 품절 확인 로직 (OptionSelector.tsx와 동일)
-      const checkIsSoldOut = (prefix: string, cap: string, col: string) => {
-        // 규칙 1: 아이폰 17 (aip17) + 256GB -> 블랙, 미스트블루, 라벤더 품절
-        if (prefix === "aip17" && cap === "256") {
-          if (["black", "mist_blue", "lavender"].includes(col)) return true
-        }
-        // 규칙 2: 아이폰 17 (aip17) + 512GB -> 블랙 품절
-        if (prefix === "aip17" && cap === "512") {
-          if (["black"].includes(col)) return true
-        }
-        // 규칙 3: 아이폰 17 프로 (aip17p) + 1TB -> 실버 제외 품절
-        if (prefix === "aip17p" && cap === "1t") {
-          if (col !== "silver") return true
-        }
-        // 규칙 4: 아이폰 17 프로 맥스 (aip17pm)
-        if (prefix === "aip17pm") {
-          if (cap === "1t") return true
-          else if (col !== "silver") return true
-        }
-        return false
-      }
-
       // 사용 가능한 색상 목록 확인 (이미지가 없거나 빈 값인 색상, 품절인 색상 제외)
       const availableColors = (device.colors_en || []).filter((c: string) => {
         if (!c || !device.images?.[c]?.length) return false
         return !checkIsSoldOut(prefix, capacity, c)
       })
 
-      // URL의 색상이 사용 가능한 색상 목록에 있는지 확인, 없으면 첫 번째 색상 사용
-      const selectedColor = availableColors[0] || (device.colors_en || [])[0] || "black"
+      // URL의 색상이 유효하고 재고가 있으면 사용, 아니면 첫 번째 사용 가능한 색상 사용
+      const isUrlColorAvailable = availableColors.includes(colorKey)
+      const selectedColor = isUrlColorAvailable ? colorKey : (availableColors[0] || (device.colors_en || [])[0] || "black")
       const colorName = COLOR_MAP[selectedColor] || selectedColor
 
       const cdnUrl = process.env.NEXT_PUBLIC_CDN_URL || ""
@@ -304,7 +290,7 @@ export default function OrderPage() {
     }
   }
 
-  if (!store.isReady) return <div className="min-h-screen flex items-center justify-center bg-white">{t('Phone.Common.loading')}</div>
+  if (!store.isReady) return <OrderSkeleton />
 
   const planInfo = PLAN_DETAILS[store.selectedPlanId] || PLAN_DETAILS["plan_69"]
 

@@ -9,6 +9,7 @@ import IntroOverlay from "@/features/phone/components/result/IntroOverlay"
 import OrderProductSummary from "@/features/phone/components/order/OrderProductSummary"
 import OrderUserForm from "@/features/phone/components/order/OrderUserForm"
 import EligibilityChecker from "@/features/phone/components/EligibilityChecker"
+import OrderSkeleton from "@/features/phone/components/skeleton/OrderSkeleton"
 
 export default function ResultPage() {
   const t = useTranslations()
@@ -94,6 +95,10 @@ export default function ResultPage() {
     planName: planData.name,
     planData: planData.data,
     planPrice: `${t('Phone.Order.monthly_price')} ${formatPrice(finalPlanPrice, locale)}${t('Phone.Common.won')}`
+  }
+
+  if (!orderData) {
+    return <OrderSkeleton />
   }
 
   return (

@@ -242,6 +242,7 @@
       "subscriber_info_input": "加入者情報入力",
       "name_label": "名前",
       "dob_label": "生年月日 (6桁)",
+      "name_error": "英語で入力してください",
       "dob_placeholder": "例: 900101",
       "dob_error": "生年月日6桁を入力してください",
       "phone_label": "携帯電話番号 (数字のみ)",

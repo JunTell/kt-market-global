@@ -242,6 +242,7 @@
       "subscriber_info_input": "输入用户信息",
       "name_label": "姓名",
       "dob_label": "出生日期 (6位)",
+      "name_error": "请输入英文",
       "dob_placeholder": "例: 900101",
       "dob_error": "请输入6位出生日期",
       "phone_label": "手机号码 (仅数字)",

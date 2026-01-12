@@ -15,8 +15,36 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "KT Market Admin",
-  description: "KT Market Admin Page",
+  metadataBase: new URL('https://global.ktmarket.co.kr'),
+  title: {
+    template: '%s | Global KT Market',
+    default: 'Global KT Market | Korea\'s No.1 Mobile Service for Foreigners',
+  },
+  description: "Official KT Authorized Agency. Provides the best mobile plans and smartphones for foreigners in Korea with English support. Check eligibility and apply online.",
+  keywords: ["KT", "Korea Telecom", "SIM Card", "eSIM", "Korea Mobile", "Expats in Korea", "Foreigner Registration Card"],
+  openGraph: {
+    title: "Global KT Market | Korea's No.1 Mobile Service",
+    description: "Official KT Authorized Agency. Best mobile plans for foreigners in Korea.",
+    url: 'https://global.ktmarket.co.kr',
+    siteName: 'Global KT Market',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Global KT Market',
+    description: 'Korea\'s No.1 Mobile Service for Foreigners',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: '/favicon.ico',
+  },
+  alternates: {
+    canonical: 'https://global.ktmarket.co.kr',
+  }
 };
 
 type Props = {

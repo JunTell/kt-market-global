@@ -15,12 +15,15 @@ import PlanSelector from "@/features/phone/components/PlanSelector"
 import StickyBar from "@/features/phone/components/StickyBar"
 import { usePhoneStore } from "@/features/phone/model/usePhoneStore"
 import { MODEL_VARIANTS, getPlanMetadata, getColorMap } from "@/features/phone/lib/phonedata"
+import { checkIsSoldOut } from "@/features/phone/lib/stock"
+
+import PhoneDetailSkeleton from "@/features/phone/components/skeleton/PhoneDetailSkeleton"
 
 export default function PhonePage() {
     const t = useTranslations()
 
     return (
-        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">{t('Phone.Common.loading')}</div>}>
+        <Suspense fallback={<PhoneDetailSkeleton />}>
             <PhoneContent />
         </Suspense>
     )
@@ -119,12 +122,16 @@ function PhoneContent() {
                 })
 
                 // 색상 및 이미지 처리
-                const colors = device.colors_en || []
+                // 1. 이미지가 있는 모든 색상을 가져옴 (품절 여부 관계없이)
+                const colors = (device.colors_en || []).filter((c: string) => {
+                    return device.images?.[c]?.length > 0
+                })
                 setAvailableColors(colors)
 
                 const cdnUrl = process.env.NEXT_PUBLIC_CDN_URL || ""
                 const imagesMap: Record<string, string[]> = {}
 
+                // 이미지 맵 생성
                 colors.forEach((c: string) => {
                     const files = device.images?.[c] || []
                     imagesMap[c] = files.map((f: string) =>
@@ -133,12 +140,28 @@ function PhoneContent() {
                 })
                 setColorImages(imagesMap)
 
-                const selectedColor = colorFromUrl && colors.includes(colorFromUrl) ? colorFromUrl : colors[0]
+                // 기본 선택 로직: URL 색상이 유효하고 재고가 있으면 사용, 아니면 첫 번째 "재고 있는" 색상 사용
+                const inStockColors = colors.filter((c: string) => !checkIsSoldOut(prefix, capacity, c))
+
+                const isUrlColorValid = colorFromUrl && colors.includes(colorFromUrl)
+                const isUrlColorInStock = isUrlColorValid && !checkIsSoldOut(prefix, capacity, colorFromUrl)
+
+                // 선택 우선순위:
+                // 1. URL 색상이 유효하고 재고가 있음 -> URL 색상
+                // 2. URL 색상이 유효하지만 재고가 없음 -> 첫 번째 재고 있는 색상으로 변경 (사용자 편의)
+                // 3. 첫 번째 재고 있는 색상
+                // 4. 재고가 하나도 없으면 그냥 첫 번째 색상 (품절 상태로 보여줌)
+                const selectedColor = isUrlColorInStock
+                    ? colorFromUrl
+                    : (inStockColors[0] || colors[0] || (device.colors_en || [])[0] || "black")
+
                 const currentImageUrls = imagesMap[selectedColor] || []
                 const currentImageUrl = currentImageUrls[0] || ""
 
-                // URL의 색상이 유효하지 않으면 URL 업데이트
-                if (colorFromUrl && !colors.includes(colorFromUrl)) {
+                // URL 업데이트 조건: 
+                // 1. URL 색상이 아예 유효하지 않음 (목록에 없음)
+                // 2. URL 색상이 품절임 (이 경우 재고 있는 색상으로 이동시켜주는 것이 좋음)
+                if (colorFromUrl !== selectedColor) {
                     const correctedModel = `${prefix}-${capacity}-${selectedColor}`
                     router.replace(`/${locale}/phone?model=${correctedModel}`, { scroll: false })
                 }
@@ -226,7 +249,7 @@ function PhoneContent() {
         value: c,
         // 대표 이미지만 전달 (썸네일용)
         image: colorImages[c]?.[0] || "",
-        isSoldOut: false
+        isSoldOut: checkIsSoldOut(prefix, capacity, c)
     }))
 
     // --- 가격 계산 ---
@@ -243,7 +266,7 @@ function PhoneContent() {
     const finalPriceInfo = { finalDevicePrice }
 
     if (loading && !store.title) {
-        return <div className="min-h-screen flex items-center justify-center">{t('Phone.Common.loading')}</div>
+        return <PhoneDetailSkeleton />
     }
 
     return (

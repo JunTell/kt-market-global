@@ -2,6 +2,8 @@
 
 import React, { useState, useRef } from "react"
 import { useTranslations } from "next-intl"
+import Select from "@/shared/ui/Select"
+import { COUNTRY_OPTIONS } from "@/shared/constants/options"
 
 interface FormData {
   userName: string
@@ -47,7 +49,7 @@ export default function OrderUserForm(props: OrderUserFormProps) {
   const nameRef = useRef<HTMLInputElement>(null)
   const dobRef = useRef<HTMLInputElement>(null)
   const phoneRef = useRef<HTMLInputElement>(null)
-  const countryRef = useRef<HTMLSelectElement>(null)
+  const countryRef = useRef<HTMLDivElement>(null)
   const reqRef = useRef<HTMLInputElement>(null)
 
   // Auto-focus Name when editing starts
@@ -144,9 +146,12 @@ export default function OrderUserForm(props: OrderUserFormProps) {
     })
   }
 
+  // English Name Regex
+  const isNameEnglish = /^[A-Za-z\s]*$/.test(formData.userName)
+
   const isDobValid = formData.userDob?.length === 6
   const isPhoneValid = formData.userPhone?.length >= 10
-  const isNameValid = formData.userName && formData.userName.trim() !== ""
+  const isNameValid = formData.userName && formData.userName.trim() !== "" && isNameEnglish
   const isUserInfoComplete = isNameValid && isDobValid && isPhoneValid
   const infoButtonLabel = isUserInfoComplete ? t('Phone.OrderForm.edit_button') : t('Phone.OrderForm.input_button')
 
@@ -195,6 +200,8 @@ export default function OrderUserForm(props: OrderUserFormProps) {
             label={t('Phone.OrderForm.name_label')}
             value={formData.userName}
             onChange={(e) => handleChange("userName", e.target.value)}
+            onBlur={() => setTouched(prev => ({ ...prev, userName: true }))}
+            error={touched.userName && !isNameEnglish ? t('Phone.OrderForm.name_error') : undefined}
             onKeyDown={(e: React.KeyboardEvent) => handleKeyDown(e, dobRef)}
             placeholder="English Name (ex: John Doe)"
           />
@@ -220,24 +227,15 @@ export default function OrderUserForm(props: OrderUserFormProps) {
             onBlur={() => setTouched(prev => ({ ...prev, userPhone: true }))}
             onKeyDown={(e: React.KeyboardEvent) => handleKeyDown(e, countryRef)}
           />
-          <div className="mb-6">
-            <div className="text-[13px] text-[#86868b] mb-2 font-medium">{t('Phone.OrderForm.country_label')}</div>
-            <select
-              ref={countryRef}
-              className="w-full p-4 text-base rounded-xl border border-[#E5E7EB] bg-white text-[#1d1d1f] outline-none box-border"
-              value={formData.country}
-              onChange={(e) => handleChange("country", e.target.value)}
-              onKeyDown={(e) => handleKeyDown(e, reqRef)}
-            >
-              <option value="Republic of Korea">Republic of Korea</option>
-              <option value="USA">USA</option>
-              <option value="China">China</option>
-              <option value="Japan">Japan</option>
-              <option value="Vietnam">Vietnam</option>
-              <option value="Thailand">Thailand</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
+          <Select
+            label={t('Phone.OrderForm.country_label')}
+            options={COUNTRY_OPTIONS}
+            value={formData.country}
+            onChange={(val) => handleChange("country", val)}
+            placeholder="Select Country"
+            disabled={props.isReadOnly}
+            ref={countryRef}
+          />
           <InputGroup
             ref={reqRef}
             label={t('Phone.OrderForm.requirements_label')}
