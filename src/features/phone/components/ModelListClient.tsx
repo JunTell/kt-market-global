@@ -20,7 +20,7 @@ const GONGGU_MODELS = [
   "aip17p-256"
 ]
 
-const CARRIERS = ["SKT", "KT", "LG U+", "알뜰폰"]
+const CARRIERS = ["SKT", "KT", "LG U+", "알뜰폰", "없음"]
 
 // 브랜드 타입 정의
 type Brand = "iphone" | "galaxy"
