@@ -8,6 +8,8 @@ import { getPlanDetails, getColorMap } from "@/features/phone/lib/phonedata"
 import { toKorean } from "@/shared/lib/toKorean"
 import { formatPrice } from "@/shared/lib/format"
 import { parsePhoneModel, getDBModelKey } from "@/features/phone/lib/phoneModel"
+import { DEFAULT_COUNTRY } from "@/shared/constants/options"
+
 import OrderProductSummary from "@/features/phone/components/order/OrderProductSummary"
 import OrderUserForm from "@/features/phone/components/order/OrderUserForm"
 import OrderSkeleton from "@/features/phone/components/skeleton/OrderSkeleton"
@@ -33,7 +35,7 @@ export default function OrderPage() {
     userName: "",
     userDob: "",
     userPhone: "",
-    country: t('Phone.Order.default_country'),
+    country: DEFAULT_COUNTRY,
     requirements: "",
     // 신청 정보
     joinType: t('Phone.Order.join_type_change'),
