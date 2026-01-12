@@ -24,13 +24,13 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between">
           {/* Links */}
           <div className="flex flex-wrap justify-center gap-2 py-4 text-sm text-[#555] bg-[#EAEBEC] font-medium">
-            <Link href="/policy" className="hover:text-black hover:underline">{t('policy_privacy')}</Link>
+            <Link href="/company" className="hover:text-black hover:underline">{t('policy_privacy')}</Link>
             <span className="text-gray-300">|</span>
-            <Link href="/policy" className="hover:text-black hover:underline">{t('policy_usage')}</Link>
+            <Link href="/company" className="hover:text-black hover:underline">{t('policy_usage')}</Link>
             <span className="text-gray-300">|</span>
-            <Link href="/policy" className="hover:text-black hover:underline">{t('policy_notice')}</Link>
+            <Link href="/company" className="hover:text-black hover:underline">{t('policy_notice')}</Link>
             <span className="text-gray-300">|</span>
-            <Link href="/policy" className="hover:text-black hover:underline">{t('policy_company')}</Link>
+            <Link href="/company" className="hover:text-black hover:underline">{t('policy_company')}</Link>
           </div>
 
           {/* Buttons */}
