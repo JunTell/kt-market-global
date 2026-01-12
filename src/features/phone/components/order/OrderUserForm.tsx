@@ -144,9 +144,12 @@ export default function OrderUserForm(props: OrderUserFormProps) {
     })
   }
 
+  // English Name Regex
+  const isNameEnglish = /^[A-Za-z\s]*$/.test(formData.userName)
+
   const isDobValid = formData.userDob?.length === 6
   const isPhoneValid = formData.userPhone?.length >= 10
-  const isNameValid = formData.userName && formData.userName.trim() !== ""
+  const isNameValid = formData.userName && formData.userName.trim() !== "" && isNameEnglish
   const isUserInfoComplete = isNameValid && isDobValid && isPhoneValid
   const infoButtonLabel = isUserInfoComplete ? t('Phone.OrderForm.edit_button') : t('Phone.OrderForm.input_button')
 
@@ -195,6 +198,8 @@ export default function OrderUserForm(props: OrderUserFormProps) {
             label={t('Phone.OrderForm.name_label')}
             value={formData.userName}
             onChange={(e) => handleChange("userName", e.target.value)}
+            onBlur={() => setTouched(prev => ({ ...prev, userName: true }))}
+            error={touched.userName && !isNameEnglish ? t('Phone.OrderForm.name_error') : undefined}
             onKeyDown={(e: React.KeyboardEvent) => handleKeyDown(e, dobRef)}
             placeholder="English Name (ex: John Doe)"
           />

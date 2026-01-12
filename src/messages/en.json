@@ -242,6 +242,7 @@
       "subscriber_info_input": "Enter Subscriber Information",
       "name_label": "Name",
       "dob_label": "Date of Birth (6 digits)",
+      "name_error": "Please enter in English only",
       "dob_placeholder": "Ex: 900101",
       "dob_error": "Please enter 6 digits for date of birth",
       "phone_label": "Phone Number (numbers only)",

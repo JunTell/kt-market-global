@@ -242,6 +242,7 @@
       "subscriber_info_input": "가입자 정보 입력",
       "name_label": "이름",
       "dob_label": "생년월일 (6자리)",
+      "name_error": "영문으로만 입력해주세요",
       "dob_placeholder": "예: 900101",
       "dob_error": "생년월일 6자리를 입력해주세요",
       "phone_label": "휴대폰 번호 (숫자만)",
