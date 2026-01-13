@@ -16,6 +16,7 @@ import {
 } from '@/features/phone/lib/visa-data';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 // --- 애니메이션 변수 ---
 const slideVariants = {
@@ -541,11 +542,13 @@ export default function EligibilityChecker() {
                         onClick={() => handlePhoneSelect(phone.id)}
                         className="w-full p-4 rounded-xl border border-line-200 hover:border-primary hover:bg-tertiary/20 transition-all bg-background shadow-sm flex items-center gap-4 group"
                       >
-                        <div className="w-20 h-20 rounded-lg bg-background-alt flex items-center justify-center overflow-hidden shrink-0 group-hover:bg-primary/5 transition-colors">
-                          <img
+                        <div className="w-20 h-20 rounded-lg bg-background-alt flex items-center justify-center overflow-hidden shrink-0 group-hover:bg-primary/5 transition-colors relative">
+                          <Image
                             src={phone.image}
                             alt={phone.name}
-                            className="w-full h-full object-contain"
+                            fill
+                            className="object-contain"
+                            sizes="80px"
                           />
                         </div>
                         <div className="flex-1 text-left">

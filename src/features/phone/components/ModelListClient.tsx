@@ -112,7 +112,8 @@ export default function ModelListClient({
       .map((device) => {
         const deviceData = device as Record<string, unknown>
         const planList = (deviceData[planTableKey] as unknown[] | undefined) || []
-        const plan = planList[0] as Record<string, unknown> | undefined
+        // ppllistobj_0808 is 69000 KRW
+        const plan = planList.find((p) => (p as { price: number }).price === 69000) as Record<string, unknown> | undefined || planList[0] as Record<string, unknown> | undefined
         if (!plan) return null
 
         const originPrice = (deviceData.price as number) ?? 0
@@ -226,7 +227,7 @@ export default function ModelListClient({
         <div className="w-full h-[50px] rounded-xl bg-bg-grouped p-1 flex box-border border border-grey-200">
           <div
             className={`flex-1 rounded-[9px] flex items-center justify-center text-[16px] font-medium cursor-pointer transition-all duration-200 select-none ${brand === "iphone"
-              ? "bg-base text-grey-900 shadow-[0_2px_4px_rgba(0,0,0,0.08)]"
+              ? "bg-white text-grey-900 shadow-[0_2px_4px_rgba(0,0,0,0.08)]"
               : "bg-transparent text-grey-500 shadow-none"
               }`}
             onClick={() => setBrand("iphone")}
@@ -235,7 +236,7 @@ export default function ModelListClient({
           </div>
           <div
             className={`flex-1 rounded-[9px] flex items-center justify-center text-[16px] font-medium cursor-pointer transition-all duration-200 select-none ${brand === "galaxy"
-              ? "bg-base text-grey-900 shadow-[0_2px_4px_rgba(0,0,0,0.08)]"
+              ? "bg-white text-grey-900 shadow-[0_2px_4px_rgba(0,0,0,0.08)]"
               : "bg-transparent text-grey-500 shadow-none"
               }`}
             onClick={() => setBrand("galaxy")}

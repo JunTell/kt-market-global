@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { useTranslations, useLocale } from "next-intl"
 import { formatPrice } from "@/shared/lib/format"
 
@@ -100,12 +101,14 @@ export default function GongguDealCard(props: Props) {
       {/* 컨텐츠 영역 */}
       <div className="relative z-10 flex flex-row items-center gap-4 w-full">
         {/* 썸네일 */}
-        <div className="w-20 h-20 rounded-[14px] bg-bg-grouped flex items-center justify-center shrink-0 overflow-hidden p-2 transition-colors group-hover:bg-grey-50">
+        <div className="w-20 h-20 rounded-[14px] bg-bg-grouped flex items-center justify-center shrink-0 overflow-hidden p-2 transition-colors group-hover:bg-grey-50 relative">
           {imageUrl ? (
-            <img
+            <Image
               src={imageUrl}
               alt={title}
-              className="w-full h-full object-contain"
+              fill
+              className="object-contain"
+              sizes="80px"
             />
           ) : (
             <div className="w-full h-full bg-grey-200" />

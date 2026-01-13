@@ -67,13 +67,10 @@ export function calcKTmarketSubsidy(
     }
   }
 
-  let subsidy = Number(subsidyRow[matchedKey]) || 0
+  const subsidy = Number(subsidyRow[matchedKey]) || 0
 
-  if (planId === "ppllistobj_0769") {
-    const is16e = model && model.includes("aip16e")
-    if (!is16e) {
-      subsidy += 50000
-    }
+  if (planId === "ppllistobj_0808") {
+    return 100000
   }
 
   return subsidy

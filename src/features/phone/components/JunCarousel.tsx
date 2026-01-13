@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useCallback } from "react"
+import Image from "next/image"
 import { useTranslations } from "next-intl"
 
 // SVG 아이콘
@@ -88,7 +89,7 @@ export default function JunCarousel({ urls = [] }: Props) {
   }
 
   return (
-    <div 
+    <div
       className="relative w-full h-[300px] overflow-hidden flex justify-center items-center touch-pan-y select-none bg-white"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -104,7 +105,7 @@ export default function JunCarousel({ urls = [] }: Props) {
       </button>
 
       {/* 슬라이드 뷰포트 */}
-      <div 
+      <div
         className="flex h-full w-full"
         style={{
           transition: !isDragging ? "transform 0.3s ease-in-out" : "none",
@@ -113,13 +114,15 @@ export default function JunCarousel({ urls = [] }: Props) {
       >
         {urls.map((url, index) => (
           <div key={index} className="flex-none w-full h-full flex justify-center items-center relative p-4">
-             {/* Next.js Image 대신 표준 img 태그 사용 */}
-             <img
-                src={url}
-                alt={`Slide ${index}`}
-                className="max-w-[90%] max-h-[90%] object-contain select-none pointer-events-none"
-                draggable={false} // 이미지 드래그 방지 (슬라이드 터치 동작 간섭 방지)
-             />
+            {/* Next.js Image 사용 */}
+            <Image
+              src={url}
+              alt={`Slide ${index}`}
+              fill
+              className="object-contain select-none pointer-events-none p-4"
+              draggable={false} // 이미지 드래그 방지
+              sizes="(max-width: 768px) 100vw, 500px"
+            />
           </div>
         ))}
       </div>

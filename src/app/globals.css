@@ -43,8 +43,8 @@
   /* Lv5: Error State #F04452 */
 
   /* 2.3 Background System (Layering) */
-  --bg-base: #FFFFFF;
-  /* White Card Surface */
+  --bg-base: #FAFAFA;
+  /* Comfortable White */
   --bg-grouped: #F2F4F6;
   /* App Background (Grey-100) */
   --bg-input: #F9FAFB;
