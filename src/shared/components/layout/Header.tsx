@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import Image from 'next/image'; // Image 컴포넌트 임포트
 import { useParams } from 'next/navigation';
-import LanguageSelector from '@/shared/ui/LanguageSelector';
+import LanguageSelector from '@/shared/components/ui/LanguageSelector';
 
 export default function Header() {
   const params = useParams();

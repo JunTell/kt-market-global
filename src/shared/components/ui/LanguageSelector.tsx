@@ -60,7 +60,7 @@ export default function LanguageSelector() {
           flex items-center gap-2 px-3 py-2
           bg-white border border-grey-200
           rounded-md transition-all duration-200
-          hover:bg-grey-100
+          hover:bg-grey-100 cursor-pointer
           ${isOpen ? 'ring-2 ring-primary border-transparent' : ''}
         `}
       >

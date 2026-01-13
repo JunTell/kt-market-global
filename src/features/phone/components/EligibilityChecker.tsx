@@ -218,11 +218,11 @@ export default function EligibilityChecker() {
     <div className="w-full max-w-[480px] mx-auto font-sans px-4 md:px-0">
       {/* 컨테이너: 높이 축소 (min-h-[460px]), Radius, Shadow 적용 */}
       <div
-        className="bg-base rounded-lg shadow-2xl shadow-grey-400/20 border border-grey-200 overflow-hidden relative min-h-[460px] flex flex-col"
+        className="bg-white rounded-lg shadow-2xl shadow-grey-400/20 border border-grey-200 overflow-hidden relative min-h-[460px] flex flex-col"
       >
         {/* Progress Bar: 높이 및 아이콘 크기 축소 */}
         {step !== 'fail' && step !== 'result' && (
-          <div className="px-5 pt-5 pb-10 bg-base z-10">
+          <div className="px-5 pt-5 pb-10 bg-white z-10">
             <div className="flex items-center justify-between relative">
               <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[2px] bg-grey-200 rounded-full -z-10" />
               <motion.div
@@ -241,14 +241,14 @@ export default function EligibilityChecker() {
                   <div key={s.id} className="flex flex-col items-center gap-1 relative z-10">
                     <motion.div
                       className={cn(
-                        "w-7 h-7 rounded-full flex items-center justify-center border transition-colors bg-base",
+                        "w-7 h-7 rounded-full flex items-center justify-center border transition-colors bg-white",
                         isCompleted || isActive ? "border-primary text-primary" : "border-border-strong text-grey-500",
                         isActive && "ring-2 ring-primary/20"
                       )}
                       initial={false}
                       animate={{
                         scale: isActive ? 1.1 : 1,
-                        backgroundColor: isCompleted ? 'var(--primary-default)' : 'var(--bg-base)',
+                        backgroundColor: isCompleted ? 'var(--primary-default)' : '#ffffff',
                         color: isCompleted ? '#ffffff' : (isActive ? 'var(--primary-default)' : 'var(--grey-500)')
                       }}
                     >

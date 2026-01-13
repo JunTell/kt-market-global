@@ -5,8 +5,8 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import "@/app/globals.css";
 import ChatBot from '@/features/inquiry/components/ChatBot';
-import Header from "@/shared/ui/layout/Header";
-import ScrollToTop from "@/shared/ui/ScrollToTop";
+import Header from "@/shared/components/layout/Header";
+import ScrollToTop from "@/shared/components/ui/ScrollToTop";
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
