@@ -26,7 +26,7 @@ export default function Home() {
       <ProcessGuide />
       <section
         id="eligibility-section"
-        className="py-10 bg-base px-4 border-y border-border-divider"
+        className="py-10 bg-base px-4 border-y border-grey-200"
       >
         <div className="max-w-md mx-auto text-center mb-6">
           <span className="text-primary font-bold tracking-wider uppercase text-[10px] mb-1.5 block">

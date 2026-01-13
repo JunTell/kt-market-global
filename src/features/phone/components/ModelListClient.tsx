@@ -244,7 +244,7 @@ export default function ModelListClient({
           </div>
         </div>
 
-        <div className="text-[13px] text-label-700 mt-2 flex items-center">
+        <div className="text-[13px] text-grey-500 mt-2 flex items-center">
           <span className="mr-1">ℹ️</span>
           {t('Phone.ModelList.subsidy_info')}
         </div>
@@ -312,11 +312,11 @@ function CarrierSelector({
       {/* 1. 기본 바 (Trigger) - 항상 렌더링하여 레이아웃 흔들림 방지 */}
       <div
         onClick={onToggle}
-        className="w-full h-[60px] bg-base rounded-[20px] border border-border-default flex items-center justify-between px-6 cursor-pointer transition-all duration-200 hover:bg-bg-grouped hover:border-border-strong hover:shadow-sm active:scale-[0.99]"
+        className="w-full h-[60px] bg-white rounded-[20px] border border-grey-200 flex items-center justify-between px-6 cursor-pointer transition-all duration-200 hover:bg-grey-50 hover:border-grey-300 hover:shadow-sm active:scale-[0.99]"
       >
         <div className="flex gap-2 text-[16px]">
-          <span className="text-label-500 font-medium">{t('Phone.ModelList.current_carrier')}</span>
-          <span className="text-label-900 font-bold">
+          <span className="text-grey-500 font-medium">{t('Phone.ModelList.current_carrier')}</span>
+          <span className="text-grey-900 font-bold">
             {selected} {t('Phone.ModelList.using_carrier')}
           </span>
         </div>
@@ -359,7 +359,7 @@ function CarrierSelector({
                 stiffness: 350,
                 mass: 0.5
               }}
-              className="relative w-full max-w-[360px] bg-base rounded-[28px] shadow-2xl p-6 flex flex-col gap-5 overflow-hidden"
+              className="relative w-full max-w-[360px] bg-white rounded-[28px] shadow-2xl p-6 flex flex-col gap-5 overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="text-center pt-1">

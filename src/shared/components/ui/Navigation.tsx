@@ -19,7 +19,7 @@ const TopHeader = ({ title, onBack, rightAction, className }: TopHeaderProps) =>
         )}>
             <div className="flex items-center w-10 shrink-0">
                 {onBack && (
-                    <button onClick={onBack} className="p-1 -ml-1 text-grey-900 hover:bg-black/5 rounded-full" aria-label="Go back">
+                    <button onClick={onBack} className="p-1 -ml-1 text-grey-900 hover:bg-black/5 rounded-full cursor-pointer" aria-label="Go back">
                         <ChevronLeft size={24} />
                     </button>
                 )}
@@ -68,7 +68,7 @@ const BottomTabItem = ({ active, icon, label, className, ...props }: BottomTabIt
     return (
         <button
             className={cn(
-                "flex flex-col items-center justify-center gap-1 w-full h-full transition-colors",
+                "flex flex-col items-center justify-center gap-1 w-full h-full transition-colors cursor-pointer",
                 active ? "text-primary" : "text-grey-400",
                 className
             )}

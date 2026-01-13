@@ -188,7 +188,7 @@ export default function OrderUserForm(props: OrderUserFormProps) {
 
   if (isEditing) {
     return (
-      <div className="w-full max-w-[480px] mx-auto min-h-screen z-50 fixed top-0 left-1/2 -translate-x-1/2 bottom-0 overflow-y-auto bg-base animate-fadeInUp">
+      <div className="w-full max-w-[480px] mx-auto min-h-screen z-[9999] fixed top-0 left-1/2 -translate-x-1/2 bottom-0 overflow-y-auto bg-white animate-fadeInUp">
         <div className="flex items-center gap-1 mb-7.5 px-5 pt-4">
           <div className="cursor-pointer p-2 -ml-2 text-grey-900" onClick={() => setIsEditing(false)}><ChevronLeft /></div>
           <div className="text-lg font-bold text-grey-900">{t('Phone.OrderForm.subscriber_info_input')}</div>
@@ -253,7 +253,7 @@ export default function OrderUserForm(props: OrderUserFormProps) {
   }
 
   return (
-    <div className={`w-full flex flex-col bg-base pt-5 px-5 min-h-[400px] relative box-border ${props.isReadOnly ? 'pb-10' : 'pb-[100px]'}`}>
+    <div className={`w-full flex flex-col bg-white pt-5 px-5 min-h-[400px] relative box-border ${props.isReadOnly ? 'pb-10' : 'pb-[100px]'}`}>
       <div className="flex items-center gap-2.5 mb-5" ref={subscriberRef}>
         <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><UserIcon /></div>
         <div className="text-lg font-bold text-grey-900">{t('Phone.OrderForm.subscriber_info_title')}</div>
@@ -321,8 +321,8 @@ export default function OrderUserForm(props: OrderUserFormProps) {
       )}
 
       {showTerms && (
-        <div className="fixed top-0 left-0 right-0 bottom-0 z-100 flex flex-col justify-end items-center">
-          <div className="bg-base rounded-t-3xl px-6 pt-7.5 pb-10 z-2 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] relative max-h-[80vh] flex flex-col overflow-y-auto animate-slideUp w-full max-w-[480px]">
+        <div className="fixed top-0 left-0 right-0 bottom-0 z-[9999] flex flex-col justify-end items-center">
+          <div className="bg-white rounded-t-3xl px-6 pt-7.5 pb-10 z-2 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] relative max-h-[80vh] flex flex-col overflow-y-auto animate-slideUp w-full max-w-[480px]">
             <div className="flex items-center justify-between mb-4 cursor-pointer" onClick={() => setAgreement(!agreement)}>
               <Checkbox checked={agreement} />
               <span className="text-base font-bold text-grey-900 flex-1">{t('Phone.OrderForm.terms_title')}</span>
@@ -407,7 +407,7 @@ const InputGroup = React.forwardRef<HTMLInputElement, {
     <input
       ref={ref}
       name={name}
-      className={`w-full p-4 text-base rounded-xl bg-base text-grey-900 outline-none box-border ${error ? 'border border-border-error' : 'border border-border-default'}`}
+      className={`w-full p-4 text-base rounded-xl bg-white text-grey-900 outline-none box-border ${error ? 'border border-status-error' : 'border border-grey-200'}`}
       value={value}
       onChange={onChange}
       onBlur={onBlur}
