@@ -95,7 +95,8 @@ export function calculateSpecialDiscount(
   registrationType: RegistrationType
 ): number {
   const isSpecialModel = modelPrefix.startsWith('aip17') || modelPrefix.startsWith('aipa')
-  return isSpecialModel && registrationType === 'mnp' ? 70000 : 0
+  // return isSpecialModel && registrationType === 'mnp' ? 70000 : 0
+  return 0
 }
 
 /**
