@@ -14,7 +14,6 @@ interface Props {
   disclosureSubsidy: number
   ktmarketDiscount: number
   planMonthlyDiscount: number
-  specialDiscount?: number
   mode: Mode
   detailPath: string
   model?: string
@@ -30,7 +29,6 @@ export default function GongguDealCard(props: Props) {
     disclosureSubsidy,
     ktmarketDiscount,
     planMonthlyDiscount,
-    specialDiscount = 0, // 값은 받아오지만, 아래 계산식에서 사용하지 않음
     mode,
     detailPath,
     model,

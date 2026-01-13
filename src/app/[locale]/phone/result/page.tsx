@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter, useParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useTranslations, useLocale } from "next-intl"
 import { formatPrice } from "@/shared/lib/format"
 import { getPlanDetails } from "@/features/phone/lib/phonedata"
@@ -14,7 +14,7 @@ import OrderSkeleton from "@/features/phone/components/skeleton/OrderSkeleton"
 export default function ResultPage() {
   const t = useTranslations()
   const router = useRouter()
-  const params = useParams()
+  // const params = useParams() // Unused
   const locale = useLocale()
   const [orderData, setOrderData] = useState<Record<string, unknown> | null>(null)
   const PLAN_DETAILS = getPlanDetails(t)
@@ -23,6 +23,7 @@ export default function ResultPage() {
   useEffect(() => {
     const data = sessionStorage.getItem("asamoDeal")
     if (data) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setOrderData(JSON.parse(data))
     }
   }, [])
@@ -55,6 +56,7 @@ export default function ResultPage() {
     try {
       const userInfoStr = sessionStorage.getItem("user-info")
       if (userInfoStr) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSavedUserInfo(JSON.parse(userInfoStr) as UserInfo)
       }
     } catch (e) {

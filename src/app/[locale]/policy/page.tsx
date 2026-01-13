@@ -1,5 +1,3 @@
-import { useTranslations } from 'next-intl';
-
 export default function PolicyPage() {
     return (
         <div className="max-w-[800px] mx-auto py-12 px-5 font-sans whitespace-pre-line leading-relaxed text-[#333]">

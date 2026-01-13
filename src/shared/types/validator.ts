@@ -40,8 +40,10 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends AppPageConfig<"/">> = Specific
   // @ts-expect-error If the import fails, lint should show an error
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handler = {} as typeof import("../../app/page")
   type __Check = __IsExpected<typeof handler>
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   type __Unused = __Check
 }
 
@@ -55,7 +57,9 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends LayoutConfig<"/">> = Specific
   // @ts-expect-error If the import fails, lint should show an error
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handler = {} as typeof import("../../app/layout")
   type __Check = __IsExpected<typeof handler>
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   type __Unused = __Check
 }

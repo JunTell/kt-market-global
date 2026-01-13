@@ -53,9 +53,16 @@ const ListRow = ({
                         {leftIcon}
                     </div>
                 )}
-                <span className="text-body1 font-medium text-grey-900 truncate">
-                    {title}
-                </span>
+                <div className="flex flex-col overflow-hidden">
+                    <span className="text-body1 font-medium text-grey-900 truncate">
+                        {title}
+                    </span>
+                    {subTitle && (
+                        <span className="text-body2 text-grey-500 truncate block">
+                            {subTitle}
+                        </span>
+                    )}
+                </div>
             </div>
 
             {/* Right */}

@@ -16,7 +16,6 @@ export interface CapacityOption {
 }
 
 interface Props {
-  modelPrefix: string
   selectedCapacity: string
   selectedColorValue: string
   capacityOptions: CapacityOption[]
@@ -26,7 +25,6 @@ interface Props {
 }
 
 export default function OptionSelector({
-  modelPrefix,
   selectedCapacity,
   selectedColorValue,
   capacityOptions,

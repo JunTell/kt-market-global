@@ -3,11 +3,18 @@
 import { createClient } from '@/shared/api/supabase/server'
 import { revalidatePath } from 'next/cache'
 
+export type ApplicationData = {
+    name: string
+    dob: string
+    model: string
+    carrier: string
+}
+
 export type ApplicationState = {
     status: 'idle' | 'success' | 'queued' | 'error'
     message: string
     ticketNumber?: number
-    savedData?: any
+    savedData?: ApplicationData
 }
 
 export async function submitApplication(
@@ -77,7 +84,7 @@ export async function submitApplication(
  */
 export async function retryApplication(
     ticketNumber: number,
-    data: any
+    data: ApplicationData
 ): Promise<ApplicationState> {
     const supabase = await createClient()
 

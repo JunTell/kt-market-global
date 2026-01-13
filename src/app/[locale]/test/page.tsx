@@ -4,11 +4,18 @@ import { createClient } from '@/shared/api/supabase/client'
 import { Loader2, CheckCircle2, AlertCircle, Ticket } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
+type FormDataCache = {
+    name: FormDataEntryValue | null
+    dob: FormDataEntryValue | null
+    model: FormDataEntryValue | null
+    carrier: FormDataEntryValue | null
+}
+
 export default function TicketPage() {
     const [status, setStatus] = useState<'idle' | 'processing' | 'success' | 'queued' | 'error'>('idle')
     const [result, setResult] = useState<{ ticketNumber?: number; message?: string }>({})
     const [isConnecting, setIsConnecting] = useState(false)
-    const [formDataCache, setFormDataCache] = useState<any>(null)
+    const [formDataCache, setFormDataCache] = useState<FormDataCache | null>(null)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -23,7 +30,7 @@ export default function TicketPage() {
         await handleSubmission(data)
     }
 
-    const handleSubmission = async (data: any) => {
+    const handleSubmission = async (data: FormDataCache) => {
         setIsConnecting(true)
         setStatus('processing')
 
@@ -58,10 +65,10 @@ export default function TicketPage() {
                 })
             }
 
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error(err)
             setStatus('error')
-            setResult({ message: err.message || "Failed to submit application" })
+            setResult({ message: err instanceof Error ? err.message : "Failed to submit application" })
         }
     }
 
