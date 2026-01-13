@@ -91,11 +91,10 @@ export function calculateDiscountedMonthlyPrice(
  * calculateSpecialDiscount('sm-s931nk', 'mnp') // 0
  */
 export function calculateSpecialDiscount(
-  modelPrefix: string,
-  registrationType: RegistrationType
+  _modelPrefix: string,
+  _registrationType: RegistrationType
 ): number {
-  const isSpecialModel = modelPrefix.startsWith('aip17') || modelPrefix.startsWith('aipa')
-  return isSpecialModel && registrationType === 'mnp' ? 70000 : 0
+  return 0
 }
 
 /**

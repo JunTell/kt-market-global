@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
+import Image from "next/image"
 import { useTranslations } from "next-intl"
 
 export interface ColorOption {
@@ -16,7 +17,6 @@ export interface CapacityOption {
 }
 
 interface Props {
-  modelPrefix: string
   selectedCapacity: string
   selectedColorValue: string
   capacityOptions: CapacityOption[]
@@ -26,7 +26,6 @@ interface Props {
 }
 
 export default function OptionSelector({
-  modelPrefix,
   selectedCapacity,
   selectedColorValue,
   capacityOptions,
@@ -60,8 +59,8 @@ export default function OptionSelector({
               key={opt.value}
               onClick={() => onSelectCapacity(opt.value)}
               className={`flex-1 py-3 rounded-[12px] text-[15px] font-semibold text-center cursor-pointer transition-all duration-200 select-none ${isSelected
-                  ? "bg-white text-[#1D1D1F] shadow-[0_1px_4px_rgba(0,0,0,0.08)]"
-                  : "bg-transparent text-[#6B7280]"
+                ? "bg-white text-[#1D1D1F] shadow-[0_1px_4px_rgba(0,0,0,0.08)]"
+                : "bg-transparent text-[#6B7280]"
                 }`}
             >
               {opt.label}
@@ -87,11 +86,13 @@ export default function OptionSelector({
                 {/* 이미지 영역 */}
                 <div className="w-16 h-16 rounded-[12px] overflow-hidden bg-[#F5F5F7] flex items-center justify-center shrink-0 p-1.5 box-border relative">
                   {color.image && (
-                    // ✅ Next.js Image -> 표준 img 태그로 변경
-                    <img
+                    // ✅ Next.js Image 사용
+                    <Image
                       src={color.image}
                       alt={color.label}
-                      className="w-full h-full object-contain"
+                      fill
+                      className="object-contain"
+                      sizes="64px"
                     />
                   )}
                 </div>

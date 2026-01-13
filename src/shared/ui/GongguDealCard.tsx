@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { useTranslations, useLocale } from "next-intl"
 import { formatPrice } from "@/shared/lib/format"
 
@@ -14,7 +15,6 @@ interface Props {
   disclosureSubsidy: number
   ktmarketDiscount: number
   planMonthlyDiscount: number
-  specialDiscount?: number
   mode: Mode
   detailPath: string
   model?: string
@@ -30,7 +30,6 @@ export default function GongguDealCard(props: Props) {
     disclosureSubsidy,
     ktmarketDiscount,
     planMonthlyDiscount,
-    specialDiscount = 0, // 값은 받아오지만, 아래 계산식에서 사용하지 않음
     mode,
     detailPath,
     model,
@@ -90,39 +89,41 @@ export default function GongguDealCard(props: Props) {
 
   return (
     <div
-      className="group relative w-full p-5 rounded-[20px] bg-background flex flex-row items-center gap-4 box-border cursor-pointer transition-all duration-300 hover:-translate-y-1 border border-line-200 group-hover:border-transparent"
+      className="group relative w-full p-5 rounded-[20px] bg-white flex flex-row items-center gap-4 box-border cursor-pointer transition-all duration-300 hover:-translate-y-1 border border-grey-200 group-hover:border-transparent"
       onClick={handleClick}
     >
       {/* 테두리 그라데이션 효과 (Hover시 나타남) */}
       <div className="absolute inset-0 rounded-[20px] p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 -z-10 pointer-events-none" />
 
       {/* 배경색 유지 (내부 컨텐츠 배경) */}
-      <div className="absolute inset-px rounded-[19px] bg-background z-0" />
+      <div className="absolute inset-px rounded-[19px] bg-white z-0" />
 
       {/* 컨텐츠 영역 */}
       <div className="relative z-10 flex flex-row items-center gap-4 w-full">
         {/* 썸네일 */}
-        <div className="w-20 h-20 rounded-[14px] bg-background-alt flex items-center justify-center shrink-0 overflow-hidden p-2 transition-colors group-hover:bg-gray-50">
+        <div className="w-20 h-20 rounded-[14px] bg-bg-grouped flex items-center justify-center shrink-0 overflow-hidden p-2 transition-colors group-hover:bg-grey-50 relative">
           {imageUrl ? (
-            <img
+            <Image
               src={imageUrl}
               alt={title}
-              className="w-full h-full object-contain"
+              fill
+              className="object-contain"
+              sizes="80px"
             />
           ) : (
-            <div className="w-full h-full bg-line-200" />
+            <div className="w-full h-full bg-grey-200" />
           )}
         </div>
 
         {/* 텍스트 정보 */}
         <div className="flex-1 flex flex-col justify-center gap-[3px] min-w-0">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="text-[17px] font-bold text-label-900 tracking-[-0.5px] whitespace-nowrap">
+            <span className="text-[17px] font-bold text-grey-900 tracking-[-0.5px] whitespace-nowrap">
               {title}
             </span>
           </div>
 
-          <div className="text-[12px] text-label-500 line-through mt-0.5">
+          <div className="text-[12px] text-grey-500 line-through mt-0.5">
             {t('Phone.GongguDealCard.original_price')} {originPriceText}
           </div>
 
@@ -130,15 +131,15 @@ export default function GongguDealCard(props: Props) {
             <div className="text-[10px] font-bold px-1.5 py-[3px] rounded-md bg-status-error text-white whitespace-nowrap">
               {t('Phone.GongguDealCard.global_special')}
             </div>
-            <span className="text-[20px] font-bold text-label-900 tracking-[-0.5px]">
+            <span className="text-[20px] font-bold text-grey-900 tracking-[-0.5px]">
               {salePriceText}
             </span>
           </div>
 
           <div
             className={`mt-1 text-[12px] font-semibold break-keep leading-[1.4] whitespace-pre-wrap min-[400px]:whitespace-normal ${mode === "device"
-                ? "text-status-correct"
-                : "text-primary"
+              ? "text-status-correct"
+              : "text-primary"
               }`}
           >
             {description}

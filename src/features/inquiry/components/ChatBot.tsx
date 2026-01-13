@@ -24,7 +24,6 @@ export default function ChatBot() {
   const FAQ_LIST = getFAQList(t);
 
   const [isAnimating, setIsAnimating] = useState(false);
-  const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
     { id: 'welcome', type: 'bot', text: t('welcome_message'), timestamp: new Date() }
   ]);
@@ -45,13 +44,12 @@ export default function ChatBot() {
     }
   }, [messages, isOpen]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   const handleSend = (text: string) => {
     if (!text.trim()) return;
     messageIdCounter.current += 1;
     const userMsg: Message = { id: `msg-${messageIdCounter.current}`, type: 'user', text: text, timestamp: new Date() };
     setMessages((prev) => [...prev, userMsg]);
-    setInput('');
 
     setTimeout(() => {
       const found = FAQ_LIST.find((item) =>

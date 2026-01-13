@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect, forwardRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ChevronDown, Check } from "lucide-react"
+import { ChevronDown, Check, Search } from "lucide-react"
 import { cn } from "@/shared/lib/utils"
 
 interface SelectProps {
@@ -25,7 +25,24 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(({
     disabled = false,
 }, ref) => {
     const [isOpen, setIsOpen] = useState(false)
+    const [searchTerm, setSearchTerm] = useState("")
+    const searchInputRef = useRef<HTMLInputElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
+
+    // Filter options based on search term
+    const filteredOptions = options.filter(option =>
+        option.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+
+    useEffect(() => {
+        if (isOpen) {
+            setTimeout(() => {
+                if (searchInputRef.current) {
+                    searchInputRef.current.focus()
+                }
+            }, 100)
+        }
+    }, [isOpen])
 
     // Close when clicking outside
     useEffect(() => {
@@ -54,12 +71,17 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(({
             <div
                 ref={ref}
                 className={cn(
-                    "w-full p-4 text-base rounded-xl border bg-white flex items-center justify-between cursor-pointer transition-all duration-200 select-none",
+                    "w-full p-4 text-base rounded-lg border bg-white flex items-center justify-between cursor-pointer transition-all duration-200 select-none",
                     isOpen ? "border-[#4285F4] ring-2 ring-[#4285F4]/10" : "border-[#E5E7EB] hover:border-[#4285F4]",
                     disabled && "opacity-50 cursor-not-allowed bg-gray-50",
                     className
                 )}
-                onClick={() => !disabled && setIsOpen(!isOpen)}
+                onClick={() => {
+                    if (!disabled) {
+                        setIsOpen(!isOpen)
+                        if (!isOpen) setSearchTerm("")
+                    }
+                }}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
@@ -89,8 +111,22 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(({
                         transition={{ duration: 0.15, ease: "easeOut" }}
                         className="absolute z-50 w-full mt-2 bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.1)] border border-gray-100 max-h-[300px] overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent"
                     >
+                        <div className="p-2 sticky top-0 bg-white z-10 border-b border-gray-100">
+                            <div className="relative">
+                                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                <input
+                                    ref={searchInputRef}
+                                    type="text"
+                                    className="w-full pl-9 pr-3 py-2 text-sm bg-gray-50 border border-transparent focus:bg-white focus:border-[#4285F4] rounded-lg outline-none transition-all placeholder:text-gray-400"
+                                    placeholder="Search..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    onClick={(e) => e.stopPropagation()}
+                                />
+                            </div>
+                        </div>
                         <div className="p-1.5">
-                            {options.map((option) => (
+                            {filteredOptions.map((option) => (
                                 <div
                                     key={option}
                                     className={cn(
@@ -107,7 +143,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(({
                                     )}
                                 </div>
                             ))}
-                            {options.length === 0 && (
+                            {filteredOptions.length === 0 && (
                                 <div className="px-4 py-3 text-sm text-gray-400 text-center">
                                     No options available
                                 </div>

@@ -34,6 +34,7 @@
     },
     "Visa": {
       "title": "请选择签证类型",
+      "instruction": "请搜索签证代码或选择类别。",
       "placeholder": "例如: E7, 留学, D2",
       "Categories": {
         "all": "全部",
@@ -86,6 +87,10 @@
       "title": "无法查询",
       "desc": "必须持有外国人登录证<br/>才能进行准确查询。",
       "retry": "返回首页"
+    },
+    "PhoneList": {
+      "title": "请选择手机型号",
+      "desc": "选择您想要的型号即可跳转至详情页面"
     },
     "ChatBot": {
       "select_phone": "选择手机型号"

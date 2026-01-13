@@ -61,7 +61,7 @@ export default function ProcessGuide() {
   };
 
   return (
-    <section className="py-10 px-5 bg-background-alt overflow-hidden">
+    <section className="py-10 px-5 bg-bg-grouped overflow-hidden">
       <motion.h2
         initial={{ opacity: 0, y: -10 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -81,9 +81,9 @@ export default function ProcessGuide() {
           <motion.div
             key={step.id}
             variants={itemVariants}
-            className="bg-background rounded-[32px] py-2 px-3 flex items-center gap-4 shadow-sm border border-line-200/50"
+            className="bg-base rounded-[32px] py-2 px-3 flex items-center gap-4 shadow-sm border border-border-default"
           >
-            <div className="shrink-0 w-[60px] h-[60px] rounded-full bg-[#5681E8] text-white flex flex-col items-center justify-center shadow-sm leading-none">
+            <div className="shrink-0 w-[60px] h-[60px] rounded-full bg-primary text-white flex flex-col items-center justify-center shadow-sm leading-none">
               <span className="text-[11px] font-medium opacity-90 mb-0.5">STEP</span>
               <span className="text-xl font-bold">{step.id}</span>
             </div>
@@ -109,9 +109,9 @@ export default function ProcessGuide() {
       >
         {badges.map((badge, idx) => {
           let badgeStyle = "";
-          if (idx === 0) badgeStyle = "bg-background border-[2.5px] border-[#5681E8] text-label-900";
-          else if (idx === 1) badgeStyle = "bg-[#A9AFB9] text-white border-none";
-          else if (idx === 2) badgeStyle = "bg-[#4A7AFF] text-white border-none";
+          if (idx === 0) badgeStyle = "bg-base border-[2.5px] border-primary text-grey-900";
+          else if (idx === 1) badgeStyle = "bg-grey-400 text-white border-none";
+          else if (idx === 2) badgeStyle = "bg-primary text-white border-none";
 
           return (
             <motion.div

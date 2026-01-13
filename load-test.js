@@ -17,7 +17,7 @@ export const options = {
     },
 };
 
-export default function () {
+export default function loadTest() {
     const url = 'http://localhost:3000/api/load-test';
 
     // Random Data

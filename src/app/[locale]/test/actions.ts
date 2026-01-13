@@ -3,11 +3,18 @@
 import { createClient } from '@/shared/api/supabase/server'
 import { revalidatePath } from 'next/cache'
 
+export type ApplicationData = {
+    name: string
+    dob: string
+    model: string
+    carrier: string
+}
+
 export type ApplicationState = {
     status: 'idle' | 'success' | 'queued' | 'error'
     message: string
     ticketNumber?: number
-    savedData?: any
+    savedData?: ApplicationData
 }
 
 export async function submitApplication(
@@ -53,13 +60,10 @@ export async function submitApplication(
     // we treat this as "queued". The user has a ticket number, but data isn't saved yet.
     if (insertError) {
         console.error('Insert Error:', insertError)
-
-        // In a real system, we might push this to a Redis queue here.
-        // For this test, we tell the client "You are in queue #1234" and let the client retry.
+        // Return error to trigger client-side retry
         return {
-            status: 'queued',
-            message: `Traffic is high. You hold Ticket #${ticketNumber}. Retrying...`,
-            ticketNumber,
+            status: 'error',
+            message: 'Traffic is high. Please try again.',
             savedData: { name, dob, model, carrier }
         }
     }
@@ -77,7 +81,7 @@ export async function submitApplication(
  */
 export async function retryApplication(
     ticketNumber: number,
-    data: any
+    data: ApplicationData
 ): Promise<ApplicationState> {
     const supabase = await createClient()
 

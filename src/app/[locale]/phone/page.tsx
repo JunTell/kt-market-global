@@ -20,7 +20,7 @@ import { checkIsSoldOut } from "@/features/phone/lib/stock"
 import PhoneDetailSkeleton from "@/features/phone/components/skeleton/PhoneDetailSkeleton"
 
 export default function PhonePage() {
-    const t = useTranslations()
+    // const t = useTranslations() // Unused
 
     return (
         <Suspense fallback={<PhoneDetailSkeleton />}>
@@ -282,7 +282,6 @@ function PhoneContent() {
                 {step === 1 && (
                     <>
                         <OptionSelector
-                            modelPrefix={prefix}
                             selectedCapacity={capacity}
                             selectedColorValue={store.color}
                             capacityOptions={capacityOpts}

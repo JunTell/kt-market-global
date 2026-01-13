@@ -20,19 +20,19 @@ export default function TargetAudience() {
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 15 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
-        duration: 0.4, 
+      transition: {
+        duration: 0.4,
         ease: "easeOut" as const
       }
     },
   };
 
   return (
-    <section className="py-10 px-5 bg-[#1F1F1F] text-label-100 overflow-hidden">
-      <motion.h2 
+    <section className="py-10 px-5 bg-[#1F1F1F] text-grey-100 overflow-hidden">
+      <motion.h2
         initial={{ opacity: 0, x: -15 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
@@ -41,7 +41,7 @@ export default function TargetAudience() {
         {t.raw('title')}
       </motion.h2>
 
-      <motion.div 
+      <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -49,8 +49,8 @@ export default function TargetAudience() {
         className="space-y-2.5 mb-8"
       >
         {checks.map((key) => (
-          <motion.div 
-            key={key} 
+          <motion.div
+            key={key}
             variants={itemVariants}
             whileTap={{ scale: 0.97 }}
             className="flex items-center gap-3 bg-white/10 px-3.5 py-3 rounded-xl border border-white/5 cursor-pointer"
@@ -61,7 +61,7 @@ export default function TargetAudience() {
         ))}
       </motion.div>
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}

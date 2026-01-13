@@ -65,8 +65,6 @@ export default function InquiryForm() {
       setStep(step + 1);
     } else {
       // ✅ 최종 제출 로직
-      const formData = { name, phone, carrier, region, device };
-
       alert(t('Toast.success')); // 실제로는 Toast UI 사용 권장
 
       // 세션 클리어 및 홈으로 이동

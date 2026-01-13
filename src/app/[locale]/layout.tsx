@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
+import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import "@/app/globals.css";
@@ -12,6 +13,12 @@ const pretendard = localFont({
   display: 'swap',
   weight: "45 920",
   variable: '--font-pretendard',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -62,7 +69,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${pretendard.variable} antialiased`}
+        className={`${inter.variable} ${pretendard.variable} antialiased`}
         suppressHydrationWarning={true}
       >
         <NextIntlClientProvider messages={messages}>

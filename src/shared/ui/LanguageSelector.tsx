@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 
 type Language = {
-  code: string; 
+  code: string;
   label: string;
   locale: string;
 };
@@ -19,12 +19,12 @@ const LANGUAGES: Language[] = [
 export default function LanguageSelector() {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  
+
   const router = useRouter();
   const pathname = usePathname();
 
   const currentLocale = pathname?.split('/')[1] || 'ko';
-  
+
   const currentLang = LANGUAGES.find(l => l.locale === currentLocale) || LANGUAGES[0];
 
   useEffect(() => {
@@ -39,15 +39,15 @@ export default function LanguageSelector() {
 
   const handleSelect = (lang: Language) => {
     setIsOpen(false);
-    
+
     if (!pathname) return;
 
     const segments = pathname.split('/');
-  
-    segments[1] = lang.locale; 
-    
+
+    segments[1] = lang.locale;
+
     const newPath = segments.join('/');
-    
+
     router.push(newPath);
   };
 
@@ -58,16 +58,16 @@ export default function LanguageSelector() {
         onClick={() => setIsOpen(!isOpen)}
         className={`
           flex items-center gap-2 px-3 py-2
-          bg-background border border-line-200
+          bg-white border border-grey-200
           rounded-md transition-all duration-200
-          hover:bg-background-alt
+          hover:bg-grey-100
           ${isOpen ? 'ring-2 ring-primary border-transparent' : ''}
         `}
       >
         <span className="text-[14px] font-medium text-label-900">
           {currentLang.code}
         </span>
-        
+
         {/* 화살표 아이콘 */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -77,9 +77,8 @@ export default function LanguageSelector() {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className={`w-4 h-4 text-label-700 transition-transform duration-200 ${
-            isOpen ? 'rotate-180' : ''
-          }`}
+          className={`w-4 h-4 text-label-700 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''
+            }`}
         >
           <path d="m6 9 6 6 6-6" />
         </svg>
@@ -89,8 +88,8 @@ export default function LanguageSelector() {
       {isOpen && (
         <div className="absolute right-0 top-full mt-2 w-32">
           <ul className="
-            bg-background 
-            border border-line-200 
+            bg-white 
+            border border-grey-200 
             rounded-md 
             shadow-lg overflow-hidden
           ">
@@ -100,11 +99,10 @@ export default function LanguageSelector() {
                   onClick={() => handleSelect(lang)}
                   className={`
                     w-full text-left px-4 py-2.5 text-[14px] transition-colors
-                    hover:bg-background-alt
-                    ${
-                      currentLang.locale === lang.locale
-                        ? 'text-primary font-semibold bg-background-alt'
-                        : 'text-label-800'
+                    hover:bg-grey-100
+                    ${currentLang.locale === lang.locale
+                      ? 'text-primary font-semibold bg-grey-50'
+                      : 'text-grey-900'
                     }
                   `}
                 >

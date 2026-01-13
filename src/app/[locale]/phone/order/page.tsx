@@ -303,9 +303,9 @@ export default function OrderPage() {
   return (
     <div className="flex flex-col gap-5 w-full max-w-[480px] mx-auto min-h-screen pb-10 bg-white">
       <div className="px-5 pt-4">
-        <p className="font-bold text-xl whitespace-pre-wrap text-label-900">{t('Phone.Order.confirm_info_title')}</p>
+        <p className="font-bold text-xl whitespace-pre-wrap text-grey-900">{t('Phone.Order.confirm_info_title')}</p>
       </div>
-      <div className="bg-white px-5 pt-4 pb-2">
+      <div className="bg-base px-5 pt-4 pb-2">
         <OrderProductSummary
           image={store.imageUrl}
           title={store.title}

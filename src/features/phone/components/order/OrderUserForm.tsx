@@ -188,10 +188,10 @@ export default function OrderUserForm(props: OrderUserFormProps) {
 
   if (isEditing) {
     return (
-      <div className="w-full max-w-[480px] mx-auto min-h-screen z-50 fixed top-0 left-1/2 -translate-x-1/2 bottom-0 overflow-y-auto bg-white animate-fadeInUp">
+      <div className="w-full max-w-[480px] mx-auto min-h-screen z-[9999] fixed top-0 left-1/2 -translate-x-1/2 bottom-0 overflow-y-auto bg-white animate-fadeInUp">
         <div className="flex items-center gap-1 mb-7.5 px-5 pt-4">
-          <div className="cursor-pointer p-2 -ml-2" onClick={() => setIsEditing(false)}><ChevronLeft /></div>
-          <div className="text-lg font-bold text-[#1d1d1f]">{t('Phone.OrderForm.subscriber_info_input')}</div>
+          <div className="cursor-pointer p-2 -ml-2 text-grey-900" onClick={() => setIsEditing(false)}><ChevronLeft /></div>
+          <div className="text-lg font-bold text-grey-900">{t('Phone.OrderForm.subscriber_info_input')}</div>
         </div>
         <div className="flex flex-col px-5">
           <InputGroup
@@ -246,7 +246,7 @@ export default function OrderUserForm(props: OrderUserFormProps) {
           />
         </div>
         <div className="pt-10 mt-auto px-5 pb-10">
-          <button className="w-full py-4.5 bg-[#4285F4] text-white text-[17px] font-bold border-none rounded-[14px] cursor-pointer shadow-[0_4px_10px_rgba(66,133,244,0.2)] transition-colors" onClick={() => setIsEditing(false)}>{t('Phone.OrderForm.save_button')}</button>
+          <button className="w-full py-4.5 bg-primary text-white text-[17px] font-bold border-none rounded-[14px] cursor-pointer shadow-lg hover:bg-primary-hover transition-colors" onClick={() => setIsEditing(false)}>{t('Phone.OrderForm.save_button')}</button>
         </div>
       </div>
     )
@@ -255,8 +255,8 @@ export default function OrderUserForm(props: OrderUserFormProps) {
   return (
     <div className={`w-full flex flex-col bg-white pt-5 px-5 min-h-[400px] relative box-border ${props.isReadOnly ? 'pb-10' : 'pb-[100px]'}`}>
       <div className="flex items-center gap-2.5 mb-5" ref={subscriberRef}>
-        <div className="w-8 h-8 rounded-full bg-[#3B82F6] flex items-center justify-center"><UserIcon /></div>
-        <div className="text-lg font-bold text-[#1d1d1f]">{t('Phone.OrderForm.subscriber_info_title')}</div>
+        <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><UserIcon /></div>
+        <div className="text-lg font-bold text-grey-900">{t('Phone.OrderForm.subscriber_info_title')}</div>
       </div>
       <div className="flex flex-col gap-4 mb-2.5 pl-1">
         <InfoRow label={t('Phone.OrderForm.name_label')} value={formData.userName} hasButton={!props.isReadOnly} buttonLabel={infoButtonLabel} onEdit={() => setIsEditing(true)} />
@@ -266,11 +266,11 @@ export default function OrderUserForm(props: OrderUserFormProps) {
         {formData.requirements && <InfoRow label={t('Phone.OrderForm.requirements')} value={formData.requirements} />}
       </div>
 
-      <div className="w-full h-px bg-[#E5E7EB] my-7.5" />
+      <div className="w-full h-px bg-border-default my-7.5" />
 
       <div className="flex items-center gap-2.5 mb-5">
-        <div className="w-8 h-8 rounded-full bg-[#8B5CF6] flex items-center justify-center"><PhoneIcon /></div>
-        <div className="text-lg font-bold text-[#1d1d1f]">{t('Phone.OrderForm.activation_info_title')}</div>
+        <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center"><PhoneIcon /></div>
+        <div className="text-lg font-bold text-grey-900">{t('Phone.OrderForm.activation_info_title')}</div>
       </div>
       <div className="flex flex-col gap-4 mb-2.5 pl-1">
         <InfoRow label={t('Phone.OrderForm.discount_type')} value={discountText} />
@@ -278,20 +278,20 @@ export default function OrderUserForm(props: OrderUserFormProps) {
         <InfoRow label={t('Phone.OrderForm.join_type')} value={props.joinType} />
       </div>
 
-      <div className="w-full h-px bg-[#E5E7EB] my-7.5" />
+      <div className="w-full h-px bg-border-default my-7.5" />
 
       <div className="flex items-center gap-2.5 mb-5">
-        <div className="w-8 h-8 rounded-full bg-[#22C55E] flex items-center justify-center"><PlanIcon /></div>
-        <div className="text-lg font-bold text-[#1d1d1f]">{t('Phone.OrderForm.plan_info_title')}</div>
+        <div className="w-8 h-8 rounded-full bg-status-success flex items-center justify-center"><PlanIcon /></div>
+        <div className="text-lg font-bold text-grey-900">{t('Phone.OrderForm.plan_info_title')}</div>
       </div>
       <div className="flex flex-col gap-4 mb-2.5 pl-1">
         <InfoRow label={t('Phone.OrderForm.plan_name')} value={displayPlan.name} />
         <InfoRow label={t('Phone.OrderForm.plan_data')} value={displayPlan.data} />
         <InfoRow label={t('Phone.OrderForm.monthly_amount')} value={props.planPrice} />
       </div>
-      <div className="bg-[#F3F4F6] rounded-2xl p-5 flex gap-3 mt-5">
-        <div className="w-5 h-5 rounded-full bg-[#4B5563] text-white text-xs font-bold flex items-center justify-center font-serif shrink-0 mt-0.5">i</div>
-        <div className="text-sm text-[#1d1d1f] leading-relaxed">
+      <div className="bg-bg-grouped rounded-2xl p-5 flex gap-3 mt-5">
+        <div className="w-5 h-5 rounded-full bg-grey-600 text-white text-xs font-bold flex items-center justify-center font-serif shrink-0 mt-0.5">i</div>
+        <div className="text-sm text-grey-900 leading-relaxed">
           <div className="font-bold mb-1">
             {props.isReadOnly ? t('Phone.OrderForm.application_success_title') : t('Phone.OrderForm.plan_maintenance_warning_title')}
           </div>
@@ -304,7 +304,7 @@ export default function OrderUserForm(props: OrderUserFormProps) {
       {!props.isReadOnly && (
         <div className="pt-10 mt-auto">
           <button
-            className="w-full py-4.5 bg-[#4285F4] text-white text-[17px] font-bold border-none rounded-[14px] cursor-pointer shadow-[0_4px_10px_rgba(66,133,244,0.2)] transition-colors"
+            className="w-full py-4.5 bg-primary text-white text-[17px] font-bold border-none rounded-[14px] cursor-pointer shadow-lg hover:bg-primary-hover transition-colors"
             onClick={() => {
               if (!isUserInfoComplete) {
                 setTouched({ userName: true, userDob: true, userPhone: true })
@@ -321,19 +321,19 @@ export default function OrderUserForm(props: OrderUserFormProps) {
       )}
 
       {showTerms && (
-        <div className="fixed top-0 left-0 right-0 bottom-0 z-100 flex flex-col justify-end items-center">
+        <div className="fixed top-0 left-0 right-0 bottom-0 z-[9999] flex flex-col justify-end items-center">
           <div className="bg-white rounded-t-3xl px-6 pt-7.5 pb-10 z-2 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] relative max-h-[80vh] flex flex-col overflow-y-auto animate-slideUp w-full max-w-[480px]">
             <div className="flex items-center justify-between mb-4 cursor-pointer" onClick={() => setAgreement(!agreement)}>
               <Checkbox checked={agreement} />
-              <span className="text-base font-bold text-[#1d1d1f] flex-1">{t('Phone.OrderForm.terms_title')}</span>
+              <span className="text-base font-bold text-grey-900 flex-1">{t('Phone.OrderForm.terms_title')}</span>
               <div className="p-2 cursor-pointer" onClick={(e) => { e.stopPropagation(); setIsTermExpanded(!isTermExpanded) }}>
                 <ChevronDown style={{ transform: isTermExpanded ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s" }} />
               </div>
             </div>
             {isTermExpanded && (
               <div className="pb-5">
-                <div className="text-[13px] text-[#6B7280] leading-relaxed mb-5" dangerouslySetInnerHTML={{ __html: t('Phone.OrderForm.terms_description') }} />
-                <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
+                <div className="text-[13px] text-grey-500 leading-relaxed mb-5" dangerouslySetInnerHTML={{ __html: t('Phone.OrderForm.terms_description') }} />
+                <div className="border border-border-default rounded-lg overflow-hidden">
                   <div className="flex border-b border-[#E5E7EB]">
                     <div className="w-[100px] bg-[#F9FAFB] p-3 text-[13px] font-semibold text-[#374151] flex items-center justify-center text-center border-r border-[#E5E7EB] box-border">{t('Phone.OrderForm.terms_purpose')}</div>
                     <div className="flex-1 p-3 text-[13px] text-[#374151] leading-relaxed bg-white box-border">{t('Phone.OrderForm.terms_purpose_value')}</div>
@@ -347,7 +347,7 @@ export default function OrderUserForm(props: OrderUserFormProps) {
             )}
             <div className="mt-7.5">
               <button
-                className={`w-full py-4.5 text-white text-[17px] font-bold border-none rounded-[14px] shadow-[0_4px_10px_rgba(66,133,244,0.2)] transition-colors ${agreement ? 'bg-[#4285F4] cursor-pointer' : 'bg-[#A0C3FF] cursor-default'}`}
+                className={`w-full py-4.5 text-white text-[17px] font-bold border-none rounded-[14px] shadow-lg transition-colors ${agreement ? 'bg-primary cursor-pointer hover:bg-primary-hover' : 'bg-grey-300 cursor-default'}`}
                 onClick={handleFinalConfirm}
                 disabled={isLoading}
               >
@@ -363,14 +363,14 @@ export default function OrderUserForm(props: OrderUserFormProps) {
 }
 
 // --- Icons & Sub Components ---
-const ChevronLeft = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d1d1f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-const ChevronDown = ({ style }: { style?: React.CSSProperties }) => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d1d1f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={style}><polyline points="6 9 12 15 18 9"></polyline></svg>
+const ChevronLeft = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+const ChevronDown = ({ style }: { style?: React.CSSProperties }) => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={style}><polyline points="6 9 12 15 18 9"></polyline></svg>
 const UserIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
 const PhoneIcon = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
 const PlanIcon = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
 
 const Checkbox = ({ checked }: { checked: boolean }) => (
-  <div className={`w-6 h-6 rounded flex items-center justify-center mr-3 shrink-0 transition-all ${checked ? 'bg-[#4285F4] border-none' : 'bg-white border border-[#D1D5DB]'}`}>
+  <div className={`w-6 h-6 rounded flex items-center justify-center mr-3 shrink-0 transition-all ${checked ? 'bg-primary border-none' : 'bg-base border border-grey-300'}`}>
     {checked && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>}
   </div>
 )
@@ -383,10 +383,10 @@ const InfoRow = ({ label, value, hasButton = false, onEdit, buttonLabel = "ìˆ˜ì 
   buttonLabel?: string
 }) => (
   <div className="flex items-start justify-between">
-    <span className="text-[15px] text-[#86868b] w-[140px] font-medium leading-snug">{label}</span>
+    <span className="text-[15px] text-grey-500 w-[140px] font-medium leading-snug">{label}</span>
     <div className="flex items-center gap-2.5 flex-1">
-      {value && <span className="text-[15px] font-semibold text-[#1d1d1f] leading-snug">{value}</span>}
-      {hasButton && <button className="py-1.5 px-3 text-[13px] text-[#4B5563] bg-[#F3F4F6] border-none rounded-md cursor-pointer ml-auto" onClick={onEdit}>{buttonLabel}</button>}
+      {value && <span className="text-[15px] font-semibold text-grey-900 leading-snug">{value}</span>}
+      {hasButton && <button className="py-1.5 px-3 text-[13px] text-grey-600 bg-bg-grouped border-none rounded-md cursor-pointer ml-auto" onClick={onEdit}>{buttonLabel}</button>}
     </div>
   </div>
 )
@@ -403,11 +403,11 @@ const InputGroup = React.forwardRef<HTMLInputElement, {
   onKeyDown?: (e: React.KeyboardEvent) => void
 }>(({ label, value, onChange, onBlur, placeholder, maxLength, error, name, onKeyDown }, ref) => (
   <div className="mb-6">
-    <div className="text-[13px] text-[#86868b] mb-2 font-medium">{label}</div>
+    <div className="text-[13px] text-grey-500 mb-2 font-medium">{label}</div>
     <input
       ref={ref}
       name={name}
-      className={`w-full p-4 text-base rounded-xl bg-white text-[#1d1d1f] outline-none box-border ${error ? 'border border-[#EF4444]' : 'border border-[#E5E7EB]'}`}
+      className={`w-full p-4 text-base rounded-lg bg-white text-grey-900 outline-none box-border ${error ? 'border border-status-error' : 'border border-grey-200'}`}
       value={value}
       onChange={onChange}
       onBlur={onBlur}
@@ -416,7 +416,7 @@ const InputGroup = React.forwardRef<HTMLInputElement, {
       maxLength={maxLength}
       autoComplete="off"
     />
-    {error && <div className="text-[#EF4444] text-[13px] mt-1.5">{error}</div>}
+    {error && <div className="text-status-error text-[13px] mt-1.5">{error}</div>}
   </div>
 ))
 InputGroup.displayName = "InputGroup"
