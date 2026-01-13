@@ -10,7 +10,7 @@ interface ListHeaderProps {
 
 const ListHeader = ({ title, className }: ListHeaderProps) => {
     return (
-        <div className={cn("px-5 py-3 bg-white mt-4", className)}>
+        <div className={cn("px-5 py-3 bg-base mt-4", className)}>
             <h5 className="text-h5 font-bold text-grey-900">{title}</h5>
         </div>
     );
@@ -39,8 +39,8 @@ const ListRow = ({
     return (
         <div
             className={cn(
-                "flex items-center justify-between px-5 py-4 bg-white transition-colors",
-                onClick && "cursor-pointer active:bg-grey-50",
+                "flex items-center justify-between px-5 py-4 bg-base transition-colors border-b border-border-divider",
+                onClick && "cursor-pointer active:bg-pressed",
                 className
             )}
             onClick={onClick}
@@ -49,7 +49,7 @@ const ListRow = ({
             {/* Left */}
             <div className="flex items-center gap-3 overflow-hidden">
                 {leftIcon && (
-                    <div className="w-10 h-10 rounded-full bg-grey-100 flex items-center justify-center shrink-0 overflow-hidden text-grey-400">
+                    <div className="w-10 h-10 rounded-full bg-grey-50 flex items-center justify-center shrink-0 overflow-hidden text-grey-400">
                         {leftIcon}
                     </div>
                 )}

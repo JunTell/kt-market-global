@@ -1,87 +1,78 @@
 'use client'
 
-import { createClient } from '@/shared/api/supabase/client'
+import { submitApplication, type ApplicationState, type ApplicationData } from './actions'
 import { Loader2, CheckCircle2, AlertCircle, Ticket } from 'lucide-react'
-import { useState, useEffect } from 'react'
-
-type FormDataCache = {
-    name: FormDataEntryValue | null
-    dob: FormDataEntryValue | null
-    model: FormDataEntryValue | null
-    carrier: FormDataEntryValue | null
-}
+import { useState } from 'react'
 
 export default function TicketPage() {
     const [status, setStatus] = useState<'idle' | 'processing' | 'success' | 'queued' | 'error'>('idle')
     const [result, setResult] = useState<{ ticketNumber?: number; message?: string }>({})
     const [isConnecting, setIsConnecting] = useState(false)
-    const [formDataCache, setFormDataCache] = useState<FormDataCache | null>(null)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
-        const data = {
-            name: formData.get('name'),
-            dob: formData.get('dob'),
-            model: formData.get('model'),
-            carrier: formData.get('carrier')
+        const appData: ApplicationData = {
+            name: formData.get('name')?.toString() || '',
+            dob: formData.get('dob')?.toString() || '',
+            model: formData.get('model')?.toString() || '',
+            carrier: formData.get('carrier')?.toString() || ''
         }
-        setFormDataCache(data) // Cache for retry
-        await handleSubmission(data)
-    }
 
-    const handleSubmission = async (data: FormDataCache) => {
+        // 1. 화면에 "접수 중입니다..." 표시
         setIsConnecting(true)
         setStatus('processing')
 
-        // 1. Frontend Jitter (1-3s)
-        const delay = 1000 + Math.random() * 2000
-        await new Promise(r => setTimeout(r, delay))
-        setIsConnecting(false)
+        // 2. 랜덤 시간 대기 (0 ~ 15초)
+        const randomDelay = Math.random() * 15000 // 0ms ~ 15000ms
+        console.log(`Waiting for ${Math.floor(randomDelay)}ms...`)
+        await new Promise(r => setTimeout(r, randomDelay))
 
+        // 3. Supabase 요청 전송 (Server Action) & Retry Logic
+        await submitWithRetry(formData, appData)
+    }
+
+    const submitWithRetry = async (formData: FormData, appData: ApplicationData, retryCount = 0) => {
         try {
-            const supabase = createClient()
+            const prevState: ApplicationState = { status: 'idle', message: '' }
+            const response = await submitApplication(prevState, formData)
 
-            // 2. Call Edge Function
-            // Note: The user specified the function name is 'bright-api'.
-            // Ensure the body format matches what the function expects.
-            const { data: responseData, error } = await supabase.functions.invoke('bright-api', {
-                body: data
-            })
-
-            if (error) throw error
-
-            if (responseData.status === 'queued') {
-                setStatus('queued')
-                setResult({
-                    ticketNumber: responseData.ticketNumber,
-                    message: responseData.message || "High traffic. You are in queue."
-                })
-            } else {
+            if (response.status === 'success') {
                 setStatus('success')
                 setResult({
-                    ticketNumber: responseData.ticketNumber,
-                    message: responseData.message
+                    ticketNumber: response.ticketNumber,
+                    message: response.message
                 })
+                setIsConnecting(false)
+            } else if (response.status === 'queued') {
+                setStatus('queued')
+                setResult({
+                    ticketNumber: response.ticketNumber,
+                    message: response.message
+                })
+                setIsConnecting(false)
+            } else {
+                // Failure (e.g. 429 or DB Error) - Check Retry
+                if (retryCount < 1) { // 1 retry allowed
+                    console.log("Submission failed, retrying once...")
+                    await submitWithRetry(formData, appData, retryCount + 1)
+                } else {
+                    throw new Error(response.message || "Failed to submit")
+                }
             }
 
         } catch (err: unknown) {
             console.error(err)
-            setStatus('error')
-            setResult({ message: err instanceof Error ? err.message : "Failed to submit application" })
+            if (retryCount < 1) {
+                console.log("Detailed error caught, retrying...")
+                await submitWithRetry(formData, appData, retryCount + 1)
+            } else {
+                setStatus('error')
+                setResult({ message: err instanceof Error ? err.message : "Application Failed after retry." })
+                setIsConnecting(false)
+            }
         }
     }
-
-    // Auto-Retry Effect for Queued State
-    useEffect(() => {
-        if (status === 'queued' && formDataCache) {
-            const timer = setTimeout(() => {
-                handleSubmission(formDataCache)
-            }, 2000 + Math.random() * 1000)
-            return () => clearTimeout(timer)
-        }
-    }, [status, formDataCache])
-
 
     return (
         <main className="min-h-screen bg-neutral-900 text-white flex flex-col items-center justify-center p-4">
@@ -91,7 +82,7 @@ export default function TicketPage() {
                 <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-center">
                     <Ticket className="w-12 h-12 mx-auto text-white/90 mb-2" />
                     <h1 className="text-2xl font-bold tracking-tight">S26 Pre-Order Global Ticket</h1>
-                    <p className="text-white/80 text-sm mt-1">Edge Function Powered</p>
+                    <p className="text-white/80 text-sm mt-1">Direct Insert Load Test</p>
                 </div>
 
                 <div className="p-6 space-y-6">
@@ -130,7 +121,7 @@ export default function TicketPage() {
                                     type="text"
                                     required
                                     placeholder="John Doe"
-                                    disabled={status === 'processing' || status === 'queued' || isConnecting}
+                                    disabled={status === 'processing' || isConnecting}
                                     className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all disabled:opacity-50"
                                 />
                             </div>
@@ -143,7 +134,7 @@ export default function TicketPage() {
                                     pattern="\d{8}"
                                     required
                                     placeholder="YYYYMMDD"
-                                    disabled={status === 'processing' || status === 'queued' || isConnecting}
+                                    disabled={status === 'processing' || isConnecting}
                                     className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all disabled:opacity-50"
                                 />
                             </div>
@@ -157,7 +148,7 @@ export default function TicketPage() {
                         hover:bg-neutral-700 has-[:checked]:bg-blue-600 has-[:checked]:border-blue-500 has-[:checked]:text-white
                         ${(status === 'processing' || isConnecting) ? 'opacity-50 cursor-not-allowed' : 'border-neutral-700 bg-neutral-900'}
                       `}>
-                                            <input type="radio" name="model" value={m} required className="hidden" disabled={status === 'processing' || status === 'queued' || isConnecting} />
+                                            <input type="radio" name="model" value={m} required className="hidden" disabled={status === 'processing' || isConnecting} />
                                             {m}
                                         </label>
                                     ))}
@@ -169,7 +160,7 @@ export default function TicketPage() {
                                 <select
                                     name="carrier"
                                     required
-                                    disabled={status === 'processing' || status === 'queued' || isConnecting}
+                                    disabled={status === 'processing' || isConnecting}
                                     className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none disabled:opacity-50"
                                 >
                                     <option value="">Select Carrier</option>
@@ -189,13 +180,11 @@ export default function TicketPage() {
 
                             <button
                                 type="submit"
-                                disabled={status === 'processing' || status === 'queued' || isConnecting}
+                                disabled={status === 'processing' || isConnecting}
                                 className="w-full bg-white text-black font-bold py-3 rounded-lg hover:bg-neutral-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                             >
                                 {isConnecting ? (
-                                    <><Loader2 className="w-4 h-4 animate-spin" /> Connecting...</>
-                                ) : status === 'processing' || status === 'queued' ? (
-                                    <><Loader2 className="w-4 h-4 animate-spin" /> Processing...</>
+                                    <><Loader2 className="w-4 h-4 animate-spin" /> 접수 중입니다... 잠시만 기다려주세요</>
                                 ) : (
                                     'Apply for Pre-Order'
                                 )}
@@ -207,7 +196,7 @@ export default function TicketPage() {
 
                 {/* Footer info */}
                 <div className="bg-neutral-900/50 p-4 border-t border-neutral-800 text-center text-xs text-neutral-500">
-                    Server Load Test Demo | Powered by Supabase Edge Functions
+                    Server Load Test Demo | Direct Insert with Random Delay
                 </div>
             </div>
         </main>

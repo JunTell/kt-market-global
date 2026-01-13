@@ -19,12 +19,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 <input
                     ref={ref}
                     className={cn(
-                        "h-12 w-full px-4 rounded-lg outline-none transition-all placeholder:text-grey-500 text-body1 text-grey-900",
-                        "bg-grey-50 border border-transparent",
+                        "h-12 w-full px-4 rounded-lg outline-none transition-all placeholder:text-grey-400 text-body1 text-grey-900",
+                        "bg-bg-input border border-border-strong",
                         // Focus & Error states
                         {
-                            "focus:bg-white focus:ring-2 focus:ring-blue": !error,
-                            "bg-red-50 text-red-500 ring-2 ring-red-500 focus:ring-red-500": error,
+                            "focus:bg-base focus:border-border-focus focus:ring-1 focus:ring-border-focus": !error,
+                            "bg-red-50 text-status-error border-border-error focus:ring-1 focus:ring-status-error": error,
                         },
                         className
                     )}
@@ -33,7 +33,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 {helperText && (
                     <span className={cn(
                         "text-caption mt-1",
-                        error ? "text-red-500" : "text-grey-500"
+                        error ? "text-status-error" : "text-grey-500"
                     )}>
                         {helperText}
                     </span>

@@ -60,13 +60,10 @@ export async function submitApplication(
     // we treat this as "queued". The user has a ticket number, but data isn't saved yet.
     if (insertError) {
         console.error('Insert Error:', insertError)
-
-        // In a real system, we might push this to a Redis queue here.
-        // For this test, we tell the client "You are in queue #1234" and let the client retry.
+        // Return error to trigger client-side retry
         return {
-            status: 'queued',
-            message: `Traffic is high. You hold Ticket #${ticketNumber}. Retrying...`,
-            ticketNumber,
+            status: 'error',
+            message: 'Traffic is high. Please try again.',
             savedData: { name, dob, model, carrier }
         }
     }

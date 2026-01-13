@@ -217,13 +217,13 @@ export default function EligibilityChecker() {
     <div className="w-full max-w-[480px] mx-auto font-sans px-4 md:px-0">
       {/* 컨테이너: 높이 축소 (min-h-[460px]), Radius, Shadow 적용 */}
       <div
-        className="bg-background rounded-[24px] shadow-2xl shadow-line-400/20 border border-line-200 overflow-hidden relative min-h-[460px] flex flex-col"
+        className="bg-base rounded-[24px] shadow-2xl shadow-grey-400/20 border border-border-default overflow-hidden relative min-h-[460px] flex flex-col"
       >
         {/* Progress Bar: 높이 및 아이콘 크기 축소 */}
         {step !== 'fail' && step !== 'result' && (
-          <div className="px-5 pt-5 pb-10 bg-background z-10">
+          <div className="px-5 pt-5 pb-10 bg-base z-10">
             <div className="flex items-center justify-between relative">
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[2px] bg-line-200 rounded-full -z-10" />
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[2px] bg-grey-200 rounded-full -z-10" />
               <motion.div
                 className="absolute left-0 top-1/2 -translate-y-1/2 h-[2px] bg-primary rounded-full -z-10 origin-left"
                 initial={{ width: '0%' }}
@@ -240,22 +240,22 @@ export default function EligibilityChecker() {
                   <div key={s.id} className="flex flex-col items-center gap-1 relative z-10">
                     <motion.div
                       className={cn(
-                        "w-7 h-7 rounded-full flex items-center justify-center border transition-colors bg-background",
-                        isCompleted || isActive ? "border-primary text-primary" : "border-line-400 text-label-500",
+                        "w-7 h-7 rounded-full flex items-center justify-center border transition-colors bg-base",
+                        isCompleted || isActive ? "border-primary text-primary" : "border-border-strong text-grey-500",
                         isActive && "ring-2 ring-primary/20"
                       )}
                       initial={false}
                       animate={{
                         scale: isActive ? 1.1 : 1,
-                        backgroundColor: isCompleted ? 'var(--primary)' : 'var(--bg-default)',
-                        color: isCompleted ? 'var(--label-100)' : (isActive ? 'var(--primary)' : 'var(--label-500)')
+                        backgroundColor: isCompleted ? 'var(--primary-default)' : 'var(--bg-base)',
+                        color: isCompleted ? '#ffffff' : (isActive ? 'var(--primary-default)' : 'var(--grey-500)')
                       }}
                     >
                       {isCompleted ? <Check size={12} strokeWidth={3} /> : <Icon size={12} />}
                     </motion.div>
                     <span className={cn(
                       "text-[10px] font-medium transition-colors whitespace-nowrap absolute -bottom-4",
-                      isActive ? "text-primary" : "text-label-500"
+                      isActive ? "text-primary" : "text-grey-500"
                     )}>
                       {s.label}
                     </span>
@@ -274,16 +274,16 @@ export default function EligibilityChecker() {
             {step === 'arc' && (
               <SlideView key="arc" direction={direction}>
                 <div className="flex flex-col items-center justify-center h-full py-2">
-                  <div className="w-14 h-14 bg-background-alt rounded-2xl flex items-center justify-center mb-4 text-primary">
+                  <div className="w-14 h-14 bg-bg-input rounded-2xl flex items-center justify-center mb-4 text-primary">
                     <UserCheck size={28} />
                   </div>
                   <h2
-                    className="text-xl font-bold text-label-900 text-center mb-1.5 leading-snug"
+                    className="text-xl font-bold text-grey-900 text-center mb-1.5 leading-snug"
                     dangerouslySetInnerHTML={{ __html: t.raw('ARC.title') }}
                   />
-                  <p className="text-label-700 text-xs mb-6 text-center">{t('ARC.desc')}</p>
+                  <p className="text-grey-700 text-xs mb-6 text-center">{t('ARC.desc')}</p>
                   <div className="w-full space-y-2.5 max-w-xs">
-                    <TapMotion onClick={() => handleARC(true)} className="w-full py-3 rounded-xl bg-primary text-label-100 font-bold text-sm shadow-md shadow-primary/20 hover:bg-secondary transition-all flex items-center justify-center gap-1.5">
+                    <TapMotion onClick={() => handleARC(true)} className="w-full py-3 rounded-xl bg-primary text-white font-bold text-sm shadow-md shadow-primary/20 hover:bg-primary-hover transition-all flex items-center justify-center gap-1.5">
                       <CheckCircle2 size={16} /> {t('ARC.yes')}
                     </TapMotion>
                     <TapMotion onClick={() => handleARC(false)} className="w-full py-3 rounded-xl bg-background-alt text-label-700 font-bold text-sm hover:bg-line-200 transition-all">

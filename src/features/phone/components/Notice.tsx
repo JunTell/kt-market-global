@@ -25,7 +25,7 @@ export const Notice = ({
     <div
       className={cn(
         "flex flex-col gap-3 p-5 w-full",
-        "bg-background-alt", // globals.css: --bg-alternative (#F2F4F6)
+        "bg-bg-grouped", // globals.css: --bg-grouped (#F2F4F6)
         "rounded-md",        // globals.css: --radius-md (8px)
         className
       )}
@@ -38,8 +38,8 @@ export const Notice = ({
       )}
 
       {/* 아코디언 리스트 */}
-      <div className="flex flex-col divide-y divide-line-200/50">
-        {/* divide-line-200/50: 아이템 간 얇은 구분선이 필요하면 유지, 없으면 삭제 */}
+      <div className="flex flex-col divide-y divide-border-divider">
+        {/* divide-border-divider */}
         {items.map((item, index) => (
           <AccordionItem key={index} item={item} />
         ))}

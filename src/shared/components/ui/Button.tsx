@@ -21,9 +21,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                     'inline-flex items-center justify-center font-bold transition-colors focus:outline-none disabled:opacity-50 disabled:pointer-events-none',
                     {
                         // Variants
-                        'bg-primary text-white hover:bg-primary-hover': variant === 'primary',
-                        'bg-grey-100 text-grey-800 hover:bg-grey-200': variant === 'secondary',
-                        'bg-transparent text-grey-600 hover:bg-black/5 hover:underline decoration-grey-600 decoration-1 underline-offset-4': variant === 'ghost',
+                        'bg-primary text-white hover:bg-primary-hover shadow-sm': variant === 'primary',
+                        'bg-base text-grey-900 border border-border-default hover:bg-grey-50 active:bg-pressed': variant === 'secondary',
+                        'bg-transparent text-grey-700 hover:bg-black/5 active:bg-pressed': variant === 'ghost',
 
                         // Sizes (Height based on mobile touch targets)
                         'h-12 text-[16px] rounded-lg': size === 'md', // 48px
@@ -52,7 +52,7 @@ interface BottomCTAProps {
 const BottomCTA = ({ children, className }: BottomCTAProps) => {
     return (
         <div className={cn(
-            "fixed bottom-0 left-0 w-full bg-white border-t border-grey-200 pb-safe z-50",
+            "fixed bottom-0 left-0 w-full bg-base border-t border-border-divider pb-safe z-50",
             "p-4", // standard padding
             className
         )}>

@@ -223,11 +223,11 @@ export default function ModelListClient({
           {t('Phone.ModelList.select_model_title')}
         </h3>
 
-        <div className="w-full h-[50px] rounded-xl bg-background-alt p-1 flex box-border">
+        <div className="w-full h-[50px] rounded-xl bg-bg-grouped p-1 flex box-border">
           <div
             className={`flex-1 rounded-[9px] flex items-center justify-center text-[16px] font-medium cursor-pointer transition-all duration-200 select-none ${brand === "iphone"
-              ? "bg-background text-label-900 shadow-[0_2px_4px_rgba(0,0,0,0.08)]"
-              : "bg-transparent text-label-500 shadow-none"
+              ? "bg-base text-grey-900 shadow-[0_2px_4px_rgba(0,0,0,0.08)]"
+              : "bg-transparent text-grey-500 shadow-none"
               }`}
             onClick={() => setBrand("iphone")}
           >
@@ -235,8 +235,8 @@ export default function ModelListClient({
           </div>
           <div
             className={`flex-1 rounded-[9px] flex items-center justify-center text-[16px] font-medium cursor-pointer transition-all duration-200 select-none ${brand === "galaxy"
-              ? "bg-background text-label-900 shadow-[0_2px_4px_rgba(0,0,0,0.08)]"
-              : "bg-transparent text-label-500 shadow-none"
+              ? "bg-base text-grey-900 shadow-[0_2px_4px_rgba(0,0,0,0.08)]"
+              : "bg-transparent text-grey-500 shadow-none"
               }`}
             onClick={() => setBrand("galaxy")}
           >
@@ -312,7 +312,7 @@ function CarrierSelector({
       {/* 1. 기본 바 (Trigger) - 항상 렌더링하여 레이아웃 흔들림 방지 */}
       <div
         onClick={onToggle}
-        className="w-full h-[60px] bg-background rounded-[20px] border border-line-200 flex items-center justify-between px-6 cursor-pointer transition-all duration-200 hover:bg-background-alt hover:border-line-400 hover:shadow-sm active:scale-[0.99]"
+        className="w-full h-[60px] bg-base rounded-[20px] border border-border-default flex items-center justify-between px-6 cursor-pointer transition-all duration-200 hover:bg-bg-grouped hover:border-border-strong hover:shadow-sm active:scale-[0.99]"
       >
         <div className="flex gap-2 text-[16px]">
           <span className="text-label-500 font-medium">{t('Phone.ModelList.current_carrier')}</span>
@@ -359,7 +359,7 @@ function CarrierSelector({
                 stiffness: 350,
                 mass: 0.5
               }}
-              className="relative w-full max-w-[360px] bg-background rounded-[28px] shadow-2xl p-6 flex flex-col gap-5 overflow-hidden"
+              className="relative w-full max-w-[360px] bg-base rounded-[28px] shadow-2xl p-6 flex flex-col gap-5 overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="text-center pt-1">
@@ -373,7 +373,7 @@ function CarrierSelector({
                     key={carrier}
                     whileTap={{ scale: 0.98 }} // 클릭 시 살짝 눌리는 효과
                     onClick={() => handleSelect(carrier)}
-                    className="group w-full h-[56px] rounded-[20px] bg-background-alt hover:bg-line-200 transition-colors duration-200 flex items-center justify-between px-5 cursor-pointer border border-transparent hover:border-line-400"
+                    className="group w-full h-[56px] rounded-[20px] bg-bg-grouped hover:bg-grey-200 transition-colors duration-200 flex items-center justify-between px-5 cursor-pointer border border-transparent hover:border-border-strong"
                   >
                     <span className="text-[17px] font-semibold text-label-900 group-hover:text-black">
                       {carrier}

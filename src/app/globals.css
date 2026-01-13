@@ -25,14 +25,45 @@
   /* Background Light */
   --grey-50: #F9FAFB;
 
+  /* 2.1 Status Colors */
+  --status-error: #F04452;
+  --status-success: #2B96ED;
+  /* Added for completeness */
+
+  /* 2.2 Border System (Semantic) */
+  --border-divider: var(--grey-100);
+  /* Lv1: List Divider #F2F4F6 */
+  --border-default: var(--grey-200);
+  /* Lv2: Card/Button #E5E8EB */
+  --border-strong: var(--grey-300);
+  /* Lv3: Input Form #D1D6DB */
+  --border-focus: var(--blue-default);
+  /* Lv4: Focus State #3182F6 */
+  --border-error: var(--status-error);
+  /* Lv5: Error State #F04452 */
+
+  /* 2.3 Background System (Layering) */
+  --bg-base: #FFFFFF;
+  /* White Card Surface */
+  --bg-grouped: #F2F4F6;
+  /* App Background (Grey-100) */
+  --bg-input: #F9FAFB;
+  /* Input Background (Grey-50) */
+  --bg-pressed: #F2F4F6;
+  /* Pressed State */
+
   /* 3. Colors - Brand & Functional */
-  --primary-default: #E60012;
-  /* KT Red Base */
-  --primary-hover: #C2000F;
-  --primary-bg: #FFF0F1;
+  --primary-default: #3182F6;
+  /* Toss Blue */
+  --primary-hover: #1B64DA;
+  --primary-bg: #E8F3FF;
+  /* Very Light Blue */
+
+  --brand-point: #E60012;
+  /* KT Red (Minimal usage) */
 
   --blue-default: #3182F6;
-  /* Global Blue (Toss Blue) */
+  /* Global Blue (Synced with Primary) */
 
   --overlay: rgba(0, 0, 0, 0.4);
 
@@ -59,8 +90,17 @@
 
   /* Color Extension */
   --color-grey-900: var(--grey-900);
+  --color-label-900: var(--grey-900);
+  /* Alias for legacy support */
+
   --color-grey-800: var(--grey-800);
+  --color-label-800: var(--grey-800);
+  /* Alias */
+
   --color-grey-700: var(--grey-700);
+  --color-label-700: var(--grey-700);
+  /* Alias */
+
   --color-grey-600: var(--grey-600);
   --color-grey-500: var(--grey-500);
   --color-grey-400: var(--grey-400);
@@ -73,9 +113,28 @@
   --color-primary-hover: var(--primary-hover);
   --color-primary-bg: var(--primary-bg);
 
+  --color-brand-point: var(--brand-point);
+
   --color-blue: var(--blue-default);
 
+  /* Background System Extension */
+  --color-bg-base: var(--bg-base);
+  --color-bg-grouped: var(--bg-grouped);
+  --color-bg-input: var(--bg-input);
+  --color-bg-pressed: var(--bg-pressed);
+
   --color-overlay: var(--overlay);
+
+  /* Status Color Extension */
+  --color-status-error: var(--status-error);
+  --color-status-success: var(--status-success);
+
+  /* Border System Extension */
+  --color-border-divider: var(--border-divider);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+  --color-border-focus: var(--border-focus);
+  --color-border-error: var(--border-error);
 
   /* Radius Extension */
   --radius-sm: var(--radius-sm);
@@ -199,7 +258,7 @@ body {
   align-items: flex-start;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  background-color: var(--grey-100);
+  background-color: var(--bg-grouped);
   /* Applied Background Color from config */
   color: var(--grey-900);
   /* Applied Default Text Color */

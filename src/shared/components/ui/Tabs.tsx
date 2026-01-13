@@ -11,7 +11,7 @@ interface TabsProps {
 const Tabs = ({ value, onChange, items, className }: TabsProps) => {
     return (
         <div className={cn(
-            "sticky top-[52px] z-30 bg-white w-full flex border-b border-grey-200",
+            "sticky top-[52px] z-30 bg-base w-full flex border-b border-border-divider",
             className
         )}>
             {items.map((item) => {
@@ -22,12 +22,12 @@ const Tabs = ({ value, onChange, items, className }: TabsProps) => {
                         onClick={() => onChange(item.value)}
                         className={cn(
                             "flex-1 py-3 text-center cursor-pointer relative transition-colors",
-                            isActive ? "text-grey-900 font-bold" : "text-grey-500"
+                            isActive ? "text-primary font-bold" : "text-grey-500"
                         )}
                     >
                         <span className="text-body1">{item.label}</span>
                         {isActive && (
-                            <div className="absolute bottom-0 left-0 w-full h-[2px] bg-grey-900 animate-fadeInUp" style={{ animationDuration: '0.2s' }} />
+                            <div className="absolute bottom-0 left-0 w-full h-[2px] bg-primary animate-fadeInUp" style={{ animationDuration: '0.2s' }} />
                         )}
                     </button>
                 );

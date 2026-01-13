@@ -14,7 +14,7 @@ const TopHeader = ({ title, onBack, rightAction, className }: TopHeaderProps) =>
     return (
         <header className={cn(
             "fixed top-0 left-0 w-full h-[52px] z-50 px-4 flex items-center justify-between transition-all",
-            "bg-white/80 backdrop-blur-md border-b border-grey-200/50",
+            "bg-base/80 backdrop-blur-md border-b border-border-divider",
             className
         )}>
             <div className="flex items-center w-10 shrink-0">
@@ -46,7 +46,7 @@ interface BottomTabBarProps {
 const BottomTabBar = ({ children, className }: BottomTabBarProps) => {
     return (
         <nav className={cn(
-            "fixed bottom-0 left-0 w-full h-[56px] pb-safe z-40 bg-white border-t border-grey-200",
+            "fixed bottom-0 left-0 w-full h-[56px] pb-safe z-40 bg-base border-t border-border-divider",
             className
         )}>
             <div className="grid grid-cols-4 h-full">
@@ -69,7 +69,7 @@ const BottomTabItem = ({ active, icon, label, className, ...props }: BottomTabIt
         <button
             className={cn(
                 "flex flex-col items-center justify-center gap-1 w-full h-full transition-colors",
-                active ? "text-grey-900" : "text-grey-400",
+                active ? "text-primary" : "text-grey-400",
                 className
             )}
             {...props}
