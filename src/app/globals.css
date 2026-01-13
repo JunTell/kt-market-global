@@ -1,85 +1,104 @@
 @import "tailwindcss";
 
 :root {
-  /* ✅ 1. 핵심 컬러 (User Defined 3 Colors) */
-  --primary: #0066FF;
-  --secondary: #3C83EC;
-  --tertiary: #BBEBFF;
+  /* 1. Spacing (Mobile & Section) */
+  --spacing-container-px: 24px;
+  --spacing-section-gap: 48px;
 
-  /* ✅ 2. Label Colors */
-  --label-900: #191F28;
-  --label-800: #333D4B;
-  --label-700: #4E5968;
-  --label-500: #8B95A1;
-  --label-100: #FFFFFF;
+  /* 2. Colors - Toss Style Grayscale */
+  --grey-900: #191F28;
+  /* Primary Text / Title */
+  --grey-800: #333D4B;
+  /* Secondary Text */
+  --grey-700: #4E5968;
+  /* Tertiary Text / Body */
+  --grey-600: #6B7684;
+  --grey-500: #8B95A1;
+  /* Placeholder */
+  --grey-400: #B0B8C1;
+  /* Disabled */
+  --grey-300: #D1D6DB;
+  /* Border */
+  --grey-200: #E5E8EB;
+  /* Divider / Border */
+  --grey-100: #F2F4F6;
+  /* Background Light */
+  --grey-50: #F9FAFB;
 
-  /* ✅ 3. Background Colors */
-  --bg-default: #FFFFFF;
-  --bg-alternative: #F2F4F6;
+  /* 3. Colors - Brand & Functional */
+  --primary-default: #E60012;
+  /* KT Red Base */
+  --primary-hover: #C2000F;
+  --primary-bg: #FFF0F1;
 
-  /* ✅ 4. Line Colors */
-  --line-800: #191F28;
-  --line-400: #D1D6DB;
-  --line-200: #E5E8EB;
+  --blue-default: #3182F6;
+  /* Global Blue (Toss Blue) */
 
-  /* ✅ 5. Status Colors */
-  --status-correct: #34C759;
-  --status-error: #FF3B30;
-  --status-caution: #FFCC00;
-  --status-disable: #D1D6DB;
+  --overlay: rgba(0, 0, 0, 0.4);
 
-  /* ✅ 6. Radius */
-  --radius-2xs: 2px;
-  --radius-xs: 4px;
+  /* 4. Radius */
   --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 10px;
-  --radius-xl: 12px;
-  --radius-2xl: 14px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+
+  /* 5. Shadows */
+  --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.06);
+  --shadow-floating: 0 4px 20px rgba(0, 0, 0, 0.12);
+  --shadow-bottom-sheet: 0 -4px 20px rgba(0, 0, 0, 0.1);
 }
 
-@theme inline {
-  /* 폰트 설정 */
-  --font-sans: var(--font-pretendard), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Hiragino Kaku Gothic ProN", "Meiryo", system-ui, sans-serif;
+@theme {
+  /* Typography - Font Family */
+  --font-sans: 'Pretendard', 'var(--font-pretendard)', -apple-system, BlinkMacSystemFont, 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 
-  /* 🎨 Color Palette 확장 */
-  --color-primary: var(--primary);
-  --color-secondary: var(--secondary);
-  --color-tertiary: var(--tertiary);
+  /* Spacing Extension */
+  --spacing-container-px: var(--spacing-container-px);
+  --spacing-section-gap: var(--spacing-section-gap);
 
-  --color-label-900: var(--label-900);
-  --color-label-800: var(--label-800);
-  --color-label-700: var(--label-700);
-  --color-label-500: var(--label-500);
-  --color-label-100: var(--label-100);
+  /* Color Extension */
+  --color-grey-900: var(--grey-900);
+  --color-grey-800: var(--grey-800);
+  --color-grey-700: var(--grey-700);
+  --color-grey-600: var(--grey-600);
+  --color-grey-500: var(--grey-500);
+  --color-grey-400: var(--grey-400);
+  --color-grey-300: var(--grey-300);
+  --color-grey-200: var(--grey-200);
+  --color-grey-100: var(--grey-100);
+  --color-grey-50: var(--grey-50);
 
-  --color-background: var(--bg-default);
-  --color-background-alt: var(--bg-alternative);
+  --color-primary: var(--primary-default);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-bg: var(--primary-bg);
 
-  --color-line-800: var(--line-800);
-  --color-line-400: var(--line-400);
-  --color-line-200: var(--line-200);
+  --color-blue: var(--blue-default);
 
-  --color-status-correct: var(--status-correct);
-  --color-status-error: var(--status-error);
-  --color-status-caution: var(--status-caution);
-  --color-status-disable: var(--status-disable);
+  --color-overlay: var(--overlay);
 
-  /* 📐 Radius 확장 */
-  --radius-2xs: var(--radius-2xs);
-  --radius-xs: var(--radius-xs);
+  /* Radius Extension */
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
   --radius-xl: var(--radius-xl);
   --radius-2xl: var(--radius-2xl);
 
-  /* 🎬 Animations */
+  /* Shadow Extension */
+  --shadow-card: var(--shadow-card);
+  --shadow-floating: var(--shadow-floating);
+  --shadow-bottom-sheet: var(--shadow-bottom-sheet);
+
+  /* Previous Animations (Preserved) */
+  --animate-fadeInUp: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slideUp: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
   @keyframes fadeInUp {
     from {
       opacity: 0;
       transform: translateY(15px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -90,15 +109,82 @@
     from {
       transform: translateY(100%);
     }
+
     to {
       transform: translateY(0);
     }
   }
-
-  --animate-fadeInUp: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-slideUp: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Custom Typography Utilities (as per requested specs) */
+@utility text-h1 {
+  font-size: 26px;
+  line-height: 140%;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@utility text-h2 {
+  font-size: 22px;
+  /* User updated this from 24px in the second config block, keeping latest */
+  line-height: 140%;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Included extra headings from first block to be safe, but prioritizing second block structure where conflicting */
+@utility text-h3 {
+  font-size: 22px;
+  line-height: 30px;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+@utility text-h4 {
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+@utility text-h5 {
+  font-size: 17px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+@utility text-body1 {
+  font-size: 16px;
+  line-height: 150%;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+@utility text-body2 {
+  font-size: 14px;
+  /* User updated to 14px in second block */
+  line-height: 150%;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+@utility text-caption {
+  font-size: 12px;
+  /* User updated to 12px in second block */
+  line-height: 140%;
+  font-weight: 400;
+  letter-spacing: 0em;
+}
+
+@utility text-micro {
+  font-size: 11px;
+  line-height: 14px;
+  letter-spacing: 0em;
+  font-weight: 500;
+}
+
+/* Global Styles */
 html {
   min-height: 100%;
   width: 100%;
@@ -108,19 +194,31 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-
   display: flex;
   justify-content: center;
   align-items: flex-start;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  background-color: var(--grey-100);
+  /* Applied Background Color from config */
+  color: var(--grey-900);
+  /* Applied Default Text Color */
 }
 
-.scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+/* Utility to hide scrollbar */
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+
+  /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+  }
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+/* Safe Area Utility */
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
 }
