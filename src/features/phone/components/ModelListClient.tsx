@@ -223,7 +223,7 @@ export default function ModelListClient({
           {t('Phone.ModelList.select_model_title')}
         </h3>
 
-        <div className="w-full h-[50px] rounded-xl bg-bg-grouped p-1 flex box-border">
+        <div className="w-full h-[50px] rounded-xl bg-bg-grouped p-1 flex box-border border border-grey-200">
           <div
             className={`flex-1 rounded-[9px] flex items-center justify-center text-[16px] font-medium cursor-pointer transition-all duration-200 select-none ${brand === "iphone"
               ? "bg-base text-grey-900 shadow-[0_2px_4px_rgba(0,0,0,0.08)]"

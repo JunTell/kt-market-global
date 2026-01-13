@@ -217,7 +217,7 @@ export default function EligibilityChecker() {
     <div className="w-full max-w-[480px] mx-auto font-sans px-4 md:px-0">
       {/* 컨테이너: 높이 축소 (min-h-[460px]), Radius, Shadow 적용 */}
       <div
-        className="bg-base rounded-[24px] shadow-2xl shadow-grey-400/20 border border-border-default overflow-hidden relative min-h-[460px] flex flex-col"
+        className="bg-base rounded-[20px] shadow-2xl shadow-grey-400/20 border border-grey-200 overflow-hidden relative min-h-[460px] flex flex-col"
       >
         {/* Progress Bar: 높이 및 아이콘 크기 축소 */}
         {step !== 'fail' && step !== 'result' && (
