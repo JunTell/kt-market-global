@@ -34,6 +34,7 @@
     },
     "Visa": {
       "title": "Select Visa Type",
+      "instruction": "Search for a visa code or select a category.",
       "placeholder": "Ex: E7, D2, Student...",
       "Categories": {
         "all": "All",
@@ -86,6 +87,10 @@
       "title": "Check Unavailable",
       "desc": "Valid ARC is required<br/>for accurate check.",
       "retry": "Go Back"
+    },
+    "PhoneList": {
+      "title": "Select a Phone Model",
+      "desc": "Select a model to view details."
     },
     "ChatBot": {
       "select_phone": "Select Phone Model"

@@ -218,7 +218,7 @@ export default function EligibilityChecker() {
     <div className="w-full max-w-[480px] mx-auto font-sans px-4 md:px-0">
       {/* 컨테이너: 높이 축소 (min-h-[460px]), Radius, Shadow 적용 */}
       <div
-        className="bg-base rounded-[20px] shadow-2xl shadow-grey-400/20 border border-grey-200 overflow-hidden relative min-h-[460px] flex flex-col"
+        className="bg-base rounded-lg shadow-2xl shadow-grey-400/20 border border-grey-200 overflow-hidden relative min-h-[460px] flex flex-col"
       >
         {/* Progress Bar: 높이 및 아이콘 크기 축소 */}
         {step !== 'fail' && step !== 'result' && (
@@ -301,7 +301,7 @@ export default function EligibilityChecker() {
                 <div className="flex flex-col h-full">
                   <div className="text-center mb-4">
                     <h2 className="text-lg font-bold text-label-900 mb-0.5">{t('Visa.title')}</h2>
-                    <p className="text-label-500 text-[11px]">비자 코드를 검색하거나 카테고리를 선택하세요.</p>
+                    <p className="text-label-500 text-[11px]">{t('Visa.instruction')}</p>
                   </div>
 
                   <div className="relative mb-2.5">
@@ -311,7 +311,7 @@ export default function EligibilityChecker() {
                       placeholder={t('Visa.placeholder')}
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full h-10 pl-9 bg-background-alt rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-primary/50 border border-transparent focus:border-primary transition-all text-label-900 placeholder:text-label-500"
+                      className="w-full h-10 pl-9 bg-background-alt rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-primary/50 border border-grey-400 focus:border-primary transition-all text-label-900 placeholder:text-label-500"
                     />
                   </div>
                   <div className="flex gap-1.5 overflow-x-auto pb-2 mb-1 scrollbar-hide -mx-2 px-2">
@@ -320,10 +320,10 @@ export default function EligibilityChecker() {
                         key={cat.id}
                         onClick={() => setActiveCategory(cat.id)}
                         className={cn(
-                          "shrink-0 px-3 py-1.5 rounded-full text-[11px] font-bold transition-all border",
+                          "shrink-0 px-3 py-1.5 rounded-md border text-[11px] font-bold transition-all",
                           activeCategory === cat.id
-                            ? "bg-primary text-label-100 border-primary shadow-sm"
-                            : "bg-background text-label-700 border-line-200 hover:bg-background-alt"
+                            ? "bg-primary/70 text-label-100 border-primary shadow-sm"
+                            : "bg-background text-label-700 border-grey-200 hover:bg-background-alt"
                         )}
                       >
                         {t(`Visa.Categories.${cat.labelKey}`)}
@@ -336,7 +336,7 @@ export default function EligibilityChecker() {
                         <TapMotion
                           key={visa.code}
                           onClick={() => handleVisaSelect(visa.code)}
-                          className="flex flex-col items-center justify-center p-2.5 rounded-xl border border-line-200 hover:border-primary/50 hover:bg-tertiary/20 transition-all bg-background shadow-sm relative group"
+                          className="flex flex-col items-center justify-center p-2.5 rounded-lg border border-grey-200 hover:border-primary/50 hover:bg-tertiary/20 transition-all bg-background shadow-sm relative group"
                         >
                           <div className="absolute top-1.5 right-1.5 opacity-0 group-hover:opacity-100 transition-opacity text-primary">
                             <CheckCircle2 size={14} />
@@ -371,7 +371,7 @@ export default function EligibilityChecker() {
                       <TapMotion
                         key={opt.key}
                         onClick={() => handleDuration(opt.value)}
-                        className="w-full p-3.5 bg-background border border-line-200 rounded-xl flex items-center justify-between hover:border-primary hover:bg-tertiary/20 hover:shadow-sm transition-all group"
+                        className="w-full p-3.5 bg-background border border-grey-400 rounded-lg flex items-center justify-between hover:border-primary hover:bg-tertiary/20 hover:shadow-sm transition-all group"
                       >
                         <span className="font-bold text-sm text-label-800 group-hover:text-primary transition-colors">
                           {t(`Duration.options.${opt.key}`)}
@@ -399,10 +399,10 @@ export default function EligibilityChecker() {
                           key={opt.key}
                           onClick={() => handleDevice(opt.value)}
                           className={cn(
-                            "w-full p-3.5 rounded-xl border transition-all flex items-center gap-3 text-left relative overflow-hidden group bg-background",
+                            "w-full p-3.5 rounded-lg border transition-all flex items-center gap-3 text-left relative overflow-hidden group bg-background",
                             isSelected
                               ? "border-primary bg-tertiary/30 shadow-sm"
-                              : "border-line-200 hover:border-primary/50 hover:bg-tertiary/10 hover:shadow-sm"
+                              : "border-grey-400 hover:border-primary/50 hover:bg-tertiary/10 hover:shadow-sm"
                           )}
                         >
                           {isSelected && (
@@ -484,8 +484,8 @@ export default function EligibilityChecker() {
                     {t('Result.plan_label')}: <span className="font-bold text-label-900 ml-1">{isSimOnly ? t('Result.plan_sim') : t('Result.plan_device')}</span>
                   </p>
 
-                  <div className="bg-background-alt p-4 rounded-xl text-left mb-5 space-y-3 border border-line-200 shadow-inner flex-1 overflow-y-auto">
-                    <div className="flex justify-between items-center pb-2.5 border-b border-line-400/30">
+                  <div className="bg-background-alt p-4 rounded-xl text-left mb-5 space-y-3 border border-grey-400 shadow-inner flex-1 overflow-y-auto">
+                    <div className="flex justify-between items-center pb-2.5 border-b border-grey-400/30">
                       <span className="text-label-700 font-medium text-sm">{t('Result.installment_label')}</span>
                       <div className={cn("flex items-center gap-1.5 font-bold text-base", result.installment ? "text-primary" : "text-status-error")}>
                         {result.installment ? <CheckCircle2 size={18} /> : <X size={18} />}
@@ -531,8 +531,8 @@ export default function EligibilityChecker() {
               <SlideView key="phoneSelection" direction={direction}>
                 <div className="flex flex-col h-full">
                   <div className="text-center mb-5">
-                    <h2 className="text-xl font-bold text-label-900 mb-1.5">휴대폰 기종을 선택하세요</h2>
-                    <p className="text-label-500 text-xs">원하시는 기종을 선택하면 상세 페이지로 이동합니다</p>
+                    <h2 className="text-xl font-bold text-label-900 mb-1.5">{t('PhoneList.title')}</h2>
+                    <p className="text-label-500 text-xs">{t('PhoneList.desc')}</p>
                   </div>
 
                   <div className="grid gap-3 flex-1 content-start overflow-y-auto pr-1 -mx-1 px-1">
@@ -540,7 +540,7 @@ export default function EligibilityChecker() {
                       <TapMotion
                         key={phone.id}
                         onClick={() => handlePhoneSelect(phone.id)}
-                        className="w-full p-4 rounded-xl border border-line-200 hover:border-primary hover:bg-tertiary/20 transition-all bg-background shadow-sm flex items-center gap-4 group"
+                        className="w-full p-4 rounded-lg border border-grey-200 hover:border-primary hover:bg-tertiary/20 transition-all bg-background shadow-sm flex items-center gap-4 group"
                       >
                         <div className="w-20 h-20 rounded-lg bg-background-alt flex items-center justify-center overflow-hidden shrink-0 group-hover:bg-primary/5 transition-colors relative">
                           <Image

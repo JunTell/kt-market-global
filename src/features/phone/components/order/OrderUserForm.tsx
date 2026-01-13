@@ -407,7 +407,7 @@ const InputGroup = React.forwardRef<HTMLInputElement, {
     <input
       ref={ref}
       name={name}
-      className={`w-full p-4 text-base rounded-xl bg-white text-grey-900 outline-none box-border ${error ? 'border border-status-error' : 'border border-grey-200'}`}
+      className={`w-full p-4 text-base rounded-lg bg-white text-grey-900 outline-none box-border ${error ? 'border border-status-error' : 'border border-grey-200'}`}
       value={value}
       onChange={onChange}
       onBlur={onBlur}
