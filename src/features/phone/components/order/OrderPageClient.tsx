@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { createClient } from "@/shared/api/supabase/client"
+import { submitOrder } from "@/features/phone/actions/order"
 import { getPlanDetails, getColorMap } from "@/features/phone/lib/phonedata"
 import { toKorean } from "@/shared/lib/toKorean"
 import { formatPrice } from "@/shared/lib/format"
@@ -273,7 +274,7 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
                 } : {}),
             }
 
-            const insertPayload = {
+            const payload = {
                 company: toKorean('company', companyName),
                 device: deviceName,
                 capacity: store.deviceCapacity,
@@ -282,20 +283,20 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
                 birthday: finalInput.userDob,
                 phone: finalInput.userPhone,
                 funnel: toKorean('funnel', store.funnel),
-                is_agreed_tos: true,
-
                 country: toKorean('country', finalInput.country),
                 plan_name: toKorean('plan_name', finalInput.planName || ''),
                 join_type: toKorean('join_type', store.joinType),
                 contract: toKorean('contract', store.contract),
                 discount_type: toKorean('discount_type', store.discountType),
                 requirements: finalInput.requirements,
-
                 form_data: formDataJson,
             }
 
-            const { error } = await supabase.from("foreigner_order").insert([insertPayload])
-            if (error) throw error
+            const result = await submitOrder({}, payload)
+
+            if (!result.success) {
+                throw new Error(result.error || "Submission failed")
+            }
 
             const userInfoToSave = {
                 userName: finalInput.userName,
@@ -310,7 +311,7 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
             window.location.href = `/${locale}/phone/result` + currentQueryParams
 
         } catch (e) {
-            console.error("DB Error:", e)
+            console.error("Action Error:", e)
             alert(`접수 실패: ${e instanceof Error ? e.message : String(e)}`)
         }
     }

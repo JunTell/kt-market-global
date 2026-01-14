@@ -7,26 +7,35 @@ interface Props {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-async function getDeviceData(modelFromUrl: string | null) {
-  if (!modelFromUrl) return null
+import { unstable_cache } from "next/cache"
 
-  const supabase = createClient()
-  try {
-    const { prefix, capacity } = parsePhoneModel(modelFromUrl)
-    const dbModelKey = getDBModelKey(prefix, capacity)
+const getDeviceData = unstable_cache(
+  async (modelFromUrl: string | null) => {
+    if (!modelFromUrl) return null
 
-    const { data: device } = await supabase
-      .from("devices")
-      .select("*")
-      .eq("model", dbModelKey)
-      .single()
+    const supabase = createClient()
+    try {
+      const { prefix, capacity } = parsePhoneModel(modelFromUrl)
+      const dbModelKey = getDBModelKey(prefix, capacity)
 
-    return device
-  } catch (error) {
-    console.error("Fetch Error:", error)
-    return null
+      const { data: device } = await supabase
+        .from("devices")
+        .select("*")
+        .eq("model", dbModelKey)
+        .single()
+
+      return device
+    } catch (error) {
+      console.error("Fetch Error:", error)
+      return null
+    }
+  },
+  ["device-data"],
+  {
+    tags: ["device-data"],
+    revalidate: 3600, // 1 hour default revalidation
   }
-}
+)
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const resolvedSearchParams = await searchParams
