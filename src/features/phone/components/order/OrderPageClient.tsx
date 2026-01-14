@@ -3,12 +3,11 @@
 import { useState, useEffect } from "react"
 import { useParams } from "next/navigation"
 import { useTranslations } from "next-intl"
-import { createClient } from "@/shared/api/supabase/client"
 import { submitOrder } from "@/features/phone/actions/order"
 import { getPlanDetails, getColorMap } from "@/features/phone/lib/phonedata"
 import { toKorean } from "@/shared/lib/toKorean"
 import { formatPrice } from "@/shared/lib/format"
-import { parsePhoneModel, getDBModelKey } from "@/features/phone/lib/phoneModel"
+import { parsePhoneModel } from "@/features/phone/lib/phoneModel"
 import { DEFAULT_COUNTRY } from "@/shared/constants/options"
 import { checkIsSoldOut } from "@/features/phone/lib/stock"
 
@@ -25,7 +24,7 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
     const t = useTranslations()
     const params = useParams()
     const locale = params.locale as string
-    const supabase = createClient()
+
 
     // 다국어 데이터
     const PLAN_DETAILS = getPlanDetails(t)

@@ -91,7 +91,9 @@ export function calculateDiscountedMonthlyPrice(
  * calculateSpecialDiscount('sm-s931nk', 'mnp') // 0
  */
 export function calculateSpecialDiscount(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _modelPrefix: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _registrationType: RegistrationType
 ): number {
   return 0
