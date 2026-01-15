@@ -3,7 +3,13 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-export async function loginAdmin(prevState: any, formData: FormData) {
+
+interface ActionState {
+    success: boolean;
+    message: string;
+}
+
+export async function loginAdmin(prevState: ActionState, formData: FormData) {
     const password = formData.get('password');
 
     if (password === '0000') {
@@ -21,6 +27,45 @@ export async function loginAdmin(prevState: any, formData: FormData) {
     }
 
     return { success: false, message: 'Invalid passcode.' };
+}
+
+
+import { z } from 'zod';
+
+import { OrderSchema } from './schema';
+
+export async function createOrder(prevState: ActionState, formData: FormData) {
+    const rawData = {
+        openingDate: formData.get('openingDate'),
+        deposit: formData.get('deposit'),
+        collection: formData.get('collection'),
+        accessories: formData.get('accessories'),
+        termination: formData.get('termination') === 'on',
+        planChange: formData.get('planChange'),
+        combination: formData.get('combination'),
+        memo: formData.get('memo'),
+    };
+
+    const validatedFields = OrderSchema.safeParse(rawData);
+
+    if (!validatedFields.success) {
+        return {
+            success: false,
+            message: validatedFields.error.issues[0].message,
+        };
+    }
+
+    // Mock DB Insertion
+    console.log('Inserting into DB:', validatedFields.data);
+
+    // In a real app, use Supabase client here:
+    // const cookieStore = await cookies();
+    // const supabase = createServerClient(..., { cookies: { ... } });
+    // const { error } = await supabase.from('orders').insert(validatedFields.data);
+
+    // if (error) return { success: false, message: error.message };
+
+    return { success: true, message: 'Order created successfully!' };
 }
 
 export async function logoutAdmin() {

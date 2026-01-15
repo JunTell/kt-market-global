@@ -2,7 +2,8 @@
 
 import { logoutAdmin } from '../actions';
 import { Button } from '@/shared/components/ui/Button';
-import { LogOut, ShieldCheck, BarChart3, Users, Settings } from 'lucide-react';
+import Link from 'next/link';
+import { LogOut, ShieldCheck, BarChart3, Users, Settings, FileText } from 'lucide-react';
 
 export function AdminDashboard() {
     return (
@@ -60,6 +61,24 @@ export function AdminDashboard() {
                             </div>
                         </div>
                     ))}
+                </div>
+
+
+                {/* Quick Actions */}
+                <div className="mb-8">
+                    <h2 className="text-h4 text-grey-800 mb-4">빠른 작업</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <Link
+                            href="/admin/orders/create"
+                            className="bg-white p-6 rounded-2xl shadow-card border border-border-default hover:border-primary transition-colors flex flex-col gap-2 group"
+                        >
+                            <div className="h-10 w-10 rounded-lg bg-primary-bg text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+                                <FileText size={20} />
+                            </div>
+                            <span className="text-body1 font-bold text-grey-900">주문서 작성</span>
+                            <span className="text-caption text-grey-500">새로운 개통 신청서를 작성합니다.</span>
+                        </Link>
+                    </div>
                 </div>
 
                 {/* Placeholder Content Area */}

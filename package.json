@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^2.0.49",
+    "@hookform/resolvers": "^5.2.2",
     "@nanostores/react": "github:ai/react",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.89.0",
@@ -27,6 +28,7 @@
     "react-dom": "19.2.3",
     "react-hook-form": "^7.68.0",
     "tailwind-merge": "^3.4.0",
+    "zod": "^4.3.5",
     "zustand": "^5.0.9"
   },
   "devDependencies": {
