@@ -13,6 +13,7 @@ import { DatePicker } from '@/shared/components/ui/DatePicker';
 import { useState, useTransition } from 'react';
 import { Calendar, CreditCard, Smartphone, FileText, CheckCircle2 } from 'lucide-react';
 import { z } from 'zod';
+import { addMonths } from 'date-fns';
 
 type OrderFormValues = z.infer<typeof OrderSchema>;
 
@@ -31,11 +32,14 @@ export function AdminOrderForm() {
     resolver: zodResolver(OrderSchema) as Resolver<OrderFormValues>,
     defaultValues: {
       openingDate: new Date().toISOString().split('T')[0],
+      shippingDate: '',
       deposit: 0,
+      depositDate: '',
       collection: 0,
       termination: false,
       accessories: '',
-      planChange: '',
+      basePlan: '',
+      changedPlan: '',
       combination: '',
       memo: '',
     },
@@ -95,6 +99,36 @@ export function AdminOrderForm() {
                   />
                 )}
               />
+              <Controller
+                control={control}
+                name="shippingDate"
+                render={({ field }) => (
+                  <div className="flex flex-col gap-2">
+                    <DatePicker
+                      label="발송일 (선택)"
+                      date={field.value ? new Date(`${field.value}T00:00:00`) : undefined}
+                      setDate={(date) => field.onChange(date ? format(date, 'yyyy-MM-dd') : '')}
+                    />
+                    <div className="flex flex-wrap gap-2">
+                      {[1, 2, 3, 4, 5, 6].map((month) => (
+                        <Button
+                          key={month}
+                          type="button"
+                          variant="secondary"
+                          onClick={() => {
+                            const today = new Date();
+                            const nextDate = addMonths(today, month);
+                            field.onChange(format(nextDate, 'yyyy-MM-dd'));
+                          }}
+                          className="text-body2 px-3 h-8 w-auto"
+                        >
+                          {month}개월 뒤
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              />
             </div>
 
             {/* Section 2: Payment Info */}
@@ -139,6 +173,19 @@ export function AdminOrderForm() {
                   )}
                 />
               </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <Controller
+                  control={control}
+                  name="depositDate"
+                  render={({ field }) => (
+                    <DatePicker
+                      label="입금일 (선택)"
+                      date={field.value ? new Date(`${field.value}T00:00:00`) : undefined}
+                      setDate={(date) => field.onChange(date ? format(date, 'yyyy-MM-dd') : '')}
+                    />
+                  )}
+                />
+              </div>
             </div>
 
             {/* Section 3: Product & Changes */}
@@ -151,10 +198,116 @@ export function AdminOrderForm() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Controller
                   control={control}
-                  name="planChange"
+                  name="basePlan"
                   render={({ field }) => (
                     <Select
-                      label="요금제 변경"
+                      label="기본 요금제"
+                      options={[
+                        '선택 안함',
+                        '위버스 초이스 프리미엄',
+                        '위버스 초이스 스페셜',
+                        '위버스 초이스 베이직',
+                        '가전구독 초이스 프리미엄',
+                        '가전구독 초이스 스페셜',
+                        '가전구독 초이스 베이직',
+                        '폰케어 초이스 프리미엄',
+                        '폰케어 초이스 스페셜',
+                        '폰케어 초이스 베이직',
+                        '티빙/지니/밀리 초이스 베이직',
+                        '티빙/지니/밀리 초이스 스페셜',
+                        '티빙/지니/밀리 초이스 프리미엄',
+                        '(유튜브 프리미엄) 초이스 프리미엄',
+                        '(유튜브 프리미엄) 초이스 스페셜',
+                        '(유튜브 프리미엄) 초이스 베이직',
+                        '5G 웰컴 3',
+                        '5G 웰컴 5',
+                        '5G 슬림 4GB(이월)',
+                        '5G 슬림 7GB(이월)',
+                        '5G 슬림 10GB(이월)',
+                        '5G 슬림 14GB(이월)',
+                        '5G 슬림 21GB(이월)',
+                        '5G 심플 30GB',
+                        '5G 슬림 4GB',
+                        '5G 슬림 10GB',
+                        '5G 슬림 21GB',
+                        '5G 심플 50GB',
+                        '5G 심플 70GB',
+                        '5G 심플 90GB',
+                        '5G 시니어 C형',
+                        '5G 시니어 B형',
+                        '5G 시니어 A형',
+                        '5G 시니어 베이직',
+                        '디바이스 초이스 베이직',
+                        '디바이스 초이스 스페셜',
+                        '디바이스 초이스 프리미엄',
+                        '5G 세이브(군인)',
+                        '5G 슬림 복지(군인)',
+                        '5G Y슬림(군인)',
+                        '5G 슬림(군인)',
+                        '삼성 초이스 프리미엄',
+                        '삼성 초이스 스페셜',
+                        '삼성 초이스 베이직',
+                        '5G 주니어 슬림',
+                        '5G 주니어',
+                        '디즈니+ 초이스 베이직',
+                        '디즈니+ 초이스 스페셜',
+                        '디즈니+ 초이스 프리미엄',
+                        '5G 심플 복지',
+                        '5G 베이직 복지',
+                        '5G 슬림 복지',
+                        '넷플릭스 초이스 베이직',
+                        '넷플릭스 초이스 스페셜',
+                        '넷플릭스 초이스 프리미엄',
+                        '5G 심플 110GB',
+                        '5G Y슬림',
+                        'Y 베이직',
+                        'Y 스페셜',
+                        '5G Y틴',
+                        '베이직',
+                        '스페셜',
+                        'Y주니어 ON',
+                        'Y군인 55 PLUS',
+                        'Y군인 77 PLUS',
+                        '나눔 베이직',
+                        '데이터 ON 나눔',
+                        '시니어 베이직',
+                        'Y군인 55 PLUS(미디어팩)',
+                        'Y군인 33',
+                        'Y틴 ON',
+                        'Y데이터ON 비디오 플러스',
+                        'Y데이터ON 프리미엄',
+                        '데이터ON 프리미엄',
+                        '데이터ON 비디오 플러스',
+                        'LTE 베이직',
+                        'LTE 음성 12.1',
+                        'LTE 음성 18.7',
+                        '순 망내무한선택형180분250MB',
+                        '순 망내무한선택형100분1GB',
+                        '순 망내무한선택형100분250MB',
+                        '순 선택형180분1GB',
+                        '순 선택형180분250MB',
+                        '순 선택형100분2GB',
+                        '순 선택형100분1GB',
+                        '순 선택형100분250MB',
+                        'Y주니어 19.8',
+                        'Y틴 20',
+                        'Y틴 27',
+                        'LTE-골든150',
+                        '순 골든20(LTE)',
+                        '키즈 알115(LTE)'
+                      ]}
+                      value={field.value || ''}
+                      onChange={field.onChange}
+                      placeholder="기본 요금제를 선택해주세요"
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name="changedPlan"
+                  render={({ field }) => (
+                    <Select
+                      label="변경 후 요금제"
                       options={[
                         '변경 없음',
                         '위버스 초이스 프리미엄',
@@ -251,7 +404,7 @@ export function AdminOrderForm() {
                       ]}
                       value={field.value || ''}
                       onChange={field.onChange}
-                      placeholder="선택해주세요"
+                      placeholder="변경 할 요금제를 선택해주세요"
                     />
                   )}
                 />
@@ -276,7 +429,7 @@ export function AdminOrderForm() {
                 render={({ field }) => (
                   <Select
                     label="악세사리"
-                    options={['선택 안함', '케이스', '필름', '충전기', '케이스+필름']}
+                    options={['선택 안함', '기타']}
                     value={field.value || ''}
                     onChange={field.onChange}
                     placeholder="선택해주세요"
