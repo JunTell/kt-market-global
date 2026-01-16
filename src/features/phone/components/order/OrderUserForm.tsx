@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react"
 import { useTranslations } from "next-intl"
-import Select from "@/shared/ui/Select"
+import Select from "@/shared/components/ui/Select"
 import { COUNTRY_OPTIONS } from "@/shared/constants/options"
 
 interface FormData {

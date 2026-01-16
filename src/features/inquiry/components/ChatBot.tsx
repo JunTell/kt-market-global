@@ -44,7 +44,7 @@ export default function ChatBot() {
     }
   }, [messages, isOpen]);
 
-   
+
   const handleSend = (text: string) => {
     if (!text.trim()) return;
     messageIdCounter.current += 1;
@@ -86,7 +86,7 @@ export default function ChatBot() {
       isOpen ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-95 pointer-events-none"
     )}>
       {/* 🔮 메인 컨테이너 */}
-      <div className="w-[360px] h-[600px] bg-white/90 backdrop-blur-xl rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-line-200/50 flex flex-col overflow-hidden">
+      <div className="w-[360px] h-[600px] bg-white/90 backdrop-blur-xl rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-border-default flex flex-col overflow-hidden">
 
         <ChatHeader onClose={() => setChatOpen(false)} />
 

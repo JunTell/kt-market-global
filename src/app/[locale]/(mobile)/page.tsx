@@ -6,7 +6,7 @@ import WhyChooseUs from '@/features/phone/components/WhyChooseUs';
 import { ServiceGuideCard } from '@/features/phone/components/ServiceGuideCard';
 import { Notice } from '@/features/phone/components/Notice';
 import ModelListContainer from '@/features/phone/components/ModelListContainer';
-import Footer from '@/shared/ui/layout/Footer';
+import Footer from '@/shared/components/layout/Footer';
 import EligibilityChecker from '@/features/phone/components/EligibilityChecker';
 
 export default function Home() {

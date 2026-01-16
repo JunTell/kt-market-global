@@ -7,7 +7,7 @@ import {
   getDeviceImageUrls,
   type RegType,
 } from "@/features/phone/lib/asamo-utils"
-import GongguDealCard from "@/shared/ui/GongguDealCard"
+import GongguDealCard from "@/shared/components/ui/GongguDealCard"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 
@@ -372,16 +372,22 @@ function CarrierSelector({
                 {CARRIERS.map((carrier) => (
                   <motion.button
                     key={carrier}
-                    whileTap={{ scale: 0.98 }} // 클릭 시 살짝 눌리는 효과
+                    whileTap={{ scale: 0.98 }}
                     onClick={() => handleSelect(carrier)}
-                    className="group w-full h-[56px] rounded-[20px] bg-bg-grouped hover:bg-grey-200 transition-colors duration-200 flex items-center justify-between px-5 cursor-pointer border border-transparent hover:border-border-strong"
+                    className={`group w-full h-[56px] rounded-[20px] transition-all duration-200 flex items-center justify-between px-5 cursor-pointer border ${selected === carrier
+                      ? "bg-white border-primary shadow-sm ring-1 ring-primary/20"
+                      : "bg-bg-grouped border-transparent hover:bg-grey-200 hover:border-border-strong"
+                      }`}
                   >
-                    <span className="text-[17px] font-semibold text-label-900 group-hover:text-black">
+                    <span className={`text-[17px] font-semibold transition-colors ${selected === carrier
+                      ? "text-primary"
+                      : "text-label-900 group-hover:text-black"
+                      }`}>
                       {carrier}
                     </span>
 
                     {selected === carrier ? (
-                      <div className="w-6 h-6 rounded-full bg-status-correct flex items-center justify-center shadow-sm">
+                      <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center shadow-sm">
                         <motion.svg
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}

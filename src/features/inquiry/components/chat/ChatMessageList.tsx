@@ -37,7 +37,7 @@ export default function ChatMessageList({ messages, faqList, onQuestionClick }: 
                         "max-w-[85%] px-4 py-3 text-[14px] leading-relaxed shadow-sm animate-in slide-in-from-bottom-2 fade-in duration-300 whitespace-pre-wrap",
                         m.type === 'user'
                             ? "bg-primary text-white rounded-[20px] rounded-tr-[4px] self-end ml-auto"
-                            : "bg-white text-gray-800 border border-gray-100 rounded-[20px] rounded-tl-[4px] self-start"
+                            : "bg-white text-grey-900 border border-grey-200 rounded-[20px] rounded-tl-[4px] self-start"
                     )}
                 >
                     {m.text}
@@ -48,10 +48,10 @@ export default function ChatMessageList({ messages, faqList, onQuestionClick }: 
                                 <button
                                     key={item.id}
                                     onClick={() => onQuestionClick(item.question)}
-                                    className="w-full text-left px-3 py-2.5 bg-gray-50 hover:bg-blue-50 hover:text-primary rounded-xl text-[13px] font-medium transition-colors flex items-center justify-between group cursor-pointer"
+                                    className="w-full text-left px-3 py-2.5 bg-bg-grouped hover:bg-primary-bg hover:text-primary rounded-xl text-[13px] font-medium transition-colors flex items-center justify-between group cursor-pointer"
                                 >
                                     <span className="lang-ko:font-medium lang-ja:font-normal">{item.question}</span>
-                                    <ChevronRight size={14} className="text-gray-400 group-hover:text-primary transition-colors" />
+                                    <ChevronRight size={14} className="text-grey-400 group-hover:text-primary transition-colors" />
                                 </button>
                             ))}
                         </div>
