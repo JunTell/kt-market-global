@@ -14,6 +14,12 @@ const initialState = {
 export function AdminLoginForm() {
     const [state, formAction, isPending] = useActionState(loginAdmin, initialState);
 
+    if (state?.success) {
+        if (typeof window !== 'undefined') {
+            window.location.reload();
+        }
+    }
+
     return (
         <div className="flex min-h-screen flex-col items-center justify-center p-4 bg-bg-grouped">
             <div className="w-full max-w-[320px] bg-white rounded-2xl shadow-card p-8 border border-border-default">

@@ -8,13 +8,6 @@ export const metadata: Metadata = {
     description: 'Restricted Area',
 };
 
-export default async function AdminPage() {
-    const cookieStore = await cookies();
-    const isAdmin = cookieStore.get('admin_access')?.value === 'true';
-
-    if (isAdmin) {
-        return <AdminDashboard />;
-    }
-
-    return <AdminLoginForm />;
+export default function AdminPage() {
+    return <AdminDashboard />;
 }
