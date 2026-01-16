@@ -39,6 +39,12 @@ export function OrderPreview({ values }: OrderPreviewProps) {
             {formatDate(values.openingDate)}
           </p>
         </div>
+        <div className="space-y-2">
+          <p className="text-caption text-grey-500 font-bold">발송일</p>
+          <p className="text-body1 text-grey-900 font-medium">
+            {formatDate(values.shippingDate)}
+          </p>
+        </div>
 
         {/* Payment Info */}
         <div className="space-y-2">
@@ -47,6 +53,7 @@ export function OrderPreview({ values }: OrderPreviewProps) {
             <div>
               <span className="text-xs text-grey-500 block">입금</span>
               <span className="text-body2 text-primary font-bold">{formatCurrency(values.deposit)}</span>
+              <span className="text-xs text-grey-400 block mt-1">{formatDate(values.depositDate)}</span>
             </div>
             <div>
               <span className="text-xs text-grey-500 block">수납</span>
@@ -60,8 +67,12 @@ export function OrderPreview({ values }: OrderPreviewProps) {
           <p className="text-caption text-grey-500 font-bold">상품 및 변경</p>
           <ul className="space-y-2 text-body2 text-grey-700">
             <li className="flex justify-between">
-              <span className="text-grey-500">요금제</span>
-              <span className="font-medium text-right text-grey-900">{values.planChange || '-'}</span>
+              <span className="text-grey-500">기본 요금제</span>
+              <span className="font-medium text-right text-grey-900">{values.basePlan || '-'}</span>
+            </li>
+            <li className="flex justify-between">
+              <span className="text-grey-500">변경 요금제</span>
+              <span className="font-medium text-right text-grey-900">{values.changedPlan || '-'}</span>
             </li>
             <li className="flex justify-between">
               <span className="text-grey-500">결합</span>

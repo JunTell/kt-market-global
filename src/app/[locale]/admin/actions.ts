@@ -37,11 +37,14 @@ import { OrderSchema } from './schema';
 export async function createOrder(prevState: ActionState, formData: FormData) {
     const rawData = {
         openingDate: formData.get('openingDate'),
+        shippingDate: formData.get('shippingDate'),
         deposit: formData.get('deposit'),
+        depositDate: formData.get('depositDate'),
         collection: formData.get('collection'),
         accessories: formData.get('accessories'),
         termination: formData.get('termination') === 'on',
-        planChange: formData.get('planChange'),
+        basePlan: formData.get('basePlan'),
+        changedPlan: formData.get('changedPlan'),
         combination: formData.get('combination'),
         memo: formData.get('memo'),
     };

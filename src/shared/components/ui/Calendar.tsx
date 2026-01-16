@@ -25,7 +25,7 @@ function Calendar({
         caption_label: "text-sm font-medium",
         nav: "absolute left-0 top-2 w-full flex justify-between items-center px-10 py-2 z-50",
         nav_button: cn(
-          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 flex items-center justify-center rounded-md hover:bg-gray-100 transition-colors pointer-events-auto !cursor-pointer"
+          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 flex items-center justify-center rounded-md hover:bg-gray-100 transition-colors pointer-events-auto cursor-pointer"
         ),
         nav_button_previous: "static",
         nav_button_next: "static",
