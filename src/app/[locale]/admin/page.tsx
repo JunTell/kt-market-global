@@ -1,7 +1,6 @@
-import { cookies } from 'next/headers';
-import { AdminLoginForm } from './_components/AdminLoginForm';
-import { AdminDashboard } from './_components/AdminDashboard';
+
 import { Metadata } from 'next';
+import { AdminDashboard } from './_components/AdminDashboard';
 
 export const metadata: Metadata = {
     title: 'Admin Access',

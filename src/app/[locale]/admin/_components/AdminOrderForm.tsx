@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm, Controller, SubmitHandler, Resolver } from 'react-hook-form';
+import { useForm, Controller, Resolver } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createOrder } from '../actions';
 import { OrderSchema } from '../schema';
