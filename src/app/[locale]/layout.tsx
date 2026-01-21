@@ -49,7 +49,12 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://global.ktmarket.co.kr',
-  }
+  },
+  verification: {
+    other: {
+      'facebook-domain-verification': '6xvpffpw3l0zkmhciw1puskq27akblq',
+    },
+  },
 };
 
 type Props = {
