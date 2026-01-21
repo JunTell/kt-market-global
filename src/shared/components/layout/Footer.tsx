@@ -72,6 +72,9 @@ export default function Footer() {
 
           {/* Right */}
           <div className="flex flex-col items-start md:items-end gap-3">
+            <p className="text-white/80 font-medium text-right text-xs opacity-70 mb-[-8px]">
+              Eng/Chn Support Available
+            </p>
             <p className="text-white/80 font-medium">{t('partner_support')}</p>
             <p className="text-xl font-bold">{t('cs_hours')}</p>
             <div className="flex gap-3 mt-1">
