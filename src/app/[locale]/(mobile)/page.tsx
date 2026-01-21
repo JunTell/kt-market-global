@@ -1,5 +1,25 @@
 import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
 import ChatBot from '@/features/inquiry/components/ChatBot';
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata.Home' });
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('og_title'),
+      description: t('og_description'),
+    },
+  };
+}
 import ProcessGuide from '@/features/phone/components/ProcessGuide';
 import TargetAudience from '@/features/phone/components/TargetAudience';
 import WhyChooseUs from '@/features/phone/components/WhyChooseUs';
