@@ -19,43 +19,60 @@ const inter = Inter({
   weight: ['400', '500', '600', '700'],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL('https://global.ktmarket.co.kr'),
-  title: {
-    template: '%s | Global KT Market',
-    default: 'Global KT Market | Korea\'s No.1 Mobile Service for Foreigners',
-  },
-  description: "Official KT Authorized Agency. Provides the best mobile plans and smartphones for foreigners in Korea with English support. Check eligibility and apply online.",
-  keywords: ["KT", "Korea Telecom", "SIM Card", "eSIM", "Korea Mobile", "Expats in Korea", "Foreigner Registration Card"],
-  openGraph: {
-    title: "Global KT Market | Korea's No.1 Mobile Service",
-    description: "Official KT Authorized Agency. Best mobile plans for foreigners in Korea.",
-    url: 'https://global.ktmarket.co.kr',
-    siteName: 'Global KT Market',
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Global KT Market',
-    description: 'Korea\'s No.1 Mobile Service for Foreigners',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  icons: {
-    icon: '/favicon.ico',
-  },
-  alternates: {
-    canonical: 'https://global.ktmarket.co.kr',
-  }
+const keywordsByLocale = {
+  en: ['Korea SIM Card', 'Buy Phone in Korea', 'SIM Free Smartphone', 'KT Mobile Service', 'Prepaid SIM'],
+  ja: ['韓国SIM', '韓国スマホ購入', 'SIMフリー', 'KTモバイル', 'プリペイドSIM'],
+  zh: ['韩国电话卡', '韩国买手机', '无锁版手机', 'KT通讯', '预付费卡'],
+  ko: ['외국인 휴대폰 개통', '선불유심', '알뜰폰', '중고폰 매입', 'KT 마켓'],
 };
 
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const keywords = keywordsByLocale[locale as keyof typeof keywordsByLocale] ?? keywordsByLocale.en;
+
+  return {
+    metadataBase: new URL('https://global.ktmarket.co.kr'),
+    title: {
+      template: '%s | Global KT Market',
+      default: 'Global KT Market | Korea\'s No.1 Mobile Service for Foreigners',
+    },
+    description: "Official KT Authorized Agency. Provides the best mobile plans and smartphones for foreigners in Korea with English support. Check eligibility and apply online.",
+    keywords: keywords,
+    openGraph: {
+      title: "Global KT Market | Korea's No.1 Mobile Service",
+      description: "Official KT Authorized Agency. Best mobile plans for foreigners in Korea.",
+      url: 'https://global.ktmarket.co.kr',
+      siteName: 'Global KT Market',
+      locale: locale,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Global KT Market',
+      description: 'Korea\'s No.1 Mobile Service for Foreigners',
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    icons: {
+      icon: '/favicon.ico',
+    },
+    alternates: {
+      canonical: 'https://global.ktmarket.co.kr',
+    },
+    verification: {
+      other: {
+        'facebook-domain-verification': '6xvpffpw3l0zkmhciw1puskq27akblq',
+      },
+    },
+  };
+}
 
 export default async function LocaleLayout({
   children,
