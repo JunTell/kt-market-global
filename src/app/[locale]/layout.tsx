@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       follow: true,
     },
     icons: {
-      icon: '/favicon.ico',
+      icon: '/images/logo.svg',
     },
     alternates: {
       canonical: 'https://global.ktmarket.co.kr',
