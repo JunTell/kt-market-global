@@ -235,7 +235,9 @@
     },
     "Page": {
       "select_plan_button": "选择套餐并确认优惠",
-      "submit_application": "填写申请表"
+      "submit_application": "填写申请书",
+      "price_info": "价格信息",
+      "final_price": "最终购买价格"
     },
     "Order": {
       "default_country": "Republic of Korea",

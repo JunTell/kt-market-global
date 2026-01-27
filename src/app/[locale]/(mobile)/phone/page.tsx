@@ -11,6 +11,8 @@ import { calculateFinalDevicePrice } from "@/features/phone/lib/priceCalculation
 
 import JunCarousel from "@/features/phone/components/JunCarousel"
 import OptionSelector, { CapacityOption, ColorOption } from "@/features/phone/components/OptionSelector"
+import OptionSummary from "@/features/phone/components/OptionSummary"
+import Modal from "@/shared/components/ui/Modal"
 import PlanSelector from "@/features/phone/components/PlanSelector"
 import StickyBar from "@/features/phone/components/StickyBar"
 import { usePhoneStore } from "@/features/phone/model/usePhoneStore"
@@ -40,6 +42,7 @@ function PhoneContent() {
 
     const [step, setStep] = useState<1 | 2>(1)
     const [loading, setLoading] = useState(true)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const lastFetchedKey = useRef<string>("")
 
@@ -270,53 +273,151 @@ function PhoneContent() {
     }
 
     return (
-        <div className="w-full max-w-[480px] mx-auto bg-white min-h-screen pb-24">
-            <JunCarousel urls={store.imageUrls} />
-
-            <div className="px-5">
-                <div className="py-6 border-b border-gray-100">
-                    <h1 className="text-2xl font-bold text-[#1d1d1f] mb-1">{store.title}</h1>
-                    <div className="text-sm text-gray-500">{store.capacity} · {COLOR_MAP[store.color] || store.color}</div>
-                </div>
-
+        <div className="w-full max-w-[780px] mx-auto bg-white min-h-screen pb-24 md:pb-8">
+            <div className={`md:flex md:gap-8 md:items-start md:py-12 ${step === 2 ? 'justify-center' : ''}`}>
+                {/* Left Column: Carousel - Only show in Step 1 */}
                 {step === 1 && (
-                    <>
-                        <OptionSelector
-                            selectedCapacity={capacity}
-                            selectedColorValue={store.color}
-                            capacityOptions={capacityOpts}
-                            colorOptions={colorOpts}
-                            onSelectCapacity={handleCapacityChange}
-                            onSelectColor={handleColorChange}
-                        />
-                        <StickyBar
-                            finalPrice=""
-                            label={t('Phone.Page.select_plan_button')}
-                            onClick={handleNextStep}
-                        />
-                    </>
+                    <div className="w-full md:w-1/2 md:sticky md:top-24">
+                        <div className="rounded-[2rem] overflow-hidden bg-gray-50/50 md:w-[350px] mx-auto">
+                            <JunCarousel urls={store.imageUrls} className="md:h-[350px]" />
+                        </div>
+                    </div>
                 )}
 
-                {step === 2 && (
-                    <>
-                        <PlanSelector
-                            plans={store.plans}
-                            selectedPlanId={store.selectedPlanId}
-                            discountMode={store.discountMode}
-                            originPrice={store.originPrice}
-                            ktMarketDiscount={0}
-                            registrationType={store.registrationType}
-                            modelPrefix={prefix}
-                            onSelectPlan={(id) => store.setStore({ selectedPlanId: id })}
-                            onChangeMode={(mode) => store.setStore({ discountMode: mode })}
-                        />
-                        <StickyBar
-                            finalPrice={`${formatPrice(finalPriceInfo.finalDevicePrice, locale)}${t('Phone.Common.won')}`}
-                            label={t('Phone.Page.submit_application')}
-                            onClick={handleOrder}
-                        />
-                    </>
-                )}
+                {/* Right Column: Details & Actions */}
+                <div className={`px-5 md:px-0 w-full mt-6 md:mt-0 ${step === 2 ? 'md:max-w-xl mx-auto' : 'md:w-1/2'}`}>
+                    <div className="py-6 md:py-0 border-b border-gray-100 md:border-none mb-6">
+                        {/* Only show Title & Price in Step 1 */}
+                        {step === 1 && (
+                            <div className="flex items-start justify-between mb-2">
+                                <div>
+                                    <h1 className="text-2xl md:text-2xl font-bold text-[#1d1d1f] mb-2">{store.title}</h1>
+                                    {/* Price Display for Desktop */}
+                                    <div className="hidden md:block">
+                                        <div className="flex items-baseline gap-2 mt-4">
+                                            <span className="text-xl font-bold text-[#1d1d1f]">
+                                                {formatPrice(finalPriceInfo.finalDevicePrice, locale)}{t('Phone.Common.won')}
+                                            </span>
+                                            {/* Discount Badge Logic if needed */}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="md:hidden text-sm text-gray-500 text-right">
+                                    {store.capacity} · {COLOR_MAP[store.color] || store.color}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    {step === 1 && (
+                        <>
+                            {/* Option Selection Summary (Trigger) */}
+                            <div className="mb-6">
+                                <OptionSummary
+                                    selectedColor={store.color}
+                                    selectedColorName={COLOR_MAP[store.color] || store.color}
+                                    selectedCapacity={capacity}
+                                    imageUrl={store.imageUrl}
+                                    onClick={() => setIsModalOpen(true)}
+                                />
+                            </div>
+
+                            {/* Option Selection Modal */}
+                            <Modal
+                                isOpen={isModalOpen}
+                                onClose={() => setIsModalOpen(false)}
+                                title={t('Phone.OptionSelector.title')}
+                            >
+                                <OptionSelector
+                                    selectedCapacity={capacity}
+                                    selectedColorValue={store.color}
+                                    capacityOptions={capacityOpts}
+                                    colorOptions={colorOpts}
+                                    onSelectCapacity={(val) => {
+                                        handleCapacityChange(val)
+                                    }}
+                                    onSelectColor={(val) => {
+                                        handleColorChange(val)
+                                        setIsModalOpen(false) // Close modal on selection
+                                    }}
+                                />
+                                {/* Modal Action Button */}
+                                <button
+                                    onClick={() => setIsModalOpen(false)}
+                                    className="w-full mt-6 bg-[#0071e3] hover:bg-[#0077ED] text-white text-lg font-bold py-3.5 rounded-xl transition-colors cursor-pointer"
+                                >
+                                    {t('Phone.Page.select_plan_button')}
+                                </button>
+                            </Modal>
+
+                            {/* Desktop Button - Inline */}
+                            <div className="hidden md:block mt-8">
+                                <button
+                                    onClick={handleNextStep}
+                                    className="w-full bg-[#0071e3] hover:bg-[#0077ED] text-white text-lg font-bold py-4 rounded-xl transition-colors shadow-lg shadow-blue-500/20 cursor-pointer"
+                                >
+                                    {t('Phone.Page.select_plan_button')}
+                                </button>
+                            </div>
+
+                            {/* Mobile Sticky Bar remains */}
+                            <div className="md:hidden">
+                                <StickyBar
+                                    finalPrice=""
+                                    label={t('Phone.Page.select_plan_button')}
+                                    onClick={handleNextStep}
+                                />
+                            </div>
+                        </>
+                    )}
+
+                    {step === 2 && (
+                        <>
+                            {/* Pricing Info Section title as per image */}
+                            <div className="mb-6">
+                                <h2 className="text-xl font-bold text-[#1d1d1f]">{t('Phone.Page.price_info')}</h2>
+                            </div>
+
+                            {/* Discount Method & Plan Selector */}
+                            <PlanSelector
+                                plans={store.plans}
+                                selectedPlanId={store.selectedPlanId}
+                                discountMode={store.discountMode}
+                                originPrice={store.originPrice}
+                                ktMarketDiscount={0}
+                                registrationType={store.registrationType}
+                                modelPrefix={prefix}
+                                onSelectPlan={(id) => store.setStore({ selectedPlanId: id })}
+                                onChangeMode={(mode) => store.setStore({ discountMode: mode })}
+                            />
+
+                            {/* Desktop Submit Button */}
+                            <div className="hidden md:block mt-8">
+                                <div className="flex items-center justify-between mb-4">
+                                    <span className="text-gray-500 font-medium">{t('Phone.Page.final_price')}</span>
+                                    <span className="text-2xl font-bold text-[#1d1d1f]">
+                                        {formatPrice(finalPriceInfo.finalDevicePrice, locale)}원
+                                    </span>
+                                </div>
+                                <button
+                                    onClick={handleOrder}
+                                    className="w-full bg-[#0071e3] hover:bg-[#0077ED] text-white text-lg font-bold py-4 rounded-xl transition-colors shadow-lg shadow-blue-500/20 cursor-pointer"
+                                >
+                                    {t('Phone.Page.submit_application')}
+                                </button>
+                            </div>
+
+                            {/* Mobile Sticky Bar remains */}
+                            <div className="md:hidden">
+                                <StickyBar
+                                    finalPrice={`${formatPrice(finalPriceInfo.finalDevicePrice, locale)}${t('Phone.Common.won')}`}
+                                    label={t('Phone.Page.submit_application')}
+                                    onClick={handleOrder}
+                                />
+                            </div>
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     )

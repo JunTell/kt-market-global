@@ -235,7 +235,9 @@
     },
     "Page": {
       "select_plan_button": "プランを選択して特典を確認",
-      "submit_application": "申込書作成"
+      "submit_application": "申込書作成",
+      "price_info": "価格情報",
+      "final_price": "最終購入価格"
     },
     "Order": {
       "default_country": "Republic of Korea",

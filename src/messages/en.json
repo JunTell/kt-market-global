@@ -22,7 +22,6 @@
       "feat3_desc": "No Korean? No problem. Professional agents are here to help.",
       "cta_check": "Check Eligibility Now",
       "cta_subscription": "Apply for Mobile Online",
-      "cta_subscription": "Apply for Mobile Online",
       "no_hidden": "No Hidden Conditions"
     },
     "Eligibility": {
@@ -237,7 +236,9 @@
     },
     "Page": {
       "select_plan_button": "Select plan and check benefits",
-      "submit_application": "Fill out application"
+      "submit_application": "Fill out application",
+      "price_info": "Price Information",
+      "final_price": "Final Purchase Price"
     },
     "Order": {
       "default_country": "Republic of Korea",

@@ -236,7 +236,9 @@
     },
     "Page": {
       "select_plan_button": "요금제 선택하고 혜택 확인하기",
-      "submit_application": "신청서 작성하기"
+      "submit_application": "신청서 작성하기",
+      "price_info": "가격 정보",
+      "final_price": "최종 구매가 (할부 원금)"
     },
     "Order": {
       "default_country": "Republic of Korea",
