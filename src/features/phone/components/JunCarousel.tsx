@@ -123,6 +123,7 @@ export default function JunCarousel({ urls = [], className = "" }: Props) {
               className="object-contain select-none pointer-events-none p-4"
               draggable={false} // 이미지 드래그 방지
               sizes="(max-width: 768px) 100vw, 500px"
+              priority={index === 0}
             />
           </div>
         ))}

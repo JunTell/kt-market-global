@@ -1,21 +1,7 @@
-'use client';
-
 import { useTranslations } from 'next-intl';
 import { CheckCircle2, ShieldCheck } from 'lucide-react';
 import Image from 'next/image';
 
-/**
- * HeroSection Component
- * 
- * Purpose: Trust-First landing page hero that immediately addresses customer anxieties:
- * - Official KT Dealer status
- * - Foreigners explicitly allowed
- * - Postpaid (not prepaid) emphasis
- * - No hidden conditions transparency
- * 
- * Design: Uses Trust Theme (Dark Navy background, Official Blue accents)
- * Architecture: Server Component (static content, no client-side state)
- */
 export default function HeroSection() {
     const t = useTranslations('Home.Hero');
 
@@ -117,23 +103,14 @@ export default function HeroSection() {
                             <a
                                 href="#eligibility-section"
                                 className="inline-flex items-center justify-center h-12 md:h-14 px-8 md:px-10 text-base md:text-lg font-bold rounded-2xl
-                                           transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] cursor-pointer shadow-xl w-full md:w-auto"
+                                           transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] cursor-pointer shadow-xl w-full md:w-auto
+                                           hover:brightness-105 hover:shadow-[0_14px_36px_rgba(255,77,77,0.45)] hover:-translate-y-[1px]"
                                 style={{
                                     background:
                                         "linear-gradient(135deg, #FF4D4D 0%, #FF6A3D 45%, #FFB020 100%)",
                                     color: "var(--trust-text-white)",
                                     boxShadow: "0 10px 28px rgba(255, 77, 77, 0.35)",
                                     textShadow: "0 1px 2px rgba(0,0,0,0.25)",
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.filter = "brightness(1.06)";
-                                    e.currentTarget.style.boxShadow = "0 14px 36px rgba(255, 77, 77, 0.45)";
-                                    e.currentTarget.style.transform = "translateY(-1px) scale(1.03)";
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.filter = "none";
-                                    e.currentTarget.style.boxShadow = "0 10px 28px rgba(255, 77, 77, 0.35)";
-                                    e.currentTarget.style.transform = "none";
                                 }}
                             >
                                 {t("cta_check")}
@@ -155,12 +132,13 @@ export default function HeroSection() {
                         <div className="relative w-full max-w-[320px] md:max-w-[440px]">
                             {/* Main ARC Image */}
                             <Image
-                                src="/images/신분증이미지1.png"
+                                src="/images/신분증이미지1.webp"
                                 alt="Foreigner Registration Card"
                                 width={500}
                                 height={320}
                                 className="w-full h-auto drop-shadow-2xl"
                                 priority
+                                sizes="(max-width: 768px) 320px, 440px"
                             />
                         </div>
                     </div>

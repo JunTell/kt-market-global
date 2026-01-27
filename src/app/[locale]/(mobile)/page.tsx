@@ -21,14 +21,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+import dynamic from 'next/dynamic';
 import HeroSection from '@/features/phone/components/HeroSection';
-import ProcessGuide from '@/features/phone/components/ProcessGuide';
-import TargetAudience from '@/features/phone/components/TargetAudience';
-import WhyChooseUs from '@/features/phone/components/WhyChooseUs';
-import { Notice } from '@/features/phone/components/Notice';
 import ModelListContainer from '@/features/phone/components/ModelListContainer';
 import Footer from '@/shared/components/layout/Footer';
-import EligibilityChecker from '@/features/phone/components/EligibilityChecker';
+
+// Dynamic Imports for Heavy Client Components
+const ProcessGuide = dynamic(() => import('@/features/phone/components/ProcessGuide'), { ssr: true });
+const TargetAudience = dynamic(() => import('@/features/phone/components/TargetAudience'), { ssr: true });
+const WhyChooseUs = dynamic(() => import('@/features/phone/components/WhyChooseUs'), { ssr: true });
+const Notice = dynamic(() => import('@/features/phone/components/Notice').then(mod => mod.Notice), { ssr: true }); // Notice is a named export? Checked in view_file.
+import EligibilityCheckerWrapper from '@/features/phone/components/EligibilityCheckerWrapper';
 
 export default function Home() {
   const t = useTranslations();
@@ -61,7 +64,7 @@ export default function Home() {
               {t('Home.Eligibility.desc')}
             </p>
           </div>
-          <EligibilityChecker />
+          <EligibilityCheckerWrapper />
         </div>
       </section>
 
