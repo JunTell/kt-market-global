@@ -53,7 +53,7 @@ export default function Footer() {
 
       {/* Top Section - Dark */}
       <div className="bg-[#191919] text-white pt-4 pb-4">
-        <div className="max-w-[1200px] mx-auto px-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div className="max-w-layout-max mx-auto px-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           {/* Left */}
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-3">
@@ -101,7 +101,7 @@ export default function Footer() {
 
       {/* Bottom Section - Dark (Unified) */}
       <div className="bg-[#191919] text-[#999] py-10 text-xs border-t border-white/10">
-        <div className="max-w-[1200px] mx-auto px-5">
+        <div className="max-w-layout-max mx-auto px-5">
           <div className="mb-8">
             <h3 className="font-bold text-white mb-4 text-sm flex items-center gap-1 cursor-pointer">
               {t('business_info_title')}

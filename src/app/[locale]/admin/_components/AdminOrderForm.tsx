@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm, Controller, Resolver } from 'react-hook-form';
+import { useForm, Controller, Resolver, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createOrder } from '../actions';
 import { OrderSchema } from '../schema';
@@ -27,7 +27,6 @@ export function AdminOrderForm() {
     handleSubmit,
     formState: { errors },
     reset,
-    watch
   } = useForm<OrderFormValues>({
     resolver: zodResolver(OrderSchema) as Resolver<OrderFormValues>,
     defaultValues: {
@@ -45,7 +44,7 @@ export function AdminOrderForm() {
     },
   });
 
-  const watchedValues = watch();
+  const watchedValues = useWatch({ control });
 
   const onSubmit = (data: OrderFormValues) => {
     startTransition(async () => {

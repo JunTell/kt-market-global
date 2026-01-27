@@ -144,7 +144,7 @@ export default function PlanSelector({
                     onSelectPlan(plan.id)
                   }
                 }}
-                className={`flex items-center justify-between p-6 rounded-2xl cursor-pointer transition-all border-2 bg-white ${isSelected ? 'border-blue-500' : 'border-gray-200'}`}
+                className={`flex flex-col md:flex-row md:items-center justify-between p-4 md:p-6 rounded-2xl cursor-pointer transition-all border-2 bg-white ${isSelected ? 'border-blue-500' : 'border-gray-200'} gap-3 md:gap-0`}
               >
                 <div className="flex items-start gap-4">
                   <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${isSelected ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}`}>
@@ -175,7 +175,7 @@ export default function PlanSelector({
                     )}
                   </div>
                 </div>
-                <div className="text-[15px] font-semibold text-blue-500 text-right whitespace-nowrap self-center">
+                <div className="text-[15px] font-semibold text-blue-500 text-right whitespace-nowrap self-end md:self-center pl-10 md:pl-0">
                   {formattedRightTextValue} {t('Phone.PlanSelector.discount_suffix')}
                 </div>
               </div>
