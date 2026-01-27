@@ -9,9 +9,20 @@
   },
   "Home": {
     "Hero": {
+      "badge_official": "KT Official Partner",
+      "badge_postpaid": "Postpaid Only",
       "title_1": "Mobile Plans in Korea,",
       "title_highlight": "Postpaid Available for Foreigners",
-      "desc": "No complex paperwork. Just your ARC, and you can get the same postpaid plans as locals."
+      "desc": "No complex paperwork. Just your ARC, and you can get the same postpaid plans as locals.",
+      "feat1_title": "No Prepaid Needed",
+      "feat1_desc": "Switch to a continuous postpaid plan instead of prepaid ones that cut off data.",
+      "feat2_title": "Installments Available",
+      "feat2_desc": "Pay for the latest devices in installments depending on your visa conditions.",
+      "feat3_title": "Multi-language Support",
+      "feat3_desc": "No Korean? No problem. Professional agents are here to help.",
+      "cta_check": "Check Eligibility Now",
+      "cta_subscription": "Apply for Mobile Online",
+      "no_hidden": "No Hidden Conditions"
     },
     "Eligibility": {
       "badge": "Eligibility Check",
@@ -125,13 +136,38 @@
     "footer": "We only guide cases that are legally possible."
   },
   "WhyUs": {
-    "title": "Why Choose Us?",
-    "check1": "Expert in Foreigner Postpaid Plans",
-    "check2": "One-stop Device Purchase",
-    "check3": "Pre-check for Impossible Cases",
-    "check4": "No Forced Add-on Services",
-    "check5": "Official Carrier Partner",
-    "footer": "We prioritize safety and\nsuccessful activation over price."
+    "title": "Why KT Market?",
+    "subtitle": "* We don't say we sell phones to foreigners. we only guide you through exact possible conditions.",
+    "Cards": {
+      "card1_title": "KT Official Agency",
+      "card1_desc": "Official KT Certified",
+      "card2_title": "No Hidden Conditions",
+      "card2_desc": "No Predatory Terms",
+      "card3_title": "No Forced Plans",
+      "card3_desc": "No Binding Constraints",
+      "card4_title": "No Prepaid Required",
+      "card4_desc": "Official Process"
+    },
+    "Comparison": {
+      "title": "Why <span class=\"text-red-500\">KT</span> Market?",
+      "Before": {
+        "title": "Before",
+        "item1": "Store Visit Required",
+        "item2": "Prepaid Plan Required",
+        "item3": "Unclear Conditions",
+        "item4": "Lack of Explanation"
+      },
+      "After": {
+        "title": "After with <span class=\"text-red-500\">KT</span> Market",
+        "item1_title": "Online Application",
+        "item1_desc": "Online application",
+        "item2_title": "Postpaid Available",
+        "item2_desc": "Postpaid plans",
+        "item3_title": "Official Process",
+        "item3_desc": "Official process"
+      },
+      "quote": "\"We don't say yes to every foreigner... ✔ we only guide you through what is possible.\""
+    }
   },
   "Form": {
     "title": "Application",
@@ -200,7 +236,9 @@
     },
     "Page": {
       "select_plan_button": "Select plan and check benefits",
-      "submit_application": "Fill out application"
+      "submit_application": "Fill out application",
+      "price_info": "Price Information",
+      "final_price": "Final Purchase Price"
     },
     "Order": {
       "default_country": "Republic of Korea",

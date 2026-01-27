@@ -21,9 +21,10 @@ const ArrowRightSVG = () => (
 
 interface Props {
   urls: string[]
+  className?: string
 }
 
-export default function JunCarousel({ urls = [] }: Props) {
+export default function JunCarousel({ urls = [], className = "" }: Props) {
   const t = useTranslations()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [touchStartX, setTouchStartX] = useState<number | null>(null)
@@ -85,12 +86,12 @@ export default function JunCarousel({ urls = [] }: Props) {
   }
 
   if (urls.length === 0) {
-    return <div className="w-full h-[300px] bg-gray-100 flex items-center justify-center text-gray-400">{t('Phone.Carousel.no_image')}</div>
+    return <div className={`w-full h-[300px] bg-gray-100 flex items-center justify-center text-gray-400 ${className}`}>{t('Phone.Carousel.no_image')}</div>
   }
 
   return (
     <div
-      className="relative w-full h-[300px] overflow-hidden flex justify-center items-center touch-pan-y select-none bg-white"
+      className={`relative w-full h-[300px] overflow-hidden flex justify-center items-center touch-pan-y select-none bg-white ${className}`}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -122,6 +123,7 @@ export default function JunCarousel({ urls = [] }: Props) {
               className="object-contain select-none pointer-events-none p-4"
               draggable={false} // 이미지 드래그 방지
               sizes="(max-width: 768px) 100vw, 500px"
+              priority={index === 0}
             />
           </div>
         ))}

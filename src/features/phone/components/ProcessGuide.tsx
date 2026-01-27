@@ -61,79 +61,81 @@ export default function ProcessGuide() {
   };
 
   return (
-    <section className="py-10 px-5 bg-bg-grouped overflow-hidden">
-      <motion.h2
-        initial={{ opacity: 0, y: -10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-xl font-bold text-label-900 mb-8 leading-tight text-center"
-        dangerouslySetInnerHTML={{ __html: t.raw('title') }}
-      />
+    <section className="py-10 md:py-16 px-5 md:px-12 bg-bg-grouped overflow-hidden">
+      <div className="w-full max-w-7xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-xl md:text-3xl font-bold text-label-900 mb-8 md:mb-10 leading-tight text-center"
+          dangerouslySetInnerHTML={{ __html: t.raw('title') }}
+        />
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        className="space-y-3 mb-12"
-      >
-        {steps.map((step) => (
-          <motion.div
-            key={step.id}
-            variants={itemVariants}
-            className="bg-base rounded-[32px] py-2 px-3 flex items-center gap-4 shadow-sm border border-border-default"
-          >
-            <div className="shrink-0 w-[60px] h-[60px] rounded-full bg-primary text-white flex flex-col items-center justify-center shadow-sm leading-none">
-              <span className="text-[11px] font-medium opacity-90 mb-0.5">STEP</span>
-              <span className="text-xl font-bold">{step.id}</span>
-            </div>
-
-            <div className="flex-1 py-1">
-              <h3 className="font-bold text-sm text-label-900 mb-1 leading-none">
-                {step.title}
-              </h3>
-              <p className="text-[11px] text-label-500 whitespace-pre-line leading-tight">
-                {step.desc}
-              </p>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      <motion.div
-        variants={badgeContainerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="flex justify-center gap-3"
-      >
-        {badges.map((badge, idx) => {
-          let badgeStyle = "";
-          if (idx === 0) badgeStyle = "bg-base border-[2.5px] border-primary text-grey-900";
-          else if (idx === 1) badgeStyle = "bg-grey-400 text-white border-none";
-          else if (idx === 2) badgeStyle = "bg-primary text-white border-none";
-
-          return (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-16 max-w-6xl mx-auto"
+        >
+          {steps.map((step) => (
             <motion.div
-              key={badge}
-              variants={badgeVariants}
-              whileTap={{ scale: 0.95 }}
-              className={cn(
-                "flex flex-col items-center justify-center rounded-full shadow-md text-center p-2 shrink-0 cursor-pointer",
-                badgeStyle
-              )}
-              style={{ width: '100px', height: '100px' }}
+              key={step.id}
+              variants={itemVariants}
+              className="bg-base rounded-[32px] py-4 md:py-6 px-4 md:px-6 flex flex-col items-center text-center gap-4 md:gap-5 shadow-sm border border-border-default h-full"
             >
-              <span className={cn(
-                "text-[13px] font-bold leading-snug break-keep whitespace-pre-line",
-                idx === 0 ? "text-label-900" : "text-white"
-              )}>
-                {t(`${badge}`)}
-              </span>
+              <div className="shrink-0 w-[60px] h-[60px] md:w-[70px] md:h-[70px] rounded-full bg-primary text-white flex flex-col items-center justify-center shadow-sm leading-none">
+                <span className="text-[11px] md:text-xs font-medium opacity-90 mb-0.5">STEP</span>
+                <span className="text-xl md:text-2xl font-bold">{step.id}</span>
+              </div>
+
+              <div className="flex-1 py-1">
+                <h3 className="font-bold text-sm md:text-lg text-label-900 mb-2 leading-tight">
+                  {step.title}
+                </h3>
+                <p className="text-[11px] md:text-sm text-label-500 whitespace-pre-line leading-relaxed">
+                  {step.desc}
+                </p>
+              </div>
             </motion.div>
-          );
-        })}
-      </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          variants={badgeContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="flex justify-center gap-3 md:gap-4"
+        >
+          {badges.map((badge, idx) => {
+            let badgeStyle = "";
+            if (idx === 0) badgeStyle = "bg-base border-[2.5px] border-primary text-grey-900";
+            else if (idx === 1) badgeStyle = "bg-grey-400 text-white border-none";
+            else if (idx === 2) badgeStyle = "bg-primary text-white border-none";
+
+            return (
+              <motion.div
+                key={badge}
+                variants={badgeVariants}
+                whileTap={{ scale: 0.95 }}
+                className={cn(
+                  "flex flex-col items-center justify-center rounded-full shadow-md text-center p-2 shrink-0 cursor-pointer",
+                  badgeStyle
+                )}
+                style={{ width: '100px', height: '100px' }}
+              >
+                <span className={cn(
+                  "text-[13px] md:text-sm font-bold leading-snug break-keep whitespace-pre-line",
+                  idx === 0 ? "text-label-900" : "text-white"
+                )}>
+                  {t(`${badge}`)}
+                </span>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </div>
     </section>
   );
 }

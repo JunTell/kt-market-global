@@ -9,9 +9,19 @@
   },
   "Home": {
     "Hero": {
+      "badge_official": "KT 公式パートナー",
+      "badge_postpaid": "後払い専用",
       "title_1": "韓国での携帯契約、",
       "title_highlight": "外国人でも後払い可能です",
-      "desc": "複雑な書類は不要。外国人登録証があれば、韓国人と同じ後払いプランで契約できます。"
+      "desc": "複雑な書類は不要。外国人登録証があれば、韓国人と同じ後払いプランで契約できます。",
+      "feat1_title": "プリペイドは卒業",
+      "feat1_desc": "データが途切れるプリペイド携帯の代わりに、ずっと使える後払いプランを。",
+      "feat2_title": "最新スマホの分割払い",
+      "feat2_desc": "ビザの条件に応じて、端末代金を分割で支払うことができます。",
+      "feat3_title": "多言語サポート",
+      "feat3_desc": "韓国語が苦手でも大丈夫です。専門の相談員がサポートします。",
+      "cta_check": "今すぐ確認",
+      "no_hidden": "隠れた条件なし"
     },
     "Eligibility": {
       "badge": "Eligibility Check",
@@ -125,13 +135,38 @@
     "footer": "外国人基準で可能な場合のみ、正確にご案内します"
   },
   "WhyUs": {
-    "title": "なぜ外国人は ここで契約するのですか？",
-    "check1": "外国人の後払い開通実績が多数",
-    "check2": "携帯電話の購入まで一度に可能",
-    "check3": "不可能な条件は事前にご案内",
-    "check4": "不要な付加サービスの強要なし",
-    "check5": "公式通信キャリアパートナー運営",
-    "footer": "価格よりも安全な開通と\n失敗のない進行を優先します"
+    "title": "なぜ KT Market なのか？",
+    "subtitle": "* 私たちは全ての外国人に携帯を販売できるとは言いません。可能な条件のみ正確にご案内します。",
+    "Cards": {
+      "card1_title": "KT 公式代理店",
+      "card1_desc": "Official KT 認定店",
+      "card2_title": "隠し条件なし",
+      "card2_desc": "不透明な約款なし",
+      "card3_title": "プラン強要なし",
+      "card3_desc": "縛り・制約なし",
+      "card4_title": "前払い要求なし",
+      "card4_desc": "公式手続き進行"
+    },
+    "Comparison": {
+      "title": "Why <span class=\"text-red-500\">KT</span> Market?",
+      "Before": {
+        "title": "Before",
+        "item1": "店舗訪問必須",
+        "item2": "プリペイド要求",
+        "item3": "条件が不明確",
+        "item4": "説明不足"
+      },
+      "After": {
+        "title": "After with <span class=\"text-red-500\">KT</span> Market",
+        "item1_title": "オンライン申請",
+        "item1_desc": "Online application",
+        "item2_title": "後払いプラン可能",
+        "item2_desc": "Postpaid plans",
+        "item3_title": "公式手続き進行",
+        "item3_desc": "Official process"
+      },
+      "quote": "\"We don't say yes to every foreigner... ✔ we only guide you through what is possible.\""
+    }
   },
   "Form": {
     "title": "相談受付",
@@ -200,7 +235,9 @@
     },
     "Page": {
       "select_plan_button": "プランを選択して特典を確認",
-      "submit_application": "申込書作成"
+      "submit_application": "申込書作成",
+      "price_info": "価格情報",
+      "final_price": "最終購入価格"
     },
     "Order": {
       "default_country": "Republic of Korea",
