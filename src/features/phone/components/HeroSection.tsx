@@ -103,7 +103,7 @@ export default function HeroSection() {
                             <a
                                 href="#eligibility-section"
                                 className="inline-flex items-center justify-center h-12 md:h-14 px-8 md:px-10 text-base md:text-lg font-bold rounded-2xl
-                                           transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] cursor-pointer shadow-xl w-full md:w-auto
+                                           transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] cursor-pointer shadow-xl w-full md:w-[280px]
                                            hover:brightness-105 hover:shadow-[0_14px_36px_rgba(255,77,77,0.45)] hover:-translate-y-[1px]"
                                 style={{
                                     background:
@@ -119,7 +119,7 @@ export default function HeroSection() {
                             <a
                                 href="#products-section"
                                 className="inline-flex items-center justify-center h-10 md:h-12 px-6 md:px-8 text-sm md:text-base font-medium rounded-xl
-                                           transition-all duration-200 hover:bg-white/10 active:scale-[0.98] cursor-pointer w-full md:w-auto"
+                                           transition-all duration-200 hover:bg-white/10 active:scale-[0.98] cursor-pointer w-full md:w-[280px]"
                                 style={{ color: 'rgba(255, 255, 255, 0.8)' }}
                             >
                                 <span className="border-b border-current pb-0.5">{t("cta_subscription")}</span>
