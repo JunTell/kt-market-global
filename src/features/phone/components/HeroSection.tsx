@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { CheckCircle2, ShieldCheck } from 'lucide-react';
+import Image from 'next/image';
 
 /**
  * HeroSection Component
@@ -18,9 +19,9 @@ export default function HeroSection() {
 
     return (
         <section
-            className="relative w-full min-h-[500px] md:min-h-[600px] flex flex-col items-center justify-center px-6 md:px-12 py-12 md:py-24 overflow-hidden"
+            className="relative w-full min-h-[300px] md:min-h-[340px] flex flex-col items-center justify-center px-6 md:px-12 py-8 md:py-10 overflow-hidden"
             style={{
-                backgroundColor: 'var(--trust-bg-900)'
+                background: 'linear-gradient(90deg, #111C2E 0%, #0A2850 100%)'
             }}
         >
             {/* Premium Grid Pattern Overlay */}
@@ -56,36 +57,36 @@ export default function HeroSection() {
 
             {/* Responsive Container */}
             <div className="w-full max-w-layout-max mx-auto relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                     {/* Left Column: Text Content */}
                     <div className="text-center md:text-left">
                         {/* Trust Badges */}
-                        <div className="flex flex-wrap gap-2 mb-6 justify-center md:justify-start">
+                        <div className="flex flex-wrap gap-2 mb-4 justify-center md:justify-start">
                             <div
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold"
+                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] md:text-xs font-bold"
                                 style={{
                                     backgroundColor: 'var(--trust-safe)',
                                     color: 'var(--trust-text-white)'
                                 }}
                             >
-                                <ShieldCheck className="w-3.5 h-3.5" />
+                                <ShieldCheck className="w-3 h-3" />
                                 <span>{t('badge_official')}</span>
                             </div>
 
                             <div
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold"
+                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] md:text-xs font-bold"
                                 style={{
                                     backgroundColor: 'var(--trust-primary)',
                                     color: 'var(--trust-text-white)'
                                 }}
                             >
-                                <CheckCircle2 className="w-3.5 h-3.5" />
+                                <CheckCircle2 className="w-3 h-3" />
                                 <span>{t('badge_postpaid')}</span>
                             </div>
                         </div>
 
                         <h1
-                            className="text-3xl md:text-5xl font-bold leading-tight mb-6"
+                            className="text-2xl md:text-3xl font-bold leading-tight mb-4"
                             style={{ color: 'var(--trust-text-white)' }}
                         >
                             {t('title_1')}
@@ -95,18 +96,26 @@ export default function HeroSection() {
                             </span>
                         </h1>
 
-                        <p
-                            className="text-base md:text-lg leading-relaxed mb-10"
-                            style={{ color: 'var(--trust-text-gray)' }}
-                        >
-                            {t('desc')}
-                        </p>
+                        <div className="mb-6 pl-1 border-l-4 border-trust-primary/30">
+                            <p
+                                className="text-xs md:text-sm font-bold mb-1"
+                                style={{ color: 'var(--trust-text-gray)' }}
+                            >
+                                KT Official Dealer <span style={{ color: 'var(--trust-primary)' }}>KT</span>
+                            </p>
+                            <p
+                                className="text-[10px] md:text-xs font-medium opacity-80"
+                                style={{ color: 'var(--trust-text-gray)' }}
+                            >
+                                {t('desc')}
+                            </p>
+                        </div>
 
                         {/* CTA Button */}
-                        <div className="flex justify-center md:justify-start mb-8 md:mb-0">
+                        <div className="flex justify-center md:justify-start mb-6 md:mb-0">
                             <a
                                 href="#eligibility-section"
-                                className="inline-flex items-center justify-center h-14 md:h-16 px-8 md:px-12 text-lg md:text-xl font-bold rounded-lg transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+                                className="inline-flex items-center justify-center h-10 md:h-12 px-6 md:px-8 text-sm md:text-base font-bold rounded-lg transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
                                 style={{
                                     backgroundColor: 'var(--trust-accent)',
                                     color: 'var(--trust-text-white)',
@@ -118,93 +127,18 @@ export default function HeroSection() {
                         </div>
                     </div>
 
-                    {/* Right Column: Features Grid */}
-                    <div className="grid grid-cols-1 gap-4">
-                        {/* Feature 1 */}
-                        <div
-                            className="p-5 md:p-6 rounded-2xl border border-white/5"
-                            style={{ backgroundColor: 'var(--trust-bg-800)' }}
-                        >
-                            <div className="flex items-start gap-4">
-                                <div className="p-2 rounded-lg bg-trust-safe/10">
-                                    <CheckCircle2
-                                        className="w-5 h-5 md:w-6 md:h-6"
-                                        style={{ color: 'var(--trust-safe)' }}
-                                    />
-                                </div>
-                                <div>
-                                    <h3
-                                        className="font-bold text-base md:text-lg mb-1"
-                                        style={{ color: 'var(--trust-text-white)' }}
-                                    >
-                                        {t('feat1_title')}
-                                    </h3>
-                                    <p
-                                        className="text-sm md:text-base opacity-80"
-                                        style={{ color: 'var(--trust-text-gray)' }}
-                                    >
-                                        {t('feat1_desc')}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Feature 2 */}
-                        <div
-                            className="p-5 md:p-6 rounded-2xl border border-white/5"
-                            style={{ backgroundColor: 'var(--trust-bg-800)' }}
-                        >
-                            <div className="flex items-start gap-4">
-                                <div className="p-2 rounded-lg bg-trust-safe/10">
-                                    <CheckCircle2
-                                        className="w-5 h-5 md:w-6 md:h-6"
-                                        style={{ color: 'var(--trust-safe)' }}
-                                    />
-                                </div>
-                                <div>
-                                    <h3
-                                        className="font-bold text-base md:text-lg mb-1"
-                                        style={{ color: 'var(--trust-text-white)' }}
-                                    >
-                                        {t('feat2_title')}
-                                    </h3>
-                                    <p
-                                        className="text-sm md:text-base opacity-80"
-                                        style={{ color: 'var(--trust-text-gray)' }}
-                                    >
-                                        {t('feat2_desc')}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Feature 3 */}
-                        <div
-                            className="p-5 md:p-6 rounded-2xl border border-white/5"
-                            style={{ backgroundColor: 'var(--trust-bg-800)' }}
-                        >
-                            <div className="flex items-start gap-4">
-                                <div className="p-2 rounded-lg bg-trust-safe/10">
-                                    <CheckCircle2
-                                        className="w-5 h-5 md:w-6 md:h-6"
-                                        style={{ color: 'var(--trust-safe)' }}
-                                    />
-                                </div>
-                                <div>
-                                    <h3
-                                        className="font-bold text-base md:text-lg mb-1"
-                                        style={{ color: 'var(--trust-text-white)' }}
-                                    >
-                                        {t('feat3_title')}
-                                    </h3>
-                                    <p
-                                        className="text-sm md:text-base opacity-80"
-                                        style={{ color: 'var(--trust-text-gray)' }}
-                                    >
-                                        {t('feat3_desc')}
-                                    </p>
-                                </div>
-                            </div>
+                    {/* Right Column: ARC Illustration */}
+                    <div className="relative flex justify-center md:justify-end">
+                        <div className="relative w-full max-w-[320px] md:max-w-[440px]">
+                            {/* Main ARC Image */}
+                            <Image
+                                src="/images/신분증이미지1.png"
+                                alt="Foreigner Registration Card"
+                                width={500}
+                                height={320}
+                                className="w-full h-auto drop-shadow-2xl"
+                                priority
+                            />
                         </div>
                     </div>
                 </div>
