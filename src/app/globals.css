@@ -1,11 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  /* 1. Spacing (Mobile & Section) */
+  /* 1. Layout */
+  --layout-max-width: 940px;
+  --layout-mobile-max-width: 440px;
+
+  /* 2. Spacing (Mobile & Section) */
   --spacing-container-px: 24px;
   --spacing-section-gap: 48px;
 
-  /* 2. Colors - Toss Style Grayscale */
+  /* 3. Colors - Toss Style Grayscale */
   --grey-900: #191F28;
   /* Primary Text / Title */
   --grey-800: #333D4B;
@@ -25,12 +29,11 @@
   /* Background Light */
   --grey-50: #F9FAFB;
 
-  /* 2.1 Status Colors */
+  /* 3.1 Status Colors */
   --status-error: #F04452;
   --status-success: #2B96ED;
-  /* Added for completeness */
 
-  /* 2.2 Border System (Semantic) */
+  /* 3.2 Border System (Semantic) */
   --border-divider: var(--grey-100);
   /* Lv1: List Divider #F2F4F6 */
   --border-default: var(--grey-200);
@@ -40,9 +43,8 @@
   --border-focus: var(--blue-default);
   /* Lv4: Focus State #3182F6 */
   --border-error: var(--status-error);
-  /* Lv5: Error State #F04452 */
 
-  /* 2.3 Background System (Layering) */
+  /* 3.3 Background System (Layering) */
   --bg-base: #FAFAFA;
   /* Comfortable White */
   --bg-grouped: #F2F4F6;
@@ -52,7 +54,7 @@
   --bg-pressed: #F2F4F6;
   /* Pressed State */
 
-  /* 3. Colors - Brand & Functional */
+  /* 4. Colors - Brand & Functional */
   --primary-default: #3182F6;
   /* Toss Blue */
   --primary-hover: #1B64DA;
@@ -67,23 +69,28 @@
 
   --overlay: rgba(0, 0, 0, 0.4);
 
-  /* Trust Theme (Main Page Hero) */
-  --trust-bg-900: #0F1216; /* Deep Dark Navy for Hero Background */
-  --trust-bg-800: #191F28; /* Card Background */
+  /* 5. Trust Theme (Main Page Hero) */
+  --trust-bg-900: #0F1216;
+  /* Hero Background */
+  --trust-bg-800: #191F28;
+  /* Card Background */
   --trust-text-white: #FFFFFF;
   --trust-text-gray: #B0B8C1;
-  --trust-primary: #0055D4; /* KT Official Blue */
-  --trust-accent: #FF3B30; /* High-attention CTA (Red/Orange) */
-  --trust-safe: #34C759; /* Certification/Success Green */
+  --trust-primary: #0055D4;
+  /* KT Official Blue */
+  --trust-accent: #FF3B30;
+  /* CTA Red */
+  --trust-safe: #34C759;
+  /* Success Green */
 
-  /* 4. Radius */
+  /* 6. Radius */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-2xl: 32px;
 
-  /* 5. Shadows */
+  /* 7. Shadows */
   --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.06);
   --shadow-floating: 0 4px 20px rgba(0, 0, 0, 0.12);
   --shadow-bottom-sheet: 0 -4px 20px rgba(0, 0, 0, 0.1);
@@ -96,6 +103,12 @@
   /* Spacing Extension */
   --spacing-container-px: var(--spacing-container-px);
   --spacing-section-gap: var(--spacing-section-gap);
+
+  /* Layout Extension */
+  --width-layout-max: var(--layout-max-width);
+  --width-mobile-max: var(--layout-mobile-max-width);
+  --max-width-layout-max: var(--layout-max-width);
+  --max-width-mobile-max: var(--layout-mobile-max-width);
 
   /* Color Extension */
   --color-grey-900: var(--grey-900);
@@ -125,6 +138,13 @@
   --color-brand-point: var(--brand-point);
 
   --color-blue: var(--blue-default);
+
+  /* Trust Theme Colors */
+  --color-trust-bg-900: var(--trust-bg-900);
+  --color-trust-bg-800: var(--trust-bg-800);
+  --color-trust-primary: var(--trust-primary);
+  --color-trust-accent: var(--trust-accent);
+  --color-trust-safe: var(--trust-safe);
 
   /* Background System Extension */
   --color-bg-base: var(--bg-base);
@@ -179,9 +199,19 @@
     }
 
     to {
+      opacity: 1;
       transform: translateY(0);
     }
   }
+}
+
+/* Layout Utilities */
+@utility max-w-layout-max {
+  max-width: var(--layout-max-width);
+}
+
+@utility max-w-mobile-max {
+  max-width: var(--layout-mobile-max-width);
 }
 
 /* Custom Typography Utilities (as per requested specs) */

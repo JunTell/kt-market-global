@@ -32,7 +32,7 @@ export default function WhyChooseUs() {
 
   return (
     <section className="py-10 md:py-16 px-5 md:px-12 bg-bg-grouped overflow-hidden">
-      <div className="w-full max-w-7xl mx-auto">
+      <div className="w-full max-w-layout-max mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ export default function WhyChooseUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="space-y-2.5 md:space-y-3 mb-8 md:mb-10 max-w-4xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-8 md:mb-10 mx-auto"
         >
           {checks.map((key) => (
             <motion.div
@@ -74,7 +74,7 @@ export default function WhyChooseUs() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5, duration: 0.5, ease: "backOut" }}
-          className="bg-grey-700/50 rounded-xl p-4 md:p-6 text-center text-grey-100 shadow-md max-w-4xl mx-auto"
+          className="bg-grey-700/50 rounded-xl p-4 md:p-6 text-center text-grey-100 shadow-md mx-auto"
         >
           <p className="text-sm md:text-base font-bold whitespace-pre-line leading-relaxed">
             {t('footer')}

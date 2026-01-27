@@ -88,7 +88,9 @@ export default async function LocaleLayout({
         suppressHydrationWarning={true}
       >
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <div className="w-full max-w-mobile-max md:max-w-layout-max mx-auto bg-base min-h-screen shadow-floating">
+            {children}
+          </div>
         </NextIntlClientProvider>
       </body>
     </html>

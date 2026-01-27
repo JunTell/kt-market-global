@@ -24,7 +24,7 @@ export const Notice = ({
   return (
     <div
       className={cn(
-        "flex flex-col gap-3 p-5 w-full",
+        "flex flex-col gap-3 p-5 md:px-12 w-full",
         "bg-bg-grouped", // globals.css: --bg-grouped (#F2F4F6)
         "rounded-md",        // globals.css: --radius-md (8px)
         className

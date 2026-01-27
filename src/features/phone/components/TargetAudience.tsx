@@ -32,7 +32,7 @@ export default function TargetAudience() {
 
   return (
     <section className="py-10 md:py-16 px-5 md:px-12 bg-[#1F1F1F] text-grey-100 overflow-hidden">
-      <div className="w-full max-w-7xl mx-auto">
+      <div className="w-full max-w-layout-max mx-auto">
         <motion.h2
           initial={{ opacity: 0, x: -15 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -47,7 +47,7 @@ export default function TargetAudience() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="space-y-2.5 md:space-y-3 mb-8 md:mb-10 max-w-4xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-8 md:mb-10 mx-auto"
         >
           {checks.map((key) => (
             <motion.div
@@ -67,7 +67,7 @@ export default function TargetAudience() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
-          className="bg-[#747474] rounded-xl px-4 md:px-6 py-3 md:py-4 text-center shadow-lg shadow-[#747474]/30 max-w-4xl mx-auto"
+          className="bg-[#747474] rounded-xl px-4 md:px-6 py-3 md:py-4 text-center shadow-lg shadow-[#747474]/30 mx-auto"
         >
           <p className="text-sm md:text-base font-bold leading-relaxed">
             {t('footer')}

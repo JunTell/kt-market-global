@@ -252,19 +252,19 @@ export default function ModelListClient({
       </div>
 
       {/* 3. 리스트 영역 (필터링된 목록 표시) */}
-      <div className="flex flex-col gap-4 mt-[30px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-[30px]">
         {loading && (
-          <div className="text-center p-10 text-label-500 text-sm">
+          <div className="text-center p-10 text-label-500 text-sm md:col-span-2">
             {t('Phone.ModelList.loading')}
           </div>
         )}
         {error && (
-          <div className="text-center p-10 text-status-error text-sm">
+          <div className="text-center p-10 text-status-error text-sm md:col-span-2">
             {error}
           </div>
         )}
         {!loading && !error && filteredDeals.length === 0 && (
-          <div className="text-center p-10 text-label-500 text-sm">
+          <div className="text-center p-10 text-label-500 text-sm md:col-span-2">
             {t('Phone.ModelList.no_models')}
           </div>
         )}

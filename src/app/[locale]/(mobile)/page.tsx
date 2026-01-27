@@ -49,7 +49,7 @@ export default function Home() {
         id="eligibility-section"
         className="py-10 md:py-16 bg-base px-4 md:px-12 border-y border-grey-200"
       >
-        <div className="w-full max-w-7xl mx-auto">
+        <div className="w-full max-w-layout-max mx-auto">
           <div className="max-w-md mx-auto text-center mb-6 md:mb-8">
             <span className="text-primary font-bold tracking-wider uppercase text-[10px] md:text-xs mb-1.5 block">
               {t('Home.Eligibility.badge')}

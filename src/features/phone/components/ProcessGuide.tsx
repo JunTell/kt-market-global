@@ -76,13 +76,13 @@ export default function ProcessGuide() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="space-y-3 md:space-y-4 mb-12 md:mb-16 max-w-4xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-16 max-w-6xl mx-auto"
         >
           {steps.map((step) => (
             <motion.div
               key={step.id}
               variants={itemVariants}
-              className="bg-base rounded-[32px] py-2 md:py-3 px-3 md:px-4 flex items-center gap-4 md:gap-5 shadow-sm border border-border-default"
+              className="bg-base rounded-[32px] py-4 md:py-6 px-4 md:px-6 flex flex-col items-center text-center gap-4 md:gap-5 shadow-sm border border-border-default h-full"
             >
               <div className="shrink-0 w-[60px] h-[60px] md:w-[70px] md:h-[70px] rounded-full bg-primary text-white flex flex-col items-center justify-center shadow-sm leading-none">
                 <span className="text-[11px] md:text-xs font-medium opacity-90 mb-0.5">STEP</span>
@@ -90,10 +90,10 @@ export default function ProcessGuide() {
               </div>
 
               <div className="flex-1 py-1">
-                <h3 className="font-bold text-sm md:text-base text-label-900 mb-1 leading-none">
+                <h3 className="font-bold text-sm md:text-lg text-label-900 mb-2 leading-tight">
                   {step.title}
                 </h3>
-                <p className="text-[11px] md:text-xs text-label-500 whitespace-pre-line leading-tight">
+                <p className="text-[11px] md:text-sm text-label-500 whitespace-pre-line leading-relaxed">
                   {step.desc}
                 </p>
               </div>
