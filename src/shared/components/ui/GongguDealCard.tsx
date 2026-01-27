@@ -83,7 +83,7 @@ export default function GongguDealCard(props: Props) {
       sessionStorage.setItem("asamoDeal", JSON.stringify(payload))
     }
 
-    const targetUrl = model ? `${detailPath}?model=${model}` : detailPath
+    const targetUrl = model ? `/${locale}${detailPath}?model=${model}` : `/${locale}${detailPath}`
     router.push(targetUrl)
   }
 
