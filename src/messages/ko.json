@@ -9,9 +9,19 @@
   },
   "Home": {
     "Hero": {
+      "badge_official": "KT 공식 파트너",
+      "badge_postpaid": "후불 전용",
       "title_1": "한국에서 휴대폰 개통,",
       "title_highlight": "외국인도 후불로 가능합니다",
-      "desc": "복잡한 서류 없이 외국인등록증만 있다면, 내국인과 똑같은 후불 요금제로 개통하세요."
+      "desc": "복잡한 서류 없이 외국인등록증만 있다면, 내국인과 똑같은 후불 요금제로 개통하세요.",
+      "feat1_title": "선불 요금제 NO",
+      "feat1_desc": "데이터가 끊기는 선불폰 대신 계속 쓰는 후불 요금제입니다.",
+      "feat2_title": "최신폰 할부 가능",
+      "feat2_desc": "비자 조건에 따라 기기값을 나누어 낼 수 있습니다.",
+      "feat3_title": "다국어 상담 지원",
+      "feat3_desc": "한국어가 서툴러도 괜찮습니다. 전문 상담원이 도와드려요.",
+      "cta_check": "지금 바로 확인하기",
+      "no_hidden": "숨겨진 조건 없음"
     },
     "Eligibility": {
       "badge": "Eligibility Check",

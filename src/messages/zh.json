@@ -9,9 +9,19 @@
   },
   "Home": {
     "Hero": {
+      "badge_official": "KT 官方合作伙伴",
+      "badge_postpaid": "仅限后付",
       "title_1": "在韩国开通手机，",
       "title_highlight": "外国人也可以后付",
-      "desc": "无需复杂材料，只要有外国人登录证，即可办理和韩国人一样的后付套餐。"
+      "desc": "无需复杂材料，只要有外国人登录证，即可办理和韩国人一样的后付套餐。",
+      "feat1_title": "拒绝预付卡",
+      "feat1_desc": "告别数据中断的预付卡，使用持续连通的后付套餐。",
+      "feat2_title": "最新手机分期",
+      "feat2_desc": "根据签证条件，可以分期支付设备费用。",
+      "feat3_title": "多语言咨询支持",
+      "feat3_desc": "韩语不流利也没关系，专业顾问为您提供帮助。",
+      "cta_check": "立即确认",
+      "no_hidden": "无隐藏条件"
     },
     "Eligibility": {
       "badge": "Eligibility Check",

@@ -9,9 +9,19 @@
   },
   "Home": {
     "Hero": {
+      "badge_official": "KT Official Partner",
+      "badge_postpaid": "Postpaid Only",
       "title_1": "Mobile Plans in Korea,",
       "title_highlight": "Postpaid Available for Foreigners",
-      "desc": "No complex paperwork. Just your ARC, and you can get the same postpaid plans as locals."
+      "desc": "No complex paperwork. Just your ARC, and you can get the same postpaid plans as locals.",
+      "feat1_title": "No Prepaid Needed",
+      "feat1_desc": "Switch to a continuous postpaid plan instead of prepaid ones that cut off data.",
+      "feat2_title": "Installments Available",
+      "feat2_desc": "Pay for the latest devices in installments depending on your visa conditions.",
+      "feat3_title": "Multi-language Support",
+      "feat3_desc": "No Korean? No problem. Professional agents are here to help.",
+      "cta_check": "Check Eligibility Now",
+      "no_hidden": "No Hidden Conditions"
     },
     "Eligibility": {
       "badge": "Eligibility Check",

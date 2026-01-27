@@ -67,6 +67,15 @@
 
   --overlay: rgba(0, 0, 0, 0.4);
 
+  /* Trust Theme (Main Page Hero) */
+  --trust-bg-900: #0F1216; /* Deep Dark Navy for Hero Background */
+  --trust-bg-800: #191F28; /* Card Background */
+  --trust-text-white: #FFFFFF;
+  --trust-text-gray: #B0B8C1;
+  --trust-primary: #0055D4; /* KT Official Blue */
+  --trust-accent: #FF3B30; /* High-attention CTA (Red/Orange) */
+  --trust-safe: #34C759; /* Certification/Success Green */
+
   /* 4. Radius */
   --radius-sm: 6px;
   --radius-md: 10px;
