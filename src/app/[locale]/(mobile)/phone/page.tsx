@@ -1,424 +1,130 @@
-"use client"
-
-import { useEffect, useState, useRef, Suspense } from "react"
-import { useRouter, useSearchParams, useParams } from "next/navigation"
-import { createClient } from "@/shared/api/supabase/client"
-import { calcKTmarketSubsidy } from "@/features/phone/lib/asamo-utils"
-import { useTranslations } from "next-intl"
-import { formatPrice } from "@/shared/lib/format"
+import { Suspense } from "react"
+import { createClient } from "@/shared/api/supabase/server"
+import { getTranslations } from "next-intl/server"
 import { parsePhoneModel, getDBModelKey } from "@/features/phone/lib/phoneModel"
-import { calculateFinalDevicePrice } from "@/features/phone/lib/priceCalculation"
-
-import JunCarousel from "@/features/phone/components/JunCarousel"
-import OptionSelector, { CapacityOption, ColorOption } from "@/features/phone/components/OptionSelector"
-import OptionSummary from "@/features/phone/components/OptionSummary"
-import Modal from "@/shared/components/ui/Modal"
-import PlanSelector from "@/features/phone/components/PlanSelector"
-import StickyBar from "@/features/phone/components/StickyBar"
-import { usePhoneStore } from "@/features/phone/model/usePhoneStore"
-import { MODEL_VARIANTS, getPlanMetadata, getColorMap } from "@/features/phone/lib/phonedata"
+import { getPlanMetadata } from "@/features/phone/lib/phonedata"
+import { calcKTmarketSubsidy } from "@/features/phone/lib/asamo-utils"
 import { checkIsSoldOut } from "@/features/phone/lib/stock"
-
+import PhoneDetailClient from "@/features/phone/components/PhoneDetailClient" // Verify path
 import PhoneDetailSkeleton from "@/features/phone/components/skeleton/PhoneDetailSkeleton"
 
-export default function PhonePage() {
-    // const t = useTranslations() // Unused
+type Props = {
+    params: Promise<{ locale: string }>
+    searchParams: Promise<{ model?: string }>
+}
 
+export default async function PhonePage({ params, searchParams }: Props) {
     return (
         <Suspense fallback={<PhoneDetailSkeleton />}>
-            <PhoneContent />
+            <PhoneServerLoader params={params} searchParams={searchParams} />
         </Suspense>
     )
 }
 
-function PhoneContent() {
-    const t = useTranslations()
-    const searchParams = useSearchParams()
-    const router = useRouter()
-    const params = useParams()
-    const locale = params.locale as string
-    const supabase = createClient()
-    const store = usePhoneStore()
+async function PhoneServerLoader({ params, searchParams }: Props) {
+    const { locale } = await params
+    const { model } = await searchParams
+    const t = await getTranslations({ locale })
+    const supabase = await createClient()
 
-    const [step, setStep] = useState<1 | 2>(1)
-    const [loading, setLoading] = useState(true)
-    const [isModalOpen, setIsModalOpen] = useState(false)
-
-    const lastFetchedKey = useRef<string>("")
-
-    // 다국어 데이터
-    const PLAN_METADATA = getPlanMetadata(t)
-    const COLOR_MAP = getColorMap(t)
-
-    const [availableColors, setAvailableColors] = useState<string[]>([])
-    const [colorImages, setColorImages] = useState<Record<string, string[]>>({})
-
-    // URL 파싱
-    const urlModel = searchParams.get("model") || "aip17-256"
+    // 1. URL Parsing
+    const urlModel = model || "aip17-256"
     const { prefix, capacity, color: colorFromUrl } = parsePhoneModel(urlModel)
+    const dbModelKey = getDBModelKey(prefix, capacity)
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const dbModelKey = getDBModelKey(prefix, capacity)
+    // 2. Default Preferences (Server-side default)
+    // Note: Use chg/chg as safe defaults. Client side will override if needed via store,
+    // but initially we render based on defaults.
+    const regType = "chg"
+    const planTable = "device_plans_chg"
 
-            if (lastFetchedKey.current === dbModelKey && availableColors.length > 0) {
-                const selectedColor = colorFromUrl && availableColors.includes(colorFromUrl)
-                    ? colorFromUrl
-                    : availableColors[0]
+    // 3. Parallel Data Fetching
+    const PLAN_METADATA = getPlanMetadata(t)
 
-                const newImageUrls = colorImages[selectedColor] || []
-                const newImageUrl = newImageUrls[0] || store.imageUrl
+    const [deviceRes, subsidyRes, planRes] = await Promise.all([
+        supabase.from("devices").select("*").eq("model", dbModelKey).maybeSingle(),
+        supabase.from("ktmarket_subsidy").select("*").eq("model", dbModelKey).maybeSingle(),
+        supabase.from(planTable).select("plan_id, price, disclosure_subsidy").eq("model", dbModelKey).in("plan_id", PLAN_METADATA.map(p => p.dbId))
+    ])
 
-                store.setStore({
-                    model: urlModel,
-                    color: selectedColor,
-                    imageUrl: newImageUrl,
-                    imageUrls: newImageUrls,
-                })
-                return
-            }
+    if (!deviceRes.data) {
+        // Handle 404 or redirect? For now, maybe return null or error UI
+        return <div className="p-10 text-center">Device not found</div>
+    }
 
-            if (!store.title) setLoading(true)
+    const device = deviceRes.data
+    const subsidies = subsidyRes.data || {}
+    const dbPlans = planRes.data || []
 
-            try {
-                const prefStr = sessionStorage.getItem("asamo_user_preference")
-                const pref = prefStr ? JSON.parse(prefStr) : {}
-                const regType = pref.registrationType || "chg"
-                const carrier = pref.userCarrier || ""
-                const planTable = regType === "chg" ? "device_plans_chg" : "device_plans_mnp"
+    // 4. Data Merging & Logic
+    const mergedPlans = PLAN_METADATA.map(meta => {
+        const dbData = dbPlans.find(p => p.plan_id === meta.dbId)
+        const price = meta.fixedPrice || dbData?.price || 0
+        const marketSubsidy = calcKTmarketSubsidy(meta.dbId, price, subsidies, dbModelKey, regType)
 
-                // DB 쿼리 (getDBModelKey에서 이미 예외 처리됨)
-                const [deviceRes, subsidyRes, planRes] = await Promise.all([
-                    supabase.from("devices").select("*").eq("model", dbModelKey).maybeSingle(),
-                    supabase.from("ktmarket_subsidy").select("*").eq("model", dbModelKey).maybeSingle(),
-                    supabase.from(planTable).select("plan_id, price, disclosure_subsidy").eq("model", dbModelKey).in("plan_id", PLAN_METADATA.map(p => p.dbId))
-                ])
-
-                if (!deviceRes.data) {
-                    console.error("Device not found for:", dbModelKey)
-                    throw new Error("Device not found")
-                }
-
-                const device = deviceRes.data
-                const subsidies = subsidyRes.data || {}
-                const dbPlans = planRes.data || []
-                // 요금제 데이터 병합
-                const mergedPlans = PLAN_METADATA.map(meta => {
-                    const dbData = dbPlans.find(p => p.plan_id === meta.dbId)
-                    const price = meta.fixedPrice || dbData?.price || 0
-                    const marketSubsidy = calcKTmarketSubsidy(meta.dbId, price, subsidies, dbModelKey, regType)
-
-                    const planData = {
-                        id: meta.uuid,
-                        dbId: meta.dbId,
-                        name: meta.name,
-                        data: meta.data,
-                        description: meta.description,
-                        calls: meta.calls,
-                        texts: meta.texts,
-                        price,
-                        disclosureSubsidy: dbData?.disclosure_subsidy || 0,
-                        marketSubsidy
-                    }
-
-                    return planData
-                })
-
-                // 색상 및 이미지 처리
-                // 1. 이미지가 있는 모든 색상을 가져옴 (품절 여부 관계없이)
-                const colors = (device.colors_en || []).filter((c: string) => {
-                    return device.images?.[c]?.length > 0
-                })
-                setAvailableColors(colors)
-
-                const cdnUrl = process.env.NEXT_PUBLIC_CDN_URL || ""
-                const imagesMap: Record<string, string[]> = {}
-
-                // 이미지 맵 생성
-                colors.forEach((c: string) => {
-                    const files = device.images?.[c] || []
-                    imagesMap[c] = files.map((f: string) =>
-                        `${cdnUrl}/phone/${device.category}/${c}/${f}.png`
-                    )
-                })
-                setColorImages(imagesMap)
-
-                // 기본 선택 로직: URL 색상이 유효하고 재고가 있으면 사용, 아니면 첫 번째 "재고 있는" 색상 사용
-                const inStockColors = colors.filter((c: string) => !checkIsSoldOut(prefix, capacity, c))
-
-                const isUrlColorValid = colorFromUrl && colors.includes(colorFromUrl)
-                const isUrlColorInStock = isUrlColorValid && !checkIsSoldOut(prefix, capacity, colorFromUrl)
-
-                // 선택 우선순위:
-                // 1. URL 색상이 유효하고 재고가 있음 -> URL 색상
-                // 2. URL 색상이 유효하지만 재고가 없음 -> 첫 번째 재고 있는 색상으로 변경 (사용자 편의)
-                // 3. 첫 번째 재고 있는 색상
-                // 4. 재고가 하나도 없으면 그냥 첫 번째 색상 (품절 상태로 보여줌)
-                const selectedColor = isUrlColorInStock
-                    ? colorFromUrl
-                    : (inStockColors[0] || colors[0] || (device.colors_en || [])[0] || "black")
-
-                const currentImageUrls = imagesMap[selectedColor] || []
-                const currentImageUrl = currentImageUrls[0] || ""
-
-                // URL 업데이트 조건: 
-                // 1. URL 색상이 아예 유효하지 않음 (목록에 없음)
-                // 2. URL 색상이 품절임 (이 경우 재고 있는 색상으로 이동시켜주는 것이 좋음)
-                if (colorFromUrl !== selectedColor) {
-                    const correctedModel = `${prefix}-${capacity}-${selectedColor}`
-                    router.replace(`/${locale}/phone?model=${correctedModel}`, { scroll: false })
-                }
-
-                store.setStore({
-                    model: urlModel,
-                    title: device.pet_name,
-                    capacity: device.capacity,
-                    originPrice: device.price,
-                    color: selectedColor,
-                    imageUrl: currentImageUrl,
-                    imageUrls: currentImageUrls,
-                    plans: mergedPlans,
-                    subsidies,
-                    registrationType: regType,
-                    userCarrier: carrier,
-                })
-
-                lastFetchedKey.current = dbModelKey
-
-            } catch (e) {
-                console.error(e)
-            } finally {
-                setLoading(false)
-            }
+        return {
+            id: meta.uuid,
+            dbId: meta.dbId,
+            name: meta.name,
+            data: meta.data,
+            description: meta.description,
+            calls: meta.calls,
+            texts: meta.texts,
+            price,
+            disclosureSubsidy: dbData?.disclosure_subsidy || 0,
+            marketSubsidy
         }
-
-        fetchData()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [urlModel, prefix, capacity, colorFromUrl])
-
-    // --- 핸들러 ---
-    const handleCapacityChange = (newCap: string) => {
-        store.setStore({ capacity: newCap })
-        const newModel = `${prefix}-${newCap}-${store.color}`
-        router.replace(`/${locale}/phone?model=${newModel}`, { scroll: false })
-    }
-
-    const handleColorChange = (newColor: string) => {
-        const newImageUrls = colorImages[newColor] || []
-        const newImageUrl = newImageUrls[0] || store.imageUrl
-
-        store.setStore({
-            color: newColor,
-            imageUrl: newImageUrl,
-            imageUrls: newImageUrls, // 전체 리스트 업데이트
-        })
-        const newModel = `${prefix}-${capacity}-${newColor}`
-        router.replace(`/${locale}/phone?model=${newModel}`, { scroll: false })
-    }
-
-    const handleNextStep = () => {
-        setStep(2)
-        window.scrollTo({ top: 0, behavior: "smooth" })
-    }
-
-    const handleOrder = () => {
-        const payload = {
-            model: store.model,
-            title: store.title,
-            capacity: store.capacity,
-            color: store.color,
-            originPrice: store.originPrice,
-            imageUrl: store.imageUrl,
-            selectedPlanId: store.selectedPlanId,
-            discountMode: store.discountMode,
-            finalDevicePrice: finalPriceInfo.finalDevicePrice,
-            userCarrier: store.userCarrier,
-            registrationType: store.registrationType,
-            savedAt: new Date().toISOString()
-        }
-
-        sessionStorage.setItem("asamoDeal", JSON.stringify(payload))
-        router.push(`/${locale}/phone/order?model=${store.model}`)
-    }
-
-    // --- 옵션 데이터 ---
-    const capacityOpts: CapacityOption[] = (MODEL_VARIANTS[prefix] || []).map(c => ({
-        label: c === "1t" ? "1TB" : c === "2t" ? "2TB" : `${c}GB`,
-        value: c
-    }))
-
-    const colorOpts: ColorOption[] = availableColors.map(c => ({
-        label: COLOR_MAP[c] || c,
-        value: c,
-        // 대표 이미지만 전달 (썸네일용)
-        image: colorImages[c]?.[0] || "",
-        isSoldOut: checkIsSoldOut(prefix, capacity, c)
-    }))
-
-    // --- 가격 계산 ---
-    const currentPlan = store.plans.find(p => p.id === store.selectedPlanId)
-
-    const finalDevicePrice = calculateFinalDevicePrice({
-        originPrice: store.originPrice,
-        plan: currentPlan,
-        discountMode: store.discountMode,
-        registrationType: store.registrationType,
-        modelPrefix: prefix
     })
 
-    const finalPriceInfo = { finalDevicePrice }
+    // 5. Colors & Images
+    const colors = (device.colors_en || []).filter((c: string) => {
+        return device.images?.[c]?.length > 0
+    })
 
-    if (loading && !store.title) {
-        return <PhoneDetailSkeleton />
+    const cdnUrl = process.env.NEXT_PUBLIC_CDN_URL || ""
+    const imagesMap: Record<string, string[]> = {}
+
+    colors.forEach((c: string) => {
+        const files = device.images?.[c] || []
+        imagesMap[c] = files.map((f: string) =>
+            `${cdnUrl}/phone/${device.category}/${c}/${f}.png`
+        )
+    })
+
+    // 6. Selection Logic (Default Color)
+    const inStockColors = colors.filter((c: string) => !checkIsSoldOut(prefix, capacity, c))
+    const isUrlColorValid = colorFromUrl && colors.includes(colorFromUrl)
+    const isUrlColorInStock = isUrlColorValid && !checkIsSoldOut(prefix, capacity, colorFromUrl)
+
+    const selectedColor = isUrlColorInStock
+        ? colorFromUrl
+        : (inStockColors[0] || colors[0] || (device.colors_en || [])[0] || "black")
+
+    // Note: If URL color was invalid/OOS and we switched, we technically "redirect" logic
+    // But in Server Component we just render the CORRECT data. 
+    // The client component can optionally update URL on mount if it mismatches.
+
+    const currentImageUrls = imagesMap[selectedColor] || []
+    const currentImageUrl = currentImageUrls[0] || ""
+
+    const initialData = {
+        model: urlModel,
+        title: device.pet_name,
+        capacity: device.capacity,
+        color: selectedColor,
+        originPrice: device.price,
+        imageUrl: currentImageUrl,
+        imageUrls: currentImageUrls,
+        plans: mergedPlans,
+        subsidies,
+        registrationType: regType as "chg" | "mnp",
+        userCarrier: "",
+        availableColors: colors,
+        colorImages: imagesMap,
+        prefix
     }
 
     return (
-        <div className="w-full max-w-[780px] mx-auto bg-white min-h-screen pb-24 md:pb-8">
-            <div className={`md:flex md:gap-8 md:items-start md:py-12 ${step === 2 ? 'justify-center' : ''}`}>
-                {/* Left Column: Carousel - Only show in Step 1 */}
-                {step === 1 && (
-                    <div className="w-full md:w-1/2 md:sticky md:top-24">
-                        <div className="rounded-[2rem] overflow-hidden bg-gray-50/50 md:w-[350px] mx-auto">
-                            <JunCarousel urls={store.imageUrls} className="md:h-[350px]" />
-                        </div>
-                    </div>
-                )}
-
-                {/* Right Column: Details & Actions */}
-                <div className={`px-5 md:px-0 w-full mt-6 md:mt-0 ${step === 2 ? 'md:max-w-xl mx-auto' : 'md:w-1/2'}`}>
-                    {/* Only show Title & Price in Step 1 */}
-                    {step === 1 && (
-                        <div className="py-6 md:py-0 border-b border-gray-100 md:border-none mb-6">
-                            <div className="flex items-start justify-between mb-2">
-                                <div>
-                                    <h1 className="text-2xl md:text-2xl font-bold text-[#1d1d1f] mb-2">{store.title}</h1>
-                                    {/* Price Display for Desktop */}
-                                    <div className="hidden md:block">
-                                        <div className="flex items-baseline gap-2 mt-4">
-                                            <span className="text-xl font-bold text-[#1d1d1f]">
-                                                {formatPrice(finalPriceInfo.finalDevicePrice, locale)}{t('Phone.Common.won')}
-                                            </span>
-                                            {/* Discount Badge Logic if needed */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="md:hidden text-sm text-gray-500 text-right">
-                                    {store.capacity} · {COLOR_MAP[store.color] || store.color}
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {step === 1 && (
-                        <>
-                            {/* Option Selection Summary (Trigger) */}
-                            <div className="mb-6">
-                                <OptionSummary
-                                    selectedColor={store.color}
-                                    selectedColorName={COLOR_MAP[store.color] || store.color}
-                                    selectedCapacity={capacity}
-                                    imageUrl={store.imageUrl}
-                                    onClick={() => setIsModalOpen(true)}
-                                />
-                            </div>
-
-                            {/* Option Selection Modal */}
-                            <Modal
-                                isOpen={isModalOpen}
-                                onClose={() => setIsModalOpen(false)}
-                                title={t('Phone.OptionSelector.title')}
-                            >
-                                <OptionSelector
-                                    selectedCapacity={capacity}
-                                    selectedColorValue={store.color}
-                                    capacityOptions={capacityOpts}
-                                    colorOptions={colorOpts}
-                                    onSelectCapacity={(val) => {
-                                        handleCapacityChange(val)
-                                    }}
-                                    onSelectColor={(val) => {
-                                        handleColorChange(val)
-                                        setIsModalOpen(false) // Close modal on selection
-                                    }}
-                                />
-                                {/* Modal Action Button */}
-                                <button
-                                    onClick={() => setIsModalOpen(false)}
-                                    className="w-full mt-6 bg-[#0071e3] hover:bg-[#0077ED] text-white text-lg font-bold py-3.5 rounded-xl transition-colors cursor-pointer"
-                                >
-                                    {t('Phone.Page.select_plan_button')}
-                                </button>
-                            </Modal>
-
-                            {/* Desktop Button - Inline */}
-                            <div className="hidden md:block mt-8">
-                                <button
-                                    onClick={handleNextStep}
-                                    className="w-full bg-[#0071e3] hover:bg-[#0077ED] text-white text-lg font-bold py-4 rounded-xl transition-colors shadow-lg shadow-blue-500/20 cursor-pointer"
-                                >
-                                    {t('Phone.Page.select_plan_button')}
-                                </button>
-                            </div>
-
-                            {/* Mobile Sticky Bar remains */}
-                            <div className="md:hidden">
-                                <StickyBar
-                                    finalPrice=""
-                                    label={t('Phone.Page.select_plan_button')}
-                                    onClick={handleNextStep}
-                                />
-                            </div>
-                        </>
-                    )}
-
-                    {step === 2 && (
-                        <>
-                            {/* Pricing Info Section title as per image */}
-                            <div className="mb-6">
-                                <h2 className="text-xl font-bold text-[#1d1d1f]">{t('Phone.Page.price_info')}</h2>
-                            </div>
-
-                            {/* Discount Method & Plan Selector */}
-                            <PlanSelector
-                                plans={store.plans}
-                                selectedPlanId={store.selectedPlanId}
-                                discountMode={store.discountMode}
-                                originPrice={store.originPrice}
-                                ktMarketDiscount={0}
-                                registrationType={store.registrationType}
-                                modelPrefix={prefix}
-                                onSelectPlan={(id) => store.setStore({ selectedPlanId: id })}
-                                onChangeMode={(mode) => store.setStore({ discountMode: mode })}
-                            />
-
-                            {/* Desktop Submit Button */}
-                            <div className="hidden md:block mt-8">
-                                <div className="flex items-center justify-between mb-4">
-                                    <span className="text-gray-500 font-medium">{t('Phone.Page.final_price')}</span>
-                                    <span className="text-2xl font-bold text-[#1d1d1f]">
-                                        {formatPrice(finalPriceInfo.finalDevicePrice, locale)}원
-                                    </span>
-                                </div>
-                                <button
-                                    onClick={handleOrder}
-                                    className="w-full bg-[#0071e3] hover:bg-[#0077ED] text-white text-lg font-bold py-4 rounded-xl transition-colors shadow-lg shadow-blue-500/20 cursor-pointer"
-                                >
-                                    {t('Phone.Page.submit_application')}
-                                </button>
-                            </div>
-
-                            {/* Mobile Sticky Bar remains */}
-                            <div className="md:hidden">
-                                <StickyBar
-                                    finalPrice={`${formatPrice(finalPriceInfo.finalDevicePrice, locale)}${t('Phone.Common.won')}`}
-                                    label={t('Phone.Page.submit_application')}
-                                    onClick={handleOrder}
-                                />
-                            </div>
-                        </>
-                    )}
-                </div>
-            </div>
-        </div>
+        <PhoneDetailClient initialData={initialData} locale={locale} />
     )
 }

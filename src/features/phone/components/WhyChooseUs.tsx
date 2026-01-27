@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Store, Eye, Ban, CreditCard, MapPin, HelpCircle, FileQuestion, MousePointerClick, CheckCircle2, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Store, Eye, Ban, CreditCard, MapPin, HelpCircle, FileQuestion, CheckCircle2, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function WhyChooseUs() {

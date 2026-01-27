@@ -4,7 +4,7 @@ import Image from "next/image"
 import { ChevronDown } from "lucide-react"
 
 interface OptionSummaryProps {
-  selectedColor: string
+  // selectedColor: string
   selectedColorName: string
   selectedCapacity: string
   imageUrl: string
@@ -12,7 +12,7 @@ interface OptionSummaryProps {
 }
 
 export default function OptionSummary({
-  selectedColor,
+  // selectedColor, // Unused
   selectedColorName,
   selectedCapacity,
   imageUrl,
