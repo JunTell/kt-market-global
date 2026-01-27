@@ -34,7 +34,7 @@ export default function Home() {
   const t = useTranslations();
 
   return (
-    <main className="min-h-screen bg-bg-grouped font-sans">
+    <main className="min-h-screen bg-white font-sans max-w-[940px] mx-auto">
       {/* Trust-First: Hero Section at Top */}
       <HeroSection />
 

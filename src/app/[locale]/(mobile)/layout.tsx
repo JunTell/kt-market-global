@@ -12,7 +12,7 @@ export default function MobileLayout({
   return (
     <div
       id="main-scroll-container"
-      className="w-full h-full max-w-mobile-max md:max-w-layout-max min-w-[360px] min-h-screen shadow-2xl overflow-x-hidden font-sans relative overflow-y-auto scrollbar-hide mx-auto bg-white"
+      className="w-full h-full min-w-[360px] min-h-screen overflow-x-hidden font-sans relative overflow-y-auto scrollbar-hide bg-white"
     >
       <ScrollToTop />
 

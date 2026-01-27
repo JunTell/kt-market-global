@@ -286,9 +286,9 @@ function PhoneContent() {
 
                 {/* Right Column: Details & Actions */}
                 <div className={`px-5 md:px-0 w-full mt-6 md:mt-0 ${step === 2 ? 'md:max-w-xl mx-auto' : 'md:w-1/2'}`}>
-                    <div className="py-6 md:py-0 border-b border-gray-100 md:border-none mb-6">
-                        {/* Only show Title & Price in Step 1 */}
-                        {step === 1 && (
+                    {/* Only show Title & Price in Step 1 */}
+                    {step === 1 && (
+                        <div className="py-6 md:py-0 border-b border-gray-100 md:border-none mb-6">
                             <div className="flex items-start justify-between mb-2">
                                 <div>
                                     <h1 className="text-2xl md:text-2xl font-bold text-[#1d1d1f] mb-2">{store.title}</h1>
@@ -306,8 +306,8 @@ function PhoneContent() {
                                     {store.capacity} · {COLOR_MAP[store.color] || store.color}
                                 </div>
                             </div>
-                        )}
-                    </div>
+                        </div>
+                    )}
 
                     {step === 1 && (
                         <>

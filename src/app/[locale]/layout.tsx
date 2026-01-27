@@ -84,13 +84,11 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${inter.variable} ${pretendard.variable} antialiased bg-bg-grouped flex justify-center`}
+        className={`${inter.variable} ${pretendard.variable} antialiased bg-white`}
         suppressHydrationWarning={true}
       >
         <NextIntlClientProvider messages={messages}>
-          <div className="w-full max-w-mobile-max md:max-w-layout-max mx-auto bg-base min-h-screen shadow-floating">
-            {children}
-          </div>
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>

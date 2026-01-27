@@ -292,15 +292,10 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  background-color: var(--bg-grouped);
-  /* Applied Background Color from config */
+  background-color: white;
   color: var(--grey-900);
-  /* Applied Default Text Color */
 }
 
 /* Utility to hide scrollbar */
