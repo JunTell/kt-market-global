@@ -135,13 +135,38 @@
     "footer": "仅在符合外国人开通标准时提供准确指引"
   },
   "WhyUs": {
-    "title": "为什么外国人 选择在这里开通？",
-    "check1": "拥有丰富的外国人后付开通经验",
-    "check2": "可一次性完成手机购买",
-    "check3": "提前告知不可开通的条件",
-    "check4": "绝无强制附加服务",
-    "check5": "正规通信公司合作伙伴运营",
-    "footer": "相比价格，我们更优先考虑\n安全开通和零失败率"
+    "title": "为什么选择KT Market?",
+    "subtitle": "* 我们不说可以给所有外国人办手机。我们只在符合条件时提供准确指引。",
+    "Cards": {
+      "card1_title": "KT 官方代理店",
+      "card1_desc": "Official KT 认证店",
+      "card2_title": "无隐藏条件",
+      "card2_desc": "无欺诈性条款",
+      "card3_title": "无强制套餐",
+      "card3_desc": "无捆绑约束",
+      "card4_title": "无需预付",
+      "card4_desc": "官方后付流程"
+    },
+    "Comparison": {
+      "title": "Why <span class=\"text-red-500\">KT</span> Market?",
+      "Before": {
+        "title": "Before",
+        "item1": "必须亲自到店",
+        "item2": "要求预付套餐",
+        "item3": "条件不明确",
+        "item4": "缺乏说明"
+      },
+      "After": {
+        "title": "After with <span class=\"text-red-500\">KT</span> Market",
+        "item1_title": "可在线申请",
+        "item1_desc": "Online application",
+        "item2_title": "支持后付套餐",
+        "item2_desc": "Postpaid plans",
+        "item3_title": "正规官方流程",
+        "item3_desc": "Official process"
+      },
+      "quote": "\"We don't say yes to every foreigner... ✔ we only guide you through what is possible.\""
+    }
   },
   "Form": {
     "title": "咨询申请",

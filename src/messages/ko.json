@@ -21,6 +21,7 @@
       "feat3_title": "다국어 상담 지원",
       "feat3_desc": "한국어가 서툴러도 괜찮습니다. 전문 상담원이 도와드려요.",
       "cta_check": "지금 바로 확인하기",
+      "cta_subscription": "온라인으로 휴대폰 가입하기",
       "no_hidden": "숨겨진 조건 없음"
     },
     "Eligibility": {
@@ -136,12 +137,37 @@
   },
   "WhyUs": {
     "title": "왜 외국인은 여기서 개통하나요?",
-    "check1": "외국인 후불 개통 경험 다수",
-    "check2": "휴대폰 구매까지 한 번에 가능",
-    "check3": "불가능한 조건은 미리 안내",
-    "check4": "불필요한 부가서비스 강요 없음",
-    "check5": "공식 통신사 파트너 운영",
-    "footer": "가격보다 안전한 개통과\n실패 없는 진행을 우선합니다"
+    "subtitle": "* 우리는 무조건 된다고 하지 않습니다. 가능한 조건만 정확히 안내합니다.",
+    "Cards": {
+      "card1_title": "KT 공식대리점",
+      "card1_desc": "Official KT 인증점",
+      "card2_title": "조건 숨김 없음",
+      "card2_desc": "투명한 가입 절차",
+      "card3_title": "요금제 강요 없음",
+      "card3_desc": "자유로운 요금제 선택",
+      "card4_title": "선불 요구 없음",
+      "card4_desc": "공식 후불 개통"
+    },
+    "Comparison": {
+      "title": "Why <span class=\"text-red-500\">KT</span> Market?",
+      "Before": {
+        "title": "일반 판매점",
+        "item1": "매장 방문 필수",
+        "item2": "선불 요금제 유도",
+        "item3": "조건 불명확",
+        "item4": "설명 부족"
+      },
+      "After": {
+        "title": "<span class=\"text-red-500\">KT</span> Market 가입 시",
+        "item1_title": "온라인 간편 신청",
+        "item1_desc": "Online application",
+        "item2_title": "후불 요금제 개통",
+        "item2_desc": "Postpaid plans",
+        "item3_title": "공식 인증 파트너",
+        "item3_desc": "Official process"
+      },
+      "quote": "\"외국인도 내국인과 똑같이 안전하게 개통할 수 있어야 합니다.\""
+    }
   },
   "Form": {
     "title": "상담 접수",

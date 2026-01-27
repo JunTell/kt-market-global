@@ -1,3 +1,5 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 import { CheckCircle2, ShieldCheck } from 'lucide-react';
 import Image from 'next/image';
@@ -111,18 +113,39 @@ export default function HeroSection() {
                             </p>
                         </div>
 
-                        {/* CTA Button */}
-                        <div className="flex justify-center md:justify-start mb-6 md:mb-0">
+                        <div className="flex flex-col items-center md:items-start gap-4 mb-6 md:mb-0 w-full md:w-auto">
                             <a
                                 href="#eligibility-section"
-                                className="inline-flex items-center justify-center h-10 md:h-12 px-6 md:px-8 text-sm md:text-base font-bold rounded-lg transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+                                className="inline-flex items-center justify-center h-12 md:h-14 px-8 md:px-10 text-base md:text-lg font-bold rounded-2xl
+                                           transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] cursor-pointer shadow-xl w-full md:w-auto"
                                 style={{
-                                    backgroundColor: 'var(--trust-accent)',
-                                    color: 'var(--trust-text-white)',
-                                    boxShadow: '0 4px 20px rgba(255, 59, 48, 0.4)'
+                                    background:
+                                        "linear-gradient(135deg, #FF4D4D 0%, #FF6A3D 45%, #FFB020 100%)",
+                                    color: "var(--trust-text-white)",
+                                    boxShadow: "0 10px 28px rgba(255, 77, 77, 0.35)",
+                                    textShadow: "0 1px 2px rgba(0,0,0,0.25)",
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.filter = "brightness(1.06)";
+                                    e.currentTarget.style.boxShadow = "0 14px 36px rgba(255, 77, 77, 0.45)";
+                                    e.currentTarget.style.transform = "translateY(-1px) scale(1.03)";
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.filter = "none";
+                                    e.currentTarget.style.boxShadow = "0 10px 28px rgba(255, 77, 77, 0.35)";
+                                    e.currentTarget.style.transform = "none";
                                 }}
                             >
-                                {t('cta_check')}
+                                {t("cta_check")}
+                            </a>
+
+                            <a
+                                href="#products-section"
+                                className="inline-flex items-center justify-center h-10 md:h-12 px-6 md:px-8 text-sm md:text-base font-medium rounded-xl
+                                           transition-all duration-200 hover:bg-white/10 active:scale-[0.98] cursor-pointer w-full md:w-auto"
+                                style={{ color: 'rgba(255, 255, 255, 0.8)' }}
+                            >
+                                <span className="border-b border-current pb-0.5">{t("cta_subscription")}</span>
                             </a>
                         </div>
                     </div>

@@ -69,7 +69,7 @@ export default function Home() {
       <TargetAudience />
 
       {/* Price Information LAST (Trust-First Strategy) */}
-      <div className="px-4 py-10">
+      <div id="products-section" className="px-4 py-10">
         <ModelListContainer
           sectionTitle={t('Phone.ModelList.section_title')}
           planId="ppllistobj_0808"
