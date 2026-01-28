@@ -7,7 +7,7 @@ import ModelListContainer from '@/features/phone/components/ModelListContainer';
 import Footer from '@/shared/components/layout/Footer';
 import EligibilityCheckerWrapper from '@/features/phone/components/EligibilityCheckerWrapper';
 
-// Dynamic Imports for Heavy Client Components
+// Dynamic Imports for Heavy Client Components - SSR enabled for Server Component compatibility
 const ProcessFlow = dynamic(() => import('@/features/phone/components/ProcessFlow'), { ssr: true });
 const ProcessGuide = dynamic(() => import('@/features/phone/components/ProcessGuide'), { ssr: true });
 const TargetAudience = dynamic(() => import('@/features/phone/components/TargetAudience'), { ssr: true });
