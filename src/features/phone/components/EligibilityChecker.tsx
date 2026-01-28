@@ -28,16 +28,16 @@ const slideVariants = {
     x: 0,
     opacity: 1,
     transition: {
-      duration: 0.35,
-      ease: [0.25, 0.1, 0.25, 1.0] as const,
+      duration: 0.3,
+      ease: [0.61, 1, 0.88, 1] as const, // ease-out equivalent
     },
   },
   exit: (direction: number) => ({
     x: direction < 0 ? 30 : -30,
     opacity: 0,
     transition: {
-      duration: 0.25,
-      ease: [0.25, 0.1, 0.25, 1.0] as const,
+      duration: 0.2,
+      ease: [0.12, 0, 0.39, 0] as const, // ease-in equivalent
     },
   }),
 };
@@ -439,13 +439,9 @@ export default function EligibilityChecker() {
             {step === 'fail' && (
               <SlideView key="fail" direction={direction}>
                 <div className="flex flex-col items-center justify-center h-full py-4 text-center">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="w-16 h-16 bg-status-error/10 text-status-error rounded-full flex items-center justify-center mb-4 shadow-sm"
-                  >
+                  <div className="w-16 h-16 bg-status-error/10 text-status-error rounded-full flex items-center justify-center mb-4 shadow-sm">
                     <X size={32} strokeWidth={3} />
-                  </motion.div>
+                  </div>
                   <h3 className="text-lg font-bold mb-2 text-label-900">{t('Fail.title')}</h3>
                   <p
                     className="text-label-500 mb-8 text-xs leading-relaxed"
@@ -462,10 +458,7 @@ export default function EligibilityChecker() {
             {step === 'result' && result && (
               <SlideView key="result" direction={direction}>
                 <div className="text-center pt-3 flex flex-col h-full">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                  <div
                     className={cn(
                       "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold mb-3 mx-auto shadow-sm",
                       result.possible
@@ -475,7 +468,7 @@ export default function EligibilityChecker() {
                   >
                     {result.possible ? <CheckCircle2 size={14} /> : <X size={14} />}
                     {result.possible ? t('Result.possible') : t('Result.impossible')}
-                  </motion.div>
+                  </div>
 
                   <h2 className="text-xl font-extrabold mb-1 text-label-900">
                     <span className="text-primary">[{selection.visaCode}]</span> {t('Result.title_suffix')}
@@ -581,6 +574,6 @@ export default function EligibilityChecker() {
           </AnimatePresence>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

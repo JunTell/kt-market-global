@@ -37,23 +37,19 @@ export default function WhyChooseUs() {
   return (
     <section className="py-12 md:py-20 px-5 md:px-12 bg-[#F9FAFB] overflow-hidden">
       <div className="w-full max-w-layout-max mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: -10 }}
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-[#191F28] mb-10 md:mb-14">
+          {t('title')}
+        </h2>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-2xl md:text-3xl font-bold text-center text-[#191F28] mb-10 md:mb-14"
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-8 md:mb-12"
         >
-          {t('title')}
-        </motion.h2>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-8 md:mb-12">
-          {cards.map(({ key, Icon, color, bgColor }, index) => (
-            <motion.div
+          {cards.map(({ key, Icon, color, bgColor }) => (
+            <div
               key={key}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
               className="bg-white rounded-2xl p-5 md:p-8 shadow-sm flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow"
             >
               <div className={`w-12 h-12 md:w-16 md:h-16 rounded-2xl ${bgColor} flex items-center justify-center mb-4 md:mb-6`}>
@@ -67,27 +63,17 @@ export default function WhyChooseUs() {
               <p className="text-[10px] md:text-sm font-medium text-gray-500">
                 {t(`Cards.${key}_desc`)}
               </p>
-            </motion.div>
+            </div>
           ))}
-        </div>
+        </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="text-center text-[11px] md:text-sm text-gray-400 font-medium px-4 break-keep mb-20 md:mb-32"
-        >
+        <p className="text-center text-[11px] md:text-sm text-gray-400 font-medium px-4 break-keep mb-20 md:mb-32">
           {t('subtitle')}
-        </motion.p>
+        </p>
 
         {/* Part B: Comparison Section */}
         <div className="relative">
-          <motion.h2
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-2xl md:text-3xl font-bold text-center text-[#191F28] mb-10 md:mb-14"
+          <h2 className="text-2xl md:text-3xl font-bold text-center text-[#191F28] mb-10 md:mb-14"
             dangerouslySetInnerHTML={{ __html: t.raw('Comparison.title') }}
           />
 
@@ -157,14 +143,9 @@ export default function WhyChooseUs() {
             </motion.div>
           </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center text-xs md:text-sm text-gray-500 font-medium italic"
-          >
+          <p className="text-center text-xs md:text-sm text-gray-500 font-medium italic">
             {t('Comparison.quote')}
-          </motion.p>
+          </p>
         </div>
       </div>
     </section>

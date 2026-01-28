@@ -3,17 +3,16 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
-import { type CapacityOption, type ColorOption } from "@/features/phone/components/OptionSelector"
-import { formatPrice } from "@/shared/lib/format"
-import { calculateFinalDevicePrice } from "@/features/phone/lib/priceCalculation"
-
-import dynamic from "next/dynamic"
-import JunCarousel from "@/features/phone/components/JunCarousel"
+import Modal from "@/shared/components/ui/Modal"
+import OptionSelector, { type CapacityOption, type ColorOption } from "@/features/phone/components/OptionSelector"
 import OptionSummary from "@/features/phone/components/OptionSummary"
 import StickyBar from "@/features/phone/components/StickyBar"
 
-const Modal = dynamic(() => import("@/shared/components/ui/Modal"), { ssr: true })
-const OptionSelector = dynamic(() => import("@/features/phone/components/OptionSelector"), { ssr: true })
+import dynamic from "next/dynamic"
+import JunCarousel from "@/features/phone/components/JunCarousel"
+import { formatPrice } from "@/shared/lib/format"
+import { calculateFinalDevicePrice } from "@/features/phone/lib/priceCalculation"
+
 const PlanSelector = dynamic(() => import("@/features/phone/components/PlanSelector"), { ssr: true })
 import { usePhoneStore, Plan } from "@/features/phone/model/usePhoneStore"
 import { MODEL_VARIANTS, getColorMap } from "@/features/phone/lib/phonedata"
@@ -50,11 +49,6 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Data merging: Use store if populated (client interaction), else initialData (SSR/First load)
-  // Note: checking store.title ensure we use store only after it's been set.
-  // However, for hydration consistency, we should initialze store and use store state primarily,
-  // but default to initialData for the initial render variables.
-
-  // We synchronize initialData to store on mount or when it changes (if user navigates)
   useEffect(() => {
     store.setStore({
       model: initialData.model,
@@ -70,11 +64,8 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
       userCarrier: initialData.userCarrier,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialData]) // Re-sync if server passes new data (e.g. navigation)
+  }, [initialData])
 
-  // Derived state for rendering
-  // We prefer the 'store' values if they exist, to reflect client-side updates (like color change).
-  // Fallback to 'initialData' to ensure HTML is generated on server/first paint.
   const currentTitle = store.title || initialData.title
   const currentCapacity = store.capacity || initialData.capacity
   const currentColor = store.color || initialData.color
@@ -83,27 +74,16 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
   const currentImageUrl = store.imageUrl || initialData.imageUrl
   const currentPlans = (store.plans && store.plans.length > 0) ? store.plans : initialData.plans
 
-  // Use Component local state or Prop for things that don't need to be in global store for this specific logic? 
-  // actually availColors and colorImages are passed from server now and are static for the model/capacity combo (mostly).
-  // But colorImages depends on capacity? No, usually model+color.
-  // The server passes colorImages for the CURRENT model config.
   const { availableColors, colorImages, prefix } = initialData
   const COLOR_MAP = getColorMap(t)
 
-  // --- Handlers ---
   const handleCapacityChange = (newCap: string) => {
     store.setStore({ capacity: newCap })
-    // In SSR version, changing capacity usually implies changing the URL to fetch new data/price
-    // because price depends on capacity (and model key changes).
-    // The original code did router.replace.
-    // We Keep this behavior. The server component will re-render with new initialData.
     const newModel = `${prefix}-${newCap}-${currentColor}`
     router.replace(`/${locale}/phone?model=${newModel}`, { scroll: false })
   }
 
   const handleColorChange = (newColor: string) => {
-    // For color change, we could just update client state if we have all images.
-    // The server passes `colorImages` map.
     const newImageUrls = colorImages[newColor] || []
     const newImageUrl = newImageUrls[0] || currentImageUrl
 
@@ -113,7 +93,6 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
       imageUrls: newImageUrls,
     })
 
-    // Update URL too
     const newModel = `${prefix}-${currentCapacity}-${newColor}`
     router.replace(`/${locale}/phone?model=${newModel}`, { scroll: false })
   }
@@ -143,7 +122,6 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
     router.push(`/${locale}/phone/order?model=${store.model || initialData.model}`)
   }
 
-  // --- Options ---
   const capacityOpts: CapacityOption[] = (MODEL_VARIANTS[prefix] || []).map(c => ({
     label: c === "1t" ? "1TB" : c === "2t" ? "2TB" : `${c}GB`,
     value: c
@@ -156,14 +134,7 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
     isSoldOut: checkIsSoldOut(prefix, currentCapacity, c)
   }))
 
-  // --- Price Calc ---
   const currentPlan = currentPlans.find(p => p.id === store.selectedPlanId)
-
-  // We need to be careful: store.selectedPlanId might be default from store (plan_69) 
-  // but mergedPlans IDs might be different? 
-  // The store default is "plan_69". 
-  // If currentPlans (from server) doesn't have it, we might have issues.
-  // However, getPlanMetadata usually ensures consistent IDs.
 
   const finalDevicePrice = calculateFinalDevicePrice({
     originPrice: currentOriginPrice,
@@ -178,7 +149,6 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
   return (
     <div className="w-full max-w-[780px] mx-auto bg-white min-h-screen pb-24 md:pb-8">
       <div className={`md:flex md:gap-8 md:items-start md:py-12 ${step === 2 ? 'justify-center' : ''}`}>
-        {/* Left Column: Carousel - Only show in Step 1 */}
         {step === 1 && (
           <div className="w-full md:w-1/2 md:sticky md:top-24">
             <div className="rounded-[2rem] overflow-hidden bg-gray-50/50 md:w-[350px] mx-auto">
@@ -187,15 +157,12 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
           </div>
         )}
 
-        {/* Right Column: Details & Actions */}
         <div className={`px-5 md:px-0 w-full mt-6 md:mt-0 ${step === 2 ? 'md:max-w-xl mx-auto' : 'md:w-1/2'}`}>
-          {/* Only show Title & Price in Step 1 */}
           {step === 1 && (
             <div className="py-6 md:py-0 border-b border-gray-100 md:border-none mb-6">
               <div className="flex items-start justify-between mb-2">
                 <div>
                   <h1 className="text-2xl md:text-2xl font-bold text-[#1d1d1f] mb-2">{currentTitle}</h1>
-                  {/* Price Display for Desktop */}
                   <div className="hidden md:block">
                     <div className="flex items-baseline gap-2 mt-4">
                       <span className="text-xl font-bold text-[#1d1d1f]">
@@ -213,7 +180,6 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
 
           {step === 1 && (
             <>
-              {/* Option Selection Summary (Trigger) */}
               <div className="mb-6">
                 <OptionSummary
                   selectedColorName={COLOR_MAP[currentColor] || currentColor}
@@ -223,7 +189,6 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
                 />
               </div>
 
-              {/* Option Selection Modal */}
               <Modal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
@@ -235,7 +200,7 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
                   capacityOptions={capacityOpts}
                   colorOptions={colorOpts}
                   onSelectCapacity={handleCapacityChange}
-                  onSelectColor={(val) => {
+                  onSelectColor={(val: string) => {
                     handleColorChange(val)
                     setIsModalOpen(false)
                   }}
@@ -248,7 +213,6 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
                 </button>
               </Modal>
 
-              {/* Desktop Button - Inline */}
               <div className="hidden md:block mt-8">
                 <button
                   onClick={handleNextStep}
@@ -258,7 +222,6 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
                 </button>
               </div>
 
-              {/* Mobile Sticky Bar */}
               <div className="md:hidden">
                 <StickyBar
                   finalPrice=""
@@ -271,25 +234,22 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
 
           {step === 2 && (
             <>
-              {/* Pricing Info Section */}
               <div className="mb-6">
                 <h2 className="text-xl font-bold text-[#1d1d1f]">{t('Phone.Page.price_info')}</h2>
               </div>
 
-              {/* Plan Selector */}
               <PlanSelector
                 plans={currentPlans}
-                selectedPlanId={store.selectedPlanId} // This is purely client state
-                discountMode={store.discountMode} // Purely client state
+                selectedPlanId={store.selectedPlanId}
+                discountMode={store.discountMode}
                 originPrice={currentOriginPrice}
                 ktMarketDiscount={0}
                 registrationType={store.registrationType || initialData.registrationType}
                 modelPrefix={prefix}
-                onSelectPlan={(id) => store.setStore({ selectedPlanId: id })}
-                onChangeMode={(mode) => store.setStore({ discountMode: mode })}
+                onSelectPlan={(id: string) => store.setStore({ selectedPlanId: id })}
+                onChangeMode={(mode: "device" | "plan") => store.setStore({ discountMode: mode })}
               />
 
-              {/* Desktop Submit Button */}
               <div className="hidden md:block mt-8">
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-gray-500 font-medium">{t('Phone.Page.final_price')}</span>
@@ -305,7 +265,6 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
                 </button>
               </div>
 
-              {/* Mobile Sticky Bar */}
               <div className="md:hidden">
                 <StickyBar
                   finalPrice={`${formatPrice(finalPriceInfo.finalDevicePrice, locale)}${t('Phone.Common.won')}`}
