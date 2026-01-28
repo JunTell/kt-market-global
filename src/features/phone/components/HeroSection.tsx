@@ -1,9 +1,9 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { CheckCircle2, ShieldCheck } from 'lucide-react';
 import Image from 'next/image';
 
-export default function HeroSection() {
-    const t = useTranslations('Home.Hero');
+export default async function HeroSection() {
+    const t = await getTranslations('Home.Hero');
 
     return (
         <section
@@ -138,6 +138,7 @@ export default function HeroSection() {
                                 height={320}
                                 className="w-full h-auto drop-shadow-2xl"
                                 priority
+                                fetchPriority="high"
                                 sizes="(max-width: 768px) 320px, 440px"
                             />
                         </div>

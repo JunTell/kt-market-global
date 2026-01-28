@@ -1,4 +1,4 @@
-import { createClient } from "@/shared/api/supabase/client"
+import { createClient } from "@/shared/api/supabase/server"
 import ModelListClient from "./ModelListClient"
 import { type RegType } from "@/features/phone/lib/asamo-utils"
 
@@ -23,7 +23,7 @@ export default async function ModelListContainer({
     userCarrier,
     registrationType
 }: Props) {
-    const supabase = createClient()
+    const supabase = await createClient()
 
     const { data: devicesData } = await supabase
         .from("devices")

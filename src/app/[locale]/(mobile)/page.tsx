@@ -1,7 +1,18 @@
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
-import ChatBot from '@/features/inquiry/components/ChatBot';
+import dynamic from 'next/dynamic';
+import HeroSection from '@/features/phone/components/HeroSection';
+import ModelListContainer from '@/features/phone/components/ModelListContainer';
+import Footer from '@/shared/components/layout/Footer';
+import EligibilityCheckerWrapper from '@/features/phone/components/EligibilityCheckerWrapper';
+
+// Dynamic Imports for Heavy Client Components
+const ProcessGuide = dynamic(() => import('@/features/phone/components/ProcessGuide'), { ssr: true });
+const TargetAudience = dynamic(() => import('@/features/phone/components/TargetAudience'), { ssr: true });
+const WhyChooseUs = dynamic(() => import('@/features/phone/components/WhyChooseUs'), { ssr: true });
+const Notice = dynamic(() => import('@/features/phone/components/Notice').then(mod => mod.Notice), { ssr: true });
+import ChatBotWrapper from '@/features/inquiry/components/ChatBotWrapper';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -20,18 +31,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   };
 }
-
-import dynamic from 'next/dynamic';
-import HeroSection from '@/features/phone/components/HeroSection';
-import ModelListContainer from '@/features/phone/components/ModelListContainer';
-import Footer from '@/shared/components/layout/Footer';
-
-// Dynamic Imports for Heavy Client Components
-const ProcessGuide = dynamic(() => import('@/features/phone/components/ProcessGuide'), { ssr: true });
-const TargetAudience = dynamic(() => import('@/features/phone/components/TargetAudience'), { ssr: true });
-const WhyChooseUs = dynamic(() => import('@/features/phone/components/WhyChooseUs'), { ssr: true });
-const Notice = dynamic(() => import('@/features/phone/components/Notice').then(mod => mod.Notice), { ssr: true }); // Notice is a named export? Checked in view_file.
-import EligibilityCheckerWrapper from '@/features/phone/components/EligibilityCheckerWrapper';
 
 export default function Home() {
   const t = useTranslations();
@@ -115,7 +114,7 @@ export default function Home() {
       />
 
       <Footer />
-      <ChatBot />
+      <ChatBotWrapper />
     </main>
   );
 }
