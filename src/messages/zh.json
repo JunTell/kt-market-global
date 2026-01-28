@@ -25,8 +25,8 @@
     },
     "Eligibility": {
       "badge": "Eligibility Check",
-      "title": "外国人专用套餐计算器",
-      "desc": "只需告知签证种类和滞留时间，10秒内即可查询开通资格和分期额度。"
+      "title": "可以开通吗？KT市场清单",
+      "desc": "检查您是否符合购买资格！"
     },
     "Features": {
       "feat1_title": "拒绝预付卡",
@@ -73,19 +73,19 @@
       }
     },
     "Device": {
-      "title": "您需要哪种设备？",
+      "title": "您需要哪种服务？",
       "desc": "为您寻找最适合的套餐。",
       "Opt1": {
-        "title": "购买最新智能手机",
-        "desc": "iPhone 16, Galaxy S25 等"
+        "title": "NEW 手机",
+        "desc": "韩国最受欢迎的 BEST 手机"
       },
       "Opt2": {
-        "title": "购买普及型手机",
-        "desc": "价格低廉性能好的型号"
+        "title": "性价比手机",
+        "desc": "价格便宜！性能也不错！"
       },
       "Opt3": {
-        "title": "仅开通SIM卡",
-        "desc": "使用现有手机，只办套餐"
+        "title": "更换原手机SIM卡",
+        "desc": "手机不变，仅更换套餐！"
       }
     },
     "Result": {
@@ -125,6 +125,19 @@
     "badge1": "拒绝\n预付卡",
     "badge2": "外国人标准\n合法程序",
     "badge3": "官方通信社\n合作伙伴"
+  },
+  "ProcessFlow": {
+    "title": "KT 官方代理处 <span class=\"text-primary\">开通流程</span>",
+    "step1_title": "申请咨询",
+    "step1_desc": "在网站上\n简单申请咨询。",
+    "step2_title": "电话咨询",
+    "step2_desc": "与专业咨询员\n进行电话咨询。",
+    "step3_title": "设备配送",
+    "step3_desc": "安全配送到\n您想要的地点。",
+    "step4_title": "领取设备及开通",
+    "step4_desc": "收到设备后\n进行开通。",
+    "step5_title": "开始使用",
+    "step5_desc": "开通完成！\n请使用KT服务。"
   },
   "Target": {
     "title": "专为这类人群\n提供的服务",
