@@ -35,7 +35,7 @@ export default function OptionSummary({
           )}
         </div>
         <div>
-          <div className="text-[19px] font-bold text-gray-900 leading-tight">{selectedColorName} - {selectedCapacity}GB</div>
+          <div className="text-[19px] font-bold text-gray-900 leading-tight">{selectedColorName} - {selectedCapacity}</div>
         </div>
       </div>
       <ChevronDown className="w-6 h-6 text-gray-400 group-hover:text-blue-500 transition-colors" />

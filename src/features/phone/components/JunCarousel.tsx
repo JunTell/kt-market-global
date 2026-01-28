@@ -124,6 +124,7 @@ export default function JunCarousel({ urls = [], className = "" }: Props) {
               draggable={false} // 이미지 드래그 방지
               sizes="(max-width: 768px) 100vw, 500px"
               priority={index === 0}
+              fetchPriority={index === 0 ? "high" : undefined}
             />
           </div>
         ))}

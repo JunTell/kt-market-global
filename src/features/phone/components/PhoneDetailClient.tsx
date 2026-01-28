@@ -3,15 +3,18 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
+import { type CapacityOption, type ColorOption } from "@/features/phone/components/OptionSelector"
 import { formatPrice } from "@/shared/lib/format"
 import { calculateFinalDevicePrice } from "@/features/phone/lib/priceCalculation"
 
+import dynamic from "next/dynamic"
 import JunCarousel from "@/features/phone/components/JunCarousel"
-import OptionSelector, { CapacityOption, ColorOption } from "@/features/phone/components/OptionSelector"
 import OptionSummary from "@/features/phone/components/OptionSummary"
-import Modal from "@/shared/components/ui/Modal"
-import PlanSelector from "@/features/phone/components/PlanSelector"
 import StickyBar from "@/features/phone/components/StickyBar"
+
+const Modal = dynamic(() => import("@/shared/components/ui/Modal"), { ssr: true })
+const OptionSelector = dynamic(() => import("@/features/phone/components/OptionSelector"), { ssr: true })
+const PlanSelector = dynamic(() => import("@/features/phone/components/PlanSelector"), { ssr: true })
 import { usePhoneStore, Plan } from "@/features/phone/model/usePhoneStore"
 import { MODEL_VARIANTS, getColorMap } from "@/features/phone/lib/phonedata"
 import { checkIsSoldOut } from "@/features/phone/lib/stock"

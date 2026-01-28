@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { createClient } from "@/shared/api/supabase/server"
+import { createPublicClient } from "@/shared/api/supabase/server"
 import { getTranslations } from "next-intl/server"
 import { parsePhoneModel, getDBModelKey } from "@/features/phone/lib/phoneModel"
 import { getPlanMetadata } from "@/features/phone/lib/phonedata"
@@ -25,7 +25,7 @@ async function PhoneServerLoader({ params, searchParams }: Props) {
     const { locale } = await params
     const { model } = await searchParams
     const t = await getTranslations({ locale })
-    const supabase = await createClient()
+    const supabase = await createPublicClient()
 
     // 1. URL Parsing
     const urlModel = model || "aip17-256"
