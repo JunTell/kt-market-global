@@ -26,8 +26,8 @@
     },
     "Eligibility": {
       "badge": "Eligibility Check",
-      "title": "Plan Calculator for Foreigners",
-      "desc": "Tell us your Visa type and duration. We check eligibility and installment limits in 10 seconds."
+      "title": "KT Market Checklist",
+      "desc": "Check if you are eligible for purchase!"
     },
     "Features": {
       "feat1_title": "No Prepaid Needed",
@@ -74,19 +74,19 @@
       }
     },
     "Device": {
-      "title": "Select Device Option",
+      "title": "What service do you need?",
       "desc": "We find the best plan for you.",
       "Opt1": {
-        "title": "New Flagship Phone",
-        "desc": "iPhone 16, Galaxy S25, etc."
+        "title": "NEW Phone",
+        "desc": "The most popular BEST phones in Korea"
       },
       "Opt2": {
-        "title": "Budget Phone",
-        "desc": "Affordable price, good specs"
+        "title": "Value Phone",
+        "desc": "Affordable and great performance!"
       },
       "Opt3": {
-        "title": "SIM Only (BYOD)",
-        "desc": "Use your own phone"
+        "title": "USIM Only",
+        "desc": "Keep your phone, just change the plan!"
       }
     },
     "Result": {
@@ -126,6 +126,19 @@
     "badge1": "No Prepaid\nSIMs",
     "badge2": "100% Legal\nProcess",
     "badge3": "Official\nPartner"
+  },
+  "ProcessFlow": {
+    "title": "KT Official Partner <span class=\"text-primary\">Activation Process</span>",
+    "step1_title": "Application",
+    "step1_desc": "Apply simply on\nthe website.",
+    "step2_title": "Happy Call",
+    "step2_desc": "Consult with a\nprofessional agent.",
+    "step3_title": "Device Delivery",
+    "step3_desc": "Safe delivery to your\ndesired location.",
+    "step4_title": "Activation",
+    "step4_desc": "Proceed with activation\nafter receiving device.",
+    "step5_title": "Service Info",
+    "step5_desc": "Activation Complete!\nEnjoy KT services."
   },
   "Target": {
     "title": "Recommended For\nThese People",

@@ -25,8 +25,8 @@
     },
     "Eligibility": {
       "badge": "Eligibility Check",
-      "title": "外国人専用プラン診断",
-      "desc": "ビザの種類と滞在期間を入力するだけ。10秒で契約可否と分割払いの限度額を診断します。"
+      "title": "契約できるかな？KTマーケットチェックリスト",
+      "desc": "購入が可能かどうかチェックしてみましょう！"
     },
     "Features": {
       "feat1_title": "プリペイドは卒業",
@@ -73,19 +73,19 @@
       }
     },
     "Device": {
-      "title": "ご希望の端末は？",
+      "title": "どのサービスが必要ですか？",
       "desc": "状況に合わせた最適なプランを探します。",
       "Opt1": {
-        "title": "最新スマホ購入",
-        "desc": "iPhone 16, Galaxy S25 など"
+        "title": "NEW スマホ",
+        "desc": "韓国で最も人気の高い BEST スマホ"
       },
       "Opt2": {
-        "title": "格安スマホ購入",
-        "desc": "低価格で性能の良いモデル"
+        "title": "コスパスモホ",
+        "desc": "安さ重視！性能もしっかり！"
       },
       "Opt3": {
-        "title": "SIMのみ契約",
-        "desc": "今のスマホそのままでプランのみ"
+        "title": "持込SIM契約",
+        "desc": "今のスマホはそのまま、プランのみ変更！"
       }
     },
     "Result": {
@@ -125,6 +125,19 @@
     "badge1": "プリペイド\nなし",
     "badge2": "外国人基準\n合法手続き",
     "badge3": "公式キャリア\nパートナー進行"
+  },
+  "ProcessFlow": {
+    "title": "KT 公式代理店 <span class=\"text-primary\">開通手続き</span>",
+    "step1_title": "相談申請",
+    "step1_desc": "ホームページで\n簡単に相談申請。",
+    "step2_title": "ハッピーコール",
+    "step2_desc": "専門相談員と\n電話相談を行います。",
+    "step3_title": "端末配送",
+    "step3_desc": "ご希望の場所へ\n安全に配送します。",
+    "step4_title": "受取および開通",
+    "step4_desc": "端末受取後\n開通を進めます。",
+    "step5_title": "サービス利用",
+    "step5_desc": "開通完了！\nKTサービスをご利用ください。"
   },
   "Target": {
     "title": "このような方に\nおすすめのサービスです",

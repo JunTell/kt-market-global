@@ -17,6 +17,7 @@ const PlanSelector = dynamic(() => import("@/features/phone/components/PlanSelec
 import { usePhoneStore, Plan } from "@/features/phone/model/usePhoneStore"
 import { MODEL_VARIANTS, getColorMap } from "@/features/phone/lib/phonedata"
 import { checkIsSoldOut } from "@/features/phone/lib/stock"
+import { ChevronLeft } from "lucide-react"
 
 interface InitialData {
   model: string
@@ -234,7 +235,14 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
 
           {step === 2 && (
             <>
-              <div className="mb-6">
+              <div className="mb-6 flex items-center gap-3">
+                <button
+                  onClick={() => setStep(1)}
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
+                  aria-label="go back"
+                >
+                  <ChevronLeft size={24} className="text-gray-600" />
+                </button>
                 <h2 className="text-xl font-bold text-[#1d1d1f]">{t('Phone.Page.price_info')}</h2>
               </div>
 
