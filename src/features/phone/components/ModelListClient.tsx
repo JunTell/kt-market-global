@@ -2,9 +2,6 @@
 
 import * as React from "react"
 import {
-  calcKTmarketSubsidy,
-  getDeviceImageUrl,
-  getDeviceImageUrls,
   type RegType,
 } from "@/features/phone/lib/asamo-utils"
 import GongguDealCard from "@/shared/components/ui/GongguDealCard"
@@ -12,20 +9,12 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 
 // --- Constants ---
-const GONGGU_MODELS = [
-  "aip17-256",
-  "sm-m366k",
-  "aip16e-128",
-  "sm-s931nk",
-  "aip17p-256"
-]
-
 const CARRIERS = ["SKT", "KT", "LG U+", "알뜰폰", "없음"]
 
 // 브랜드 타입 정의
 type Brand = "iphone" | "galaxy"
 
-interface ModelList {
+export interface ModelList {
   model: string
   title: string
   capacity: string
@@ -38,23 +27,23 @@ interface ModelList {
   imageUrls: string[]
 }
 
-interface Props {
+export interface ModelListClientProps {
   sectionTitle?: string
   planId?: string
   userCarrier?: string
   registrationType?: RegType
-  initialDevices: Record<string, unknown>[]
-  initialSubsidies: Record<string, unknown>[] | null
+  initialDealsChg: ModelList[]
+  initialDealsMnp: ModelList[]
 }
 
 export default function ModelListClient({
   sectionTitle,
-  planId = "ppllistobj_0808",
+  // planId = "ppllistobj_0808",
   userCarrier: initialCarrier,
   registrationType: initialRegType,
-  initialDevices,
-  initialSubsidies
-}: Props) {
+  initialDealsChg,
+  initialDealsMnp
+}: ModelListClientProps) {
   const t = useTranslations()
 
   // 브랜드 선택 상태 (기본값: iphone)
@@ -98,63 +87,11 @@ export default function ModelListClient({
   const loading = false
   const error = null
 
-  // --- 3. 데이터 가공 ---
+  // --- 3. 데이터 가공 제거 (Server에서 처리) ---
   React.useEffect(() => {
-    const rawDevices = initialDevices;
-    const rawSubsidies = initialSubsidies;
-
-    if (rawDevices.length === 0) return
-
-    const planTableKey =
-      registrationType === "chg" ? "device_plans_chg" : "device_plans_mnp"
-
-    const mapped: ModelList[] = rawDevices
-      .map((device) => {
-        const deviceData = device as Record<string, unknown>
-        const planList = (deviceData[planTableKey] as unknown[] | undefined) || []
-        // ppllistobj_0808 is 69000 KRW
-        const plan = planList.find((p) => (p as { price: number }).price === 69000) as Record<string, unknown> | undefined || planList[0] as Record<string, unknown> | undefined
-        if (!plan) return null
-
-        const originPrice = (deviceData.price as number) ?? 0
-        const disclosureSubsidy = (plan.disclosure_subsidy as number) ?? 0
-        const subsidyRow = rawSubsidies?.find((s) => (s as Record<string, unknown>).model === deviceData.model) as Record<string, unknown> | undefined
-
-        const ktmarketDiscount = calcKTmarketSubsidy(
-          planId,
-          (plan.price as number) ?? 0,
-          subsidyRow,
-          deviceData.model as string,
-          registrationType
-        )
-
-        const specialDiscount = 0
-
-        const planMonthlyDiscount = Math.floor(((plan.price as number) ?? 0) * 0.25)
-        const imageUrls = getDeviceImageUrls(deviceData)
-
-        return {
-          model: deviceData.model as string,
-          title: (deviceData.pet_name as string) ?? (deviceData.model as string),
-          capacity: (deviceData.capacity as string) ?? "",
-          originPrice,
-          disclosureSubsidy,
-          ktmarketDiscount,
-          specialDiscount,
-          planMonthlyDiscount,
-          imageUrl: getDeviceImageUrl(deviceData),
-          imageUrls: imageUrls,
-        }
-      })
-      .filter((item): item is ModelList => Boolean(item))
-
-    mapped.sort(
-      (a, b) =>
-        GONGGU_MODELS.indexOf(a.model) - GONGGU_MODELS.indexOf(b.model)
-    )
-
-    setDeals(mapped)
-  }, [initialDevices, initialSubsidies, planId, registrationType])
+    const activeDeals = registrationType === "chg" ? initialDealsChg : initialDealsMnp
+    setDeals(activeDeals)
+  }, [initialDealsChg, initialDealsMnp, registrationType])
 
   // --- 핸들러 ---
   const handleCarrierChange = (newCarrier: string) => {

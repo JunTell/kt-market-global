@@ -99,7 +99,7 @@ export default async function HeroSection() {
                             </p>
                         </div>
 
-                        <div className="flex flex-col items-center md:items-start gap-4 mb-6 md:mb-0 w-full md:w-auto">
+                        <div className="flex flex-col items-center md:items-start gap-4 mb-6 md:mb-0 w-full md:w-auto animate-fadeInUp">
                             <a
                                 href="#eligibility-section"
                                 className="inline-flex items-center justify-center h-12 md:h-14 px-8 md:px-10 text-base md:text-lg font-bold rounded-2xl

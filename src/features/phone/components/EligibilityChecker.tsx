@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Check, X, Search, ChevronRight, RotateCcw, Smartphone, Cpu,
-  CreditCard, Calendar, UserCheck, CheckCircle2
+  Check, X, Search, ChevronRight, RotateCcw, Smartphone,
+  CreditCard, Calendar, UserCheck, CheckCircle2, MessageCircle
 } from 'lucide-react';
 import { cn } from '@/shared/lib/utils';
 import {
@@ -17,6 +17,7 @@ import {
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useUIStore } from '@/shared/model/useUIStore';
 
 // --- 애니메이션 변수 ---
 const slideVariants = {
@@ -28,16 +29,16 @@ const slideVariants = {
     x: 0,
     opacity: 1,
     transition: {
-      duration: 0.35,
-      ease: [0.25, 0.1, 0.25, 1.0] as const,
+      duration: 0.3,
+      ease: [0.61, 1, 0.88, 1] as const, // ease-out equivalent
     },
   },
   exit: (direction: number) => ({
     x: direction < 0 ? 30 : -30,
     opacity: 0,
     transition: {
-      duration: 0.25,
-      ease: [0.25, 0.1, 0.25, 1.0] as const,
+      duration: 0.2,
+      ease: [0.12, 0, 0.39, 0] as const, // ease-in equivalent
     },
   }),
 };
@@ -72,6 +73,7 @@ export default function EligibilityChecker() {
   const locale = useLocale();
   const currentLocale = (['ko', 'en', 'zh', 'ja'].includes(locale) ? locale : 'ko') as 'ko' | 'en' | 'zh' | 'ja';
   const router = useRouter();
+  const openChat = useUIStore((state) => state.openChat);
 
   const [step, setStep] = useState<Step>('arc');
   const [direction, setDirection] = useState(1);
@@ -140,6 +142,14 @@ export default function EligibilityChecker() {
     setStep('result');
   };
 
+  const handleBack = () => {
+    setDirection(-1);
+    if (step === 'visa') setStep('arc');
+    else if (step === 'duration') setStep('visa');
+    else if (step === 'device') setStep('duration');
+    else if (step === 'phoneSelection') setStep('result');
+  };
+
   const reset = () => {
     setDirection(-1);
     setStep('arc');
@@ -172,7 +182,9 @@ export default function EligibilityChecker() {
   const currentStepIndex = stepsInfo.findIndex(s => s.id === step);
 
   const getDeviceIcon = (key: string) => {
-    if (key === 'Opt3') return <Cpu size={20} className="text-primary" />;
+    if (key === 'Opt1') return <span className="text-2xl">🔥</span>;
+    if (key === 'Opt2') return <span className="text-2xl">💰</span>;
+    if (key === 'Opt3') return <span className="text-2xl">📲</span>;
     return <Smartphone size={20} className="text-primary" />;
   };
 
@@ -269,6 +281,17 @@ export default function EligibilityChecker() {
 
         {/* Content Area: 패딩 축소 (p-5) */}
         <div className="flex-1 flex flex-col p-5 pt-3 relative">
+          {/* Back Button for Steps - Now below step indicator */}
+          {currentStepIndex > 0 && step !== 'result' && (
+            <button
+              type="button"
+              onClick={handleBack}
+              className="absolute left-5 top-10 text-grey-400 hover:text-primary transition-colors flex items-center gap-1 text-[11px] font-medium group z-20 cursor-pointer"
+            >
+              <ChevronRight className="rotate-180 w-3 h-3 group-hover:-translate-x-0.5 transition-transform" />
+              {t('Fail.retry') === '처음으로' ? '이전' : 'Back'}
+            </button>
+          )}
           <AnimatePresence mode='wait' custom={direction}>
 
             {/* STEP 1: ARC */}
@@ -284,11 +307,17 @@ export default function EligibilityChecker() {
                   />
                   <p className="text-grey-700 text-xs mb-6 text-center">{t('ARC.desc')}</p>
                   <div className="w-full space-y-2.5 max-w-xs">
-                    <TapMotion onClick={() => handleARC(true)} className="w-full py-3 rounded-xl bg-primary text-white font-bold text-sm shadow-md shadow-primary/20 hover:bg-primary-hover transition-all flex items-center justify-center gap-1.5">
-                      <CheckCircle2 size={16} /> {t('ARC.yes')}
+                    <TapMotion
+                      onClick={() => handleARC(true)}
+                      className="w-full py-4 rounded-xl bg-status-success text-white font-bold text-base shadow-lg shadow-status-success/20 hover:bg-status-success/90 transition-all flex items-center justify-center gap-2"
+                    >
+                      <Check size={20} strokeWidth={3} /> {t('ARC.yes')}
                     </TapMotion>
-                    <TapMotion onClick={() => handleARC(false)} className="w-full py-3 rounded-xl bg-background-alt text-label-700 font-bold text-sm hover:bg-line-200 transition-all">
-                      {t('ARC.no')}
+                    <TapMotion
+                      onClick={() => handleARC(false)}
+                      className="w-full py-4 rounded-xl bg-[#FF6B6B] text-white font-bold text-base shadow-lg shadow-[#FF6B6B]/20 hover:bg-[#FF5C5C] transition-all flex items-center justify-center gap-2"
+                    >
+                      <X size={20} strokeWidth={3} /> {t('ARC.no')}
                     </TapMotion>
                   </div>
                 </div>
@@ -439,13 +468,9 @@ export default function EligibilityChecker() {
             {step === 'fail' && (
               <SlideView key="fail" direction={direction}>
                 <div className="flex flex-col items-center justify-center h-full py-4 text-center">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="w-16 h-16 bg-status-error/10 text-status-error rounded-full flex items-center justify-center mb-4 shadow-sm"
-                  >
+                  <div className="w-16 h-16 bg-status-error/10 text-status-error rounded-full flex items-center justify-center mb-4 shadow-sm">
                     <X size={32} strokeWidth={3} />
-                  </motion.div>
+                  </div>
                   <h3 className="text-lg font-bold mb-2 text-label-900">{t('Fail.title')}</h3>
                   <p
                     className="text-label-500 mb-8 text-xs leading-relaxed"
@@ -462,10 +487,7 @@ export default function EligibilityChecker() {
             {step === 'result' && result && (
               <SlideView key="result" direction={direction}>
                 <div className="text-center pt-3 flex flex-col h-full">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                  <div
                     className={cn(
                       "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold mb-3 mx-auto shadow-sm",
                       result.possible
@@ -475,7 +497,7 @@ export default function EligibilityChecker() {
                   >
                     {result.possible ? <CheckCircle2 size={14} /> : <X size={14} />}
                     {result.possible ? t('Result.possible') : t('Result.impossible')}
-                  </motion.div>
+                  </div>
 
                   <h2 className="text-xl font-extrabold mb-1 text-label-900">
                     <span className="text-primary">[{selection.visaCode}]</span> {t('Result.title_suffix')}
@@ -509,17 +531,18 @@ export default function EligibilityChecker() {
                       <Smartphone size={18} /> {t('ChatBot.select_phone')} <ChevronRight size={16} />
                     </TapMotion>
                     <TapMotion
-                      onClick={() => router.push('/inquiry')}
-                      className="w-full py-3 bg-[#FEE500] text-[#191919] rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-[#FDD835] transition-all"
+                      onClick={() => openChat()}
+                      className="w-full py-4 rounded-xl bg-[#FAE100] text-[#371D1E] font-bold text-base shadow-lg shadow-[#FAE100]/20 hover:brightness-95 transition-all flex items-center justify-center gap-2"
                     >
-                      <span className="text-lg">📝</span> {t('Result.cta_kakao')}
+                      <MessageCircle size={20} fill="#371D1E" /> {t('Result.cta_kakao')}
                     </TapMotion>
+
                     <button
                       type="button"
                       onClick={reset}
-                      className="text-[11px] text-label-500 flex items-center justify-center gap-1 mx-auto hover:text-label-700 transition-colors py-1.5 cursor-pointer"
+                      className="w-full py-3 text-grey-500 text-sm font-bold hover:text-primary transition-colors flex items-center justify-center gap-1.5"
                     >
-                      <RotateCcw size={10} /> {t('Result.reset')}
+                      <RotateCcw size={14} /> {t('Result.reset')}
                     </button>
                   </div>
                 </div>
@@ -581,6 +604,6 @@ export default function EligibilityChecker() {
           </AnimatePresence>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

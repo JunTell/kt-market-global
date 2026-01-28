@@ -7,7 +7,8 @@ import ModelListContainer from '@/features/phone/components/ModelListContainer';
 import Footer from '@/shared/components/layout/Footer';
 import EligibilityCheckerWrapper from '@/features/phone/components/EligibilityCheckerWrapper';
 
-// Dynamic Imports for Heavy Client Components
+// Dynamic Imports for Heavy Client Components - SSR enabled for Server Component compatibility
+const ProcessFlow = dynamic(() => import('@/features/phone/components/ProcessFlow'), { ssr: true });
 const ProcessGuide = dynamic(() => import('@/features/phone/components/ProcessGuide'), { ssr: true });
 const TargetAudience = dynamic(() => import('@/features/phone/components/TargetAudience'), { ssr: true });
 const WhyChooseUs = dynamic(() => import('@/features/phone/components/WhyChooseUs'), { ssr: true });
@@ -42,10 +43,6 @@ export default function Home() {
 
       {/* Trust Building: Why Choose Us */}
       <WhyChooseUs />
-
-      {/* Process Transparency */}
-      <ProcessGuide />
-
       {/* Eligibility Checker */}
       <section
         id="eligibility-section"
@@ -66,16 +63,21 @@ export default function Home() {
           <EligibilityCheckerWrapper />
         </div>
       </section>
-
-      {/* Target Audience */}
-      <TargetAudience />
-
       {/* Price Information LAST (Trust-First Strategy) */}
       <div id="products-section" className="px-4 py-10">
         <ModelListContainer
           sectionTitle={t('Phone.ModelList.section_title')}
           planId="ppllistobj_0808"
         />
+      </div>
+      {/* Target Audience */}
+      <TargetAudience />
+
+      <ProcessGuide />
+
+      {/* Process Transparency */}
+      <div className="py-12 md:py-20">
+        <ProcessFlow />
       </div>
 
       {/* Notice Section */}
