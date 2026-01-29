@@ -1,44 +1,42 @@
 {
   "Metadata": {
     "Home": {
-      "title": "Korea SIM Card & Mobile Plans (Postpaid) | iPhone & Galaxy | Global KT Market",
-      "description": "Looking for a Korea SIM card or mobile phone? Get official KT postpaid plans with your ARC. Buy iPhone 17 & Galaxy S26 with monthly installments. English support available.",
+      "title": "Phone Plan in Korea for Foreigners | KT Market Global",
+      "description": "KT Market Global helps foreigners living in Korea get mobile phone plans and devices online. Buy iPhone, Samsung, and affordable phones on the KT network. No Korean credit card, no deposit. English support available.",
       "keywords": [
-        "Korea SIM Card",
-        "Korea eSIM",
-        "Korea Mobile Plan",
-        "Korea Data Plan",
-        "Buy Phone in Korea",
-        "iPhone Price Korea",
-        "Samsung Galaxy Korea",
-        "KT Postpaid Sim",
-        "Mobile Contract Korea",
-        "KT for Foreigners",
-        "Phone Contract with ARC",
-        "Global KT Market"
+        "phone plan in Korea for foreigners",
+        "buy phone in Korea",
+        "KT mobile plan foreigners",
+        "iPhone Korea foreigners",
+        "Samsung phone Korea",
+        "Korea phone without credit card",
+        "KT Market Global"
       ],
-      "og_title": "Best Mobile Plans for Foreigners in Korea | Global KT Market",
-      "og_description": "Get the latest iPhone & Galaxy with official KT postpaid plans. Easy online application for ARC holders.",
-      "twitter_title": "Korea Mobile Plans & Phones for Foreigners",
-      "twitter_description": "Official KT Partner. Get your phone & plan online with ARC."
+      "og_title": "Phone Plan in Korea for Foreigners – KT Market Global",
+      "og_description": "Official global service of KT Market. Apply for a phone and mobile plan in Korea easily, even if you're a foreigner.",
+      "twitter_title": "Phone Plan in Korea for Foreigners | KT Market Global",
+      "twitter_description": "Official global service of KT Market. Apply for a phone and mobile plan in Korea easily."
     }
   },
   "Home": {
     "Hero": {
       "badge_official": "KT Official Partner",
       "badge_postpaid": "Postpaid Only",
-      "title_1": "Mobile Plans in Korea,",
-      "title_highlight": "Postpaid Available for Foreigners",
+      "title_1": "Phone Plan in Korea",
+      "title_highlight": "for Foreigners",
+      "subtitle": "Buy a phone and mobile plan online – simple, fast, and reliable.",
+      "trust_line": "KT Market Global · Official KT Partner",
       "desc": "No complex paperwork. Just your ARC, and you can get the same postpaid plans as locals.",
-      "feat1_title": "No Prepaid Needed",
-      "feat1_desc": "Switch to a continuous postpaid plan instead of prepaid ones that cut off data.",
-      "feat2_title": "Installments Available",
-      "feat2_desc": "Pay for the latest devices in installments depending on your visa conditions.",
-      "feat3_title": "Multi-language Support",
-      "feat3_desc": "No Korean? No problem. Professional agents are here to help.",
+      "feat1_title": "No Korean credit card required",
+      "feat2_title": "No deposit",
+      "feat3_title": "English support available",
+      "feat4_title": "Online application & delivery",
       "cta_check": "Check Eligibility Now",
       "cta_subscription": "Apply for Mobile Online",
       "no_hidden": "No Hidden Conditions"
+    },
+    "Brand": {
+      "description": "KT Market Global is the official international service of KT Market, providing mobile phones and KT plans for foreigners in Korea."
     },
     "Eligibility": {
       "badge": "Eligibility Check",
@@ -168,14 +166,14 @@
     "title": "Why KT Market?",
     "subtitle": "* We don't say we sell phones to foreigners. we only guide you through exact possible conditions.",
     "Cards": {
-      "card1_title": "KT Official Agency",
-      "card1_desc": "Official KT Certified",
-      "card2_title": "No Hidden Conditions",
-      "card2_desc": "No Predatory Terms",
-      "card3_title": "No Forced Plans",
-      "card3_desc": "No Binding Constraints",
-      "card4_title": "No Prepaid Required",
-      "card4_desc": "Official Process"
+      "card1_title": "No Korean credit card required",
+      "card1_desc": "Available without Korean card",
+      "card2_title": "No deposit",
+      "card2_desc": "Zero upfront security deposit",
+      "card3_title": "English support available",
+      "card3_desc": "Professional English assistance",
+      "card4_title": "Online application & delivery",
+      "card4_desc": "Apply online, get it at home"
     },
     "Comparison": {
       "title": "Why <span class=\"text-red-500\">KT</span> Market?",

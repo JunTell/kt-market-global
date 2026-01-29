@@ -74,7 +74,7 @@ export default async function HeroSection() {
                         </div>
 
                         <h1
-                            className="text-2xl md:text-3xl font-bold leading-tight mb-4"
+                            className="text-2xl md:text-3xl font-bold leading-tight mb-2"
                             style={{ color: 'var(--trust-text-white)' }}
                         >
                             {t('title_1')}
@@ -83,13 +83,16 @@ export default async function HeroSection() {
                                 {t('title_highlight')}
                             </span>
                         </h1>
+                        <p className="text-sm md:text-lg mb-6 opacity-90" style={{ color: 'var(--trust-text-white)' }}>
+                            {t('subtitle')}
+                        </p>
 
                         <div className="mb-6 pl-1 border-l-4 border-trust-primary/30">
                             <p
                                 className="text-xs md:text-sm font-bold mb-1"
                                 style={{ color: 'var(--trust-text-gray)' }}
                             >
-                                KT Official Dealer <span style={{ color: 'var(--trust-primary)' }}>KT</span>
+                                {t('trust_line')}
                             </p>
                             <p
                                 className="text-[10px] md:text-xs font-medium opacity-80"

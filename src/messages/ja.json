@@ -1,43 +1,42 @@
 {
   "Metadata": {
     "Home": {
-      "title": "韓国SIMカード＆携帯プラン (後払い) | iPhone 17 & Galaxy S26 | Global KT Market",
-      "description": "韓国でSIMカードや携帯電話をお探しですか？外国人登録証(ARC)があれば公式KTの後払いプランをご利用いただけます。iPhone 16やGalaxy S25の分割払いも可能。日本語・英語サポートあり。",
+      "title": "外国人向け韓国携帯プラン | KT Market Global",
+      "description": "KT Market Global は、韓国在住の外国人が携帯プランや端末をオンラインで簡単に購入できるようサポートします。iPhone、Samsung、格安スマホを KT ネットワークで。韓国のクレジットカード不要、保証金なし。英語サポート対応。",
       "keywords": [
-        "韓国 SIMカード",
-        "韓国 eSIM",
-        "韓国 携帯プラン",
-        "韓国 データ通信",
-        "韓国 スマホ購入",
-        "iPhone 韓国 価格",
-        "Galaxy 韓国",
-        "KT 後払い SIM",
-        "韓国 携帯契約",
-        "外国人 KT 契約",
-        "外国人登録証 携帯契約",
-        "Global KT Market"
+        "外国人向け韓国携帯プラン",
+        "韓国で携帯購入",
+        "KT 外国人プラン",
+        "iPhone 韓国 外国人",
+        "Samsung 韓国 携帯",
+        "クレジットカードなし韓国携帯",
+        "KT Market Global"
       ],
-      "og_title": "韓国在住外国人向け最良の携帯プラン | Global KT Market",
-      "og_description": "最新のiPhone & Galaxyを公式KT後払いプランで。外国人登録証をお持ちの方ならオンラインで簡単に申し込み可能。",
-      "twitter_title": "韓国の外国人向け携帯プラン＆スマホ購入",
-      "twitter_description": "KT公式パートナー。外国人登録証でスマホとプランをオンライン契約。"
+      "og_title": "外国人向け韓国携帯プラン – KT Market Global",
+      "og_description": "KT Market の公式グローバルサービス。在韓外国人の方でも、韓国で携帯電話とプランをオンラインで簡単に申し込めます。",
+      "twitter_title": "外国人向け韓国携帯プラン | KT Market Global",
+      "twitter_description": "KT Market の公式グローバル服务。韓国で携帯電話とプランをオンラインで簡単に申し込めます。"
     }
   },
   "Home": {
     "Hero": {
       "badge_official": "KT 公式パートナー",
       "badge_postpaid": "後払い専用",
-      "title_1": "韓国での携帯契約、",
-      "title_highlight": "外国人でも後払い可能です",
+      "title_1": "外国人向け",
+      "title_highlight": "韓国携帯プラン",
+      "subtitle": "携帯とプランをオンラインで - 簡単、スピーディー、安心。",
+      "trust_line": "KT Market Global · KT 公式パートナー",
       "desc": "複雑な書類は不要。外国人登録証があれば、韓国人と同じ後払いプランで契約できます。",
-      "feat1_title": "プリペイドは卒業",
-      "feat1_desc": "データが途切れるプリペイド携帯の代わりに、ずっと使える後払いプランを。",
-      "feat2_title": "最新スマホの分割払い",
-      "feat2_desc": "ビザの条件に応じて、端末代金を分割で支払うことができます。",
-      "feat3_title": "多言語サポート",
-      "feat3_desc": "韓国語が苦手でも大丈夫です。専門の相談員がサポートします。",
+      "feat1_title": "韓国のクレジットカード不要",
+      "feat2_title": "保証金なし",
+      "feat3_title": "英語サポート対応",
+      "feat4_title": "オンライン申請＆配送",
       "cta_check": "今すぐ確認",
+      "cta_subscription": "オンラインで携帯を申し込む",
       "no_hidden": "隠れた条件なし"
+    },
+    "Brand": {
+      "description": "KT Market Global は KT Market の公式グローバルサービスです。在韓外国人向けに携帯端末と KT のプランを提供しています。"
     },
     "Eligibility": {
       "badge": "Eligibility Check",
@@ -167,14 +166,14 @@
     "title": "なぜ KT Market なのか？",
     "subtitle": "* 私たちは全ての外国人に携帯を販売できるとは言いません。可能な条件のみ正確にご案内します。",
     "Cards": {
-      "card1_title": "KT 公式代理店",
-      "card1_desc": "Official KT 認定店",
-      "card2_title": "隠し条件なし",
-      "card2_desc": "不透明な約款なし",
-      "card3_title": "プラン強要なし",
-      "card3_desc": "縛り・制約なし",
-      "card4_title": "前払い要求なし",
-      "card4_desc": "公式手続き進行"
+      "card1_title": "韓国のクレジットカード不要",
+      "card1_desc": "韓国カードなしでも申請可能",
+      "card2_title": "保証金なし",
+      "card2_desc": "初期保証金の負担ゼロ",
+      "card3_title": "英語サポート対応",
+      "card3_desc": "専門的な英語対応が可能",
+      "card4_title": "オンライン申請＆配送",
+      "card4_desc": "自宅からオンラインで完結"
     },
     "Comparison": {
       "title": "Why <span class=\"text-red-500\">KT</span> Market?",

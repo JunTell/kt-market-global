@@ -1,44 +1,42 @@
 {
   "Metadata": {
     "Home": {
-      "title": "한국 SIM 카드 및 휴대폰 요금제 (후불) | 아이폰 17 & 갤럭시 S26 | 글로벌 KT 마켓",
-      "description": "한국에서 SIM 카드나 휴대폰을 찾고 계신가요? 외국인등록증(ARC)으로 공식 KT 후불 요금제를 이용하세요. 아이폰 16 & 갤럭시 S25 할부 구매 가능. 영어 및 다국어 상담 지원.",
+      "title": "외국인을 위한 한국 휴대폰 요금제 | KT Market Global",
+      "description": "KT Market Global은 한국에 거주하는 외국인들이 모바일 요금제와 기기를 온라인으로 간편하게 구매할 수 있도록 돕습니다. 아이폰, 삼성 및 가성비 폰을 KT 네트워크에서 만나보세요. 한국 신용카드나 보증금이 필요 없으며, 영어 지원이 가능합니다.",
       "keywords": [
-        "한국 SIM 카드",
-        "한국 eSIM",
-        "한국 휴대폰 요금제",
-        "한국 데이터 플랜",
-        "한국에서 휴대폰 구매",
-        "아이폰 한국 가격",
-        "삼성 갤럭시 한국",
-        "KT 후불 유심",
-        "휴대폰 약정 한국",
-        "외국인 KT 개통",
-        "외국인등록증 휴대폰 계약",
-        "글로벌 KT 마켓"
+        "외국인 휴대폰 개통",
+        "한국 휴대폰 구매",
+        "KT 외국인 요금제",
+        "아이폰 한국 외국인",
+        "삼성 휴대폰 한국",
+        "한국 신용카드 없이 휴대폰",
+        "KT Market Global"
       ],
-      "og_title": "대한민국 거주 외국인을 위한 최적의 모바일 요금제 | 글로벌 KT 마켓",
-      "og_description": "최신 아이폰 & 갤럭시를 공식 KT 후불 요금제로 만나보세요. 외국인등록증 소지자라면 온라인으로 간편하게 신청 가능.",
-      "twitter_title": "외국인을 위한 한국 모바일 요금제 & 휴대폰 구매",
-      "twitter_description": "KT 공식 파트너. 외국인등록증으로 온라인에서 휴대폰과 요금제를 신청하세요."
+      "og_title": "외국인을 위한 한국 휴대폰 요금제 – KT Market Global",
+      "og_description": "KT Market의 공식 글로벌 서비스. 외국인이라도 한국에서 휴대폰과 요금제를 쉽고 간편하게 신청하세요.",
+      "twitter_title": "외국인을 위한 한국 휴대폰 요금제 | KT Market Global",
+      "twitter_description": "KT Market의 공식 글로벌 서비스. 한국에서 휴대폰과 요금제를 쉽고 간편하게 신청하세요."
     }
   },
   "Home": {
     "Hero": {
       "badge_official": "KT 공식 파트너",
       "badge_postpaid": "후불 전용",
-      "title_1": "한국에서 휴대폰 개통,",
-      "title_highlight": "외국인도 후불로 가능합니다",
+      "title_1": "외국인을 위한",
+      "title_highlight": "한국 휴대폰 요금제",
+      "subtitle": "휴대폰과 요금제를 온라인으로 - 쉽고 빠르고 믿을 수 있게.",
+      "trust_line": "KT Market Global · KT 공식 파트너",
       "desc": "복잡한 서류 없이 외국인등록증만 있다면, 내국인과 똑같은 후불 요금제로 개통하세요.",
-      "feat1_title": "선불 요금제 NO",
-      "feat1_desc": "데이터가 끊기는 선불폰 대신 계속 쓰는 후불 요금제입니다.",
-      "feat2_title": "최신폰 할부 가능",
-      "feat2_desc": "비자 조건에 따라 기기값을 나누어 낼 수 있습니다.",
-      "feat3_title": "다국어 상담 지원",
-      "feat3_desc": "한국어가 서툴러도 괜찮습니다. 전문 상담원이 도와드려요.",
+      "feat1_title": "한국 신용카드 불필요",
+      "feat2_title": "보증금 없음",
+      "feat3_title": "영어 지원 가능",
+      "feat4_title": "온라인 신청 및 배송",
       "cta_check": "지금 바로 확인하기",
       "cta_subscription": "온라인으로 휴대폰 가입하기",
       "no_hidden": "숨겨진 조건 없음"
+    },
+    "Brand": {
+      "description": "KT Market Global은 KT Market의 공식 글로벌 서비스로, 한국 내 외국인을 위한 휴대폰과 KT 요금제를 제공합니다."
     },
     "Eligibility": {
       "badge": "Eligibility Check",
@@ -168,14 +166,14 @@
     "title": "왜 외국인은 여기서 개통하나요?",
     "subtitle": "* 우리는 무조건 된다고 하지 않습니다. 가능한 조건만 정확히 안내합니다.",
     "Cards": {
-      "card1_title": "KT 공식대리점",
-      "card1_desc": "Official KT 인증점",
-      "card2_title": "조건 숨김 없음",
-      "card2_desc": "투명한 가입 절차",
-      "card3_title": "요금제 강요 없음",
-      "card3_desc": "자유로운 요금제 선택",
-      "card4_title": "선불 요구 없음",
-      "card4_desc": "공식 후불 개통"
+      "card1_title": "한국 신용카드 불필요",
+      "card1_desc": "한국 카드 없이도 신청 가능",
+      "card2_title": "보증금 없음",
+      "card2_desc": "초기 보증금 부담 제로",
+      "card3_title": "영어 지원 가능",
+      "card3_desc": "전문적인 영어 상담 지원",
+      "card4_title": "온라인 신청 및 배송",
+      "card4_desc": "집에서 편하게 온라인 신청"
     },
     "Comparison": {
       "title": "Why <span class=\"text-red-500\">KT</span> Market?",

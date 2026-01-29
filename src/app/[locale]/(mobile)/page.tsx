@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t('og_title'),
       description: t('og_description'),
       url: `https://global.ktmarket.co.kr/${locale}`,
-      siteName: 'Global KT Market',
+      siteName: 'KT Market Global',
       locale: locale === 'en' ? 'en_US' : locale,
       type: 'website',
       images: [
@@ -73,6 +73,13 @@ export default function Home() {
     <main className="min-h-screen bg-white font-sans max-w-[940px] mx-auto">
       {/* Trust-First: Hero Section at Top */}
       <HeroSection />
+
+      {/* Short Brand Description */}
+      <section className="py-8 px-6 md:px-12 bg-white text-center border-b border-grey-50">
+        <p className="text-xs md:text-sm text-grey-500 max-w-2xl mx-auto leading-relaxed font-medium">
+          {t('Home.Brand.description')}
+        </p>
+      </section>
 
       {/* Trust Building: Why Choose Us */}
       <WhyChooseUs />

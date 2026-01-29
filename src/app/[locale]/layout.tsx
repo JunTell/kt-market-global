@@ -38,23 +38,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     metadataBase: new URL('https://global.ktmarket.co.kr'),
     title: {
-      template: '%s | Global KT Market',
-      default: 'Global KT Market | Korea\'s No.1 Mobile Service for Foreigners',
+      template: '%s | KT Market Global',
+      default: 'Phone Plan in Korea for Foreigners | KT Market Global',
     },
     description: "Official KT Authorized Agency. Provides the best mobile plans and smartphones for foreigners in Korea with English support. Check eligibility and apply online.",
     keywords: keywords,
     openGraph: {
-      title: "Global KT Market | Korea's No.1 Mobile Service",
+      title: "Phone Plan in Korea for Foreigners – KT Market Global",
       description: "Official KT Authorized Agency. Best mobile plans for foreigners in Korea.",
       url: 'https://global.ktmarket.co.kr',
-      siteName: 'Global KT Market',
+      siteName: 'KT Market Global',
       locale: locale,
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Global KT Market',
-      description: 'Korea\'s No.1 Mobile Service for Foreigners',
+      title: 'KT Market Global',
+      description: 'Phone Plan in Korea for Foreigners',
     },
     robots: {
       index: true,
