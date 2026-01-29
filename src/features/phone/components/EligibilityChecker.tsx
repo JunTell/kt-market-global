@@ -68,7 +68,7 @@ const TapMotion = ({ children, className, onClick }: { children: React.ReactNode
 
 type Step = 'arc' | 'visa' | 'duration' | 'device' | 'result' | 'fail' | 'phoneSelection';
 
-export default function EligibilityChecker() {
+export default function EligibilityChecker({ showPhoneSelection = true }: { showPhoneSelection?: boolean }) {
   const t = useTranslations('Checker');
   const locale = useLocale();
   const currentLocale = (['ko', 'en', 'zh', 'ja'].includes(locale) ? locale : 'ko') as 'ko' | 'en' | 'zh' | 'ja';
@@ -521,6 +521,17 @@ export default function EligibilityChecker() {
                   </div>
 
                   <div className="space-y-2">
+                    {showPhoneSelection && (
+                      <TapMotion
+                        onClick={() => {
+                          setDirection(1);
+                          setStep('phoneSelection');
+                        }}
+                        className="w-full py-3.5 bg-primary text-label-100 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-secondary transition-all shadow-md hover:shadow-lg"
+                      >
+                        <Smartphone size={18} /> {t('ChatBot.select_phone')} <ChevronRight size={16} />
+                      </TapMotion>
+                    )}
                     <TapMotion
                       onClick={() => {
                         setDirection(1);
