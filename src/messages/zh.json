@@ -1,43 +1,42 @@
 {
   "Metadata": {
     "Home": {
-      "title": "韩国SIM卡及手机套餐 (后付) | iPhone 17 & Galaxy S26 | Global KT Market",
-      "description": "正在寻找韩国SIM卡或手机？通过外国人登录证(ARC)即可获得KT官方后付套餐。支持iPhone 16和Galaxy S25分期付款。提供中文和英文服务。",
+      "title": "韩国外国人手机套餐 | KT Market Global",
+      "description": "KT Market Global 帮助在韩外国人在线办理手机套餐和设备。在 KT 网络上购买 iPhone、三星及高性价比手机。无需韩国信用卡，无需保证金。提供英语支持。",
       "keywords": [
-        "韩国 SIM卡",
-        "韩国 eSIM",
-        "韩国 手机套餐",
-        "韩国 数据流量",
+        "韩国外国人手机套餐",
         "在韩国买手机",
-        "iPhone 韩国 价格",
-        "三星 Galaxy 韩国",
-        "KT 后付 SIM卡",
-        "韩国 手机合约",
-        "外国人 开通 KT",
-        "持有ARC办理手机",
-        "Global KT Market"
+        "KT 外国人手机套餐",
+        "iPhone 韩国 外国人",
+        "三星 韩国 手机",
+        "无需信用卡办手机",
+        "KT Market Global"
       ],
-      "og_title": "在韩外国人最佳手机套餐 | Global KT Market",
-      "og_description": "通过KT官方后付套餐获取最新的 iPhone 和 Galaxy。持有ARC即可轻松在线申请。",
-      "twitter_title": "韩国外国人手机套餐与手机购买",
-      "twitter_description": "KT官方合作伙伴。持有ARC在线办理手机与套餐。"
+      "og_title": "韩国外国人手机套餐 – KT Market Global",
+      "og_description": "KT Market 的官方全球服务。在韩国轻松申请手机和套餐，专为外国人量身定制。",
+      "twitter_title": "韩国外国人手机套餐 | KT Market Global",
+      "twitter_description": "KT Market 的官方全球服务。在韩国轻松申请手机和套餐。"
     }
   },
   "Home": {
     "Hero": {
       "badge_official": "KT 官方合作伙伴",
       "badge_postpaid": "仅限后付",
-      "title_1": "在韩国开通手机，",
-      "title_highlight": "外国人也可以后付",
+      "title_1": "韩国面向外国人的",
+      "title_highlight": "手机套餐",
+      "subtitle": "在线购买手机和套餐 - 简单、快捷、可靠。",
+      "trust_line": "KT Market Global · KT 官方合作伙伴",
       "desc": "无需复杂材料，只要有外国人登录证，即可办理和韩国人一样的后付套餐。",
-      "feat1_title": "拒绝预付卡",
-      "feat1_desc": "告别数据中断的预付卡，使用持续连通的后付套餐。",
-      "feat2_title": "最新手机分期",
-      "feat2_desc": "根据签证条件，可以分期支付设备费用。",
-      "feat3_title": "多语言咨询支持",
-      "feat3_desc": "韩语不流利也没关系，专业顾问为您提供帮助。",
+      "feat1_title": "无需韩国信用卡",
+      "feat2_title": "无需保证金",
+      "feat3_title": "提供英语支持",
+      "feat4_title": "在线申请及配送",
       "cta_check": "立即确认",
+      "cta_subscription": "在线办理手机",
       "no_hidden": "无隐藏条件"
+    },
+    "Brand": {
+      "description": "KT Market Global 是 KT Market 的官方全球服务，为在韩外国人提供手机和 KT 套餐。"
     },
     "Eligibility": {
       "badge": "Eligibility Check",
@@ -167,14 +166,14 @@
     "title": "为什么选择KT Market?",
     "subtitle": "* 我们不说可以给所有外国人办手机。我们只在符合条件时提供准确指引。",
     "Cards": {
-      "card1_title": "KT 官方代理店",
-      "card1_desc": "Official KT 认证店",
-      "card2_title": "无隐藏条件",
-      "card2_desc": "无欺诈性条款",
-      "card3_title": "无强制套餐",
-      "card3_desc": "无捆绑约束",
-      "card4_title": "无需预付",
-      "card4_desc": "官方后付流程"
+      "card1_title": "无需韩国信用卡",
+      "card1_desc": "无韩国卡亦可办理",
+      "card2_title": "无需保证金",
+      "card2_desc": "无需提前支付保证金",
+      "card3_title": "提供英语支持",
+      "card3_desc": "专业英文咨询支持",
+      "card4_title": "在线申请及配送",
+      "card4_desc": "足不出户在线申请"
     },
     "Comparison": {
       "title": "Why <span class=\"text-red-500\">KT</span> Market?",
