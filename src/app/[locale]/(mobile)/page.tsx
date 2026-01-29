@@ -26,9 +26,42 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t('title'),
     description: t('description'),
+    keywords: t.has('keywords') ? (t.raw('keywords') as string[]) : [],
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title: t('og_title'),
       description: t('og_description'),
+      url: `https://global.ktmarket.co.kr/${locale}`,
+      siteName: 'Global KT Market',
+      locale: locale === 'en' ? 'en_US' : locale,
+      type: 'website',
+      images: [
+        {
+          url: locale === 'en' ? '/images/og-image-en.jpg' : '/images/logo.svg',
+          width: 1200,
+          height: 630,
+          alt: 'Global KT Market - Mobile Service for Foreigners',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t.has('twitter_title') ? t('twitter_title') : t('og_title'),
+      description: t.has('twitter_description') ? t('twitter_description') : t('og_description'),
+      images: [locale === 'en' ? '/images/og-image-en.jpg' : '/images/logo.svg'],
+    },
+    alternates: {
+      canonical: `https://global.ktmarket.co.kr/${locale}`,
     },
   };
 }

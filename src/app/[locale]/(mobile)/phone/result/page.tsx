@@ -106,7 +106,7 @@ export default function ResultPage() {
   return (
     <main className="min-h-screen bg-white">
       <div className="p-4">
-        <EligibilityChecker />
+        <EligibilityChecker showPhoneSelection={false} />
       </div>
       {/* 1. 성공 오버레이 */}
       <IntroOverlay />
