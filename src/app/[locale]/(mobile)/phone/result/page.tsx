@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import Script from "next/script"
 import { useTranslations, useLocale } from "next-intl"
 import { formatPrice } from "@/shared/lib/format"
 import { getPlanDetails } from "@/features/phone/lib/phonedata"
@@ -105,6 +106,11 @@ export default function ResultPage() {
 
   return (
     <main className="min-h-screen bg-white">
+      <Script id="google-conversion-event" strategy="afterInteractive">
+        {`
+          gtag('event', 'conversion', {'send_to': 'AW-11271910125/zZSOCKvkrO8bEO3l7v4p'});
+        `}
+      </Script>
       <div className="p-4">
         <EligibilityChecker showPhoneSelection={false} />
       </div>
