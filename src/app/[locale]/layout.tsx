@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import "@/app/globals.css";
+import Script from 'next/script';
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
@@ -83,6 +84,21 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
+      <head>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-11271910125"
+          strategy="afterInteractive"
+        />
+        <Script id="google-tag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-11271910125');
+          `}
+        </Script>
+      </head>
       <body
         className={`${inter.variable} ${pretendard.variable} antialiased bg-white`}
         suppressHydrationWarning={true}
