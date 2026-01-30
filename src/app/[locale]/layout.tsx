@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     verification: {
       other: {
-        'facebook-domain-verification': '6xvpffpw3l0zkmhciw1puskq27akblq',
+        'facebook-domain-verification': '6xvpfpw3l0zkmhciw1puskq27akblq',
       },
     },
   };
