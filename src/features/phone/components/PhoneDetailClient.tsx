@@ -67,21 +67,20 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialData])
 
-  const currentTitle = store.title || initialData.title
-  const currentCapacity = store.capacity || initialData.capacity
-  const currentColor = store.color || initialData.color
-  const currentOriginPrice = store.originPrice || initialData.originPrice
-  const currentImageUrls = (store.imageUrls && store.imageUrls.length > 0) ? store.imageUrls : initialData.imageUrls
-  const currentImageUrl = store.imageUrl || initialData.imageUrl
-  const currentPlans = (store.plans && store.plans.length > 0) ? store.plans : initialData.plans
+  const isStoreSynced = store.model === initialData.model
+  const currentTitle = (isStoreSynced && store.title) || initialData.title
+  const currentCapacity = (isStoreSynced && store.capacity) || initialData.capacity
+  const currentColor = (isStoreSynced && store.color) || initialData.color
+  const currentOriginPrice = (isStoreSynced && store.originPrice) || initialData.originPrice
+  const currentImageUrls = (isStoreSynced && store.imageUrls && store.imageUrls.length > 0) ? store.imageUrls : initialData.imageUrls
+  const currentImageUrl = (isStoreSynced && store.imageUrl) || initialData.imageUrl
+  const currentPlans = (isStoreSynced && store.plans && store.plans.length > 0) ? store.plans : initialData.plans
 
   const { availableColors, colorImages, prefix } = initialData
   const COLOR_MAP = getColorMap(t)
 
   const handleCapacityChange = (newCap: string) => {
     store.setStore({ capacity: newCap })
-    const newModel = `${prefix}-${newCap}-${currentColor}`
-    router.replace(`/${locale}/phone?model=${newModel}`, { scroll: false })
   }
 
   const handleColorChange = (newColor: string) => {
@@ -95,7 +94,7 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
     })
 
     const newModel = `${prefix}-${currentCapacity}-${newColor}`
-    router.replace(`/${locale}/phone?model=${newModel}`, { scroll: false })
+    router.replace(`/${locale}/phone?model=${encodeURIComponent(newModel)}`, { scroll: false })
   }
 
   const handleNextStep = () => {
