@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import "@/app/globals.css";
 import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
@@ -101,7 +102,7 @@ export default async function LocaleLayout({
 
       </head>
       <body
-        className={`${inter.variable} ${pretendard.variable} antialiased bg-white`}
+        className={`${inter.variable} ${pretendard.variable} antialiased bg-white overflow-y-hidden`}
         suppressHydrationWarning={true}
       >
 
@@ -109,6 +110,7 @@ export default async function LocaleLayout({
           {children}
         </NextIntlClientProvider>
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID as string} />
     </html>
   );
 }
