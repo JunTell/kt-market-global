@@ -101,7 +101,7 @@ export default async function LocaleLayout({
 
       </head>
       <body
-        className={`${inter.variable} ${pretendard.variable} antialiased bg-white`}
+        className={`${inter.variable} ${pretendard.variable} antialiased bg-white overflow-y-hidden`}
         suppressHydrationWarning={true}
       >
 
