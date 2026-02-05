@@ -44,7 +44,10 @@ export function parsePhoneModel(modelString: string): ParsedPhoneModel {
 
   // 기본 용량 값 가져오기
   const defaultCapacity = MODEL_VARIANTS[prefix]?.[0] || "256"
-  const capacity = parts[capacityIndex] || defaultCapacity
+  let capacity = parts[capacityIndex] || defaultCapacity
+
+  // "GB" 문자열 제거 (URL에 실수로 포함된 경우 대비)
+  capacity = capacity.replace(/gb/gi, "")
   const color = parts.slice(capacityIndex + 1).join("-") || ""
 
   return {

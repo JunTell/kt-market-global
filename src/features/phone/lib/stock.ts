@@ -1,5 +1,5 @@
 export const checkIsSoldOut = (prefix: string, cap: string, col: string) => {
-    const color = col.toLowerCase().trim()
+    const color = col.toLowerCase().trim().replace(/\s+/g, '_')
     // 규칙 1: 아이폰 17 (aip17) + 256GB -> 블랙, 미스트블루, 라벤더 품절
     if (prefix === "aip17" && cap === "256") {
         if (["black", "mist_blue", "lavender"].includes(color)) return true

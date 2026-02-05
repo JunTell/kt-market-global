@@ -110,7 +110,7 @@ async function PhoneServerLoader({ params, searchParams }: Props) {
     const initialData = {
         model: urlModel,
         title: device.pet_name,
-        capacity: device.capacity,
+        capacity: capacity,
         color: selectedColor,
         originPrice: device.price,
         imageUrl: currentImageUrl,
