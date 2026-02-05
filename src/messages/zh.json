@@ -326,7 +326,7 @@
       "phone_label": "手机号码 (仅数字)",
       "phone_placeholder": "01012345678",
       "phone_error": "请输入11位手机号码",
-      "country_label": "国籍 (Country)",
+      "country_label": "国籍 (Nationality)",
       "requirements_label": "要求事项 (可选)",
       "requirements_placeholder": "例: 我想保留现有SIM卡",
       "save_button": "保存",

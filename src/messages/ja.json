@@ -326,7 +326,7 @@
       "phone_label": "携帯電話番号 (数字のみ)",
       "phone_placeholder": "01012345678",
       "phone_error": "携帯電話番号11桁を入力してください",
-      "country_label": "国籍 (Country)",
+      "country_label": "国籍 (Nationality)",
       "requirements_label": "要望事項 (任意)",
       "requirements_placeholder": "例: 既存のSIMカードをそのまま使用したいです",
       "save_button": "保存",
