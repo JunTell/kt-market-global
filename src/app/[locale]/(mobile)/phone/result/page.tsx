@@ -100,68 +100,95 @@ export default function ResultPage() {
     planPrice: `${t('Phone.Order.monthly_price')} ${formatPrice(finalPlanPrice, locale)}${t('Phone.Common.won')}`
   }
 
-  if (!orderData) {
-    return <OrderSkeleton />
-  }
-
   return (
-    <main className="min-h-screen bg-white">
+    <>
       <Script id="google-conversion-event" strategy="afterInteractive">
         {`
           gtag('event', 'conversion', {'send_to': 'AW-11271910125/zZSOCKvkrO8bEO3l7v4p'});
         `}
       </Script>
-      <div className="p-4">
-        <EligibilityChecker showPhoneSelection={false} />
-      </div>
-      {/* 1. 성공 오버레이 */}
-      <IntroOverlay />
-
-      <div className="max-w-[480px] mx-auto px-5 pt-5 pb-[120px]">
-        <h1 className="text-2xl font-bold text-[#191F28] mb-6 mt-2.5 whitespace-pre-line">
-          {t('Phone.Result.application_complete_title')}
-        </h1>
-
-        {/* 2. 상품 정보 요약 */}
-        <OrderProductSummary
-          image={productInfo.image}
-          title={productInfo.title}
-          spec={productInfo.spec}
-          price={productInfo.price}
+      <Script id="meta-pixel" strategy="afterInteractive">
+        {`
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '865290846335788');
+          fbq('track', 'PageView');
+        `}
+      </Script>
+      <noscript>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          height="1"
+          width="1"
+          style={{ display: 'none' }}
+          src="https://www.facebook.com/tr?id=865290846335788&ev=PageView&noscript=1"
+          alt="facebook pixel"
         />
+      </noscript>
 
-        <div className="w-full h-px bg-[#F2F4F6] my-6" />
+      {!orderData ? (
+        <OrderSkeleton />
+      ) : (
+        <main className="min-h-screen bg-white">
+          <div className="p-4">
+            <EligibilityChecker showPhoneSelection={false} />
+          </div>
+          {/* 1. 성공 오버레이 */}
+          <IntroOverlay />
 
-        {/* 3. 신청 정보 확인 (Read Only) */}
-        {/* 스타일 여백 제거를 위해 -20px margin 사용 혹은 컴포넌트 내부 padding 조절 필요 */}
-        <div className="-mx-5">
-          <OrderUserForm
-            isReadOnly={true}
-            userName={userInfo.userName}
-            userDob={userInfo.userDob}
-            userPhone={userInfo.userPhone}
-            country={userInfo.country}
-            requirements={userInfo.requirements}
-            // 기타 props
-            joinType={String(orderData?.joinType || t('Phone.Order.join_type_change'))}
-            contract={String(orderData?.contract || t('Phone.Order.contract_24'))}
-            discountType={String(orderData?.discountType || "device")}
-            planName={planInfo.planName}
-            planData={planInfo.planData}
-            planPrice={planInfo.planPrice}
-          />
-        </div>
+          <div className="max-w-[480px] mx-auto px-5 pt-5 pb-[120px]">
+            <h1 className="text-2xl font-bold text-[#191F28] mb-6 mt-2.5 whitespace-pre-line">
+              {t('Phone.Result.application_complete_title')}
+            </h1>
 
-        {/* 4. 홈으로 돌아가기 버튼 */}
-        <div className="mt-5">
-          <button
-            className="w-full p-4 bg-[#F2F4F6] text-[#4B5563] text-base font-bold rounded-[14px] hover:bg-gray-200 transition-colors cursor-pointer"
-            onClick={() => router.push(`/${locale}`)}
-          >
-            {t('Phone.Result.go_home_button')}
-          </button>
-        </div>
-      </div>
-    </main>
+            {/* 2. 상품 정보 요약 */}
+            <OrderProductSummary
+              image={productInfo.image}
+              title={productInfo.title}
+              spec={productInfo.spec}
+              price={productInfo.price}
+            />
+
+            <div className="w-full h-px bg-[#F2F4F6] my-6" />
+
+            {/* 3. 신청 정보 확인 (Read Only) */}
+            {/* 스타일 여백 제거를 위해 -20px margin 사용 혹은 컴포넌트 내부 padding 조절 필요 */}
+            <div className="-mx-5">
+              <OrderUserForm
+                isReadOnly={true}
+                userName={userInfo.userName}
+                userDob={userInfo.userDob}
+                userPhone={userInfo.userPhone}
+                country={userInfo.country}
+                requirements={userInfo.requirements}
+                // 기타 props
+                joinType={String(orderData?.joinType || t('Phone.Order.join_type_change'))}
+                contract={String(orderData?.contract || t('Phone.Order.contract_24'))}
+                discountType={String(orderData?.discountType || "device")}
+                planName={planInfo.planName}
+                planData={planInfo.planData}
+                planPrice={planInfo.planPrice}
+              />
+            </div>
+
+            {/* 4. 홈으로 돌아가기 버튼 */}
+            <div className="mt-5">
+              <button
+                className="w-full p-4 bg-[#F2F4F6] text-[#4B5563] text-base font-bold rounded-[14px] hover:bg-gray-200 transition-colors cursor-pointer"
+                onClick={() => router.push(`/${locale}`)}
+              >
+                {t('Phone.Result.go_home_button')}
+              </button>
+            </div>
+          </div>
+        </main>
+      )}
+    </>
   )
 }
