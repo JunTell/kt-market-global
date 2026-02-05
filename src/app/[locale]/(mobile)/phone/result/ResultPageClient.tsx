@@ -25,6 +25,7 @@ export default function ResultPageClient() {
   useEffect(() => {
     const data = sessionStorage.getItem("asamoDeal")
     if (data) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setOrderData(JSON.parse(data))
     }
   }, [])
@@ -57,6 +58,7 @@ export default function ResultPageClient() {
     try {
       const userInfoStr = sessionStorage.getItem("user-info")
       if (userInfoStr) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSavedUserInfo(JSON.parse(userInfoStr) as UserInfo)
       }
     } catch (e) {
