@@ -114,6 +114,7 @@
       "installment_ok": "가능 (OK)",
       "installment_no": "불가능 (NO)",
       "cta_kakao": "카카오톡 상담하기",
+      "cta_whatsapp": "WhatsApp 상담하기",
       "reset": "다시하기"
     },
     "Fail": {

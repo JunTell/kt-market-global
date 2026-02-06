@@ -36,7 +36,7 @@ export default function ChatContactCards() {
                 </a>
 
                 <a
-                    href="https://wa.me/821012345678"
+                    href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '821012345678'}`}
                     target="_blank"
                     rel="noreferrer"
                     className="flex items-center gap-3 p-3 rounded-2xl bg-[#25D366] hover:bg-[#20bd5a] transition-all shadow-sm hover:shadow-md cursor-pointer group"
