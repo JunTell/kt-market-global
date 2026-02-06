@@ -17,7 +17,6 @@ import {
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useUIStore } from '@/shared/model/useUIStore';
 
 // --- 애니메이션 변수 ---
 const slideVariants = {
@@ -70,10 +69,10 @@ type Step = 'arc' | 'visa' | 'duration' | 'device' | 'result' | 'fail' | 'phoneS
 
 export default function EligibilityChecker({ showPhoneSelection = true }: { showPhoneSelection?: boolean }) {
   const t = useTranslations('Checker');
+  const tChat = useTranslations('ChatBot');
   const locale = useLocale();
   const currentLocale = (['ko', 'en', 'zh', 'ja'].includes(locale) ? locale : 'ko') as 'ko' | 'en' | 'zh' | 'ja';
   const router = useRouter();
-  const openChat = useUIStore((state) => state.openChat);
 
   const [step, setStep] = useState<Step>('arc');
   const [direction, setDirection] = useState(1);
@@ -219,6 +218,24 @@ export default function EligibilityChecker({ showPhoneSelection = true }: { show
       name: 'iPhone 17 Pro',
       capacity: '256GB',
       image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/aip17p/silver/01.png'
+    },
+    {
+      id: 'aip17pm-256',
+      name: 'iPhone 17 Pro Max',
+      capacity: '256GB',
+      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/aip17pm/silver/01.png'
+    },
+    {
+      id: 'sm-s731nk',
+      name: 'Galaxy S25',
+      capacity: '256GB',
+      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/sm-s731nk/ice_blue/01.png'
+    },
+    {
+      id: 'aipa-256',
+      name: 'iPhone Air',
+      capacity: '256GB',
+      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/aipa/cloud_white/01.png'
     }
   ];
 
@@ -534,18 +551,13 @@ export default function EligibilityChecker({ showPhoneSelection = true }: { show
                     )}
                     <TapMotion
                       onClick={() => {
-                        setDirection(1);
-                        setStep('phoneSelection');
+                        const message = encodeURIComponent(tChat('whatsapp_welcome_msg'));
+                        const url = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '821012345678'}?text=${message}`;
+                        window.open(url, '_blank');
                       }}
-                      className="w-full py-3.5 bg-primary text-label-100 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-secondary transition-all shadow-md hover:shadow-lg"
+                      className="w-full py-4 rounded-xl bg-[#25D366] text-white font-bold text-base shadow-lg shadow-[#25D366]/20 hover:bg-[#20bd5a] transition-all flex items-center justify-center gap-2"
                     >
-                      <Smartphone size={18} /> {t('ChatBot.select_phone')} <ChevronRight size={16} />
-                    </TapMotion>
-                    <TapMotion
-                      onClick={() => openChat()}
-                      className="w-full py-4 rounded-xl bg-[#FAE100] text-[#371D1E] font-bold text-base shadow-lg shadow-[#FAE100]/20 hover:brightness-95 transition-all flex items-center justify-center gap-2"
-                    >
-                      <MessageCircle size={20} fill="#371D1E" /> {t('Result.cta_kakao')}
+                      <MessageCircle size={20} fill="currentColor" /> {t('Result.cta_whatsapp')}
                     </TapMotion>
 
                     <button

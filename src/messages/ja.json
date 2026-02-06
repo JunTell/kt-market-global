@@ -114,6 +114,7 @@
       "installment_ok": "可能 (OK)",
       "installment_no": "不可 (NO)",
       "cta_kakao": "カカオトーク相談",
+      "cta_whatsapp": "WhatsApp相談",
       "reset": "やり直す"
     },
     "Fail": {

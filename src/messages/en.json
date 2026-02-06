@@ -114,6 +114,7 @@
       "installment_ok": "Allowed (OK)",
       "installment_no": "Not Allowed (NO)",
       "cta_kakao": "Chat on KakaoTalk",
+      "cta_whatsapp": "Chat on WhatsApp",
       "reset": "Start Over"
     },
     "Fail": {

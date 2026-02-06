@@ -114,6 +114,7 @@
       "installment_ok": "可以 (OK)",
       "installment_no": "不可 (NO)",
       "cta_kakao": "KakaoTalk 咨询",
+      "cta_whatsapp": "WhatsApp 咨询",
       "reset": "重新开始"
     },
     "Fail": {

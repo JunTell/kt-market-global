@@ -14,7 +14,10 @@ const GONGGU_MODELS = [
     "sm-m366k",
     "aip16e-128",
     "sm-s931nk",
-    "aip17p-256"
+    "aip17p-256",
+    "aip17pm-256",
+    "aipa-256",
+    "sm-s731nk"
 ]
 
 export default async function ModelListContainer({

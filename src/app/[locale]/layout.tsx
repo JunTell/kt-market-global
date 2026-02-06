@@ -64,6 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     icons: {
       icon: '/images/logo.svg',
+      apple: '/images/logo.svg',
     },
     alternates: {
       canonical: 'https://global.ktmarket.co.kr',
@@ -99,6 +100,21 @@ export default async function LocaleLayout({
             gtag('config', 'AW-11271910125');
           `}
         </Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'KT Market Global',
+              url: 'https://global.ktmarket.co.kr',
+              logo: 'https://global.ktmarket.co.kr/images/logo.svg',
+              sameAs: [
+                'https://www.facebook.com/ktmarketglobal',
+              ]
+            })
+          }}
+        />
 
       </head>
       <body
