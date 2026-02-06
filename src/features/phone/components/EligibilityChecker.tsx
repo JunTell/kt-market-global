@@ -219,6 +219,24 @@ export default function EligibilityChecker({ showPhoneSelection = true }: { show
       name: 'iPhone 17 Pro',
       capacity: '256GB',
       image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/aip17p/silver/01.png'
+    },
+    {
+      id: 'aip17pm-256',
+      name: 'iPhone 17 Pro Max',
+      capacity: '256GB',
+      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/aip17pm/silver/01.png'
+    },
+    {
+      id: 'sm-s731nk',
+      name: 'Galaxy S25',
+      capacity: '256GB',
+      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/sm-s731nk/ice_blue/01.png'
+    },
+    {
+      id: 'aipa-256',
+      name: 'iPhone Air',
+      capacity: '256GB',
+      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/aipa/silver/01.png'
     }
   ];
 

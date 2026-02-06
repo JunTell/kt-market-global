@@ -82,6 +82,11 @@ export function getDBModelKey(prefix: string, capacity: string): string {
     return capacity === "512" ? "sm-s931nk512" : "sm-s931nk"
   }
 
+  // 삼성 갤럭시 S25 (일반)
+  if (prefix === "sm-s731nk") {
+    return "sm-s731nk"
+  }
+
   // 일반적인 경우: prefix-capacity
   return `${prefix}-${capacity}`
 }
