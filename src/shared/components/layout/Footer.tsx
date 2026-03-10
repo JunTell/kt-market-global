@@ -87,7 +87,7 @@ export default function Footer() {
                 <KakaoIcon />
               </a>
               <a
-                href="https://wa.me/821012345678"
+                href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '821012345678'}`}
                 target="_blank"
                 rel="noreferrer"
                 className="w-12 h-12 flex items-center justify-center bg-[#25D366] text-white rounded-xl hover:bg-[#20bd5a] transition-colors"
