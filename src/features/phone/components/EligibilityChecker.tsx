@@ -193,49 +193,49 @@ export default function EligibilityChecker({ showPhoneSelection = true }: { show
       id: 'aip17-256',
       name: 'iPhone 17',
       capacity: '256GB',
-      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/aip17/mist_blue/01.png'
+      image: 'https://juntell.s3.ap-northeast-2.amazonaws.com/phone/aip17/mist_blue/01.png'
     },
     {
       id: 'sm-m366k',
       name: 'Jump4',
       capacity: '128GB',
-      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/sm-m366k/black/01.png'
+      image: 'https://juntell.s3.ap-northeast-2.amazonaws.com/phone/sm-m366k/black/01.png'
     },
     {
       id: 'aip16e-128',
       name: 'iPhone 16e',
       capacity: '128GB',
-      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/aip16e/white/01.png'
+      image: 'https://juntell.s3.ap-northeast-2.amazonaws.com/phone/aip16e/white/01.png'
     },
     {
       id: 'sm-s931nk',
       name: 'Galaxy S25',
       capacity: '256GB',
-      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/sm-s931nk/ice_blue/01.png'
+      image: 'https://juntell.s3.ap-northeast-2.amazonaws.com/phone/sm-s931nk/ice_blue/01.png'
     },
     {
       id: 'aip17p-256',
       name: 'iPhone 17 Pro',
       capacity: '256GB',
-      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/aip17p/silver/01.png'
+      image: 'https://juntell.s3.ap-northeast-2.amazonaws.com/phone/aip17p/silver/01.png'
     },
     {
       id: 'aip17pm-256',
       name: 'iPhone 17 Pro Max',
       capacity: '256GB',
-      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/aip17pm/silver/01.png'
+      image: 'https://juntell.s3.ap-northeast-2.amazonaws.com/phone/aip17pm/silver/01.png'
     },
     {
       id: 'sm-s731nk',
       name: 'Galaxy S25',
       capacity: '256GB',
-      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/sm-s731nk/ice_blue/01.png'
+      image: 'https://juntell.s3.ap-northeast-2.amazonaws.com/phone/sm-s731nk/ice_blue/01.png'
     },
     {
       id: 'aipa-256',
       name: 'iPhone Air',
       capacity: '256GB',
-      image: 'https://d2ilcqjaeymypa.cloudfront.net/phone/aipa/cloud_white/01.png'
+      image: 'https://juntell.s3.ap-northeast-2.amazonaws.com/phone/aipa/cloud_white/01.png'
     }
   ];
 

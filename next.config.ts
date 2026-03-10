@@ -13,6 +13,11 @@ const nextConfig = {
         hostname: 'd2ilcqjaeymypa.cloudfront.net',
         pathname: '/**',
       },
+      {
+        protocol: 'https' as const,
+        hostname: 'juntell.s3.ap-northeast-2.amazonaws.com',
+        pathname: '/**',
+      },
     ],
   },
   experimental: {
