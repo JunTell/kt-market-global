@@ -26,8 +26,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                         'bg-transparent text-grey-700 hover:bg-black/5 active:bg-pressed': variant === 'ghost',
 
                         // Sizes (Height based on mobile touch targets)
-                        'h-12 text-[16px] rounded-lg': size === 'md', // 48px
-                        'h-14 text-[18px] rounded-lg': size === 'lg', // 56px
+                        'h-12 text-[16px] rounded-xl': size === 'md', // 48px
+                        'h-14 text-[18px] rounded-2xl': size === 'lg', // 56px
 
                         // Width
                         'w-full': fullWidth,

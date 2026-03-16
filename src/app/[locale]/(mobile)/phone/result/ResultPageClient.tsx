@@ -6,7 +6,6 @@ import { useTranslations, useLocale } from "next-intl"
 import { formatPrice } from "@/shared/lib/format"
 import { getPlanDetails } from "@/features/phone/lib/phonedata"
 import IntroOverlay from "@/features/phone/components/result/IntroOverlay"
-import OrderProductSummary from "@/features/phone/components/order/OrderProductSummary"
 import OrderUserForm from "@/features/phone/components/order/OrderUserForm"
 import EligibilityChecker from "@/features/phone/components/EligibilityChecker"
 import OrderSkeleton from "@/features/phone/components/skeleton/OrderSkeleton"
@@ -14,14 +13,11 @@ import OrderSkeleton from "@/features/phone/components/skeleton/OrderSkeleton"
 export default function ResultPageClient() {
   const t = useTranslations()
   const router = useRouter()
-  // searchParams logic removed; model reading moved to Server Component if needed for scripts,
-  // but for UI logic here, we rely on sessionStorage as before.
   const locale = useLocale()
   const [orderData, setOrderData] = useState<Record<string, unknown> | null>(null)
 
   const PLAN_DETAILS = getPlanDetails(t)
 
-  // 클라이언트에서만 sessionStorage 읽기 (Hydration 오류 방지)
   useEffect(() => {
     const data = sessionStorage.getItem("asamoDeal")
     if (data) {
@@ -39,10 +35,12 @@ export default function ResultPageClient() {
 
   interface UserInfo {
     userName: string
-    userDob: string
     userPhone: string
+    foreignerId: string
+    zipCode: string
+    address: string
+    detailAddress: string
     country: string
-    requirements: string
   }
 
   interface PlanInfo {
@@ -53,7 +51,6 @@ export default function ResultPageClient() {
 
   const [savedUserInfo, setSavedUserInfo] = useState<UserInfo | null>(null)
 
-  // user-info에서 저장된 사용자 정보를 우선 사용
   useEffect(() => {
     try {
       const userInfoStr = sessionStorage.getItem("user-info")
@@ -66,7 +63,6 @@ export default function ResultPageClient() {
     }
   }, [])
 
-  // asamoDeal에서 제품 정보 추출
   const productInfo: ProductInfo = orderData ? {
     title: String(orderData.title || ""),
     spec: `${String(orderData.capacity || "")} · ${String(orderData.color || "")}`,
@@ -83,13 +79,14 @@ export default function ResultPageClient() {
 
   const userInfo: UserInfo = savedUserInfo || {
     userName: "",
-    userDob: "",
     userPhone: "",
+    foreignerId: "",
+    zipCode: "",
+    address: "",
+    detailAddress: "",
     country: t('Phone.Order.default_country'),
-    requirements: "",
   }
 
-  // 요금제 정보 추출
   const selectedPlanId = String(orderData?.selectedPlanId || "plan_69")
   const planData = PLAN_DETAILS[selectedPlanId] || PLAN_DETAILS["plan_69"]
   const additionalCost = selectedPlanId === 'plan_90_v' ? 4450 : 0
@@ -110,34 +107,27 @@ export default function ResultPageClient() {
       <div className="p-4">
         <EligibilityChecker showPhoneSelection={false} />
       </div>
-      {/* 1. 성공 오버레이 */}
       <IntroOverlay />
 
-      <div className="max-w-[480px] mx-auto px-5 pt-5 pb-[120px]">
-        <h1 className="text-2xl font-bold text-[#191F28] mb-6 mt-2.5 whitespace-pre-line">
+      <div className="max-w-[480px] mx-auto pb-[120px]">
+        <h1 className="text-2xl font-bold text-[#191F28] mb-6 mt-2.5 px-5 whitespace-pre-line">
           {t('Phone.Result.application_complete_title')}
         </h1>
 
-        {/* 2. 상품 정보 요약 */}
-        <OrderProductSummary
-          image={productInfo.image}
-          title={productInfo.title}
-          spec={productInfo.spec}
-          price={productInfo.price}
-        />
-
-        <div className="w-full h-px bg-[#F2F4F6] my-6" />
-
-        {/* 3. 신청 정보 확인 (Read Only) */}
-        <div className="-mx-5">
+        <div className="w-full">
           <OrderUserForm
             isReadOnly={true}
+            imageUrl={productInfo.image}
+            title={productInfo.title}
+            spec={productInfo.spec}
+            price={productInfo.price}
             userName={userInfo.userName}
-            userDob={userInfo.userDob}
             userPhone={userInfo.userPhone}
+            foreignerId={userInfo.foreignerId}
+            zipCode={userInfo.zipCode}
+            address={userInfo.address}
+            detailAddress={userInfo.detailAddress}
             country={userInfo.country}
-            requirements={userInfo.requirements}
-            // 기타 props
             joinType={String(orderData.joinType || t('Phone.Order.join_type_change'))}
             contract={String(orderData.contract || t('Phone.Order.contract_24'))}
             discountType={String(orderData.discountType || "device")}
@@ -147,8 +137,7 @@ export default function ResultPageClient() {
           />
         </div>
 
-        {/* 4. 홈으로 돌아가기 버튼 */}
-        <div className="mt-5">
+        <div className="mt-5 px-5">
           <button
             className="w-full p-4 bg-[#F2F4F6] text-[#4B5563] text-base font-bold rounded-[14px] hover:bg-gray-200 transition-colors cursor-pointer"
             onClick={() => router.push(`/${locale}`)}
@@ -160,3 +149,4 @@ export default function ResultPageClient() {
     </main>
   )
 }
+
