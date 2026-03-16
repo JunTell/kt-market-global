@@ -126,15 +126,26 @@ export default function Footer() {
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-4 mt-6 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all">
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-white text-lg">kt</span>
-                <span className="text-[10px] bg-white/10 text-[#ccc] px-1 rounded">{t('cert_kt_official')}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-white">KAIT</span>
-                <span className="text-[10px] text-[#ccc]">{t('cert_kait')}</span>
-              </div>
+            <div className="flex flex-wrap gap-4 mt-6">
+              {[
+                { src: '/images/footer1.png', alt: '온라인공식인증점' },
+                { src: '/images/footer2.png', alt: 'KT마켓정보' },
+                { src: '/images/footer3.png', alt: '공정거래위원회' },
+                { src: '/images/footer4.png', alt: '에스크로(매매보호서비스)' },
+                { src: '/images/footer5.png', alt: '한국정보통신진흥협회' },
+                { src: '/images/footer6.png', alt: '통신시장유통질서건전화' },
+              ].map(({ src, alt }) => (
+                <div key={src} className="flex flex-col items-center gap-1">
+                  <Image
+                    src={src}
+                    alt={alt}
+                    width={60}
+                    height={60}
+                    className="object-contain"
+                  />
+                  <span className="text-[9px] text-[#888] text-center leading-tight max-w-[64px]">{alt}</span>
+                </div>
+              ))}
             </div>
           </div>
 
