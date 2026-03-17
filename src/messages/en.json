@@ -294,6 +294,11 @@
       "submit_button": "Submit Application"
     },
     "PlanSelector": {
+      "select_service_title": "Choose your service",
+      "mnp_title": "Switch to KT",
+      "mnp_desc_short": "Keeping my number from SKT, LG, MVNO",
+      "chg_title": "Existing KT User",
+      "chg_desc_short": "I am already using KT and want to change device",
       "discount_method_title": "Please select discount method",
       "device_discount": "Device Discount",
       "plan_discount": "Plan Discount",

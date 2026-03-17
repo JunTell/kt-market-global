@@ -294,6 +294,11 @@
       "submit_button": "신청서 작성하기"
     },
     "PlanSelector": {
+      "select_service_title": "서비스 선택",
+      "mnp_title": "번호이동 (타사 → KT)",
+      "mnp_desc_short": "기존 번호 그대로 KT로 이동",
+      "chg_title": "기기변경 (KT → KT)",
+      "chg_desc_short": "이미 KT를 사용 중인 경우",
       "discount_method_title": "할인 방법을 선택해주세요",
       "device_discount": "기기할인",
       "plan_discount": "요금할인",
