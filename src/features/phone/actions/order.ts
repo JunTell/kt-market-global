@@ -51,6 +51,8 @@ export async function submitOrder(
     const { data } = validatedFields
 
     try {
+        const kstNow = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString()
+
         const { error } = await supabase.from("foreigner_order").insert([
             {
                 company: data.company,
@@ -73,6 +75,7 @@ export async function submitOrder(
                 zip_code: data.zip_code,
                 address: data.address,
                 detail_address: data.detail_address,
+                created_at: kstNow,
             },
         ])
 
