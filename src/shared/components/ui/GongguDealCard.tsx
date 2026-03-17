@@ -20,6 +20,7 @@ interface Props {
   model?: string
   imageUrl?: string
   imageUrls?: string[]
+  isSoldOut?: boolean
 }
 
 export default function GongguDealCard(props: Props) {
@@ -35,6 +36,7 @@ export default function GongguDealCard(props: Props) {
     model,
     imageUrl,
     imageUrls,
+    isSoldOut = false,
   } = props
 
   const router = useRouter()
@@ -63,6 +65,7 @@ export default function GongguDealCard(props: Props) {
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault()
+    if (isSoldOut) return
 
     if (typeof window !== "undefined") {
       const payload = {
@@ -89,11 +92,18 @@ export default function GongguDealCard(props: Props) {
 
   return (
     <div
-      className="group relative w-full p-5 rounded-[20px] bg-white flex flex-row items-center gap-4 box-border cursor-pointer transition-all duration-300 hover:-translate-y-1 border border-grey-200 group-hover:border-transparent"
+      className={cn(
+        "group relative w-full p-5 rounded-[20px] bg-white flex flex-row items-center gap-4 box-border transition-all duration-300 border border-grey-200",
+        isSoldOut 
+          ? "cursor-not-allowed opacity-75 grayscale-[0.5]" 
+          : "cursor-pointer hover:-translate-y-1 hover:border-transparent"
+      )}
       onClick={handleClick}
     >
-      {/* 테두리 그라데이션 효과 (Hover시 나타남) */}
-      <div className="absolute inset-0 rounded-[20px] p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 -z-10 pointer-events-none" />
+      {/* 테두리 그라데이션 효과 (Hover시 나타남, 품절시 비활성) */}
+      {!isSoldOut && (
+        <div className="absolute inset-0 rounded-[20px] p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 -z-10 pointer-events-none" />
+      )}
 
       {/* 배경색 유지 (내부 컨텐츠 배경) */}
       <div className="absolute inset-px rounded-[19px] bg-white z-0" />
@@ -101,24 +111,33 @@ export default function GongguDealCard(props: Props) {
       {/* 컨텐츠 영역 */}
       <div className="relative z-10 flex flex-row items-center gap-4 w-full">
         {/* 썸네일 */}
-        <div className="w-20 h-20 rounded-[14px] bg-bg-grouped flex items-center justify-center shrink-0 overflow-hidden p-2 transition-colors group-hover:bg-grey-50 relative">
+        <div className="w-20 h-20 rounded-[14px] bg-bg-grouped flex items-center justify-center shrink-0 overflow-hidden p-2 transition-colors relative">
           {imageUrl ? (
             <Image
               src={imageUrl}
               alt={title}
               fill
-              className="object-contain"
+              className={cn("object-contain", isSoldOut && "opacity-50")}
               sizes="80px"
             />
           ) : (
             <div className="w-full h-full bg-grey-200" />
+          )}
+
+          {isSoldOut && (
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+              <span className="text-white text-[10px] font-black tracking-wider uppercase">SOLD OUT</span>
+            </div>
           )}
         </div>
 
         {/* 텍스트 정보 */}
         <div className="flex-1 flex flex-col justify-center gap-[3px] min-w-0">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="text-[17px] font-bold text-grey-900 tracking-[-0.5px] whitespace-nowrap">
+            <span className={cn(
+              "text-[17px] font-bold tracking-[-0.5px] whitespace-nowrap",
+              isSoldOut ? "text-grey-400" : "text-grey-900"
+            )}>
               {title}
             </span>
           </div>
@@ -128,24 +147,36 @@ export default function GongguDealCard(props: Props) {
           </div>
 
           <div className="mt-1 flex items-center gap-1.5 flex-wrap">
-            <div className="text-[10px] font-bold px-1.5 py-[3px] rounded-md bg-status-error text-white whitespace-nowrap">
+            <div className={cn(
+              "text-[10px] font-bold px-1.5 py-[3px] rounded-md text-white whitespace-nowrap",
+              isSoldOut ? "bg-grey-400" : "bg-status-error"
+            )}>
               {t('Phone.GongguDealCard.global_special')}
             </div>
-            <span className="text-[20px] font-bold text-grey-900 tracking-[-0.5px]">
+            <span className={cn(
+              "text-[20px] font-bold tracking-[-0.5px]",
+              isSoldOut ? "text-grey-400" : "text-grey-900"
+            )}>
               {salePriceText}
             </span>
           </div>
 
           <div
-            className={`mt-1 text-[12px] font-semibold break-keep leading-[1.4] whitespace-pre-wrap min-[400px]:whitespace-normal ${mode === "device"
-              ? "text-status-correct"
-              : "text-primary"
-              }`}
+            className={cn(
+              "mt-1 text-[12px] font-semibold break-keep leading-[1.4] whitespace-pre-wrap min-[400px]:whitespace-normal",
+              isSoldOut 
+                ? "text-grey-400" 
+                : mode === "device" ? "text-status-correct" : "text-primary"
+            )}
           >
-            {description}
+            {isSoldOut ? t('Phone.ModelList.no_models') : description}
           </div>
         </div>
       </div>
     </div>
   )
+}
+
+function cn(...classes: (string | boolean | undefined)[]) {
+  return classes.filter(Boolean).join(" ")
 }

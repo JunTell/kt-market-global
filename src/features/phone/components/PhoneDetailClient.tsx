@@ -80,6 +80,8 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
   const { availableColors, colorImages, prefix } = initialData
   const COLOR_MAP = getColorMap(t)
 
+  const isCurrentlySoldOut = checkIsSoldOut(prefix, currentCapacity, currentColor)
+
   const handleCapacityChange = (newCap: string) => {
     store.setStore({ capacity: newCap })
   }
@@ -99,11 +101,13 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
   }
 
   const handleNextStep = () => {
+    if (isCurrentlySoldOut) return
     setStep(2)
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   const handleOrder = () => {
+    if (isCurrentlySoldOut) return
     const payload = {
       model: store.model || initialData.model,
       title: currentTitle,
@@ -212,25 +216,33 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
                 />
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="w-full mt-6 bg-[#0071e3] hover:bg-[#0077ED] text-white text-lg font-bold py-3.5 rounded-xl transition-colors cursor-pointer"
+                  disabled={isCurrentlySoldOut}
+                  className={cn(
+                    "w-full mt-6 text-white text-lg font-bold py-3.5 rounded-xl transition-colors cursor-pointer",
+                    isCurrentlySoldOut ? "bg-gray-400 cursor-not-allowed" : "bg-[#0071e3] hover:bg-[#0077ED]"
+                  )}
                 >
-                  {t('Phone.Page.select_plan_button')}
+                  {isCurrentlySoldOut ? "Sold Out" : t('Phone.Page.select_plan_button')}
                 </button>
               </Modal>
 
               <div className="hidden md:block mt-8">
                 <button
                   onClick={handleNextStep}
-                  className="w-full bg-[#0071e3] hover:bg-[#0077ED] text-white text-lg font-bold py-4 rounded-xl transition-colors shadow-lg shadow-blue-500/20 cursor-pointer"
+                  disabled={isCurrentlySoldOut}
+                  className={cn(
+                    "w-full text-white text-lg font-bold py-4 rounded-xl transition-colors shadow-lg cursor-pointer",
+                    isCurrentlySoldOut ? "bg-gray-400 cursor-not-allowed shadow-none" : "bg-[#0071e3] hover:bg-[#0077ED] shadow-blue-500/20"
+                  )}
                 >
-                  {t('Phone.Page.select_plan_button')}
+                  {isCurrentlySoldOut ? "Sold Out" : t('Phone.Page.select_plan_button')}
                 </button>
               </div>
 
               <div className="md:hidden">
                 <StickyBar
                   finalPrice=""
-                  label={t('Phone.Page.select_plan_button')}
+                  label={isCurrentlySoldOut ? "Sold Out" : t('Phone.Page.select_plan_button')}
                   onClick={handleNextStep}
                 />
               </div>
@@ -271,16 +283,20 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
                 </div>
                 <button
                   onClick={handleOrder}
-                  className="w-full bg-[#0071e3] hover:bg-[#0077ED] text-white text-lg font-bold py-4 rounded-xl transition-colors shadow-lg shadow-blue-500/20 cursor-pointer"
+                  disabled={isCurrentlySoldOut}
+                  className={cn(
+                    "w-full text-white text-lg font-bold py-4 rounded-xl transition-colors shadow-lg cursor-pointer",
+                    isCurrentlySoldOut ? "bg-gray-400 cursor-not-allowed shadow-none" : "bg-[#0071e3] hover:bg-[#0077ED] shadow-blue-500/20"
+                  )}
                 >
-                  {t('Phone.Page.submit_application')}
+                  {isCurrentlySoldOut ? "Sold Out" : t('Phone.Page.submit_application')}
                 </button>
               </div>
 
               <div className="md:hidden">
                 <StickyBar
                   finalPrice={`${formatPrice(finalPriceInfo.finalDevicePrice, locale)}${t('Phone.Common.won')}`}
-                  label={t('Phone.Page.submit_application')}
+                  label={isCurrentlySoldOut ? "Sold Out" : t('Phone.Page.submit_application')}
                   onClick={handleOrder}
                 />
               </div>
@@ -290,4 +306,8 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
       </div>
     </div>
   )
+}
+
+function cn(...classes: (string | boolean | undefined)[]) {
+  return classes.filter(Boolean).join(" ")
 }

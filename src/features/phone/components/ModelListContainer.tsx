@@ -1,6 +1,7 @@
 import { createClient } from "@/shared/api/supabase/server"
 import ModelListClient, { ModelList } from "./ModelListClient"
 import { type RegType, calcKTmarketSubsidy, getDeviceImageUrl, getDeviceImageUrls } from "@/features/phone/lib/asamo-utils"
+import { checkIsSoldOut } from "@/features/phone/lib/stock"
 
 interface Props {
     sectionTitle?: string
@@ -12,7 +13,6 @@ interface Props {
 const GONGGU_MODELS = [
     "aip17-256",
     "sm-m366k",
-    "aip16e-128",
     "sm-s931nk",
     "aip17p-256",
     "aip17pm-256",
@@ -58,6 +58,10 @@ export default async function ModelListContainer({
                 const subsidyRow = subsidiesData?.find((s) => s.model === device.model)
                 const ktmarketDiscount = calcKTmarketSubsidy(planId, plan.price ?? 0, subsidyRow, device.model as string, regType)
 
+                // Extract prefix for sold-out check
+                const prefix = (device.model as string).split("-")[0]
+                const isSoldOut = checkIsSoldOut(prefix, (device.capacity as string) ?? "", "")
+
                 return {
                     model: device.model as string,
                     title: (device.pet_name as string) ?? (device.model as string),
@@ -69,7 +73,8 @@ export default async function ModelListContainer({
                     planMonthlyDiscount: Math.floor((plan.price ?? 0) * 0.25),
                     imageUrl: getDeviceImageUrl(device),
                     imageUrls: getDeviceImageUrls(device),
-                }
+                    isSoldOut
+                } as ModelList
             })
             .filter((item): item is ModelList => item !== null)
             .sort((a, b) => GONGGU_MODELS.indexOf(a.model) - GONGGU_MODELS.indexOf(b.model))
