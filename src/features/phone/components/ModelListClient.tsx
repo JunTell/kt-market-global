@@ -21,6 +21,7 @@ export interface ModelList {
   planMonthlyDiscount: number
   imageUrl: string
   imageUrls: string[]
+  isSoldOut?: boolean
 }
 
 export interface ModelListClientProps {
@@ -132,6 +133,7 @@ export default function ModelListClient({
             detailPath="/phone"
             imageUrl={deal.imageUrl}
             imageUrls={deal.imageUrls}
+            isSoldOut={deal.isSoldOut}
           />
         ))}
       </div>
