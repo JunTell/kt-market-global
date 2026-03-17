@@ -20,7 +20,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                     ref={ref}
                     className={cn(
                         "h-12 w-full px-4 rounded-lg outline-none transition-all placeholder:text-grey-400 text-body1 text-grey-900",
-                        "bg-bg-input border border-border-strong",
+                        "border border-border-strong",
                         // Focus & Error states
                         {
                             "focus:bg-base focus:border-border-focus focus:ring-1 focus:ring-border-focus": !error,
