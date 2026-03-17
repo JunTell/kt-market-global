@@ -7,6 +7,7 @@ import Modal from "@/shared/components/ui/Modal"
 import OptionSelector, { type CapacityOption, type ColorOption } from "@/features/phone/components/OptionSelector"
 import OptionSummary from "@/features/phone/components/OptionSummary"
 import StickyBar from "@/features/phone/components/StickyBar"
+import JoinTypeSelector from "@/features/phone/components/JoinTypeSelector"
 
 import dynamic from "next/dynamic"
 import JunCarousel from "@/features/phone/components/JunCarousel"
@@ -159,27 +160,31 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
 
         <div className={`px-5 md:px-0 w-full mt-6 md:mt-0 ${step === 2 ? 'md:max-w-xl mx-auto' : 'md:w-1/2'}`}>
           {step === 1 && (
-            <div className="py-6 md:py-0 border-b border-gray-100 md:border-none mb-6">
-              <div className="flex items-start justify-between mb-2">
-                <div>
-                  <h1 className="text-2xl md:text-2xl font-bold text-[#1d1d1f] mb-2">{currentTitle}</h1>
-                  <div className="hidden md:block">
-                    <div className="flex items-baseline gap-2 mt-4">
-                      <span className="text-xl font-bold text-[#1d1d1f]">
-                        {formatPrice(finalPriceInfo.finalDevicePrice, locale)}{t('Phone.Common.won')}
-                      </span>
+            <>
+              <JoinTypeSelector
+                registrationType={store.registrationType || initialData.registrationType}
+                onChange={(type) => store.setStore({ registrationType: type })}
+                t={t}
+              />
+
+              <div className="py-6 md:py-0 border-b border-gray-100 md:border-none mb-6">
+                <div className="flex items-start justify-between mb-2">
+                  <div>
+                    <h1 className="text-2xl md:text-2xl font-bold text-[#1d1d1f] mb-2">{currentTitle}</h1>
+                    <div className="hidden md:block">
+                      <div className="flex items-baseline gap-2 mt-4">
+                        <span className="text-xl font-bold text-[#1d1d1f]">
+                          {formatPrice(finalPriceInfo.finalDevicePrice, locale)}{t('Phone.Common.won')}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="md:hidden text-sm text-gray-500 text-right">
-                  {currentCapacity}GB · {COLOR_MAP[currentColor] || currentColor}
+                  <div className="md:hidden text-sm text-gray-500 text-right">
+                    {currentCapacity}GB · {COLOR_MAP[currentColor] || currentColor}
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
 
-          {step === 1 && (
-            <>
               <div className="mb-6">
                 <OptionSummary
                   selectedColorName={COLOR_MAP[currentColor] || currentColor}

@@ -11,7 +11,6 @@ import { parsePhoneModel } from "@/features/phone/lib/phoneModel"
 import { DEFAULT_COUNTRY } from "@/shared/constants/options"
 import { checkIsSoldOut } from "@/features/phone/lib/stock"
 
-import OrderProductSummary from "@/features/phone/components/order/OrderProductSummary"
 import OrderUserForm from "@/features/phone/components/order/OrderUserForm"
 import OrderSkeleton from "@/features/phone/components/skeleton/OrderSkeleton"
 
@@ -25,30 +24,25 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
     const params = useParams()
     const locale = params.locale as string
 
-
-    // 다국어 데이터
     const PLAN_DETAILS = getPlanDetails(t)
     const COLOR_MAP = getColorMap(t)
 
-    // 통합 State
     const [store, setStore] = useState({
-        // 표시용
         imageUrl: "",
         title: "",
         spec: "",
         price: "",
-        // 사용자 정보
         userName: "",
-        userDob: "",
         userPhone: "",
+        foreignerId: "",
+        zipCode: "",
+        address: "",
+        detailAddress: "",
         country: DEFAULT_COUNTRY,
-        requirements: "",
-        // 신청 정보
         joinType: t('Phone.Order.join_type_change'),
         contract: t('Phone.Order.contract_24'),
         discountType: "device",
         selectedPlanId: "plan_69",
-        // DB 저장용
         deviceModel: "",
         modelBase: "",
         deviceCapacity: "",
@@ -60,16 +54,15 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
 
     const [isReadOnly, setIsReadOnly] = useState(false)
 
-    // 스크롤 강제 이동 로직
     useEffect(() => {
         if (store.isReady) {
             if (typeof window !== 'undefined' && window.history) {
-                window.history.scrollRestoration = 'manual';
+                window.history.scrollRestoration = 'manual'
             }
             const timer = setTimeout(() => {
-                window.scrollTo(0, 0);
-            }, 10);
-            return () => clearTimeout(timer);
+                window.scrollTo(0, 0)
+            }, 10)
+            return () => clearTimeout(timer)
         }
     }, [store.isReady])
 
@@ -77,7 +70,6 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
         if (typeof window === "undefined") return
 
         const initializeData = async () => {
-            // 1. 세션에서 제품 정보 로드
             let sessionData = null
             try {
                 const sessionDataStr = sessionStorage.getItem("asamoDeal")
@@ -88,39 +80,24 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
                 console.error(e)
             }
 
-            // 우선순위 결정:
-            // 1. URL의 model과 세션의 model이 일치하면 세션 데이터 사용 (사용자 커스텀 정보 유지)
-            // 2. 일치하지 않거나 세션이 없지만, 서버에서 받은 initialDeviceData가 있으면 그것을 사용
-            // 3. 그 외의 경우 (세션만 있는데 URL과 불일치 - 보통 따르지 않음, 혹은 URL 모델 기준으로 DB 재조회 필요할 수 있으나 SSR에서 처리됨)
-
-            let dataToApply = null;
-
+            let dataToApply = null
             if (sessionData && modelFromUrl && sessionData.model === modelFromUrl) {
-                dataToApply = sessionData;
+                dataToApply = sessionData
             } else if (initialDeviceData) {
-                dataToApply = initialDeviceData;
+                dataToApply = initialDeviceData
             } else if (sessionData && !modelFromUrl) {
-                // URL 파라미터가 없으면 세션 데이터라도 보여줌 (예외 케이스)
-                dataToApply = sessionData;
+                dataToApply = sessionData
             }
 
             if (dataToApply) {
-                // 서버 데이터일 경우 포맷팅이 필요할 수 있음
-                // applyDataToStore 내에서 처리
                 if (initialDeviceData && dataToApply === initialDeviceData) {
-                    // Server Data Formatting
-                    applyServerDataToStore(initialDeviceData);
+                    applyServerDataToStore(initialDeviceData)
                 } else {
-                    applyDataToStore(dataToApply);
+                    applyDataToStore(dataToApply)
                 }
-            } else if (modelFromUrl && !initialDeviceData) {
-                // SSR 실패했거나 클라이언트 네비게이션으로 왔을 때 fallback fetching?
-                // 이미 SSR에서 시도했으므로 여기선 생략 가능하지만, 안전장치로 둘 수 있음.
-                // 하지만 여기선 SSR을 신뢰하고 생략.
             }
 
-
-            // 2. 세션에서 사용자 정보 로드
+            // session restore
             try {
                 const userInfoStr = sessionStorage.getItem("user-info")
                 if (userInfoStr) {
@@ -128,10 +105,12 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
                     setStore(prev => ({
                         ...prev,
                         userName: userInfo.userName || prev.userName,
-                        userDob: userInfo.userDob || prev.userDob,
                         userPhone: userInfo.userPhone || prev.userPhone,
+                        foreignerId: userInfo.foreignerId || prev.foreignerId,
+                        zipCode: userInfo.zipCode || prev.zipCode,
+                        address: userInfo.address || prev.address,
+                        detailAddress: userInfo.detailAddress || prev.detailAddress,
                         country: userInfo.country || prev.country,
-                        requirements: userInfo.requirements || prev.requirements,
                     }))
                     setIsReadOnly(true)
                 }
@@ -144,7 +123,6 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [initialDeviceData, modelFromUrl])
 
-    // 기존 applyDataToStore (세션 데이터/클라이언트 포맷용)
     const applyDataToStore = (data: Record<string, unknown>) => {
         const colorKey = String(data.color || "random")
         const colorName = COLOR_MAP[colorKey] || colorKey || t('Phone.Common.default_color')
@@ -154,7 +132,6 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
         const { prefix } = parsePhoneModel(String(data.model || ""))
         const modelBase = prefix
 
-        // 가격 계산 로직
         let priceText = ""
         if (data.finalDevicePrice !== undefined) {
             priceText = `${t('Phone.Order.installment_price')} ${formatPrice(Number(data.finalDevicePrice), locale)}${t('Phone.Common.won')}`
@@ -179,29 +156,22 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
         }))
     }
 
-    // 서버 데이터 적용 (DB Raw Data -> Store)
     const applyServerDataToStore = (device: Record<string, unknown>) => {
-        // url param model (fullModelStr) 복원 필요
-        // initialDeviceData에 fullModelStr가 없으므로 modelFromUrl 사용
-        // 하지만 DB data가 device table row 그대로라면 구조가 다름.
+        const fullModelStr = modelFromUrl || ""
+        const { prefix, capacity, color: colorKey } = parsePhoneModel(fullModelStr)
 
-        const fullModelStr = modelFromUrl || "";
-        const { prefix, capacity, color: colorKey } = parsePhoneModel(fullModelStr);
-
-        // 사용 가능한 색상 및 이미지 처리
         const availableColors = ((device.colors_en as string[]) || []).filter((c: string) => {
             if (!c || !(device.images as Record<string, string[]>)?.[c]?.length) return false
             return !checkIsSoldOut(prefix, capacity, c)
         })
 
-        // URL의 색상이 유효하고 재고가 있으면 사용, 아니면 첫 번째 사용 가능한 색상 사용
         const isUrlColorAvailable = availableColors.includes(colorKey)
         const selectedColor = isUrlColorAvailable ? colorKey : (availableColors[0] || (device.colors_en as string[])?.[0] || "black")
         const colorName = COLOR_MAP[selectedColor] || selectedColor
 
         const cdnUrl = process.env.NEXT_PUBLIC_CDN_URL || ""
         const imageFile = (device.images as Record<string, string[]>)?.[selectedColor]?.[0] || "01"
-        const imageUrl = `${cdnUrl}/phone/${device.category}/${selectedColor}/${imageFile}.png`
+        const imageUrl = `${cdnUrl}/phone/${prefix}/${selectedColor}/${imageFile}.png`
 
         setStore(prev => ({
             ...prev,
@@ -210,7 +180,7 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
             spec: `${device.capacity} · ${colorName}`,
             price: `${t('Phone.Order.release_price')} ${formatPrice(device.price as number, locale)}${t('Phone.Common.won')}`,
             deviceModel: fullModelStr,
-            modelBase: device.model as string, // DB key
+            modelBase: device.model as string,
             deviceCapacity: device.capacity as string,
             deviceColor: colorName,
             joinType: t('Phone.Order.join_type_change'),
@@ -222,17 +192,18 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
 
     interface UserFormData {
         userName: string
-        userDob: string
         userPhone: string
+        foreignerId: string
+        zipCode: string
+        address: string
+        detailAddress: string
         country: string
-        requirements: string
         planName?: string
     }
 
     const handleConfirm = async (userInput: UserFormData) => {
         try {
             const finalInput = userInput
-
             if (!finalInput || !finalInput.userName || !finalInput.userPhone) {
                 alert(t('Phone.Order.form_alert'))
                 return
@@ -258,16 +229,18 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
                 funnel: toKorean('funnel', store.funnel || t('Phone.Order.funnel_asamo')),
                 country: toKorean('country', finalInput.country),
                 company: toKorean('company', companyName),
-                birthday: finalInput.userDob,
                 capacity: store.deviceCapacity,
                 pet_name: store.modelBase,
                 register: toKorean('join_type', store.joinType),
                 sub_phone: finalInput.userPhone,
                 isAgreedTOS: true,
-                requirements: finalInput.requirements || t('Phone.Order.default_requirements'),
                 planName: toKorean('plan_name', finalInput.planName || ''),
                 contract: toKorean('contract', store.contract),
                 discountType: toKorean('discount_type', store.discountType),
+                foreignerId: finalInput.foreignerId,
+                zipCode: finalInput.zipCode,
+                address: finalInput.address,
+                detailAddress: finalInput.detailAddress,
                 ...(sessionData?.['eligibility_data'] ? {
                     'eligibility_data': sessionData['eligibility_data']
                 } : {}),
@@ -279,7 +252,7 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
                 capacity: store.deviceCapacity,
                 color: toKorean('color', store.deviceColor),
                 name: finalInput.userName,
-                birthday: finalInput.userDob,
+                birthday: finalInput.foreignerId.slice(0, 6),
                 phone: finalInput.userPhone,
                 funnel: toKorean('funnel', store.funnel),
                 country: toKorean('country', finalInput.country),
@@ -287,8 +260,12 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
                 join_type: toKorean('join_type', store.joinType),
                 contract: toKorean('contract', store.contract),
                 discount_type: toKorean('discount_type', store.discountType),
-                requirements: finalInput.requirements,
                 form_data: formDataJson,
+                // New Fields
+                foreigner_id: finalInput.foreignerId,
+                zip_code: finalInput.zipCode,
+                address: finalInput.address,
+                detail_address: finalInput.detailAddress,
             }
 
             const result = await submitOrder({}, payload)
@@ -299,10 +276,12 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
 
             const userInfoToSave = {
                 userName: finalInput.userName,
-                userDob: finalInput.userDob,
                 userPhone: finalInput.userPhone,
+                foreignerId: finalInput.foreignerId,
+                zipCode: finalInput.zipCode,
+                address: finalInput.address,
+                detailAddress: finalInput.detailAddress,
                 country: finalInput.country,
-                requirements: finalInput.requirements,
             }
             sessionStorage.setItem("user-info", JSON.stringify(userInfoToSave))
 
@@ -311,41 +290,35 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
 
         } catch (e) {
             console.error("Action Error:", e)
-            alert(`접수 실패: ${e instanceof Error ? e.message : String(e)}`)
+            alert(`Fail: ${e instanceof Error ? e.message : String(e)}`)
         }
     }
 
     if (!store.isReady) return <OrderSkeleton />
 
     const planInfo = PLAN_DETAILS[store.selectedPlanId] || PLAN_DETAILS["plan_69"]
-
     const additionalCost = store.selectedPlanId === 'plan_90_v' ? 4450 : 0
     const finalPlanPrice = planInfo.price + additionalCost
-
     const planPriceText = `${t('Phone.Order.monthly_price')} ${formatPrice(finalPlanPrice, locale)}${t('Phone.Common.won')}`
 
     return (
-        <div className="flex flex-col gap-5 w-full max-w-[480px] mx-auto min-h-screen pb-10 bg-white">
-            <div className="px-5 pt-4">
-                <p className="font-bold text-xl whitespace-pre-wrap text-grey-900">{t('Phone.Order.confirm_info_title')}</p>
-            </div>
-            <div className="bg-base px-5 pt-4 pb-2">
-                <OrderProductSummary
-                    image={store.imageUrl}
-                    title={store.title}
-                    spec={store.spec}
-                    price={store.price}
-                />
-            </div>
-
+        <div className="flex flex-col w-full max-w-[480px] mx-auto min-h-screen pb-10 bg-white relative">
+            <h2 className="text-[20px] font-bold text-grey-900 leading-[1.4] m-0 px-5 pt-5 pb-5 whitespace-pre-line">
+                {t('Phone.Order.confirm_info_title')}
+            </h2>
+            
             <OrderUserForm
+                imageUrl={store.imageUrl}
+                title={store.title}
+                spec={store.spec}
+                price={store.price}
                 userName={store.userName}
-                userDob={store.userDob}
                 userPhone={store.userPhone}
-
+                foreignerId={store.foreignerId}
+                zipCode={store.zipCode}
+                address={store.address}
+                detailAddress={store.detailAddress}
                 country={store.country}
-
-                requirements={store.requirements}
                 joinType={store.joinType}
                 contract={store.contract}
                 discountType={store.discountType}

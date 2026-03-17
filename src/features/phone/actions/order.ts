@@ -10,7 +10,7 @@ const OrderSchema = z.object({
     capacity: z.string(),
     color: z.string(),
     name: z.string(),
-    birthday: z.string(),
+    birthday: z.string().optional(),
     phone: z.string(),
     funnel: z.string().optional(),
     country: z.string(),
@@ -20,6 +20,10 @@ const OrderSchema = z.object({
     discount_type: z.string(),
     requirements: z.string().optional().nullable(),
     form_data: z.any(), // Storing the full JSON payload
+    foreigner_id: z.string().optional(),
+    zip_code: z.string().optional(),
+    address: z.string().optional(),
+    detail_address: z.string().optional(),
 })
 
 export type OrderState = {
@@ -47,6 +51,8 @@ export async function submitOrder(
     const { data } = validatedFields
 
     try {
+        const kstNow = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString()
+
         const { error } = await supabase.from("foreigner_order").insert([
             {
                 company: data.company,
@@ -65,6 +71,11 @@ export async function submitOrder(
                 discount_type: data.discount_type,
                 requirements: data.requirements,
                 form_data: data.form_data,
+                foreigner_id: data.foreigner_id,
+                zip_code: data.zip_code,
+                address: data.address,
+                detail_address: data.detail_address,
+                created_at: kstNow,
             },
         ])
 

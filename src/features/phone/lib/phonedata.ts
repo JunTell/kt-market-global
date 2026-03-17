@@ -74,7 +74,6 @@ export const MODEL_VARIANTS: Record<string, string[]> = {
   aip17p: ["256", "512", "1t"],
   aip17pm: ["256", "512", "1t", "2t"],
   aipa: ["256", "512", "1t"],
-  aip16e: ["128", "256"],
   "sm-m366k": ["128"],
   "sm-s931nk": ["256", "512"],
   "sm-s731nk": ["256"]
