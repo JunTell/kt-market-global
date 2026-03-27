@@ -70,6 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: 'https://global.ktmarket.co.kr',
     },
     verification: {
+      google: 'qsP7Cl2wxBczV2spmXSJ_64Ip2rR256ZwqfmxNxUspM',
       other: {
         'facebook-domain-verification': '6xvpfpw3l0zkmhciw1puskq27akblq',
       },
