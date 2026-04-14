@@ -11,13 +11,23 @@ interface Props {
 }
 
 const GONGGU_MODELS = [
+    // iPhone 17 series
     "aip17-256",
-    "sm-m366k",
-    "sm-s931nk",
+    "aip17e-256",
+    "aipa-256",
     "aip17p-256",
     "aip17pm-256",
-    "aipa-256",
-    "sm-s731nk"
+    // iPhone 16 series
+    "aip16e-128",
+    // Galaxy S26 series
+    "sm-s942nk",
+    "sm-s947nk",
+    "sm-s948nk",
+    // Galaxy S25 series
+    "sm-s931nk",
+    "sm-s731nk",
+    // Galaxy M series
+    "sm-m366k",
 ]
 
 export default async function ModelListContainer({

@@ -120,7 +120,9 @@
     "Fail": {
       "title": "Check Unavailable",
       "desc": "Valid ARC is required<br/>for accurate check.",
-      "retry": "Go Back"
+      "retry": "Go Back",
+      "browse_phones": "Browse Phones Anyway",
+      "whatsapp_help": "Get Help via WhatsApp"
     },
     "PhoneList": {
       "title": "Select a Phone Model",
