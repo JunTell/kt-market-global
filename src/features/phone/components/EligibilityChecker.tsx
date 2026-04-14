@@ -4,19 +4,16 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Check, X, Search, ChevronRight, RotateCcw, Smartphone,
-  CreditCard, Calendar, UserCheck, CheckCircle2, MessageCircle
+  CreditCard, UserCheck, CheckCircle2, MessageCircle
 } from 'lucide-react';
 import { cn } from '@/shared/lib/utils';
 import {
   VISA_FULL_LIST,
   getFullVisaResult,
   VISA_CATEGORIES,
-  DURATION_OPTIONS,
   DEVICE_OPTIONS
 } from '@/features/phone/lib/visa-data';
 import { useTranslations, useLocale } from 'next-intl';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 
 // --- 애니메이션 변수 ---
 const slideVariants = {
@@ -65,14 +62,13 @@ const TapMotion = ({ children, className, onClick }: { children: React.ReactNode
   </motion.button>
 );
 
-type Step = 'arc' | 'visa' | 'duration' | 'device' | 'result' | 'fail' | 'phoneSelection';
+type Step = 'arc' | 'visa' | 'device' | 'result' | 'fail' | 'phoneSelection';
 
 export default function EligibilityChecker({ showPhoneSelection = true }: { showPhoneSelection?: boolean }) {
   const t = useTranslations('Checker');
   const tChat = useTranslations('ChatBot');
   const locale = useLocale();
   const currentLocale = (['ko', 'en', 'zh', 'ja'].includes(locale) ? locale : 'ko') as 'ko' | 'en' | 'zh' | 'ja';
-  const router = useRouter();
 
   const [step, setStep] = useState<Step>('arc');
   const [direction, setDirection] = useState(1);
@@ -81,7 +77,6 @@ export default function EligibilityChecker({ showPhoneSelection = true }: { show
   const [selection, setSelection] = useState({
     hasARC: false,
     visaCode: '',
-    duration: '',
     devicePlan: '',
   });
 
@@ -117,12 +112,6 @@ export default function EligibilityChecker({ showPhoneSelection = true }: { show
   const handleVisaSelect = (code: string) => {
     setSelection({ ...selection, visaCode: code });
     setDirection(1);
-    setStep('duration');
-  };
-
-  const handleDuration = (durationValue: string) => {
-    setSelection({ ...selection, duration: durationValue });
-    setDirection(1);
     setStep('device');
   };
 
@@ -144,9 +133,7 @@ export default function EligibilityChecker({ showPhoneSelection = true }: { show
   const handleBack = () => {
     setDirection(-1);
     if (step === 'visa') setStep('arc');
-    else if (step === 'duration') setStep('visa');
-    else if (step === 'device') setStep('duration');
-    else if (step === 'phoneSelection') setStep('result');
+    else if (step === 'device') setStep('visa');
   };
 
   const reset = () => {
@@ -154,7 +141,7 @@ export default function EligibilityChecker({ showPhoneSelection = true }: { show
     setStep('arc');
 
     setTimeout(() => {
-      setSelection({ hasARC: false, visaCode: '', duration: '', devicePlan: '' });
+      setSelection({ hasARC: false, visaCode: '', devicePlan: '' });
       setSearchTerm('');
       setActiveCategory('all');
       setDirection(1);
@@ -174,7 +161,6 @@ export default function EligibilityChecker({ showPhoneSelection = true }: { show
   const stepsInfo = [
     { id: 'arc', label: t('Steps.arc'), icon: UserCheck },
     { id: 'visa', label: t('Steps.visa'), icon: CreditCard },
-    { id: 'duration', label: t('Steps.duration'), icon: Calendar },
     { id: 'device', label: t('Steps.device'), icon: Smartphone },
   ];
 
@@ -185,62 +171,6 @@ export default function EligibilityChecker({ showPhoneSelection = true }: { show
     if (key === 'Opt2') return <span className="text-2xl">💰</span>;
     if (key === 'Opt3') return <span className="text-2xl">📲</span>;
     return <Smartphone size={20} className="text-primary" />;
-  };
-
-  // 휴대폰 기종 데이터 (5종) - GONGGU_MODELS
-  const PHONE_MODELS = [
-    {
-      id: 'aip17-256',
-      name: 'iPhone 17',
-      capacity: '256GB',
-      image: `${process.env.NEXT_PUBLIC_CDN_URL}/phone/aip17/mist_blue/01.png`
-    },
-    {
-      id: 'sm-m366k',
-      name: 'Jump4',
-      capacity: '128GB',
-      image: `${process.env.NEXT_PUBLIC_CDN_URL}/phone/sm-m366k/black/01.png`
-    },
-    {
-      id: 'aip16e-128',
-      name: 'iPhone 16e',
-      capacity: '128GB',
-      image: `${process.env.NEXT_PUBLIC_CDN_URL}/phone/aip16e/white/01.png`
-    },
-    {
-      id: 'sm-s931nk',
-      name: 'Galaxy S25',
-      capacity: '256GB',
-      image: `${process.env.NEXT_PUBLIC_CDN_URL}/phone/sm-s931nk/ice_blue/01.png`
-    },
-    {
-      id: 'aip17p-256',
-      name: 'iPhone 17 Pro',
-      capacity: '256GB',
-      image: `${process.env.NEXT_PUBLIC_CDN_URL}/phone/aip17p/silver/01.png`
-    },
-    {
-      id: 'aip17pm-256',
-      name: 'iPhone 17 Pro Max',
-      capacity: '256GB',
-      image: `${process.env.NEXT_PUBLIC_CDN_URL}/phone/aip17pm/silver/01.png`
-    },
-    {
-      id: 'sm-s731nk',
-      name: 'Galaxy S25',
-      capacity: '256GB',
-      image: `${process.env.NEXT_PUBLIC_CDN_URL}/phone/sm-s731nk/ice_blue/01.png`
-    },
-    {
-      id: 'aipa-256',
-      name: 'iPhone Air',
-      capacity: '256GB',
-      image: `${process.env.NEXT_PUBLIC_CDN_URL}/phone/aipa/cloud_white/01.png`
-    }
-  ];
-
-  const handlePhoneSelect = (modelId: string) => {
-    router.push(`/${locale}/phone?model=${modelId}`);
   };
 
   return (
@@ -404,33 +334,7 @@ export default function EligibilityChecker({ showPhoneSelection = true }: { show
               </SlideView>
             )}
 
-            {/* STEP 3: DURATION */}
-            {step === 'duration' && (
-              <SlideView key="duration" direction={direction}>
-                <div className="pt-4 text-center flex flex-col h-full">
-                  <div className="w-14 h-14 bg-background-alt rounded-2xl flex items-center justify-center mb-4 mx-auto text-primary">
-                    <Calendar size={28} />
-                  </div>
-                  <h2 className="text-xl font-bold mb-1.5 text-label-900">{t('Duration.title')}</h2>
-                  <div className="grid gap-2.5 max-w-xs mx-auto w-full flex-1 content-center">
-                    {DURATION_OPTIONS.map((opt) => (
-                      <TapMotion
-                        key={opt.key}
-                        onClick={() => handleDuration(opt.value)}
-                        className="w-full p-3.5 bg-background border border-grey-400 rounded-lg flex items-center justify-between hover:border-primary hover:bg-tertiary/20 hover:shadow-sm transition-all group"
-                      >
-                        <span className="font-bold text-sm text-label-800 group-hover:text-primary transition-colors">
-                          {t(`Duration.options.${opt.key}`)}
-                        </span>
-                        <CheckCircle2 size={18} className="text-line-400 group-hover:text-primary transition-colors" />
-                      </TapMotion>
-                    ))}
-                  </div>
-                </div>
-              </SlideView>
-            )}
-
-            {/* STEP 4: DEVICE */}
+            {/* STEP 3: DEVICE */}
             {step === 'device' && (
               <SlideView key="device" direction={direction}>
                 <div className="pt-2 text-center h-full flex flex-col">
@@ -490,12 +394,36 @@ export default function EligibilityChecker({ showPhoneSelection = true }: { show
                   </div>
                   <h3 className="text-lg font-bold mb-2 text-label-900">{t('Fail.title')}</h3>
                   <p
-                    className="text-label-500 mb-8 text-xs leading-relaxed"
+                    className="text-label-500 mb-6 text-xs leading-relaxed"
                     dangerouslySetInnerHTML={{ __html: t.raw('Fail.desc') }}
                   />
-                  <TapMotion onClick={reset} className="px-6 py-3 bg-label-900 text-label-100 rounded-xl hover:bg-black transition-all shadow-md font-bold text-sm flex items-center gap-1.5">
-                    <RotateCcw size={16} /> {t('Fail.retry')}
-                  </TapMotion>
+                  <div className="w-full space-y-2.5 max-w-xs">
+                    <TapMotion
+                      onClick={() => {
+                        document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className="w-full py-3.5 bg-primary text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-md hover:bg-primary/90 transition-all"
+                    >
+                      <Smartphone size={16} /> {t('Fail.browse_phones')}
+                    </TapMotion>
+                    <TapMotion
+                      onClick={() => {
+                        const message = encodeURIComponent(tChat('whatsapp_welcome_msg'));
+                        const url = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '821012345678'}?text=${message}`;
+                        window.open(url, '_blank');
+                      }}
+                      className="w-full py-3 rounded-xl bg-[#25D366] text-white font-bold text-sm flex items-center justify-center gap-2 hover:bg-[#20bd5a] transition-all"
+                    >
+                      <MessageCircle size={16} fill="currentColor" /> {t('Fail.whatsapp_help')}
+                    </TapMotion>
+                    <button
+                      type="button"
+                      onClick={reset}
+                      className="w-full py-2.5 text-grey-500 text-xs font-bold hover:text-primary transition-colors flex items-center justify-center gap-1.5"
+                    >
+                      <RotateCcw size={12} /> {t('Fail.retry')}
+                    </button>
+                  </div>
                 </div>
               </SlideView>
             )}
@@ -538,15 +466,20 @@ export default function EligibilityChecker({ showPhoneSelection = true }: { show
                   </div>
 
                   <div className="space-y-2">
+                    {/* 가능 여부와 무관하게 항상 폰 둘러보기 표시 */}
                     {showPhoneSelection && (
                       <TapMotion
                         onClick={() => {
-                          setDirection(1);
-                          setStep('phoneSelection');
+                          document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
                         }}
-                        className="w-full py-3.5 bg-primary text-label-100 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-secondary transition-all shadow-md hover:shadow-lg"
+                        className={cn(
+                          "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg",
+                          result.possible
+                            ? "bg-primary text-white hover:bg-primary/90"
+                            : "bg-grey-100 text-grey-700 hover:bg-grey-200"
+                        )}
                       >
-                        <Smartphone size={18} /> {t('ChatBot.select_phone')} <ChevronRight size={16} />
+                        <Smartphone size={18} /> {t('Fail.browse_phones')} <ChevronRight size={16} />
                       </TapMotion>
                     )}
                     <TapMotion
@@ -555,74 +488,28 @@ export default function EligibilityChecker({ showPhoneSelection = true }: { show
                         const url = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '821012345678'}?text=${message}`;
                         window.open(url, '_blank');
                       }}
-                      className="w-full py-4 rounded-xl bg-[#25D366] text-white font-bold text-base shadow-lg shadow-[#25D366]/20 hover:bg-[#20bd5a] transition-all flex items-center justify-center gap-2"
+                      className={cn(
+                        "w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all",
+                        result.possible
+                          ? "bg-[#25D366]/10 text-[#1a9e50] hover:bg-[#25D366]/20"
+                          : "bg-[#25D366] text-white shadow-lg shadow-[#25D366]/20 hover:bg-[#20bd5a]"
+                      )}
                     >
-                      <MessageCircle size={20} fill="currentColor" /> {t('Result.cta_whatsapp')}
+                      <MessageCircle size={18} fill={result.possible ? "none" : "currentColor"} /> {t('Result.cta_whatsapp')}
                     </TapMotion>
 
                     <button
                       type="button"
                       onClick={reset}
-                      className="w-full py-3 text-grey-500 text-sm font-bold hover:text-primary transition-colors flex items-center justify-center gap-1.5"
+                      className="w-full py-2.5 text-grey-500 text-xs font-bold hover:text-primary transition-colors flex items-center justify-center gap-1.5"
                     >
-                      <RotateCcw size={14} /> {t('Result.reset')}
+                      <RotateCcw size={12} /> {t('Result.reset')}
                     </button>
                   </div>
                 </div>
               </SlideView>
             )}
 
-            {/* STEP 7: PHONE SELECTION */}
-            {step === 'phoneSelection' && (
-              <SlideView key="phoneSelection" direction={direction}>
-                <div className="flex flex-col h-full">
-                  <div className="text-center mb-5">
-                    <h2 className="text-xl font-bold text-label-900 mb-1.5">{t('PhoneList.title')}</h2>
-                    <p className="text-label-500 text-xs">{t('PhoneList.desc')}</p>
-                  </div>
-
-                  <div className="grid gap-3 flex-1 content-start overflow-y-auto pr-1 -mx-1 px-1">
-                    {PHONE_MODELS.map((phone) => (
-                      <TapMotion
-                        key={phone.id}
-                        onClick={() => handlePhoneSelect(phone.id)}
-                        className="w-full p-4 rounded-lg border border-grey-200 hover:border-primary hover:bg-tertiary/20 transition-all bg-background shadow-sm flex items-center gap-4 group"
-                      >
-                        <div className="w-20 h-20 rounded-lg bg-background-alt flex items-center justify-center overflow-hidden shrink-0 group-hover:bg-primary/5 transition-colors relative">
-                          <Image
-                            src={phone.image}
-                            alt={phone.name}
-                            fill
-                            className="object-contain"
-                            sizes="80px"
-                          />
-                        </div>
-                        <div className="flex-1 text-left">
-                          <div className="font-bold text-base text-label-900 mb-1 group-hover:text-primary transition-colors">
-                            {phone.name}
-                          </div>
-                          <div className="text-xs text-label-500">
-                            {phone.capacity}
-                          </div>
-                        </div>
-                        <ChevronRight size={20} className="text-label-400 group-hover:text-primary transition-colors" />
-                      </TapMotion>
-                    ))}
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setDirection(-1);
-                      setStep('result');
-                    }}
-                    className="text-xs text-label-500 flex items-center justify-center gap-1 mx-auto hover:text-label-700 transition-colors py-3 cursor-pointer mt-4"
-                  >
-                    <ChevronRight size={12} className="rotate-180" /> 이전으로
-                  </button>
-                </div>
-              </SlideView>
-            )}
 
           </AnimatePresence>
         </div>

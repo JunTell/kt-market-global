@@ -77,14 +77,25 @@ export function getDBModelKey(prefix: string, capacity: string): string {
     return "sm-m366k"
   }
 
-  // 삼성 갤럭시 S24 시리즈 - 512GB는 특별한 키 사용
+  // 삼성 갤럭시 S25 - 512GB는 특별한 키 사용
   if (prefix === "sm-s931nk") {
     return capacity === "512" ? "sm-s931nk512" : "sm-s931nk"
   }
 
-  // 삼성 갤럭시 S25 (일반)
+  // 삼성 갤럭시 S25 FE
   if (prefix === "sm-s731nk") {
     return "sm-s731nk"
+  }
+
+  // 삼성 갤럭시 S26 시리즈
+  if (prefix === "sm-s942nk") {
+    return capacity === "512" ? "sm-s942nk512" : "sm-s942nk"
+  }
+  if (prefix === "sm-s947nk") {
+    return capacity === "512" ? "sm-s947nk512" : "sm-s947nk"
+  }
+  if (prefix === "sm-s948nk") {
+    return capacity === "512" ? "sm-s948nk512" : capacity === "1t" ? "sm-s948nk1t" : "sm-s948nk"
   }
 
   // 일반적인 경우: prefix-capacity
@@ -142,5 +153,5 @@ export function buildModelQueryParam(prefix: string, capacity: string, color?: s
  * isSpecialDiscountModel("sm-s931nk") // false
  */
 export function isSpecialDiscountModel(prefix: string): boolean {
-  return prefix.startsWith("aip17") || prefix.startsWith("aipa")
+  return prefix.startsWith("aip17") || prefix.startsWith("aip16") || prefix.startsWith("aipa")
 }

@@ -70,11 +70,21 @@ export const COLOR_MAP: Record<string, string> = {
 }
 
 export const MODEL_VARIANTS: Record<string, string[]> = {
+  // iPhone 16 series
+  aip16e: ["128", "256"],
+  // iPhone 17 series
   aip17: ["256", "512"],
+  aip17e: ["256"],
   aip17p: ["256", "512", "1t"],
   aip17pm: ["256", "512", "1t", "2t"],
   aipa: ["256", "512", "1t"],
+  // Galaxy M series
   "sm-m366k": ["128"],
+  // Galaxy S25 series
   "sm-s931nk": ["256", "512"],
-  "sm-s731nk": ["256"]
+  "sm-s731nk": ["256"],
+  // Galaxy S26 series
+  "sm-s942nk": ["256", "512"],
+  "sm-s947nk": ["256", "512"],
+  "sm-s948nk": ["256", "512", "1t"],
 }

@@ -65,7 +65,13 @@ export default function GongguDealCard(props: Props) {
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault()
-    if (isSoldOut) return
+
+    // 품절이어도 /phone 페이지로 이동 (다른 용량/색상 확인 가능)
+    if (isSoldOut) {
+      const targetUrl = model ? `/${locale}${detailPath}?model=${model}` : `/${locale}${detailPath}`
+      router.push(targetUrl)
+      return
+    }
 
     if (typeof window !== "undefined") {
       const payload = {
@@ -94,8 +100,8 @@ export default function GongguDealCard(props: Props) {
     <div
       className={cn(
         "group relative w-full p-5 rounded-[20px] bg-white flex flex-row items-center gap-4 box-border transition-all duration-300 border border-grey-200",
-        isSoldOut 
-          ? "cursor-not-allowed opacity-75 grayscale-[0.5]" 
+        isSoldOut
+          ? "cursor-pointer opacity-75 grayscale-[0.5]"
           : "cursor-pointer hover:-translate-y-1 hover:border-transparent"
       )}
       onClick={handleClick}
