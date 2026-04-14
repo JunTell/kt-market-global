@@ -81,8 +81,17 @@ export default function Home() {
         </p>
       </section>
 
+      {/* Price Information FIRST — 폰 먼저 보여주기 */}
+      <div id="products-section" className="px-4 py-10">
+        <ModelListContainer
+          sectionTitle={t('Phone.ModelList.section_title')}
+          planId="ppllistobj_0808"
+        />
+      </div>
+
       {/* Trust Building: Why Choose Us */}
       <WhyChooseUs />
+
       {/* Eligibility Checker */}
       <section
         id="eligibility-section"
@@ -103,13 +112,6 @@ export default function Home() {
           <EligibilityCheckerWrapper />
         </div>
       </section>
-      {/* Price Information LAST (Trust-First Strategy) */}
-      <div id="products-section" className="px-4 py-10">
-        <ModelListContainer
-          sectionTitle={t('Phone.ModelList.section_title')}
-          planId="ppllistobj_0808"
-        />
-      </div>
       {/* Target Audience */}
       <TargetAudience />
 

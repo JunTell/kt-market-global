@@ -120,7 +120,9 @@
     "Fail": {
       "title": "照会不可",
       "desc": "外国人登録証がないと<br/>正確な照会ができません。",
-      "retry": "最初に戻る"
+      "retry": "最初に戻る",
+      "browse_phones": "機種を見る",
+      "whatsapp_help": "WhatsAppで相談"
     },
     "PhoneList": {
       "title": "携帯機種を選択してください",

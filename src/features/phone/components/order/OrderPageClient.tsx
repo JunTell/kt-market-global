@@ -219,6 +219,10 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
 
             const companyName = t('Phone.Order.telecom_kt')
             const deviceName = store.title.replace(/\s\d+(GB|TB)$/i, "").trim()
+            // Birthday is derived from ARC first 6 digits if available
+            const birthday = finalInput.foreignerId
+                ? finalInput.foreignerId.replace(/-/g, "").slice(0, 6)
+                : undefined
 
             const formDataJson = {
                 ...sessionData,
@@ -237,10 +241,10 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
                 planName: toKorean('plan_name', finalInput.planName || ''),
                 contract: toKorean('contract', store.contract),
                 discountType: toKorean('discount_type', store.discountType),
-                foreignerId: finalInput.foreignerId,
-                zipCode: finalInput.zipCode,
-                address: finalInput.address,
-                detailAddress: finalInput.detailAddress,
+                foreignerId: finalInput.foreignerId || undefined,
+                zipCode: finalInput.zipCode || undefined,
+                address: finalInput.address || undefined,
+                detailAddress: finalInput.detailAddress || undefined,
                 ...(sessionData?.['eligibility_data'] ? {
                     'eligibility_data': sessionData['eligibility_data']
                 } : {}),
@@ -252,7 +256,7 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
                 capacity: store.deviceCapacity,
                 color: toKorean('color', store.deviceColor),
                 name: finalInput.userName,
-                birthday: finalInput.foreignerId.slice(0, 6),
+                birthday,
                 phone: finalInput.userPhone,
                 funnel: toKorean('funnel', store.funnel),
                 country: toKorean('country', finalInput.country),
@@ -261,11 +265,10 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
                 contract: toKorean('contract', store.contract),
                 discount_type: toKorean('discount_type', store.discountType),
                 form_data: formDataJson,
-                // New Fields
-                foreigner_id: finalInput.foreignerId,
-                zip_code: finalInput.zipCode,
-                address: finalInput.address,
-                detail_address: finalInput.detailAddress,
+                foreigner_id: finalInput.foreignerId || undefined,
+                zip_code: finalInput.zipCode || undefined,
+                address: finalInput.address || undefined,
+                detail_address: finalInput.detailAddress || undefined,
             }
 
             const result = await submitOrder({}, payload)
@@ -302,11 +305,14 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
     const planPriceText = `${t('Phone.Order.monthly_price')} ${formatPrice(finalPlanPrice, locale)}${t('Phone.Common.won')}`
 
     return (
-        <div className="flex flex-col w-full max-w-[480px] mx-auto min-h-screen pb-10 bg-white relative">
-            <h2 className="text-[20px] font-bold text-grey-900 leading-[1.4] m-0 px-5 pt-5 pb-5 whitespace-pre-line">
-                {t('Phone.Order.confirm_info_title')}
-            </h2>
-            
+        <div className="flex flex-col w-full max-w-[480px] mx-auto min-h-screen bg-white relative">
+            <div className="px-5 pt-6 pb-5">
+                <h2 className="text-[22px] font-bold text-grey-900 leading-[1.35] m-0 whitespace-pre-line">
+                    {t('Phone.Order.confirm_info_title')}
+                </h2>
+                <p className="text-[14px] text-grey-500 mt-1.5">이름과 연락처만 입력하면 바로 신청됩니다.</p>
+            </div>
+
             <OrderUserForm
                 imageUrl={store.imageUrl}
                 title={store.title}

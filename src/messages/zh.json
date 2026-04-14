@@ -120,7 +120,9 @@
     "Fail": {
       "title": "无法查询",
       "desc": "必须持有外国人登录证<br/>才能进行准确查询。",
-      "retry": "返回首页"
+      "retry": "返回首页",
+      "browse_phones": "查看手机",
+      "whatsapp_help": "WhatsApp咨询"
     },
     "PhoneList": {
       "title": "请选择手机型号",
