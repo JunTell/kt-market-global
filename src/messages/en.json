@@ -282,7 +282,8 @@
       "monthly_price": "Monthly",
       "default_requirements": "Device change with existing plan",
       "confirm_info_title": "Please confirm\nthe information below",
-      "form_alert": "Please enter both your name and contact number."
+      "form_alert": "Please enter both your name and contact number.",
+      "order_subtitle": "Enter your name and contact to apply instantly."
     },
     "Carousel": {
       "no_image": "No image available"
@@ -393,7 +394,16 @@
       "terms_items_value": "Name, Contact, ARC Number, Address",
       "terms_description_detail": "Your personal information is collected for consultation, activation, and delivery, and will be destroyed after 6 months of retention in accordance with related laws.",
       "form_incomplete_alert": "Please enter your name, contact, ARC number, and address correctly.",
-      "postcode_loading_alert": "Loading postal code service. Please try again in a moment."
+      "postcode_loading_alert": "Loading postal code service. Please try again in a moment.",
+      "contact_info_title": "Contact Info",
+      "required_badge": "Required",
+      "optional_info_title": "Additional Info",
+      "optional_badge": "Optional",
+      "optional_suffix": "(Optional)",
+      "optional_info_desc": "ARC number and address will be verified when the agent contacts you.",
+      "foreigner_id_hint": "Entering this in advance will speed up the activation process.",
+      "agent_contact_title": "Our agent will contact you directly",
+      "agent_contact_desc": "After applying, a KT Market Global agent will contact you to guide you through the remaining activation process."
     },
     "Result": {
       "application_complete_title": "Application\nCompleted.",

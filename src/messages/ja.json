@@ -282,7 +282,8 @@
       "monthly_price": "月",
       "default_requirements": "既存プランで機種変更",
       "confirm_info_title": "以下の情報が正しいか\nご確認ください",
-      "form_alert": "お名前と連絡先を両方入力してください。"
+      "form_alert": "お名前と連絡先を両方入力してください。",
+      "order_subtitle": "お名前と連絡先を入力するだけで申し込み完了です。"
     },
     "Carousel": {
       "no_image": "画像がありません"
@@ -388,7 +389,16 @@
       "terms_items_value": "氏名、連絡先、外国人登録番号、住所",
       "terms_description_detail": "お客様が入力した個人情報は、相談・開通・配送のために収集され、関連法令により6ヶ月間保管後、破棄されます。",
       "form_incomplete_alert": "氏名、連絡先、外国人登録番号、住所をすべて正しく入力してください。",
-      "postcode_loading_alert": "郵便番号サービスを読み込んでいます。後でもう一度お試しください。"
+      "postcode_loading_alert": "郵便番号サービスを読み込んでいます。後でもう一度お試しください。",
+      "contact_info_title": "連絡先情報",
+      "required_badge": "必須",
+      "optional_info_title": "追加情報",
+      "optional_badge": "任意",
+      "optional_suffix": "（任意）",
+      "optional_info_desc": "外国人登録番号と住所は、担当者からご連絡する際に確認します。",
+      "foreigner_id_hint": "事前に入力いただくと、開通がスムーズになります。",
+      "agent_contact_title": "担当者が直接ご連絡いたします",
+      "agent_contact_desc": "申し込み後、KT Market Globalの担当者がご連絡し、残りの開通手続きをご案内します。"
     },
     "Result": {
       "application_complete_title": "申込が\n完了しました。",

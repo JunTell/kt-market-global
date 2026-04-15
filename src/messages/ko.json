@@ -282,7 +282,8 @@
       "monthly_price": "월",
       "default_requirements": "기존요금제로 기변",
       "confirm_info_title": "아래 정보가 맞는지\n확인해주세요",
-      "form_alert": "성함과 연락처를 모두 입력해주세요."
+      "form_alert": "성함과 연락처를 모두 입력해주세요.",
+      "order_subtitle": "이름과 연락처만 입력하면 바로 신청됩니다."
     },
     "Carousel": {
       "no_image": "이미지가 없습니다"
@@ -393,7 +394,16 @@
       "terms_items_value": "이름, 연락처, 외국인등록증 번호, 주소",
       "terms_description_detail": "고객님이 입력한 개인정보는 상담, 개통, 배송을 위해 수집되며, 관계 법령에 따라 6개월간 보관 후 파기됩니다.",
       "form_incomplete_alert": "이름, 연락처, 외국인등록증 번호, 주소를 모두 올바르게 입력해주세요.",
-      "postcode_loading_alert": "우편번호 서비스를 불러오는 중입니다. 잠시 후 다시 시도해주세요."
+      "postcode_loading_alert": "우편번호 서비스를 불러오는 중입니다. 잠시 후 다시 시도해주세요.",
+      "contact_info_title": "연락처 정보",
+      "required_badge": "필수",
+      "optional_info_title": "추가 정보",
+      "optional_badge": "선택사항",
+      "optional_suffix": "(선택)",
+      "optional_info_desc": "외국인등록증 번호와 주소는 담당자가 연락 시 확인합니다.",
+      "foreigner_id_hint": "미리 입력하시면 개통이 더 빠릅니다.",
+      "agent_contact_title": "담당자가 직접 연락드립니다",
+      "agent_contact_desc": "신청 후 KT Market Global 담당자가 연락하여 나머지 개통 절차를 안내해 드립니다."
     },
     "Result": {
       "application_complete_title": "신청이\n완료되었습니다.",

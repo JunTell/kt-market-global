@@ -282,7 +282,8 @@
       "monthly_price": "月",
       "default_requirements": "使用现有套餐更换设备",
       "confirm_info_title": "请确认以下信息\n是否正确",
-      "form_alert": "请输入您的姓名和联系方式。"
+      "form_alert": "请输入您的姓名和联系方式。",
+      "order_subtitle": "只需输入姓名和联系方式即可立即申请。"
     },
     "Carousel": {
       "no_image": "无图片"
@@ -388,7 +389,16 @@
       "terms_items_value": "姓名、联系方式、外国人登录证号码、地址",
       "terms_description_detail": "您输入的个人信息用于咨询、开通及配送，将根据相关法令保管6个月后被销毁。",
       "form_incomplete_alert": "请正确输入姓名、联系方式、外国人登录证号码和地址。",
-      "postcode_loading_alert": "正在加载邮政编码服务。请稍后重试。"
+      "postcode_loading_alert": "正在加载邮政编码服务。请稍后重试。",
+      "contact_info_title": "联系方式",
+      "required_badge": "必填",
+      "optional_info_title": "附加信息",
+      "optional_badge": "选填",
+      "optional_suffix": "（选填）",
+      "optional_info_desc": "外国人登录证号码和地址将由担当者联系时确认。",
+      "foreigner_id_hint": "提前填写可加快开通流程。",
+      "agent_contact_title": "担当者将直接与您联系",
+      "agent_contact_desc": "申请后，KT Market Global担当者将与您联系，指导您完成剩余开通流程。"
     },
     "Result": {
       "application_complete_title": "申请已\n完成。",
