@@ -300,9 +300,7 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
     if (!store.isReady) return <OrderSkeleton />
 
     const planInfo = PLAN_DETAILS[store.selectedPlanId] || PLAN_DETAILS["plan_69"]
-    const additionalCost = store.selectedPlanId === 'plan_90_v' ? 4450 : 0
-    const finalPlanPrice = planInfo.price + additionalCost
-    const planPriceText = `${t('Phone.Order.monthly_price')} ${formatPrice(finalPlanPrice, locale)}${t('Phone.Common.won')}`
+    const planPriceText = `${t('Phone.Order.monthly_price')} ${formatPrice(planInfo.price, locale)}${t('Phone.Common.won')}`
 
     return (
         <div className="flex flex-col w-full max-w-[480px] mx-auto min-h-screen bg-white relative">
@@ -310,7 +308,7 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
                 <h2 className="text-[22px] font-bold text-grey-900 leading-[1.35] m-0 whitespace-pre-line">
                     {t('Phone.Order.confirm_info_title')}
                 </h2>
-                <p className="text-[14px] text-grey-500 mt-1.5">이름과 연락처만 입력하면 바로 신청됩니다.</p>
+                <p className="text-[14px] text-grey-500 mt-1.5">{t('Phone.Order.order_subtitle')}</p>
             </div>
 
             <OrderUserForm

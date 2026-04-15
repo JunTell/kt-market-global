@@ -167,8 +167,8 @@ export default function OrderUserForm(props: OrderUserFormProps) {
             {/* Required Section */}
             <div className="px-5 mt-7">
                 <div className="flex items-center gap-2 mb-4">
-                    <span className="text-[16px] font-bold text-grey-900">연락처 정보</span>
-                    <span className="px-2 py-0.5 bg-primary/10 text-primary text-[11px] font-bold rounded-full">필수</span>
+                    <span className="text-[16px] font-bold text-grey-900">{t("contact_info_title")}</span>
+                    <span className="px-2 py-0.5 bg-primary/10 text-primary text-[11px] font-bold rounded-full">{t("required_badge")}</span>
                 </div>
 
                 <div className="flex flex-col gap-4">
@@ -207,8 +207,8 @@ export default function OrderUserForm(props: OrderUserFormProps) {
                     onClick={() => setShowOptional(v => !v)}
                 >
                     <div className="flex items-center gap-2">
-                        <span className="text-[16px] font-bold text-grey-900">추가 정보</span>
-                        <span className="px-2 py-0.5 bg-grey-100 text-grey-500 text-[11px] font-bold rounded-full">선택사항</span>
+                        <span className="text-[16px] font-bold text-grey-900">{t("optional_info_title")}</span>
+                        <span className="px-2 py-0.5 bg-grey-100 text-grey-500 text-[11px] font-bold rounded-full">{t("optional_badge")}</span>
                     </div>
                     <div className={`transition-transform duration-200 ${showOptional ? "rotate-180" : ""}`}>
                         <ChevronDown />
@@ -217,25 +217,25 @@ export default function OrderUserForm(props: OrderUserFormProps) {
 
                 {!showOptional && (
                     <p className="text-[13px] text-grey-500 mt-1.5">
-                        외국인등록증 번호와 주소는 담당자가 연락 시 확인합니다.
+                        {t("optional_info_desc")}
                     </p>
                 )}
 
                 {showOptional && (
                     <div className="mt-4 flex flex-col gap-4 animate-fadeIn">
                         <Input
-                            label={`${t("foreigner_id_label")} (선택)`}
+                            label={`${t("foreigner_id_label")} ${t("optional_suffix")}`}
                             value={formData.foreignerId}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange("foreignerId", e.target.value)}
                             placeholder={t("foreigner_id_placeholder")}
                             maxLength={14}
                             inputMode="numeric"
-                            helperText="미리 입력하시면 개통이 더 빠릅니다"
+                            helperText={t("foreigner_id_hint")}
                         />
 
                         <div className="flex flex-col gap-2">
                             <label className="text-body2 font-bold text-grey-800">
-                                {t("address_label")} <span className="text-grey-400 font-normal text-[13px]">(선택)</span>
+                                {t("address_label")} <span className="text-grey-400 font-normal text-[13px]">{t("optional_suffix")}</span>
                             </label>
                             <div className="flex gap-2 items-stretch">
                                 <Input
@@ -274,9 +274,9 @@ export default function OrderUserForm(props: OrderUserFormProps) {
             <div className="mx-5 mt-6 bg-[#f0f7ff] rounded-2xl px-4 py-4 flex gap-3 items-start">
                 <span className="text-[20px] shrink-0">📞</span>
                 <div>
-                    <div className="text-[14px] font-bold text-[#1a56d6] mb-0.5">담당자가 직접 연락드립니다</div>
+                    <div className="text-[14px] font-bold text-[#1a56d6] mb-0.5">{t("agent_contact_title")}</div>
                     <div className="text-[13px] text-[#4a6fa5] leading-[1.5]">
-                        신청 후 KT Market Global 담당자가 연락하여 나머지 개통 절차를 안내해 드립니다.
+                        {t("agent_contact_desc")}
                     </div>
                 </div>
             </div>
