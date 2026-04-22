@@ -22,11 +22,12 @@
     "Hero": {
       "badge_official": "KT Official Partner",
       "badge_postpaid": "Postpaid Only",
-      "title_1": "Buy Your Phone and Plan",
-      "title_highlight": "in Korea as a Foreigner",
-      "subtitle": "Choose a device, check eligibility, and apply online with guidance designed for expats and international residents.",
+      "badge_specialist": "Foreigner Specialist",
+      "title_1": "Mobile Service",
+      "title_highlight": "for Foreigners in Korea",
+      "subtitle": "Check your eligibility, compare phones, and apply online with support built for foreign residents in Korea.",
       "trust_line": "KT Market Global · Official KT Partner",
-      "desc": "No unclear sales talk. If your ARC and visa qualify, you can move forward with a legal KT postpaid plan and device purchase.",
+      "desc": "We help foreign residents check ARC, visa, and payment conditions first, then move forward only when postpaid activation is actually possible.",
       "feat1_title": "No Korean credit card required",
       "feat2_title": "No deposit",
       "feat3_title": "English support available",
@@ -35,15 +36,18 @@
       "stat1_value": "No Korean card",
       "stat2_label": "Deposit",
       "stat2_value": "Zero deposit",
-      "stat3_label": "Support",
-      "stat3_value": "English ready",
-      "panel_eyebrow": "For Global Customers",
-      "panel_title": "Clear steps before you apply",
-      "panel_desc": "We show qualification, device pricing, and delivery flow upfront so international buyers can decide faster.",
+      "stat3_label": "Consultations",
+      "stat3_value": "88 handled",
+      "consultation_label": "Foreigner Consultations",
+      "consultation_value": "88 inquiries handled",
+      "consultation_desc": "This count reflects actual consultation cases for foreigners looking to activate phones in Korea.",
+      "panel_eyebrow": "For Foreign Residents",
+      "panel_title": "Start with the information you need most",
+      "panel_desc": "See eligibility, payment conditions, and application steps before you start your order.",
       "assurance1_title": "Transparent payment conditions",
       "assurance1_desc": "See what is required before you submit.",
-      "assurance2_title": "Built for English-first buyers",
-      "assurance2_desc": "Information is organized for non-Korean speakers.",
+      "assurance2_title": "Foreigner-specialized guidance",
+      "assurance2_desc": "The page explains the most common activation blockers for foreign residents first.",
       "assurance3_title": "Apply online, receive safely",
       "assurance3_desc": "From consultation to delivery, the flow stays simple.",
       "cta_check": "Check Eligibility Now",
@@ -51,46 +55,52 @@
       "no_hidden": "No Hidden Conditions"
     },
     "Brand": {
-      "description": "KT Market Global is the official international service of KT Market, built to help foreign residents in Korea compare phones, understand eligibility, and complete a KT purchase with less friction."
+      "description": "KT Market Global is the official international service of KT Market for foreign residents who want to apply for phones and KT plans in Korea."
     },
     "Conversion": {
-      "eyebrow": "Why This Converts Better",
-      "title": "Everything an overseas buyer needs before committing",
-      "description": "Instead of sending users into a long sales process, the page now surfaces trust, qualification, payment conditions, and purchase flow early so international visitors can act with confidence.",
-      "journey_eyebrow": "Fast Purchase Journey",
-      "journey_title": "A shorter path from visit to order",
-      "journey_description": "The main flow is designed to answer the exact questions global customers ask before they buy.",
+      "eyebrow": "Foreigner Support",
+      "title": "What you can check before you apply",
+      "description": "This page is focused on the questions foreign residents ask most often before buying a phone and plan in Korea.",
+      "stat1_label": "Specialty",
+      "stat1_value": "Foreigner phone activation",
+      "stat2_label": "Consultations",
+      "stat2_value": "88 cases",
+      "stat3_label": "Support",
+      "stat3_value": "Foreigner-focused",
+      "journey_eyebrow": "Application Steps",
+      "journey_title": "A simple path from check to application",
+      "journey_description": "Review the key conditions first, compare phones, and move forward with a clearer next step.",
       "item1": {
-        "title": "Official KT-based guidance",
-        "desc": "Trust signals appear before product browsing, not after."
+        "title": "Service for foreign residents",
+        "desc": "This is built for foreigners in Korea, not for general telecom shoppers."
       },
       "item2": {
-        "title": "No surprise payment barriers",
-        "desc": "Credit card, deposit, and qualification points are visible at the top."
+        "title": "88 consultation cases",
+        "desc": "A visible consultation count helps new visitors trust the service."
       },
       "item3": {
-        "title": "English-friendly decision flow",
-        "desc": "Key purchase steps are grouped in the order foreign users expect."
+        "title": "Eligibility comes first",
+        "desc": "Check the main requirements before spending time comparing options."
       },
       "item4": {
-        "title": "Delivery and activation clarity",
-        "desc": "Users see how the order actually gets completed in Korea."
+        "title": "Simple application flow",
+        "desc": "Move from qualification to phone selection and application in one flow."
       },
       "step1": {
-        "title": "1. Check if your ARC and visa qualify",
+        "title": "1. Check if you qualify as a foreign resident",
         "desc": "A quick eligibility flow removes doubt before users browse pricing."
       },
       "step2": {
-        "title": "2. Compare featured phones and plan benefits",
+        "title": "2. Compare popular phones for foreigners",
         "desc": "Popular devices are presented with a conversion-first shopping flow."
       },
       "step3": {
-        "title": "3. Apply and receive follow-up support",
+        "title": "3. Apply with specialist follow-up",
         "desc": "Users can submit with confidence knowing what happens next."
       }
     },
     "Eligibility": {
-      "badge": "Eligibility Check",
+      "badge": "Check Eligibility",
       "title": "KT Market Checklist",
       "desc": "Check if you are eligible for purchase!"
     },

@@ -35,6 +35,19 @@ export default function ConversionHighlights() {
             {t('description')}
           </p>
 
+          <div className="mb-8 grid gap-3 md:grid-cols-3">
+            {(['stat1', 'stat2', 'stat3'] as const).map((key) => (
+              <div key={key} className="rounded-[22px] border border-[#e5edf8] bg-[#f8fbff] px-4 py-4">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#7b8794]">
+                  {t(`${key}_label`)}
+                </p>
+                <p className="mt-2 text-lg font-bold text-[#111827]">
+                  {t(`${key}_value`)}
+                </p>
+              </div>
+            ))}
+          </div>
+
           <div className="grid gap-3 md:grid-cols-2">
             {highlightKeys.map((key, index) => {
               const Icon = ICONS[index];

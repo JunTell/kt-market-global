@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { CheckCircle2, ShieldCheck, Truck, WalletCards, Globe2 } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, Truck, WalletCards, Globe2, Users } from 'lucide-react';
 import Image from 'next/image';
 
 export default async function HeroSection() {
@@ -75,6 +75,17 @@ export default async function HeroSection() {
                             >
                                 <CheckCircle2 className="w-3 h-3" />
                                 <span>{t('badge_postpaid')}</span>
+                            </div>
+
+                            <div
+                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] md:text-xs font-bold"
+                                style={{
+                                    backgroundColor: 'rgba(255,255,255,0.1)',
+                                    color: 'var(--trust-text-white)'
+                                }}
+                            >
+                                <Users className="w-3 h-3" />
+                                <span>{t('badge_specialist')}</span>
                             </div>
                         </div>
 
@@ -153,6 +164,18 @@ export default async function HeroSection() {
                             >
                                 {t("cta_check")}
                             </a>
+
+                            <div className="w-full md:w-[280px] rounded-2xl border border-white/10 bg-[rgba(255,255,255,0.08)] px-4 py-3 text-left">
+                                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
+                                    {t('consultation_label')}
+                                </p>
+                                <p className="mt-1 text-lg font-bold text-white">
+                                    {t('consultation_value')}
+                                </p>
+                                <p className="mt-1 text-xs leading-5 text-white/70">
+                                    {t('consultation_desc')}
+                                </p>
+                            </div>
                         </div>
                     </div>
 
