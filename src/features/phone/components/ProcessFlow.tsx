@@ -38,13 +38,19 @@ export default function ProcessFlow() {
   };
 
   return (
-    <section className="py-12 md:py-20 px-5 md:px-0 bg-white">
+    <section className="bg-white px-5 py-14 md:px-0 md:py-20">
       <div className="w-full max-w-[940px] mx-auto">
         <div className="text-center mb-10 md:mb-16">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.24em] text-[#0055D4]">
+            {t('eyebrow')}
+          </p>
           <h2
             className="text-2xl md:text-[32px] font-bold text-[#1d1d1f] leading-tight"
             dangerouslySetInnerHTML={{ __html: t.raw('title') }}
           />
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-gray-500 md:text-base">
+            {t('lead')}
+          </p>
         </div>
 
         <motion.div
@@ -58,7 +64,7 @@ export default function ProcessFlow() {
             <motion.div
               key={step.id}
               variants={itemVariants}
-              className="flex items-center bg-gray-50 rounded-2xl p-4 md:p-6 gap-4 md:gap-6"
+              className="flex items-center gap-4 rounded-[28px] border border-gray-100 bg-gray-50 p-4 md:gap-6 md:p-6"
             >
               {/* Number Badge */}
               <div className="shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-[#1d1d1f] font-bold text-sm md:text-base shadow-sm">

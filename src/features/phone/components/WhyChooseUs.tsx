@@ -35,11 +35,19 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="py-12 md:py-20 px-5 md:px-12 bg-[#F9FAFB] overflow-hidden">
+    <section className="overflow-hidden bg-[#f8fafc] px-5 py-14 md:px-12 md:py-20">
       <div className="w-full max-w-layout-max mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-center text-[#191F28] mb-10 md:mb-14">
-          {t('title')}
-        </h2>
+        <div className="mb-10 text-center md:mb-14">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.24em] text-[#0055D4]">
+            {t('eyebrow')}
+          </p>
+          <h2 className="text-2xl md:text-3xl font-bold text-center text-[#191F28] mb-3">
+            {t('title')}
+          </h2>
+          <p className="mx-auto max-w-2xl text-sm leading-6 text-gray-500 md:text-base">
+            {t('lead')}
+          </p>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -50,7 +58,7 @@ export default function WhyChooseUs() {
           {cards.map(({ key, Icon, color, bgColor }) => (
             <div
               key={key}
-              className="bg-white rounded-2xl p-5 md:p-8 shadow-sm flex flex-col items-center text-center border border-gray-100 hover:shadow-md transition-shadow"
+              className="flex flex-col items-center rounded-[28px] border border-gray-100 bg-white p-5 text-center shadow-sm transition-shadow hover:shadow-md md:p-8"
             >
               <div className={`w-12 h-12 md:w-16 md:h-16 rounded-2xl ${bgColor} flex items-center justify-center mb-4 md:mb-6`}>
                 <Icon className={`w-6 h-6 md:w-8 md:h-8 ${color}`} strokeWidth={2.5} />
@@ -67,7 +75,7 @@ export default function WhyChooseUs() {
           ))}
         </motion.div>
 
-        <p className="text-center text-[11px] md:text-sm text-gray-400 font-medium px-4 break-keep mb-20 md:mb-32">
+        <p className="mb-20 break-keep px-4 text-center text-[11px] font-medium text-gray-400 md:mb-32 md:text-sm">
           {t('subtitle')}
         </p>
 
@@ -77,7 +85,7 @@ export default function WhyChooseUs() {
             dangerouslySetInnerHTML={{ __html: t.raw('Comparison.title') }}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-stretch max-w-4xl mx-auto mb-12">
+          <div className="mx-auto mb-12 grid max-w-4xl grid-cols-1 items-stretch gap-6 md:grid-cols-2 md:gap-12">
             {/* Before Board */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}

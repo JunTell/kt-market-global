@@ -22,21 +22,72 @@
     "Hero": {
       "badge_official": "KT 公式パートナー",
       "badge_postpaid": "後払い専用",
-      "title_1": "外国人向け",
-      "title_highlight": "韓国携帯プラン",
-      "subtitle": "携帯とプランをオンラインで - 簡単、スピーディー、安心。",
+      "title_1": "外国人でも韓国で",
+      "title_highlight": "端末とプランをそのまま購入",
+      "subtitle": "海外ユーザー向けに必要な情報を先に整理し、資格確認から申込までオンラインでスムーズにつながる構成です。",
       "trust_line": "KT Market Global · KT 公式パートナー",
-      "desc": "複雑な書類は不要。外国人登録証があれば、韓国人と同じ後払いプランで契約できます。",
+      "desc": "誰でも可能とは案内しません。ARC とビザ条件に合えば、合法的な KT 後払い契約と端末購入を明確にご案内します。",
       "feat1_title": "韓国のクレジットカード不要",
       "feat2_title": "保証金なし",
       "feat3_title": "英語サポート対応",
       "feat4_title": "オンライン申請＆配送",
+      "stat1_label": "支払い条件",
+      "stat1_value": "韓国カード不要",
+      "stat2_label": "初期費用",
+      "stat2_value": "保証金なし",
+      "stat3_label": "サポート",
+      "stat3_value": "英語対応",
+      "panel_eyebrow": "Global Buyer Ready",
+      "panel_title": "申込前に知るべきことを先に",
+      "panel_desc": "海外利用者が最も気にする資格、価格、配送の流れを先に見せて、購入判断を早めます。",
+      "assurance1_title": "支払い条件を先に確認",
+      "assurance1_desc": "申込前に必要条件を上部で確認できます。",
+      "assurance2_title": "英語ユーザー基準の情報設計",
+      "assurance2_desc": "韓国語に不慣れでも理解しやすい順序で構成しています。",
+      "assurance3_title": "オンライン申込と安全な配送",
+      "assurance3_desc": "相談から配送までの流れがシンプルです。",
       "cta_check": "今すぐ確認",
-      "cta_subscription": "オンラインで携帯を申し込む",
+      "cta_subscription": "端末とプランを見る",
       "no_hidden": "隠れた条件なし"
     },
     "Brand": {
-      "description": "KT Market Global は KT Market の公式グローバルサービスです。在韓外国人向けに携帯端末と KT のプランを提供しています。"
+      "description": "KT Market Global は KT Market の公式グローバルサービスで、韓国在住の外国人が端末比較、資格確認、KT 申込までをより少ない離脱で進められるよう設計されています。"
+    },
+    "Conversion": {
+      "eyebrow": "コンバージョン重視",
+      "title": "海外購入者が申込前に必要な情報をまとめて提示",
+      "description": "韓国ユーザー向けの長い説明ではなく、海外ユーザーが実際に確認したい資格条件、支払い条件、購入手順、配送フローを先に見せて離脱を減らします。",
+      "journey_eyebrow": "Fast Purchase Journey",
+      "journey_title": "訪問から申込までを短くする導線",
+      "journey_description": "海外ユーザーが離脱しやすいポイントを前段で解消するよう、主要フローを再構成しました。",
+      "item1": {
+        "title": "KT ベースの公式信頼要素",
+        "desc": "商品を見る前に公式パートナー情報を先に提示します。"
+      },
+      "item2": {
+        "title": "支払い障壁を事前に案内",
+        "desc": "カード、保証金、資格条件を上部で確認できます。"
+      },
+      "item3": {
+        "title": "英語圏ユーザー向けの情報順序",
+        "desc": "非韓国語ユーザーでも判断しやすい順序で配置しました。"
+      },
+      "item4": {
+        "title": "配送と開通まで透明化",
+        "desc": "韓国でどう受け取り、どう開通するかまで明確に伝えます。"
+      },
+      "step1": {
+        "title": "1. ARC とビザで申込可否を確認",
+        "desc": "価格を見る前に資格を確認し、不安を減らします。"
+      },
+      "step2": {
+        "title": "2. 人気端末とプラン特典を比較",
+        "desc": "海外ユーザーに人気の機種からすぐに比較できます。"
+      },
+      "step3": {
+        "title": "3. 申込後の相談と配送を案内",
+        "desc": "申込後に何が起こるかを明確にして完了率を高めます。"
+      }
     },
     "Eligibility": {
       "badge": "Eligibility Check",
@@ -145,7 +196,9 @@
     "badge3": "公式キャリア\nパートナー進行"
   },
   "ProcessFlow": {
+    "eyebrow": "手続きの透明性",
     "title": "KT 公式代理店 <span class=\"text-primary\">開通手続き</span>",
+    "lead": "海外ユーザーは決済前に配送、開通、サポートの流れが明確なほど申込しやすくなります。",
     "step1_title": "相談申請",
     "step1_desc": "ホームページで\n簡単に相談申請。",
     "step2_title": "ハッピーコール",
@@ -158,7 +211,9 @@
     "step5_desc": "開通完了！\nKTサービスをご利用ください。"
   },
   "Target": {
+    "eyebrow": "主な対象ユーザー",
     "title": "このような方に\nおすすめのサービスです",
+    "lead": "韓国で後払い契約と端末購入を、わかりやすい手順で進めたい外国人ユーザー向けです。",
     "check1": "外国人登録証(ARC)を既に保有している方",
     "check2": "韓国で携帯電話を購入したい方",
     "check3": "プリペイドではなく、後払いプランのみ使いたい方",
@@ -166,7 +221,9 @@
     "footer": "外国人基準で可能な場合のみ、正確にご案内します"
   },
   "WhyUs": {
+    "eyebrow": "購入前の信頼設計",
     "title": "なぜ KT Market なのか？",
+    "lead": "グローバルユーザーは印象より根拠を見ます。購入判断につながる要素を先に示します。",
     "subtitle": "* 私たちは全ての外国人に携帯を販売できるとは言いません。可能な条件のみ正確にご案内します。",
     "Cards": {
       "card1_title": "韓国のクレジットカード不要",
@@ -414,7 +471,9 @@
       "plan_discount_desc": "+ 選択約定 料金割引25%"
     },
     "ModelList": {
-      "section_title": "今日のお買い得",
+      "eyebrow": "おすすめ端末",
+      "section_title": "KT 特典つきで比較できる人気スマホ",
+      "section_desc": "海外ユーザーに人気の機種から見て、そのままプラン選択と申込まで進めます。",
       "current_carrier": "現在の通信会社",
       "using_carrier": "使用中",
       "select_carrier_title": "通信会社を選択してください",
