@@ -22,21 +22,72 @@
     "Hero": {
       "badge_official": "KT 官方合作伙伴",
       "badge_postpaid": "仅限后付",
-      "title_1": "韩国面向外国人的",
-      "title_highlight": "手机套餐",
-      "subtitle": "在线购买手机和套餐 - 简单、快捷、可靠。",
+      "title_1": "外国人在韩国也能",
+      "title_highlight": "直接购买手机和套餐",
+      "subtitle": "先展示海外用户真正关心的信息，再把资格确认、选机和申请在线顺畅串起来。",
       "trust_line": "KT Market Global · KT 官方合作伙伴",
-      "desc": "无需复杂材料，只要有外国人登录证，即可办理和韩国人一样的后付套餐。",
+      "desc": "我们不会笼统承诺所有人都能办理。只要 ARC 和签证条件符合，就会清楚说明合法的 KT 后付开通与购机流程。",
       "feat1_title": "无需韩国信用卡",
       "feat2_title": "无需保证金",
       "feat3_title": "提供英语支持",
       "feat4_title": "在线申请及配送",
+      "stat1_label": "支付条件",
+      "stat1_value": "无需韩国卡",
+      "stat2_label": "前期成本",
+      "stat2_value": "无保证金",
+      "stat3_label": "客服支持",
+      "stat3_value": "支持英语",
+      "panel_eyebrow": "Global Buyer Ready",
+      "panel_title": "先看申请前最关键的信息",
+      "panel_desc": "把海外用户最在意的资格、价格和配送流程提前说明，帮助更快做出购买决定。",
+      "assurance1_title": "先确认支付条件",
+      "assurance1_desc": "申请前需要什么，上方就能直接看到。",
+      "assurance2_title": "按英语用户习惯整理信息",
+      "assurance2_desc": "即使不熟悉韩语，也能快速抓住重点。",
+      "assurance3_title": "在线申请，安心收货",
+      "assurance3_desc": "从咨询到配送，流程尽量简单直接。",
       "cta_check": "立即确认",
-      "cta_subscription": "在线办理手机",
+      "cta_subscription": "查看手机与套餐",
       "no_hidden": "无隐藏条件"
     },
     "Brand": {
-      "description": "KT Market Global 是 KT Market 的官方全球服务，为在韩外国人提供手机和 KT 套餐。"
+      "description": "KT Market Global 是 KT Market 的官方全球服务，专为在韩外国人减少理解成本和流失率而设计，让用户更容易完成手机比较、资格确认和 KT 申请。"
+    },
+    "Conversion": {
+      "eyebrow": "以转化为核心",
+      "title": "把海外购买者在下单前最关心的信息集中展示",
+      "description": "不再让海外用户先进入冗长销售流程，而是优先展示资格条件、支付门槛、购买步骤和配送方式，减少犹豫和流失。",
+      "journey_eyebrow": "Fast Purchase Journey",
+      "journey_title": "从访问到申请的路径更短",
+      "journey_description": "重新组织主流程，先解决全球用户最容易离开的疑问点。",
+      "item1": {
+        "title": "先给出 KT 官方信任感",
+        "desc": "在看商品前先看到官方合作与核心信任信息。"
+      },
+      "item2": {
+        "title": "提前说明支付门槛",
+        "desc": "信用卡、保证金和资格条件在顶部就可确认。"
+      },
+      "item3": {
+        "title": "更适合英语用户的浏览顺序",
+        "desc": "按照海外用户熟悉的判断顺序来安排内容。"
+      },
+      "item4": {
+        "title": "配送与开通流程更透明",
+        "desc": "清楚说明在韩国如何收货、如何完成开通。"
+      },
+      "step1": {
+        "title": "1. 先确认 ARC 和签证是否符合",
+        "desc": "先判断资格，再看价格，减少不确定感。"
+      },
+      "step2": {
+        "title": "2. 对比热门机型与套餐优惠",
+        "desc": "直接从外国用户常买的机型开始比较。"
+      },
+      "step3": {
+        "title": "3. 提交申请并了解后续支持",
+        "desc": "让用户清楚知道申请后下一步会发生什么。"
+      }
     },
     "Eligibility": {
       "badge": "Eligibility Check",
@@ -145,7 +196,9 @@
     "badge3": "官方通信社\n合作伙伴"
   },
   "ProcessFlow": {
+    "eyebrow": "流程透明",
     "title": "KT 官方代理处 <span class=\"text-primary\">开通流程</span>",
+    "lead": "对于海外用户来说，支付前就了解配送、开通和后续支持，会显著提升申请意愿。",
     "step1_title": "申请咨询",
     "step1_desc": "在网站上\n简单申请咨询。",
     "step2_title": "电话咨询",
@@ -158,7 +211,9 @@
     "step5_desc": "开通完成！\n请使用KT服务。"
   },
   "Target": {
+    "eyebrow": "核心目标用户",
     "title": "专为这类人群\n提供的服务",
+    "lead": "适合希望在韩国以清晰流程完成后付开通和购机的外国人用户。",
     "check1": "已持有外国人登录证(ARC)的外国人",
     "check2": "想在韩国购买手机的人",
     "check3": "不想用预付卡，只想使用后付套餐的人",
@@ -166,7 +221,9 @@
     "footer": "仅在符合外国人开通标准时提供准确指引"
   },
   "WhyUs": {
+    "eyebrow": "先建立信任",
     "title": "为什么选择KT Market?",
+    "lead": "全球用户更看重依据而不是口号。这一部分先说明真正促成购买的理由。",
     "subtitle": "* 我们不说可以给所有外国人办手机。我们只在符合条件时提供准确指引。",
     "Cards": {
       "card1_title": "无需韩国信用卡",
@@ -265,6 +322,18 @@
       "model_loading": "型号加载中"
     },
     "Page": {
+      "purchase_ready": "已准备购买",
+      "selection_title": "先选择适合你的设备组合",
+      "selection_desc": "对海外用户来说，在比较套餐前先看清机型、颜色、入网方式和流程，会更容易做决定。",
+      "highlight1_title": "基于 KT 的正式购买流程",
+      "highlight1_desc": "你正在 KT Market Global 的正式流程中进行选择。",
+      "highlight2_title": "更适合非韩语用户理解",
+      "highlight2_desc": "按照海外用户熟悉的顺序整理了关键选择项。",
+      "highlight3_title": "配送和后续步骤更清晰",
+      "highlight3_desc": "比较完成后直接申请，也能清楚知道下一步。",
+      "pricing_eyebrow": "套餐选择",
+      "pricing_title": "申请前先比较优惠差异",
+      "pricing_desc": "把月费和设备最终价格同时展示，帮助更快做决定。",
       "select_plan_button": "选择套餐并确认优惠",
       "submit_application": "填写申请书",
       "price_info": "价格信息",
@@ -283,7 +352,19 @@
       "default_requirements": "使用现有套餐更换设备",
       "confirm_info_title": "请确认以下信息\n是否正确",
       "form_alert": "请输入您的姓名和联系方式。",
-      "order_subtitle": "只需输入姓名和联系方式即可立即申请。"
+      "order_subtitle": "只需输入姓名和联系方式即可立即申请。",
+      "checkout_eyebrow": "结账流程",
+      "step1_label": "步骤1",
+      "step1_value": "确认订单",
+      "step2_label": "步骤2",
+      "step2_value": "填写信息",
+      "step3_label": "步骤3",
+      "step3_value": "顾问联系",
+      "assurance_title": "提交后的流程",
+      "assurance_headline": "KT Market Global 顾问会继续说明剩余的开通步骤。",
+      "assurance_desc": "提交后会先确认资格与申请内容，再说明配送和开通的下一步。",
+      "form_section_title": "填写申请信息",
+      "form_section_desc": "请填写以下内容，方便团队尽快确认并联系您。"
     },
     "Carousel": {
       "no_image": "无图片"
@@ -297,6 +378,9 @@
       "submit_button": "填写申请表"
     },
     "PlanSelector": {
+      "hero_eyebrow": "优惠比较",
+      "hero_title": "更直观地比较套餐优惠",
+      "hero_desc": "月费、流量和总优惠额度可以一眼看清。",
       "discount_method_title": "请选择折扣方式",
       "device_discount": "设备折扣",
       "plan_discount": "套餐折扣",
@@ -317,10 +401,19 @@
       "plan_data": "数据",
       "plan_calls": "通话",
       "plan_texts": "短信",
+      "card_benefit": "优惠",
       "monthly_fee": "月费",
       "data_on_video_notice": "数据ON视频套餐目前无法新入网，仅限现有用户保留，新用户将入网数据ON视频Plus"
     },
     "OrderForm": {
+      "summary_eyebrow": "订单摘要",
+      "summary_title": "先确认你选择的手机和套餐",
+      "summary_status": "已确认",
+      "summary_badge1_title": "入网类型",
+      "summary_badge2_title": "套餐",
+      "summary_badge3_title": "月费",
+      "reassurance_title": "提交表单并不等于立即最终开通",
+      "reassurance_desc": "提交后顾问会先确认资格与内容，再继续说明配送和开通步骤。",
       "subscriber_info_input": "输入用户信息",
       "name_label": "姓名",
       "birthday_label": "出生日期 (8位)",
@@ -414,7 +507,9 @@
       "plan_discount_desc": "+ 选择约定 套餐折扣25%"
     },
     "ModelList": {
-      "section_title": "今日特惠",
+      "eyebrow": "推荐机型",
+      "section_title": "直接比较带有 KT 优惠的热门手机",
+      "section_desc": "先看海外用户最常选择的机型，然后直接进入套餐选择和申请流程。",
       "current_carrier": "当前运营商",
       "using_carrier": "使用中",
       "select_carrier_title": "请选择运营商",

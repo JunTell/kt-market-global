@@ -1,13 +1,18 @@
 import { getTranslations } from 'next-intl/server';
-import { CheckCircle2, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, Truck, WalletCards, Globe2 } from 'lucide-react';
 import Image from 'next/image';
 
 export default async function HeroSection() {
     const t = await getTranslations('Home.Hero');
+    const assurances = [
+        { key: 'assurance1', Icon: WalletCards },
+        { key: 'assurance2', Icon: Globe2 },
+        { key: 'assurance3', Icon: Truck },
+    ] as const;
 
     return (
         <section
-            className="relative w-full min-h-[300px] md:min-h-[340px] flex flex-col items-center justify-center px-6 md:px-12 py-8 md:py-10 overflow-hidden"
+            className="relative flex min-h-[300px] w-full flex-col items-center justify-center overflow-hidden px-6 py-10 md:min-h-[340px] md:px-12 md:py-14"
             style={{
                 background: 'linear-gradient(90deg, #111C2E 0%, #0A2850 100%)'
             }}
@@ -45,7 +50,7 @@ export default async function HeroSection() {
 
             {/* Responsive Container */}
             <div className="w-full max-w-layout-max mx-auto relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[1.1fr_0.9fr]">
                     {/* Left Column: Text Content */}
                     <div className="text-center md:text-left">
                         {/* Trust Badges */}
@@ -74,7 +79,7 @@ export default async function HeroSection() {
                         </div>
 
                         <h1
-                            className="text-2xl md:text-3xl font-bold leading-tight mb-2"
+                            className="mb-3 text-3xl font-bold leading-tight md:text-5xl"
                             style={{ color: 'var(--trust-text-white)' }}
                         >
                             {t('title_1')}
@@ -83,19 +88,40 @@ export default async function HeroSection() {
                                 {t('title_highlight')}
                             </span>
                         </h1>
-                        <p className="text-sm md:text-lg mb-6 opacity-90" style={{ color: 'var(--trust-text-white)' }}>
+                        <p className="mb-6 max-w-xl text-sm opacity-90 md:text-lg" style={{ color: 'var(--trust-text-white)' }}>
                             {t('subtitle')}
                         </p>
 
-                        <div className="mb-6 pl-1 border-l-4 border-trust-primary/30">
+                        <div className="mb-6 rounded-[24px] border border-white/10 bg-[rgba(255,255,255,0.06)] p-4 md:p-5">
+                            <div className="mb-4 grid grid-cols-3 gap-3 text-left">
+                                <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
+                                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
+                                        {t('stat1_label')}
+                                    </p>
+                                    <p className="mt-2 text-lg font-bold text-white md:text-xl">{t('stat1_value')}</p>
+                                </div>
+                                <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
+                                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
+                                        {t('stat2_label')}
+                                    </p>
+                                    <p className="mt-2 text-lg font-bold text-white md:text-xl">{t('stat2_value')}</p>
+                                </div>
+                                <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
+                                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
+                                        {t('stat3_label')}
+                                    </p>
+                                    <p className="mt-2 text-lg font-bold text-white md:text-xl">{t('stat3_value')}</p>
+                                </div>
+                            </div>
+
                             <p
-                                className="text-xs md:text-sm font-bold mb-1"
+                                className="mb-1 text-xs font-bold md:text-sm"
                                 style={{ color: 'var(--trust-text-gray)' }}
                             >
                                 {t('trust_line')}
                             </p>
                             <p
-                                className="text-[10px] md:text-xs font-medium opacity-80"
+                                className="text-[10px] font-medium opacity-80 md:text-xs"
                                 style={{ color: 'var(--trust-text-gray)' }}
                             >
                                 {t('desc')}
@@ -132,18 +158,44 @@ export default async function HeroSection() {
 
                     {/* Right Column: ARC Illustration */}
                     <div className="relative flex justify-center md:justify-end">
-                        <div className="relative w-full max-w-[320px] md:max-w-[440px]">
-                            {/* Main ARC Image */}
-                            <Image
-                                src="/images/신분증이미지1.webp"
-                                alt="Foreigner Registration Card"
-                                width={500}
-                                height={320}
-                                className="w-full h-auto drop-shadow-2xl"
-                                priority
-                                fetchPriority="high"
-                                sizes="(max-width: 768px) 320px, 440px"
-                            />
+                        <div className="relative w-full max-w-[360px] md:max-w-[440px]">
+                            <div className="absolute -left-2 top-5 hidden w-[170px] rounded-[26px] border border-white/10 bg-[rgba(255,255,255,0.08)] p-4 backdrop-blur md:block">
+                                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/55">
+                                    {t('panel_eyebrow')}
+                                </p>
+                                <h3 className="mt-2 text-lg font-bold text-white">{t('panel_title')}</h3>
+                                <p className="mt-2 text-sm leading-6 text-white/75">{t('panel_desc')}</p>
+                            </div>
+
+                            <div className="relative rounded-[36px] border border-white/10 bg-[rgba(255,255,255,0.06)] p-4 shadow-[0_30px_90px_rgba(0,0,0,0.28)] backdrop-blur">
+                                <Image
+                                    src="/images/신분증이미지1.webp"
+                                    alt="Foreigner Registration Card"
+                                    width={500}
+                                    height={320}
+                                    className="w-full h-auto drop-shadow-2xl"
+                                    priority
+                                    fetchPriority="high"
+                                    sizes="(max-width: 768px) 320px, 440px"
+                                />
+
+                                <div className="mt-4 grid gap-3">
+                                    {assurances.map(({ key, Icon }) => (
+                                        <div
+                                            key={key}
+                                            className="flex items-center gap-3 rounded-2xl border border-white/10 bg-[#0d2244]/80 px-4 py-3"
+                                        >
+                                            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-white">
+                                                <Icon className="h-5 w-5" />
+                                            </div>
+                                            <div className="text-left">
+                                                <p className="text-sm font-semibold text-white">{t(`${key}_title`)}</p>
+                                                <p className="text-xs text-white/70">{t(`${key}_desc`)}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -31,16 +31,22 @@ export default function TargetAudience() {
   };
 
   return (
-    <section className="py-10 md:py-16 px-5 md:px-12 bg-[#1F1F1F] text-grey-100 overflow-hidden">
+    <section className="overflow-hidden bg-[#111827] px-5 py-14 text-grey-100 md:px-12 md:py-20">
       <div className="w-full max-w-layout-max mx-auto">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.24em] text-[#93c5fd]">
+          {t('eyebrow')}
+        </p>
         <motion.h2
           initial={{ opacity: 0, x: -15 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="text-xl md:text-3xl font-bold mb-6 md:mb-8 leading-tight"
+          className="mb-3 text-xl font-bold leading-tight md:mb-4 md:text-3xl"
         >
           {t.raw('title')}
         </motion.h2>
+        <p className="mb-8 max-w-2xl text-sm leading-6 text-white/70 md:mb-10 md:text-base">
+          {t('lead')}
+        </p>
 
         <motion.div
           variants={containerVariants}
@@ -54,7 +60,7 @@ export default function TargetAudience() {
               key={key}
               variants={itemVariants}
               whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-3 md:gap-4 bg-white/10 px-3.5 md:px-4 py-3 md:py-3.5 rounded-xl border border-white/5 cursor-pointer"
+              className="flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-[rgba(255,255,255,0.08)] px-4 py-4 md:gap-4 md:px-5"
             >
               <CheckCircle2 className="text-secondary shrink-0" size={18} />
               <span className="text-sm md:text-base font-medium leading-snug">{t(key)}</span>

@@ -2,10 +2,10 @@
 
 import React, { useState, useCallback } from "react"
 import Script from "next/script"
-import Image from "next/image"
 import { Input } from "@/shared/components/ui/Input"
 import { Button } from "@/shared/components/ui/Button"
 import { useTranslations } from "next-intl"
+import OrderProductSummary from "@/features/phone/components/order/OrderProductSummary"
 
 interface FormData {
     userName: string
@@ -148,19 +148,42 @@ export default function OrderUserForm(props: OrderUserFormProps) {
         <div className="w-full flex flex-col bg-white pb-32">
             <Script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" strategy="lazyOnload" />
 
-            {/* Product Card */}
-            <div className="flex items-center gap-4 px-5 py-4 bg-[#f7f8fa] mx-5 mt-1 rounded-2xl">
-                <div className="relative w-[68px] h-[68px] shrink-0 bg-white rounded-xl shadow-sm p-1.5">
-                    {props.imageUrl ? (
-                        <Image src={props.imageUrl} alt="Device" fill className="object-contain p-1" />
-                    ) : (
-                        <div className="w-full h-full bg-[#eee] rounded-lg" />
-                    )}
+            <div className="mx-5 mt-1 rounded-[28px] border border-[#e7edf5] bg-[#fbfcfe] p-4 shadow-sm">
+                <div className="mb-4 flex items-center justify-between">
+                    <div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#0055d4]">
+                            {t("summary_eyebrow")}
+                        </p>
+                        <p className="mt-1 text-[15px] font-bold text-grey-900">{t("summary_title")}</p>
+                    </div>
+                    <div className="rounded-full bg-[#eef5ff] px-3 py-1 text-[12px] font-semibold text-[#0055d4]">
+                        {t("summary_status")}
+                    </div>
                 </div>
-                <div className="flex flex-col gap-0.5 min-w-0">
-                    <div className="text-[16px] font-bold text-[#1d1d1f] truncate">{props.title}</div>
-                    <div className="text-[13px] text-[#86868b] font-medium">{props.spec}</div>
-                    <div className="text-[13px] text-primary font-bold mt-0.5">{props.price}</div>
+                <OrderProductSummary
+                    image={props.imageUrl}
+                    title={props.title}
+                    spec={props.spec}
+                    price={props.price}
+                />
+                <div className="mt-4 grid grid-cols-3 gap-2">
+                    <SummaryBadge title={t("summary_badge1_title")} value={props.joinType} />
+                    <SummaryBadge title={t("summary_badge2_title")} value={props.planName} />
+                    <SummaryBadge title={t("summary_badge3_title")} value={props.planPrice} />
+                </div>
+            </div>
+
+            <div className="mx-5 mt-4 rounded-[24px] bg-[#f6f9fc] px-4 py-4">
+                <div className="flex items-start gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white text-[18px] shadow-sm">
+                        ✓
+                    </div>
+                    <div>
+                        <div className="text-[14px] font-bold text-grey-900">{t("reassurance_title")}</div>
+                        <div className="mt-1 text-[13px] leading-[1.55] text-grey-600">
+                            {t("reassurance_desc")}
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -399,19 +422,13 @@ export default function OrderUserForm(props: OrderUserFormProps) {
 function ReadOnlyView({ formData, t, ...props }: { formData: FormData; t: ReturnType<typeof useTranslations<"Phone.OrderForm">> } & OrderUserFormProps) {
     return (
         <div className="w-full flex flex-col bg-white">
-            <div className="flex items-center gap-4 px-5 py-4 bg-[#f7f8fa] mx-5 mt-1 rounded-2xl">
-                <div className="relative w-[68px] h-[68px] shrink-0 bg-white rounded-xl shadow-sm p-1.5">
-                    {props.imageUrl ? (
-                        <Image src={props.imageUrl} alt="Device" fill className="object-contain p-1" />
-                    ) : (
-                        <div className="w-full h-full bg-[#eee] rounded-lg" />
-                    )}
-                </div>
-                <div className="flex flex-col gap-0.5 min-w-0">
-                    <div className="text-[16px] font-bold text-[#1d1d1f] truncate">{props.title}</div>
-                    <div className="text-[13px] text-[#86868b] font-medium">{props.spec}</div>
-                    <div className="text-[13px] text-primary font-bold mt-0.5">{props.price}</div>
-                </div>
+            <div className="mx-5 mt-1 rounded-[28px] border border-[#e7edf5] bg-[#fbfcfe] p-4 shadow-sm">
+                <OrderProductSummary
+                    image={props.imageUrl}
+                    title={props.title}
+                    spec={props.spec}
+                    price={props.price}
+                />
             </div>
 
             <div className="px-5 mt-7 flex flex-col gap-5">
@@ -448,6 +465,13 @@ const InfoRow = ({ label, value }: { label: string; value: string | undefined })
     <div className="flex items-center gap-4 justify-between min-h-[22px]">
         <span className="text-[14px] text-grey-500 w-[70px] font-medium shrink-0">{label}</span>
         <span className="text-[15px] font-medium text-grey-900 flex-1 text-right">{value}</span>
+    </div>
+)
+
+const SummaryBadge = ({ title, value }: { title: string; value: string }) => (
+    <div className="rounded-2xl bg-white px-3 py-3 shadow-sm ring-1 ring-[#e8edf3]">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-grey-400">{title}</div>
+        <div className="mt-1 text-[13px] font-bold leading-[1.35] text-grey-900">{value}</div>
     </div>
 )
 

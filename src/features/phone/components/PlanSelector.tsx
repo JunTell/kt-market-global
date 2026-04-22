@@ -73,6 +73,17 @@ export default function PlanSelector({
 
   return (
     <div className="w-full flex flex-col gap-8 py-4">
+      <div className="rounded-[28px] border border-[#e5edf8] bg-[#f9fbff] p-4 md:p-5">
+        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#0055d4]">
+          {t('Phone.PlanSelector.hero_eyebrow')}
+        </p>
+        <h3 className="mt-2 text-lg font-bold text-[#111827] md:text-xl">
+          {t('Phone.PlanSelector.hero_title')}
+        </h3>
+        <p className="mt-1 text-sm leading-6 text-[#5b6473]">
+          {t('Phone.PlanSelector.hero_desc')}
+        </p>
+      </div>
 
       {/* 1. 할인 방법 탭 */}
       <div className="flex flex-col gap-3">
@@ -136,39 +147,84 @@ export default function PlanSelector({
                     onSelectPlan(plan.id)
                   }
                 }}
-                className={`flex flex-col md:flex-row md:items-center justify-between p-4 md:p-6 rounded-2xl cursor-pointer transition-all border-2 bg-white ${isSelected ? 'border-blue-500' : 'border-gray-200'} gap-3 md:gap-0`}
+                className={`cursor-pointer rounded-[28px] border-2 bg-white p-4 transition-all md:p-6 ${isSelected ? 'border-blue-500 shadow-[0_18px_50px_rgba(0,85,212,0.12)]' : 'border-gray-200'}`}
               >
-                <div className="flex items-start gap-4">
-                  <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 ${isSelected ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}`}>
-                    {isSelected && <div className="w-2.5 h-2.5 rounded-full bg-white" />}
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <div className="text-xl font-bold text-[#1d1d1f]">
-                      {`${formattedPrice}${t('Phone.Common.won')}`}
+                <div className="mb-4 flex items-start justify-between gap-3">
+                  <div className="flex items-start gap-4">
+                    <div className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 ${isSelected ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}`}>
+                      {isSelected && <div className="w-2.5 h-2.5 rounded-full bg-white" />}
                     </div>
-
-                    {is69PlanGroup ? (
-                      <div onClick={(e) => e.stopPropagation()}>
-                        <select
-                          className="text-sm font-medium text-gray-600 p-1.5 rounded-lg border border-gray-300 bg-gray-50 outline-none cursor-pointer mt-0.5"
-                          value={dropdownValue}
-                          onChange={(e) => handleVariantChange(e)}
-                        >
-                          <option value="video">{t('Phone.PlanSelector.data_on_video')}</option>
-                          <option value="simple">{t('Phone.PlanSelector.simple_110gb')}</option>
-                        </select>
+                    <div className="flex flex-col gap-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <div className="text-xl font-bold text-[#1d1d1f]">
+                          {`${formattedPrice}${t('Phone.Common.won')}`}
+                        </div>
+                        {!isDeviceMode && (
+                          <span className="rounded-full bg-blue-50 px-2 py-1 text-[11px] font-bold text-blue-600">
+                            {t('Phone.PlanSelector.discount_badge')}
+                          </span>
+                        )}
                       </div>
-                    ) : (
-                      <div className="text-sm font-medium text-gray-500 mt-0.5">{plan.name}</div>
-                    )}
 
-                    {!isDeviceMode && (
-                      <div className="text-xs text-blue-500 mt-0.5">{t('Phone.Order.monthly_price')} {formattedDiscountedMonthly}{t('Phone.Common.won')}</div>
-                    )}
+                      {is69PlanGroup ? (
+                        <div onClick={(e) => e.stopPropagation()}>
+                          <select
+                            className="mt-0.5 cursor-pointer rounded-lg border border-gray-300 bg-gray-50 p-1.5 text-sm font-medium text-gray-600 outline-none"
+                            value={dropdownValue}
+                            onChange={(e) => handleVariantChange(e)}
+                          >
+                            <option value="video">{t('Phone.PlanSelector.data_on_video')}</option>
+                            <option value="simple">{t('Phone.PlanSelector.simple_110gb')}</option>
+                          </select>
+                        </div>
+                      ) : (
+                        <div className="mt-0.5 text-sm font-medium text-gray-500">{plan.name}</div>
+                      )}
+
+                      {!isDeviceMode && (
+                        <div className="mt-0.5 text-xs text-blue-500">{t('Phone.Order.monthly_price')} {formattedDiscountedMonthly}{t('Phone.Common.won')}</div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-400">
+                      {t('Phone.PlanSelector.card_benefit')}
+                    </div>
+                    <div className="mt-1 whitespace-nowrap text-[15px] font-semibold text-blue-500">
+                      {formattedRightTextValue} {t('Phone.PlanSelector.discount_suffix')}
+                    </div>
                   </div>
                 </div>
-                <div className="text-[15px] font-semibold text-blue-500 text-right whitespace-nowrap self-end md:self-center pl-10 md:pl-0">
-                  {formattedRightTextValue} {t('Phone.PlanSelector.discount_suffix')}
+
+                <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+                  <div className="rounded-2xl bg-[#f8fafc] px-3 py-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
+                      {t('Phone.PlanSelector.plan_data')}
+                    </p>
+                    <p className="mt-1 text-sm font-bold text-[#111827]">{plan.description}</p>
+                  </div>
+                  <div className="rounded-2xl bg-[#f8fafc] px-3 py-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
+                      {t('Phone.PlanSelector.plan_calls')}
+                    </p>
+                    <p className="mt-1 text-sm font-bold text-[#111827]">{plan.calls}</p>
+                  </div>
+                  <div className="rounded-2xl bg-[#f8fafc] px-3 py-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
+                      {t('Phone.PlanSelector.plan_texts')}
+                    </p>
+                    <p className="mt-1 text-sm font-bold text-[#111827]">{plan.texts}</p>
+                  </div>
+                  <div className="rounded-2xl bg-[#f8fafc] px-3 py-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
+                      {t('Phone.PlanSelector.monthly_fee')}
+                    </p>
+                    <p className="mt-1 text-sm font-bold text-[#111827]">
+                      {isDeviceMode
+                        ? `${formattedPrice}${t('Phone.Common.won')}`
+                        : `${formattedDiscountedMonthly}${t('Phone.Common.won')}`}
+                    </p>
+                  </div>
                 </div>
               </div>
             )

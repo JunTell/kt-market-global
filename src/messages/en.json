@@ -22,21 +22,72 @@
     "Hero": {
       "badge_official": "KT Official Partner",
       "badge_postpaid": "Postpaid Only",
-      "title_1": "Phone Plan in Korea",
-      "title_highlight": "for Foreigners",
-      "subtitle": "Buy a phone and mobile plan online – simple, fast, and reliable.",
+      "title_1": "Buy Your Phone and Plan",
+      "title_highlight": "in Korea as a Foreigner",
+      "subtitle": "Choose a device, check eligibility, and apply online with guidance designed for expats and international residents.",
       "trust_line": "KT Market Global · Official KT Partner",
-      "desc": "No complex paperwork. Just your ARC, and you can get the same postpaid plans as locals.",
+      "desc": "No unclear sales talk. If your ARC and visa qualify, you can move forward with a legal KT postpaid plan and device purchase.",
       "feat1_title": "No Korean credit card required",
       "feat2_title": "No deposit",
       "feat3_title": "English support available",
       "feat4_title": "Online application & delivery",
+      "stat1_label": "Card",
+      "stat1_value": "No Korean card",
+      "stat2_label": "Deposit",
+      "stat2_value": "Zero deposit",
+      "stat3_label": "Support",
+      "stat3_value": "English ready",
+      "panel_eyebrow": "For Global Customers",
+      "panel_title": "Clear steps before you apply",
+      "panel_desc": "We show qualification, device pricing, and delivery flow upfront so international buyers can decide faster.",
+      "assurance1_title": "Transparent payment conditions",
+      "assurance1_desc": "See what is required before you submit.",
+      "assurance2_title": "Built for English-first buyers",
+      "assurance2_desc": "Information is organized for non-Korean speakers.",
+      "assurance3_title": "Apply online, receive safely",
+      "assurance3_desc": "From consultation to delivery, the flow stays simple.",
       "cta_check": "Check Eligibility Now",
-      "cta_subscription": "Apply for Mobile Online",
+      "cta_subscription": "Shop Phones and Plans",
       "no_hidden": "No Hidden Conditions"
     },
     "Brand": {
-      "description": "KT Market Global is the official international service of KT Market, providing mobile phones and KT plans for foreigners in Korea."
+      "description": "KT Market Global is the official international service of KT Market, built to help foreign residents in Korea compare phones, understand eligibility, and complete a KT purchase with less friction."
+    },
+    "Conversion": {
+      "eyebrow": "Why This Converts Better",
+      "title": "Everything an overseas buyer needs before committing",
+      "description": "Instead of sending users into a long sales process, the page now surfaces trust, qualification, payment conditions, and purchase flow early so international visitors can act with confidence.",
+      "journey_eyebrow": "Fast Purchase Journey",
+      "journey_title": "A shorter path from visit to order",
+      "journey_description": "The main flow is designed to answer the exact questions global customers ask before they buy.",
+      "item1": {
+        "title": "Official KT-based guidance",
+        "desc": "Trust signals appear before product browsing, not after."
+      },
+      "item2": {
+        "title": "No surprise payment barriers",
+        "desc": "Credit card, deposit, and qualification points are visible at the top."
+      },
+      "item3": {
+        "title": "English-friendly decision flow",
+        "desc": "Key purchase steps are grouped in the order foreign users expect."
+      },
+      "item4": {
+        "title": "Delivery and activation clarity",
+        "desc": "Users see how the order actually gets completed in Korea."
+      },
+      "step1": {
+        "title": "1. Check if your ARC and visa qualify",
+        "desc": "A quick eligibility flow removes doubt before users browse pricing."
+      },
+      "step2": {
+        "title": "2. Compare featured phones and plan benefits",
+        "desc": "Popular devices are presented with a conversion-first shopping flow."
+      },
+      "step3": {
+        "title": "3. Apply and receive follow-up support",
+        "desc": "Users can submit with confidence knowing what happens next."
+      }
     },
     "Eligibility": {
       "badge": "Eligibility Check",
@@ -145,7 +196,9 @@
     "badge3": "Official\nPartner"
   },
   "ProcessFlow": {
+    "eyebrow": "Transparent Fulfillment",
     "title": "KT Official Partner <span class=\"text-primary\">Activation Process</span>",
+    "lead": "Overseas buyers convert better when delivery, activation, and support are explained before checkout.",
     "step1_title": "Application",
     "step1_desc": "Apply simply on\nthe website.",
     "step2_title": "Happy Call",
@@ -158,7 +211,9 @@
     "step5_desc": "Activation Complete!\nEnjoy KT services."
   },
   "Target": {
+    "eyebrow": "Best Fit Customers",
     "title": "Recommended For\nThese People",
+    "lead": "This service is optimized for foreign residents who want a clear, legal, postpaid buying path in Korea.",
     "check1": "Foreigners who already have an ARC",
     "check2": "Who want to buy a phone in Korea",
     "check3": "Who want Postpaid (Not Prepaid)",
@@ -166,7 +221,9 @@
     "footer": "We only guide cases that are legally possible."
   },
   "WhyUs": {
+    "eyebrow": "Trust Before Checkout",
     "title": "Why KT Market?",
+    "lead": "Global buyers need proof, not slogans. This section explains the practical reasons they are more likely to complete a purchase here.",
     "subtitle": "* We don't say we sell phones to foreigners. we only guide you through exact possible conditions.",
     "Cards": {
       "card1_title": "No Korean credit card required",
@@ -265,6 +322,18 @@
       "model_loading": "Model loading"
     },
     "Page": {
+      "purchase_ready": "Purchase Ready",
+      "selection_title": "Choose the device setup that fits your move-in situation",
+      "selection_desc": "Global buyers convert better when device, color, sign-up type, and delivery expectations are obvious before plan pricing.",
+      "highlight1_title": "Official KT-based purchase flow",
+      "highlight1_desc": "You are selecting inside a structured KT Market Global process.",
+      "highlight2_title": "Built for non-Korean speakers",
+      "highlight2_desc": "Key product decisions are grouped in the order international users expect.",
+      "highlight3_title": "Delivery and follow-up explained",
+      "highlight3_desc": "You can compare first, then apply with a clearer next step.",
+      "pricing_eyebrow": "Plan Selection",
+      "pricing_title": "Compare benefits before you submit",
+      "pricing_desc": "This step makes the total device price and monthly plan tradeoff visible so buyers can decide faster.",
       "select_plan_button": "Select plan and check benefits",
       "submit_application": "Fill out application",
       "price_info": "Price Information",
@@ -283,7 +352,19 @@
       "default_requirements": "Device change with existing plan",
       "confirm_info_title": "Please confirm\nthe information below",
       "form_alert": "Please enter both your name and contact number.",
-      "order_subtitle": "Enter your name and contact to apply instantly."
+      "order_subtitle": "Enter your name and contact to apply instantly.",
+      "checkout_eyebrow": "Checkout Flow",
+      "step1_label": "Step 1",
+      "step1_value": "Check details",
+      "step2_label": "Step 2",
+      "step2_value": "Submit form",
+      "step3_label": "Step 3",
+      "step3_value": "Agent contact",
+      "assurance_title": "What Happens Next",
+      "assurance_headline": "A KT Market Global agent will guide the remaining activation flow.",
+      "assurance_desc": "This order form is designed to remove uncertainty before purchase. After submission, your details are checked and the next activation steps are explained directly.",
+      "form_section_title": "Your application details",
+      "form_section_desc": "Complete the short form below so the team can confirm your order and contact you quickly."
     },
     "Carousel": {
       "no_image": "No image available"
@@ -297,6 +378,9 @@
       "submit_button": "Submit Application"
     },
     "PlanSelector": {
+      "hero_eyebrow": "Benefit Comparison",
+      "hero_title": "Compare plan discounts with less guesswork",
+      "hero_desc": "International buyers should be able to see monthly fee, included data, and total discount at a glance.",
       "select_service_title": "Choose your service",
       "mnp_title": "Switch to KT",
       "mnp_desc_short": "Keeping my number from SKT, LG, MVNO",
@@ -322,10 +406,19 @@
       "plan_data": "Data",
       "plan_calls": "Calls",
       "plan_texts": "Texts",
+      "card_benefit": "Benefit",
       "monthly_fee": "Monthly Fee",
       "data_on_video_notice": "Data ON Video plan is currently unavailable for new subscriptions. Existing subscribers can keep it, and new subscribers will be enrolled in Data ON Video Plus."
     },
     "OrderForm": {
+      "summary_eyebrow": "Order Summary",
+      "summary_title": "Review your selected device and plan",
+      "summary_status": "Ready",
+      "summary_badge1_title": "Join Type",
+      "summary_badge2_title": "Plan",
+      "summary_badge3_title": "Monthly",
+      "reassurance_title": "Your application is not the final activation step",
+      "reassurance_desc": "After you submit, an agent reviews eligibility, confirms the next steps, and helps complete delivery and activation.",
       "subscriber_info_input": "Enter Subscriber Information",
       "name_label": "Name",
       "birthday_label": "Date of Birth (8 digits)",
@@ -419,7 +512,9 @@
       "plan_discount_desc": "+ 25% Plan Discount"
     },
     "ModelList": {
-      "section_title": "Today's Deals",
+      "eyebrow": "Featured Devices",
+      "section_title": "Shop Phones With KT Plan Benefits",
+      "section_desc": "Start with the most requested models for foreign residents in Korea, then move directly into plan selection and application.",
       "current_carrier": "Current Carrier",
       "using_carrier": "In Use",
       "select_carrier_title": "Please select a carrier",

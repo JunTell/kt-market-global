@@ -6,6 +6,7 @@ import HeroSection from '@/features/phone/components/HeroSection';
 import ModelListContainer from '@/features/phone/components/ModelListContainer';
 import Footer from '@/shared/components/layout/Footer';
 import EligibilityCheckerWrapper from '@/features/phone/components/EligibilityCheckerWrapper';
+import ConversionHighlights from '@/features/phone/components/ConversionHighlights';
 
 // Dynamic Imports for Heavy Client Components - SSR enabled for Server Component compatibility
 const ProcessFlow = dynamic(() => import('@/features/phone/components/ProcessFlow'), { ssr: true });
@@ -71,31 +72,39 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white font-sans max-w-[940px] mx-auto">
-      {/* Trust-First: Hero Section at Top */}
       <HeroSection />
 
-      {/* Short Brand Description */}
-      <section className="py-8 px-6 md:px-12 bg-white text-center border-b border-grey-50">
-        <p className="text-xs md:text-sm text-grey-500 max-w-2xl mx-auto leading-relaxed font-medium">
+      <section className="border-b border-[#edf2f7] bg-white px-6 py-7 text-center md:px-12">
+        <p className="mx-auto max-w-3xl text-sm font-medium leading-relaxed text-grey-600 md:text-base">
           {t('Home.Brand.description')}
         </p>
       </section>
 
-      {/* Price Information FIRST — 폰 먼저 보여주기 */}
-      <div id="products-section" className="px-4 py-10">
+      <ConversionHighlights />
+
+      <section id="products-section" className="px-4 py-14 md:py-20">
+        <div className="mb-8 text-center">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.24em] text-[#0055D4]">
+            {t('Phone.ModelList.eyebrow')}
+          </p>
+          <h2 className="text-2xl font-bold text-[#111827] md:text-3xl">
+            {t('Phone.ModelList.section_title')}
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-grey-600 md:text-base">
+            {t('Phone.ModelList.section_desc')}
+          </p>
+        </div>
         <ModelListContainer
-          sectionTitle={t('Phone.ModelList.section_title')}
+          sectionTitle=""
           planId="ppllistobj_0808"
         />
-      </div>
+      </section>
 
-      {/* Trust Building: Why Choose Us */}
       <WhyChooseUs />
 
-      {/* Eligibility Checker */}
       <section
         id="eligibility-section"
-        className="py-10 md:py-16 bg-base px-4 md:px-12 border-y border-grey-200"
+        className="border-y border-grey-200 bg-base px-4 py-14 md:px-12 md:py-20"
       >
         <div className="w-full max-w-layout-max mx-auto">
           <div className="max-w-md mx-auto text-center mb-6 md:mb-8">
@@ -112,17 +121,15 @@ export default function Home() {
           <EligibilityCheckerWrapper />
         </div>
       </section>
-      {/* Target Audience */}
+
       <TargetAudience />
 
       <ProcessGuide />
 
-      {/* Process Transparency */}
       <div className="py-12 md:py-20">
         <ProcessFlow />
       </div>
 
-      {/* Notice Section */}
       <Notice
         title={t('Main.Notice.section_title')}
         items={[
