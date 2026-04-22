@@ -322,6 +322,18 @@
       "model_loading": "Model loading"
     },
     "Page": {
+      "purchase_ready": "Purchase Ready",
+      "selection_title": "Choose the device setup that fits your move-in situation",
+      "selection_desc": "Global buyers convert better when device, color, sign-up type, and delivery expectations are obvious before plan pricing.",
+      "highlight1_title": "Official KT-based purchase flow",
+      "highlight1_desc": "You are selecting inside a structured KT Market Global process.",
+      "highlight2_title": "Built for non-Korean speakers",
+      "highlight2_desc": "Key product decisions are grouped in the order international users expect.",
+      "highlight3_title": "Delivery and follow-up explained",
+      "highlight3_desc": "You can compare first, then apply with a clearer next step.",
+      "pricing_eyebrow": "Plan Selection",
+      "pricing_title": "Compare benefits before you submit",
+      "pricing_desc": "This step makes the total device price and monthly plan tradeoff visible so buyers can decide faster.",
       "select_plan_button": "Select plan and check benefits",
       "submit_application": "Fill out application",
       "price_info": "Price Information",
@@ -340,7 +352,19 @@
       "default_requirements": "Device change with existing plan",
       "confirm_info_title": "Please confirm\nthe information below",
       "form_alert": "Please enter both your name and contact number.",
-      "order_subtitle": "Enter your name and contact to apply instantly."
+      "order_subtitle": "Enter your name and contact to apply instantly.",
+      "checkout_eyebrow": "Checkout Flow",
+      "step1_label": "Step 1",
+      "step1_value": "Check details",
+      "step2_label": "Step 2",
+      "step2_value": "Submit form",
+      "step3_label": "Step 3",
+      "step3_value": "Agent contact",
+      "assurance_title": "What Happens Next",
+      "assurance_headline": "A KT Market Global agent will guide the remaining activation flow.",
+      "assurance_desc": "This order form is designed to remove uncertainty before purchase. After submission, your details are checked and the next activation steps are explained directly.",
+      "form_section_title": "Your application details",
+      "form_section_desc": "Complete the short form below so the team can confirm your order and contact you quickly."
     },
     "Carousel": {
       "no_image": "No image available"
@@ -354,6 +378,9 @@
       "submit_button": "Submit Application"
     },
     "PlanSelector": {
+      "hero_eyebrow": "Benefit Comparison",
+      "hero_title": "Compare plan discounts with less guesswork",
+      "hero_desc": "International buyers should be able to see monthly fee, included data, and total discount at a glance.",
       "select_service_title": "Choose your service",
       "mnp_title": "Switch to KT",
       "mnp_desc_short": "Keeping my number from SKT, LG, MVNO",
@@ -379,10 +406,19 @@
       "plan_data": "Data",
       "plan_calls": "Calls",
       "plan_texts": "Texts",
+      "card_benefit": "Benefit",
       "monthly_fee": "Monthly Fee",
       "data_on_video_notice": "Data ON Video plan is currently unavailable for new subscriptions. Existing subscribers can keep it, and new subscribers will be enrolled in Data ON Video Plus."
     },
     "OrderForm": {
+      "summary_eyebrow": "Order Summary",
+      "summary_title": "Review your selected device and plan",
+      "summary_status": "Ready",
+      "summary_badge1_title": "Join Type",
+      "summary_badge2_title": "Plan",
+      "summary_badge3_title": "Monthly",
+      "reassurance_title": "Your application is not the final activation step",
+      "reassurance_desc": "After you submit, an agent reviews eligibility, confirms the next steps, and helps complete delivery and activation.",
       "subscriber_info_input": "Enter Subscriber Information",
       "name_label": "Name",
       "birthday_label": "Date of Birth (8 digits)",

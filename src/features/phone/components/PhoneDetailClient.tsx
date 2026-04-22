@@ -18,7 +18,7 @@ const PlanSelector = dynamic(() => import("@/features/phone/components/PlanSelec
 import { usePhoneStore, Plan } from "@/features/phone/model/usePhoneStore"
 import { MODEL_VARIANTS, getColorMap } from "@/features/phone/lib/phonedata"
 import { checkIsSoldOut } from "@/features/phone/lib/stock"
-import { ChevronLeft } from "lucide-react"
+import { BadgeCheck, ChevronLeft, Globe2, ShieldCheck, Truck } from "lucide-react"
 
 interface InitialData {
   model: string
@@ -150,6 +150,11 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
   })
 
   const finalPriceInfo = { finalDevicePrice }
+  const purchaseHighlights = [
+    { key: "highlight1", Icon: ShieldCheck },
+    { key: "highlight2", Icon: Globe2 },
+    { key: "highlight3", Icon: Truck },
+  ] as const
 
   return (
     <div className="w-full max-w-[780px] mx-auto bg-white min-h-screen pb-24 md:pb-8">
@@ -165,6 +170,32 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
         <div className={`px-5 md:px-0 w-full mt-6 md:mt-0 ${step === 2 ? 'md:max-w-xl mx-auto' : 'md:w-1/2'}`}>
           {step === 1 && (
             <>
+              <div className="mb-4 rounded-[28px] border border-[#dbe8f8] bg-[#f7fbff] p-4 md:p-5">
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#0055d4] shadow-sm">
+                  <BadgeCheck className="h-3.5 w-3.5" />
+                  <span>{t('Phone.Page.purchase_ready')}</span>
+                </div>
+                <h2 className="text-lg font-bold text-[#111827] md:text-xl">
+                  {t('Phone.Page.selection_title')}
+                </h2>
+                <p className="mt-1 text-sm leading-6 text-[#5b6473]">
+                  {t('Phone.Page.selection_desc')}
+                </p>
+                <div className="mt-4 grid gap-3">
+                  {purchaseHighlights.map(({ key, Icon }) => (
+                    <div key={key} className="flex items-start gap-3 rounded-2xl bg-white px-4 py-3 shadow-sm ring-1 ring-[#e6eef9]">
+                      <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#edf4ff] text-[#0055d4]">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-[#111827]">{t(`Phone.Page.${key}_title`)}</p>
+                        <p className="text-xs leading-5 text-[#6b7280]">{t(`Phone.Page.${key}_desc`)}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               <JoinTypeSelector
                 registrationType={store.registrationType || initialData.registrationType}
                 onChange={(type) => store.setStore({ registrationType: type })}
@@ -251,6 +282,29 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
 
           {step === 2 && (
             <>
+              <div className="mb-4 rounded-[28px] border border-[#e5edf8] bg-[#f9fbff] p-4 md:p-5">
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#0055d4]">
+                  {t('Phone.Page.pricing_eyebrow')}
+                </p>
+                <h3 className="mt-2 text-lg font-bold text-[#111827] md:text-xl">
+                  {t('Phone.Page.pricing_title')}
+                </h3>
+                <p className="mt-1 text-sm leading-6 text-[#5b6473]">
+                  {t('Phone.Page.pricing_desc')}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#111827] ring-1 ring-[#e2e8f0]">
+                    {currentTitle}
+                  </span>
+                  <span className="rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#111827] ring-1 ring-[#e2e8f0]">
+                    {currentCapacity}GB
+                  </span>
+                  <span className="rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#111827] ring-1 ring-[#e2e8f0]">
+                    {COLOR_MAP[currentColor] || currentColor}
+                  </span>
+                </div>
+              </div>
+
               <div className="mb-6 flex items-center gap-3">
                 <button
                   onClick={() => setStep(1)}

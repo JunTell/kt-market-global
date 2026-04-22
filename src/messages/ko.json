@@ -322,6 +322,18 @@
       "model_loading": "모델명 로딩 중"
     },
     "Page": {
+      "purchase_ready": "구매 준비 완료",
+      "selection_title": "내 상황에 맞는 기기 구성부터 먼저 선택",
+      "selection_desc": "해외 사용자는 요금제 전에 기종, 색상, 가입 유형, 진행 방식을 명확히 볼수록 선택이 빨라집니다.",
+      "highlight1_title": "KT 기반 공식 구매 흐름",
+      "highlight1_desc": "KT Market Global의 공식 절차 안에서 안전하게 선택합니다.",
+      "highlight2_title": "비한국어 사용자도 이해하기 쉬운 구성",
+      "highlight2_desc": "해외 이용자가 익숙한 순서대로 핵심 선택 항목을 배치했습니다.",
+      "highlight3_title": "배송과 후속 안내까지 명확하게",
+      "highlight3_desc": "비교 후 바로 신청으로 넘어가도 다음 단계가 분명합니다.",
+      "pricing_eyebrow": "요금제 선택",
+      "pricing_title": "신청 전에 혜택 차이부터 비교",
+      "pricing_desc": "월 요금과 단말 최종가가 어떻게 달라지는지 한 번에 보여줘서 빠르게 결정할 수 있게 합니다.",
       "select_plan_button": "요금제 선택하고 혜택 확인하기",
       "submit_application": "신청서 작성하기",
       "price_info": "가격 정보",
@@ -340,7 +352,19 @@
       "default_requirements": "기존요금제로 기변",
       "confirm_info_title": "아래 정보가 맞는지\n확인해주세요",
       "form_alert": "성함과 연락처를 모두 입력해주세요.",
-      "order_subtitle": "이름과 연락처만 입력하면 바로 신청됩니다."
+      "order_subtitle": "이름과 연락처만 입력하면 바로 신청됩니다.",
+      "checkout_eyebrow": "체크아웃 흐름",
+      "step1_label": "1단계",
+      "step1_value": "주문 확인",
+      "step2_label": "2단계",
+      "step2_value": "정보 입력",
+      "step3_label": "3단계",
+      "step3_value": "상담 연락",
+      "assurance_title": "신청 후 진행 방식",
+      "assurance_headline": "KT Market Global 담당자가 남은 개통 절차를 직접 안내합니다.",
+      "assurance_desc": "주문서 제출 후 자격과 신청 내용을 확인하고, 배송 및 개통 다음 단계를 순서대로 안내합니다.",
+      "form_section_title": "신청자 정보 입력",
+      "form_section_desc": "빠르게 접수할 수 있도록 아래 정보를 입력해주세요."
     },
     "Carousel": {
       "no_image": "이미지가 없습니다"
@@ -354,6 +378,9 @@
       "submit_button": "신청서 작성하기"
     },
     "PlanSelector": {
+      "hero_eyebrow": "혜택 비교",
+      "hero_title": "헷갈리지 않게 요금제 혜택을 바로 비교",
+      "hero_desc": "해외 이용자도 월 요금, 데이터, 총 할인 규모를 한눈에 보고 고를 수 있도록 구성했습니다.",
       "select_service_title": "서비스 선택",
       "mnp_title": "번호이동 (타사 → KT)",
       "mnp_desc_short": "기존 번호 그대로 KT로 이동",
@@ -379,10 +406,19 @@
       "plan_data": "데이터",
       "plan_calls": "통화",
       "plan_texts": "문자",
+      "card_benefit": "혜택",
       "monthly_fee": "월 요금",
       "data_on_video_notice": "데이터ON비디오요금제는 현재 가입불가인 요금제로, 기존가입자만 유지되며 신규가입자는 데이터ON비디오 플러스로 가입돼요"
     },
     "OrderForm": {
+      "summary_eyebrow": "주문 요약",
+      "summary_title": "선택한 기기와 요금제를 먼저 확인",
+      "summary_status": "확인 완료",
+      "summary_badge1_title": "가입유형",
+      "summary_badge2_title": "요금제",
+      "summary_badge3_title": "월 요금",
+      "reassurance_title": "주문서 제출이 곧바로 최종 개통은 아닙니다",
+      "reassurance_desc": "접수 후 담당자가 자격과 신청 내용을 확인하고, 배송과 개통 다음 단계를 안내합니다.",
       "subscriber_info_input": "가입자 정보 입력",
       "name_label": "이름",
       "birthday_label": "생년월일 (8자리)",

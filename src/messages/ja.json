@@ -322,6 +322,18 @@
       "model_loading": "モデル名読み込み中"
     },
     "Page": {
+      "purchase_ready": "購入準備完了",
+      "selection_title": "自分に合う端末構成を先に選択",
+      "selection_desc": "海外ユーザーは、料金比較の前に機種、色、加入方式、進行方法が明確なほど選びやすくなります。",
+      "highlight1_title": "KT ベースの公式購入フロー",
+      "highlight1_desc": "KT Market Global の公式手順の中で安心して選択できます。",
+      "highlight2_title": "非韓国語ユーザーにも分かりやすい構成",
+      "highlight2_desc": "海外利用者が理解しやすい順序で重要項目を整理しました。",
+      "highlight3_title": "配送とその後の案内まで明確",
+      "highlight3_desc": "比較してすぐ申し込んでも、次の流れが分かります。",
+      "pricing_eyebrow": "プラン選択",
+      "pricing_title": "申込前に特典差を比較",
+      "pricing_desc": "月額料金と端末最終価格の違いを見える化して、判断を早めます。",
       "select_plan_button": "プランを選択して特典を確認",
       "submit_application": "申込書作成",
       "price_info": "価格情報",
@@ -340,7 +352,19 @@
       "default_requirements": "既存プランで機種変更",
       "confirm_info_title": "以下の情報が正しいか\nご確認ください",
       "form_alert": "お名前と連絡先を両方入力してください。",
-      "order_subtitle": "お名前と連絡先を入力するだけで申し込み完了です。"
+      "order_subtitle": "お名前と連絡先を入力するだけで申し込み完了です。",
+      "checkout_eyebrow": "チェックアウトフロー",
+      "step1_label": "Step 1",
+      "step1_value": "内容確認",
+      "step2_label": "Step 2",
+      "step2_value": "情報入力",
+      "step3_label": "Step 3",
+      "step3_value": "担当者連絡",
+      "assurance_title": "申込後の流れ",
+      "assurance_headline": "KT Market Global の担当者が残りの開通手順をご案内します。",
+      "assurance_desc": "申込後に資格と内容を確認し、配送と開通の次のステップを順番に説明します。",
+      "form_section_title": "申込者情報の入力",
+      "form_section_desc": "すばやく受付できるよう、以下の情報を入力してください。"
     },
     "Carousel": {
       "no_image": "画像がありません"
@@ -354,6 +378,9 @@
       "submit_button": "申込書を作成する"
     },
     "PlanSelector": {
+      "hero_eyebrow": "特典比較",
+      "hero_title": "迷わずプラン特典を比較",
+      "hero_desc": "月額、データ量、総割引額を一目で比較できるようにしました。",
       "discount_method_title": "割引方法を選択してください",
       "device_discount": "端末割引",
       "plan_discount": "プラン割引",
@@ -374,10 +401,19 @@
       "plan_data": "データ",
       "plan_calls": "通話",
       "plan_texts": "メッセージ",
+      "card_benefit": "特典",
       "monthly_fee": "月額料金",
       "data_on_video_notice": "データONビデオプランは現在新規加入不可のプランで、既存加入者のみ維持され、新規加入者はデータONビデオプラスに加入されます"
     },
     "OrderForm": {
+      "summary_eyebrow": "注文概要",
+      "summary_title": "選択した端末とプランを先に確認",
+      "summary_status": "確認済み",
+      "summary_badge1_title": "加入方式",
+      "summary_badge2_title": "プラン",
+      "summary_badge3_title": "月額",
+      "reassurance_title": "フォーム送信がそのまま最終開通ではありません",
+      "reassurance_desc": "送信後に担当者が資格と内容を確認し、配送と開通の次のステップをご案内します。",
       "subscriber_info_input": "加入者情報入力",
       "name_label": "名前",
       "birthday_label": "生年月日 (8桁)",

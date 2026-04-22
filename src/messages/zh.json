@@ -322,6 +322,18 @@
       "model_loading": "型号加载中"
     },
     "Page": {
+      "purchase_ready": "已准备购买",
+      "selection_title": "先选择适合你的设备组合",
+      "selection_desc": "对海外用户来说，在比较套餐前先看清机型、颜色、入网方式和流程，会更容易做决定。",
+      "highlight1_title": "基于 KT 的正式购买流程",
+      "highlight1_desc": "你正在 KT Market Global 的正式流程中进行选择。",
+      "highlight2_title": "更适合非韩语用户理解",
+      "highlight2_desc": "按照海外用户熟悉的顺序整理了关键选择项。",
+      "highlight3_title": "配送和后续步骤更清晰",
+      "highlight3_desc": "比较完成后直接申请，也能清楚知道下一步。",
+      "pricing_eyebrow": "套餐选择",
+      "pricing_title": "申请前先比较优惠差异",
+      "pricing_desc": "把月费和设备最终价格同时展示，帮助更快做决定。",
       "select_plan_button": "选择套餐并确认优惠",
       "submit_application": "填写申请书",
       "price_info": "价格信息",
@@ -340,7 +352,19 @@
       "default_requirements": "使用现有套餐更换设备",
       "confirm_info_title": "请确认以下信息\n是否正确",
       "form_alert": "请输入您的姓名和联系方式。",
-      "order_subtitle": "只需输入姓名和联系方式即可立即申请。"
+      "order_subtitle": "只需输入姓名和联系方式即可立即申请。",
+      "checkout_eyebrow": "结账流程",
+      "step1_label": "步骤1",
+      "step1_value": "确认订单",
+      "step2_label": "步骤2",
+      "step2_value": "填写信息",
+      "step3_label": "步骤3",
+      "step3_value": "顾问联系",
+      "assurance_title": "提交后的流程",
+      "assurance_headline": "KT Market Global 顾问会继续说明剩余的开通步骤。",
+      "assurance_desc": "提交后会先确认资格与申请内容，再说明配送和开通的下一步。",
+      "form_section_title": "填写申请信息",
+      "form_section_desc": "请填写以下内容，方便团队尽快确认并联系您。"
     },
     "Carousel": {
       "no_image": "无图片"
@@ -354,6 +378,9 @@
       "submit_button": "填写申请表"
     },
     "PlanSelector": {
+      "hero_eyebrow": "优惠比较",
+      "hero_title": "更直观地比较套餐优惠",
+      "hero_desc": "月费、流量和总优惠额度可以一眼看清。",
       "discount_method_title": "请选择折扣方式",
       "device_discount": "设备折扣",
       "plan_discount": "套餐折扣",
@@ -374,10 +401,19 @@
       "plan_data": "数据",
       "plan_calls": "通话",
       "plan_texts": "短信",
+      "card_benefit": "优惠",
       "monthly_fee": "月费",
       "data_on_video_notice": "数据ON视频套餐目前无法新入网，仅限现有用户保留，新用户将入网数据ON视频Plus"
     },
     "OrderForm": {
+      "summary_eyebrow": "订单摘要",
+      "summary_title": "先确认你选择的手机和套餐",
+      "summary_status": "已确认",
+      "summary_badge1_title": "入网类型",
+      "summary_badge2_title": "套餐",
+      "summary_badge3_title": "月费",
+      "reassurance_title": "提交表单并不等于立即最终开通",
+      "reassurance_desc": "提交后顾问会先确认资格与内容，再继续说明配送和开通步骤。",
       "subscriber_info_input": "输入用户信息",
       "name_label": "姓名",
       "birthday_label": "出生日期 (8位)",

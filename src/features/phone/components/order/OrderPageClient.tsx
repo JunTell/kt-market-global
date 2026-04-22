@@ -304,11 +304,60 @@ export default function OrderPageClient({ initialDeviceData, modelFromUrl }: Pro
 
     return (
         <div className="flex flex-col w-full max-w-[480px] mx-auto min-h-screen bg-white relative">
-            <div className="px-5 pt-6 pb-5">
+            <div className="px-5 pt-6 pb-3">
+                <div className="mb-4 rounded-[28px] border border-[#dbe8f8] bg-[#f7fbff] p-4">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#0055d4]">
+                        {t('Phone.Order.checkout_eyebrow')}
+                    </p>
+                    <h2 className="mt-2 text-[22px] font-bold leading-[1.35] text-grey-900">
+                        {t('Phone.Order.confirm_info_title')}
+                    </h2>
+                    <p className="mt-1.5 text-[14px] text-grey-500">{t('Phone.Order.order_subtitle')}</p>
+                    <div className="mt-4 grid grid-cols-3 gap-2">
+                        <div className="rounded-2xl bg-white px-3 py-3 shadow-sm ring-1 ring-[#e6eef9]">
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-grey-400">
+                                {t('Phone.Order.step1_label')}
+                            </p>
+                            <p className="mt-1 text-[13px] font-bold text-grey-900">{t('Phone.Order.step1_value')}</p>
+                        </div>
+                        <div className="rounded-2xl bg-white px-3 py-3 shadow-sm ring-1 ring-[#e6eef9]">
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-grey-400">
+                                {t('Phone.Order.step2_label')}
+                            </p>
+                            <p className="mt-1 text-[13px] font-bold text-grey-900">{t('Phone.Order.step2_value')}</p>
+                        </div>
+                        <div className="rounded-2xl bg-white px-3 py-3 shadow-sm ring-1 ring-[#e6eef9]">
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-grey-400">
+                                {t('Phone.Order.step3_label')}
+                            </p>
+                            <p className="mt-1 text-[13px] font-bold text-grey-900">{t('Phone.Order.step3_value')}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="rounded-[24px] bg-[#111827] px-4 py-4 text-white shadow-[0_16px_40px_rgba(17,24,39,0.18)]">
+                    <div className="flex items-start justify-between gap-4">
+                        <div>
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
+                                {t('Phone.Order.assurance_title')}
+                            </p>
+                            <p className="mt-2 text-[15px] font-bold">{t('Phone.Order.assurance_headline')}</p>
+                        </div>
+                        <div className="rounded-full bg-white/10 px-3 py-1 text-[12px] font-semibold text-white/80">
+                            KT
+                        </div>
+                    </div>
+                    <p className="mt-2 text-[13px] leading-[1.5] text-white/70">
+                        {t('Phone.Order.assurance_desc')}
+                    </p>
+                </div>
+            </div>
+
+            <div className="px-5 pb-5">
                 <h2 className="text-[22px] font-bold text-grey-900 leading-[1.35] m-0 whitespace-pre-line">
-                    {t('Phone.Order.confirm_info_title')}
+                    {t('Phone.Order.form_section_title')}
                 </h2>
-                <p className="text-[14px] text-grey-500 mt-1.5">{t('Phone.Order.order_subtitle')}</p>
+                <p className="text-[14px] text-grey-500 mt-1.5">{t('Phone.Order.form_section_desc')}</p>
             </div>
 
             <OrderUserForm
