@@ -22,11 +22,12 @@
     "Hero": {
       "badge_official": "KT 官方合作伙伴",
       "badge_postpaid": "仅限后付",
-      "title_1": "外国人在韩国也能",
-      "title_highlight": "直接购买手机和套餐",
-      "subtitle": "先展示海外用户真正关心的信息，再把资格确认、选机和申请在线顺畅串起来。",
+      "badge_specialist": "外国人专门",
+      "title_1": "面向在韩外国人",
+      "title_highlight": "的手机开通服务",
+      "subtitle": "先确认外国人登录证和签证条件，再在线比较手机并提交申请。",
       "trust_line": "KT Market Global · KT 官方合作伙伴",
-      "desc": "我们不会笼统承诺所有人都能办理。只要 ARC 和签证条件符合，就会清楚说明合法的 KT 后付开通与购机流程。",
+      "desc": "先确认 ARC、签证和支付条件，只有在确认后付开通可行时才会提供准确说明。",
       "feat1_title": "无需韩国信用卡",
       "feat2_title": "无需保证金",
       "feat3_title": "提供英语支持",
@@ -35,15 +36,18 @@
       "stat1_value": "无需韩国卡",
       "stat2_label": "前期成本",
       "stat2_value": "无保证金",
-      "stat3_label": "客服支持",
-      "stat3_value": "支持英语",
-      "panel_eyebrow": "Global Buyer Ready",
-      "panel_title": "先看申请前最关键的信息",
-      "panel_desc": "把海外用户最在意的资格、价格和配送流程提前说明，帮助更快做出购买决定。",
+      "stat3_label": "咨询数量",
+      "stat3_value": "已处理88件",
+      "consultation_label": "外国人咨询件数",
+      "consultation_value": "目前累计88件",
+      "consultation_desc": "这是面向希望在韩国开通手机的外国用户所处理的实际咨询数量。",
+      "panel_eyebrow": "面向在韩外国人",
+      "panel_title": "先查看申请前需要的信息",
+      "panel_desc": "可先确认是否可办理、支付条件和申请步骤，再继续进行。",
       "assurance1_title": "先确认支付条件",
       "assurance1_desc": "申请前需要什么，上方就能直接看到。",
-      "assurance2_title": "按英语用户习惯整理信息",
-      "assurance2_desc": "即使不熟悉韩语，也能快速抓住重点。",
+      "assurance2_title": "外国人专门说明结构",
+      "assurance2_desc": "优先解释外国人开通时最常遇到的阻碍条件。",
       "assurance3_title": "在线申请，安心收货",
       "assurance3_desc": "从咨询到配送，流程尽量简单直接。",
       "cta_check": "立即确认",
@@ -54,43 +58,49 @@
       "description": "KT Market Global 是 KT Market 的官方全球服务，专为在韩外国人减少理解成本和流失率而设计，让用户更容易完成手机比较、资格确认和 KT 申请。"
     },
     "Conversion": {
-      "eyebrow": "以转化为核心",
-      "title": "把海外购买者在下单前最关心的信息集中展示",
-      "description": "不再让海外用户先进入冗长销售流程，而是优先展示资格条件、支付门槛、购买步骤和配送方式，减少犹豫和流失。",
-      "journey_eyebrow": "Fast Purchase Journey",
-      "journey_title": "从访问到申请的路径更短",
-      "journey_description": "重新组织主流程，先解决全球用户最容易离开的疑问点。",
+      "eyebrow": "外国人专门 안내",
+      "title": "申请前可以先确认的内容",
+      "description": "在韩国申请手机和套餐前，外国用户最常确认的内容可以先在这里查看。",
+      "stat1_label": "专门领域",
+      "stat1_value": "外国人手机开通",
+      "stat2_label": "咨询数量",
+      "stat2_value": "88件",
+      "stat3_label": "支持方式",
+      "stat3_value": "外国人专门咨询",
+      "journey_eyebrow": "申请步骤",
+      "journey_title": "从确认到申请的简单流程",
+      "journey_description": "先确认必要条件，再比较手机，之后更容易进入下一步。",
       "item1": {
-        "title": "先给出 KT 官方信任感",
-        "desc": "在看商品前先看到官方合作与核心信任信息。"
+        "title": "面向外国人的服务",
+        "desc": "这不是普通手机商城，而是面向在韩外国人的开通服务。"
       },
       "item2": {
-        "title": "提前说明支付门槛",
-        "desc": "信用卡、保证金和资格条件在顶部就可确认。"
+        "title": "展示88件咨询实绩",
+        "desc": "用实际咨询数量提升首次访问时的信任感。"
       },
       "item3": {
-        "title": "更适合英语用户的浏览顺序",
-        "desc": "按照海外用户熟悉的判断顺序来安排内容。"
+        "title": "先确认资格条件",
+        "desc": "在比较选项前可先确认基本办理条件。"
       },
       "item4": {
-        "title": "配送与开通流程更透明",
-        "desc": "清楚说明在韩国如何收货、如何完成开通。"
+        "title": "简单的申请流程",
+        "desc": "可按一个流程完成资格确认、选机和申请。"
       },
       "step1": {
-        "title": "1. 先确认 ARC 和签证是否符合",
+        "title": "1. 先确认外国人条件是否符合",
         "desc": "先判断资格，再看价格，减少不确定感。"
       },
       "step2": {
-        "title": "2. 对比热门机型与套餐优惠",
+        "title": "2. 比较外国用户常选机型",
         "desc": "直接从外国用户常买的机型开始比较。"
       },
       "step3": {
-        "title": "3. 提交申请并了解后续支持",
+        "title": "3. 按专门咨询流程提交申请",
         "desc": "让用户清楚知道申请后下一步会发生什么。"
       }
     },
     "Eligibility": {
-      "badge": "Eligibility Check",
+      "badge": "确认是否可办理",
       "title": "可以开通吗？KT市场清单",
       "desc": "检查您是否符合购买资格！"
     },
