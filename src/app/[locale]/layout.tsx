@@ -10,6 +10,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
   display: 'swap',
+  preload: true,
   weight: "45 920",
   variable: '--font-pretendard',
 });

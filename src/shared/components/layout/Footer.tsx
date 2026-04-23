@@ -24,24 +24,24 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between">
           {/* Links */}
           <div className="flex flex-wrap justify-center gap-2 py-4 text-sm text-[#555] bg-[#EAEBEC] font-medium">
-            <Link href="/company" className="hover:text-black hover:underline">{t('policy_privacy')}</Link>
+            <Link href="/company" className="hover:text-black hover:underline py-3 px-1">{t('policy_privacy')}</Link>
             <span className="text-gray-300">|</span>
-            <Link href="/company" className="hover:text-black hover:underline">{t('policy_usage')}</Link>
+            <Link href="/company" className="hover:text-black hover:underline py-3 px-1">{t('policy_usage')}</Link>
             <span className="text-gray-300">|</span>
-            <Link href="/company" className="hover:text-black hover:underline">{t('policy_notice')}</Link>
+            <Link href="/company" className="hover:text-black hover:underline py-3 px-1">{t('policy_notice')}</Link>
             <span className="text-gray-300">|</span>
-            <Link href="/company" className="hover:text-black hover:underline">{t('policy_company')}</Link>
+            <Link href="/company" className="hover:text-black hover:underline py-3 px-1">{t('policy_company')}</Link>
           </div>
 
           {/* Buttons */}
           <div className="w-full flex justify-center gap-3 bg-[#FFFFFF] py-2">
-            <Link href="https://www.youtube.com/@%EC%BC%80%EC%9D%B4%ED%8B%B0%EB%A7%88%EC%BC%93" target="_blank" className="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm hover:shadow-md transition-all">
+            <Link href="https://www.youtube.com/@%EC%BC%80%EC%9D%B4%ED%8B%B0%EB%A7%88%EC%BC%93" target="_blank" className="flex items-center gap-2 bg-white px-4 py-2.5 rounded-full border border-gray-200 shadow-sm hover:shadow-md transition-all">
               <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
               </svg>
               <span className="text-xs font-bold text-[#333]">{t('channel_youtube')}</span>
             </Link>
-            <Link href="http://pf.kakao.com/_HfItxj" target="_blank" className="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm hover:shadow-md transition-all">
+            <Link href="http://pf.kakao.com/_HfItxj" target="_blank" className="flex items-center gap-2 bg-white px-4 py-2.5 rounded-full border border-gray-200 shadow-sm hover:shadow-md transition-all">
               <svg className="w-5 h-5 text-[#3C1E1E] bg-[#FEE500] rounded" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 3C6.48 3 2 6.48 2 10.77C2 13.54 3.79 16 6.6 17.47L5.6 21.08C5.55 21.28 5.76 21.46 5.95 21.34L10.3 18.52C10.85 18.61 11.42 18.66 12 18.66C17.52 18.66 22 15.18 22 10.89C22 6.6 17.52 3 12 3Z" />
               </svg>
@@ -64,6 +64,7 @@ export default function Footer() {
                   width={100}
                   height={30}
                   className="h-6 w-auto"
+                  style={{ height: 'auto' }}
                 />
               </div>
             </div>
@@ -152,11 +153,11 @@ export default function Footer() {
           <div className="h-px bg-white/10 w-full mb-6" />
 
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div className="flex gap-6 text-[13px]">
-              <Link href="/company" className="text-[#888] hover:text-white transition-colors">
+            <div className="flex gap-4 text-[13px]">
+              <Link href="/company" className="text-[#888] hover:text-white transition-colors py-3">
                 {t('terms_of_service')}
               </Link>
-              <Link href="/company" className="font-bold text-[#b0b0b0] hover:text-white transition-colors">
+              <Link href="/company" className="font-bold text-[#b0b0b0] hover:text-white transition-colors py-3">
                 {t('privacy_policy')}
               </Link>
             </div>

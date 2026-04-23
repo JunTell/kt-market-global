@@ -18,6 +18,7 @@ export default function Header() {
             alt="KT Market Logo"
             width={80}
             height={60}
+            className="h-[30px] w-auto"
             priority
           />
         </Link>

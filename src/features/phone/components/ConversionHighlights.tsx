@@ -7,6 +7,7 @@ const ICONS = [ShieldCheck, CreditCard, Globe2, PackageCheck];
 
 export default function ConversionHighlights() {
   const t = useTranslations('Home.Conversion');
+  const heroT = useTranslations('Home.Hero');
 
   const highlightKeys = ['item1', 'item2', 'item3', 'item4'] as const;
   const stepKeys = ['step1', 'step2', 'step3'] as const;
@@ -35,13 +36,27 @@ export default function ConversionHighlights() {
             {t('description')}
           </p>
 
+          <div className="mb-6 rounded-[24px] border border-[#d9e7fb] bg-[#edf4ff] px-4 py-4">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#5c6f91] md:text-[11px]">
+              {heroT('consultation_label')}
+            </p>
+            <div className="mt-2 flex flex-col gap-1 md:flex-row md:items-end md:justify-between">
+              <p className="text-lg font-bold text-[#111827] md:text-xl">
+                {heroT('consultation_value')}
+              </p>
+              <p className="hidden text-xs leading-5 text-[#5b6578] md:block md:max-w-sm md:text-sm">
+                {heroT('consultation_desc')}
+              </p>
+            </div>
+          </div>
+
           <div className="mb-8 grid gap-3 md:grid-cols-3">
             {(['stat1', 'stat2', 'stat3'] as const).map((key) => (
               <div key={key} className="rounded-[22px] border border-[#e5edf8] bg-[#f8fbff] px-4 py-4">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#7b8794]">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#7b8794] md:text-[11px]">
                   {t(`${key}_label`)}
                 </p>
-                <p className="mt-2 text-lg font-bold text-[#111827]">
+                <p className="mt-2 text-xl font-bold text-[#111827] md:text-lg">
                   {t(`${key}_value`)}
                 </p>
               </div>
@@ -63,7 +78,7 @@ export default function ConversionHighlights() {
                   <h3 className="mb-1 text-sm font-bold text-[#111827] md:text-base">
                     {t(`${key}.title`)}
                   </h3>
-                  <p className="text-xs leading-5 text-[#6b7280] md:text-sm">
+                  <p className="hidden text-xs leading-5 text-[#6b7280] md:block md:text-sm">
                     {t(`${key}.desc`)}
                   </p>
                 </div>
@@ -78,7 +93,7 @@ export default function ConversionHighlights() {
             <span>{t('journey_eyebrow')}</span>
           </div>
 
-          <h3 className="mb-2 text-xl font-bold md:text-2xl">{t('journey_title')}</h3>
+          <h2 className="mb-2 text-xl font-bold md:text-2xl">{t('journey_title')}</h2>
           <p className="mb-8 text-sm leading-6 text-white/70 md:text-base">
             {t('journey_description')}
           </p>
