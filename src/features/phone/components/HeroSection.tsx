@@ -1,14 +1,9 @@
 import { getTranslations } from 'next-intl/server';
-import { CheckCircle2, ShieldCheck, Truck, WalletCards, Globe2, Users } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, Users } from 'lucide-react';
 import Image from 'next/image';
 
 export default async function HeroSection() {
     const t = await getTranslations('Home.Hero');
-    const assurances = [
-        { key: 'assurance1', Icon: WalletCards },
-        { key: 'assurance2', Icon: Globe2 },
-        { key: 'assurance3', Icon: Truck },
-    ] as const;
 
     return (
         <section
@@ -90,7 +85,7 @@ export default async function HeroSection() {
                         </div>
 
                         <h1
-                            className="mb-3 text-3xl font-bold leading-tight md:text-5xl"
+                            className="mb-3 break-keep text-3xl font-bold leading-tight md:text-5xl"
                             style={{ color: 'var(--trust-text-white)' }}
                         >
                             {t('title_1')}
@@ -103,45 +98,9 @@ export default async function HeroSection() {
                             {t('subtitle')}
                         </p>
 
-                        <div className="mb-6 rounded-[24px] border border-white/10 bg-[rgba(255,255,255,0.06)] p-4 md:p-5">
-                            <div className="mb-4 grid grid-cols-3 gap-3 text-left">
-                                <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
-                                        {t('stat1_label')}
-                                    </p>
-                                    <p className="mt-2 text-lg font-bold text-white md:text-xl">{t('stat1_value')}</p>
-                                </div>
-                                <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
-                                        {t('stat2_label')}
-                                    </p>
-                                    <p className="mt-2 text-lg font-bold text-white md:text-xl">{t('stat2_value')}</p>
-                                </div>
-                                <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
-                                        {t('stat3_label')}
-                                    </p>
-                                    <p className="mt-2 text-lg font-bold text-white md:text-xl">{t('stat3_value')}</p>
-                                </div>
-                            </div>
-
-                            <p
-                                className="mb-1 text-xs font-bold md:text-sm"
-                                style={{ color: 'var(--trust-text-gray)' }}
-                            >
-                                {t('trust_line')}
-                            </p>
-                            <p
-                                className="text-[10px] font-medium opacity-80 md:text-xs"
-                                style={{ color: 'var(--trust-text-gray)' }}
-                            >
-                                {t('desc')}
-                            </p>
-                        </div>
-
                         <div className="flex flex-col items-center md:items-start gap-3 mb-6 md:mb-0 w-full md:w-auto animate-fadeInUp">
                             <a
-                                href="#products-section"
+                                href="#eligibility-section"
                                 className="inline-flex items-center justify-center h-12 md:h-14 px-8 md:px-10 text-base md:text-lg font-bold rounded-2xl
                                            transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] cursor-pointer shadow-xl w-full md:w-[280px]
                                            hover:brightness-105 hover:shadow-[0_14px_36px_rgba(255,77,77,0.45)] hover:-translate-y-[1px]"
@@ -153,43 +112,23 @@ export default async function HeroSection() {
                                     textShadow: "0 1px 2px rgba(0,0,0,0.25)",
                                 }}
                             >
-                                {t("cta_subscription")}
+                                {t("cta_check")}
                             </a>
 
                             <a
-                                href="#eligibility-section"
+                                href="#products-section"
                                 className="inline-flex items-center justify-center h-11 md:h-12 px-6 md:px-8 text-sm md:text-base font-semibold rounded-xl
                                            transition-all duration-200 active:scale-[0.98] cursor-pointer w-full md:w-[280px] border border-white/30 hover:border-white/60 hover:bg-white/10"
                                 style={{ color: 'rgba(255, 255, 255, 0.9)' }}
                             >
-                                {t("cta_check")}
+                                {t("cta_subscription")}
                             </a>
-
-                            <div className="w-full md:w-[280px] rounded-2xl border border-white/10 bg-[rgba(255,255,255,0.08)] px-4 py-3 text-left">
-                                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
-                                    {t('consultation_label')}
-                                </p>
-                                <p className="mt-1 text-lg font-bold text-white">
-                                    {t('consultation_value')}
-                                </p>
-                                <p className="mt-1 text-xs leading-5 text-white/70">
-                                    {t('consultation_desc')}
-                                </p>
-                            </div>
                         </div>
                     </div>
 
                     {/* Right Column: ARC Illustration */}
                     <div className="relative flex justify-center md:justify-end">
                         <div className="relative w-full max-w-[360px] md:max-w-[440px]">
-                            <div className="absolute -left-2 top-5 hidden w-[170px] rounded-[26px] border border-white/10 bg-[rgba(255,255,255,0.08)] p-4 backdrop-blur md:block">
-                                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/55">
-                                    {t('panel_eyebrow')}
-                                </p>
-                                <h3 className="mt-2 text-lg font-bold text-white">{t('panel_title')}</h3>
-                                <p className="mt-2 text-sm leading-6 text-white/75">{t('panel_desc')}</p>
-                            </div>
-
                             <div className="relative rounded-[36px] border border-white/10 bg-[rgba(255,255,255,0.06)] p-4 shadow-[0_30px_90px_rgba(0,0,0,0.28)] backdrop-blur">
                                 <Image
                                     src="/images/신분증이미지1.webp"
@@ -201,23 +140,6 @@ export default async function HeroSection() {
                                     fetchPriority="high"
                                     sizes="(max-width: 768px) 320px, 440px"
                                 />
-
-                                <div className="mt-4 grid gap-3">
-                                    {assurances.map(({ key, Icon }) => (
-                                        <div
-                                            key={key}
-                                            className="flex items-center gap-3 rounded-2xl border border-white/10 bg-[#0d2244]/80 px-4 py-3"
-                                        >
-                                            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-white">
-                                                <Icon className="h-5 w-5" />
-                                            </div>
-                                            <div className="text-left">
-                                                <p className="text-sm font-semibold text-white">{t(`${key}_title`)}</p>
-                                                <p className="text-xs text-white/70">{t(`${key}_desc`)}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
                             </div>
                         </div>
                     </div>

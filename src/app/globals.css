@@ -205,6 +205,26 @@
   }
 }
 
+@layer base {
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  [lang="ko"] body {
+    font-family: 'Pretendard', var(--font-pretendard), var(--font-inter), -apple-system, BlinkMacSystemFont, 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  }
+
+  [lang="ko"] h1,
+  [lang="ko"] h2,
+  [lang="ko"] h3 {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-wrap: balance;
+  }
+}
+
 /* Layout Utilities */
 @utility max-w-layout-max {
   max-width: var(--layout-max-width);

@@ -68,9 +68,11 @@ export default function ModelListClient({
   return (
     <div className="w-full flex flex-col py-5">
       <div className="text-left">
-        <h2 className="text-[26px] font-bold text-label-900 m-0 mb-4">
-          {sectionTitle || t('Phone.ModelList.section_title')}
-        </h2>
+        {sectionTitle && (
+          <h2 className="text-[26px] font-bold text-label-900 m-0 mb-4">
+            {sectionTitle}
+          </h2>
+        )}
       </div>
 
       <div className="text-[13px] text-label-700 mt-2 flex items-center">
