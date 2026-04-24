@@ -22,6 +22,7 @@ interface Props {
   onSelectColor: (val: string) => void;
   capacityLabel: string;
   colorLabel: string;
+  soldOutLabel?: string;
 }
 
 export default function OptionPills({
@@ -29,6 +30,7 @@ export default function OptionPills({
   capacities, colors,
   onSelectCapacity, onSelectColor,
   capacityLabel, colorLabel,
+  soldOutLabel = 'Sold out',
 }: Props) {
   return (
     <div className="space-y-4">
@@ -89,7 +91,7 @@ export default function OptionPills({
                   </span>
                   {c.isSoldOut && (
                     <span className="text-[9px] font-bold uppercase tracking-wider text-[#F04452]">
-                      Sold out
+                      {soldOutLabel}
                     </span>
                   )}
                 </button>

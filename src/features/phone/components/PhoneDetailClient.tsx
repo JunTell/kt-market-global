@@ -165,6 +165,7 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
             onSelectColor={handleColorChange}
             capacityLabel={t("Phone.OptionSelector.capacity_label") || "Capacity"}
             colorLabel={t("Phone.OptionSelector.color_label") || "Color"}
+            soldOutLabel={t("Phone.OptionSelector.sold_out")}
           />
 
           {allVariantsSoldOut && (
@@ -204,7 +205,7 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
                   : "bg-[#0071e3] hover:bg-[#0077ED] shadow-blue-500/20")
               }
             >
-              {isCurrentlySoldOut ? "Sold Out" : t("Phone.Page.submit_application")}
+              {isCurrentlySoldOut ? t("Phone.OptionSelector.sold_out") : t("Phone.Page.submit_application")}
             </button>
           </div>
         </div>
@@ -218,8 +219,9 @@ export default function PhoneDetailClient({ initialData, locale }: Props) {
       <div className="md:hidden">
         <StickyBar
           finalPrice={priceText}
-          label={isCurrentlySoldOut ? "Sold Out" : t("Phone.Page.submit_application")}
+          label={isCurrentlySoldOut ? t("Phone.OptionSelector.sold_out") : t("Phone.Page.submit_application")}
           onClick={handleOrder}
+          disabled={isCurrentlySoldOut}
         />
       </div>
     </div>
