@@ -124,6 +124,10 @@
       "title": "Real reviews from foreigners",
       "subtitle": "Verified customers who signed up through us",
       "summary": "★★★★★ 4.9/5 · 1,200+ reviews",
+      "section_aria": "Customer reviews",
+      "scroller_aria": "Review list — use left/right arrow keys to scroll",
+      "card_aria": "Review by {name}",
+      "rating_aria": "Rating {rating} out of 5",
       "items": [
         { "id": "r01", "name": "Anna K.", "country_code": "US", "country_label": "United States", "rating": 5, "model": "iPhone 17 Pro", "date": "2024-11-12", "body": "Applied in English, got my number next day. Super easy for foreigners." },
         { "id": "r02", "name": "Kenji T.", "country_code": "JP", "country_label": "Japan", "rating": 5, "model": "Galaxy S25", "date": "2024-10-28", "body": "I was worried about the Korean paperwork but they handled everything over KakaoTalk." },

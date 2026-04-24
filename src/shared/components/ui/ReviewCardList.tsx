@@ -32,7 +32,10 @@ export default function ReviewCardList({ items, filterModel, autoGrid = true }: 
   const shouldGrid = autoGrid && filtered.length < 3;
 
   return (
-    <section className="bg-white px-5 py-14 md:py-20" aria-label="Customer reviews">
+    <section
+      className="bg-white px-5 py-14 md:py-20"
+      aria-label={t.has('section_aria') ? t('section_aria') : 'Customer reviews'}
+    >
       <div className="mx-auto max-w-layout-max">
         <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#FFB020]">
           {t.has('summary') ? t('summary') : '★★★★★'}
@@ -51,7 +54,7 @@ export default function ReviewCardList({ items, filterModel, autoGrid = true }: 
             ref={scrollerRef}
             tabIndex={0}
             role="group"
-            aria-label="Review list — use left/right arrow keys to scroll"
+            aria-label={t.has('scroller_aria') ? t('scroller_aria') : 'Review list — use left/right arrow keys to scroll'}
             onKeyDown={onKeyDown}
             className="scrollbar-hide mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto outline-none focus:ring-2 focus:ring-[#0055D4]/40 rounded-[20px]"
           >

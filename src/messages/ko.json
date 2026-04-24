@@ -124,6 +124,10 @@
       "title": "[TODO-LOCALE] Real reviews from foreigners",
       "subtitle": "[TODO-LOCALE] Verified customers who signed up through us",
       "summary": "[TODO-LOCALE] ★★★★★ 4.9/5 · 1,200+ reviews",
+      "section_aria": "[TODO-LOCALE] Customer reviews",
+      "scroller_aria": "[TODO-LOCALE] Review list — use left/right arrow keys to scroll",
+      "card_aria": "[TODO-LOCALE] Review by {name}",
+      "rating_aria": "[TODO-LOCALE] Rating {rating} out of 5",
       "items": [
         { "id": "r01", "name": "[TODO-LOCALE] Anna K.", "country_code": "US", "country_label": "[TODO-LOCALE] United States", "rating": 5, "model": "[TODO-LOCALE] iPhone 17 Pro", "date": "2024-11-12", "body": "[TODO-LOCALE] Applied in English, got my number next day. Super easy for foreigners." },
         { "id": "r02", "name": "[TODO-LOCALE] Kenji T.", "country_code": "JP", "country_label": "[TODO-LOCALE] Japan", "rating": 5, "model": "[TODO-LOCALE] Galaxy S25", "date": "2024-10-28", "body": "[TODO-LOCALE] I was worried about the Korean paperwork but they handled everything over KakaoTalk." },

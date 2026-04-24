@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import type { Review } from '@/features/home/types';
 
 const AVATAR_BG = [
@@ -26,11 +27,12 @@ export default function ReviewCard({ review }: { review: Review }) {
   const imgSrc = `/images/reviews/${review.id}.webp`;
   const initial = review.name.trim().charAt(0).toUpperCase();
   const bg = pickBg(review.name);
+  const t = useTranslations('Home.Reviews');
 
   return (
     <article
       className="snap-start shrink-0 w-[280px] rounded-[20px] border border-[#E5E8EB] bg-white p-4"
-      aria-label={`Review by ${review.name}`}
+      aria-label={t.has('card_aria') ? t('card_aria', { name: review.name }) : `Review by ${review.name}`}
     >
       <header className="flex items-center gap-3">
         <div
@@ -60,7 +62,7 @@ export default function ReviewCard({ review }: { review: Review }) {
         </div>
       </header>
 
-      <div className="mt-3 flex items-center gap-1 text-[#FFB020]" aria-label={`Rating ${review.rating} out of 5`}>
+      <div className="mt-3 flex items-center gap-1 text-[#FFB020]" aria-label={t.has('rating_aria') ? t('rating_aria', { rating: review.rating }) : `Rating ${review.rating} out of 5`}>
         {Array.from({ length: 5 }).map((_, i) => (
           <span key={i} aria-hidden="true" className={i < review.rating ? '' : 'opacity-30'}>★</span>
         ))}
