@@ -3,6 +3,8 @@
 > 이 문서는 디자인 리뷰 결과를 바탕으로, 각 개선점을 Claude에게 지시할 수 있도록 세세하게 작성된 프롬프트 목록입니다.
 > 각 항목을 복사해서 Claude에게 붙여넣으면 해당 수정이 실행됩니다.
 
+> **2026-04-24 Update:** FINDING-001, 003, 005, 011, 013 are addressed by the UX redesign (see `docs/superpowers/specs/2026-04-24-ux-redesign-design.md`). FINDING-002, 004, 006, 007, 008, 009, 010, 012, 014 remain open — handle in follow-up PRs when touching the affected files.
+
 ---
 
 ## FINDING-001: 히어로 섹션 정보 과부하 정리
