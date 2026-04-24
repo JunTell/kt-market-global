@@ -435,7 +435,9 @@
     },
     "OptionSelector": {
       "title": "オプション選択",
-      "sold_out": "売り切れ"
+      "sold_out": "売り切れ",
+      "capacity_label": "[TODO-LOCALE] Capacity",
+      "color_label": "[TODO-LOCALE] Color"
     },
     "StickyBar": {
       "final_price_label": "最終特典価格",

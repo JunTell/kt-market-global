@@ -435,7 +435,9 @@
     },
     "OptionSelector": {
       "title": "选择选项",
-      "sold_out": "售罄"
+      "sold_out": "售罄",
+      "capacity_label": "[TODO-LOCALE] Capacity",
+      "color_label": "[TODO-LOCALE] Color"
     },
     "StickyBar": {
       "final_price_label": "最终优惠价",

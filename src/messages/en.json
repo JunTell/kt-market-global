@@ -435,7 +435,9 @@
     },
     "OptionSelector": {
       "title": "Select Options",
-      "sold_out": "Sold Out"
+      "sold_out": "Sold Out",
+      "capacity_label": "Capacity",
+      "color_label": "Color"
     },
     "StickyBar": {
       "final_price_label": "Final Price",

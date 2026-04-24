@@ -435,7 +435,9 @@
     },
     "OptionSelector": {
       "title": "옵션 선택",
-      "sold_out": "품절"
+      "sold_out": "품절",
+      "capacity_label": "[TODO-LOCALE] Capacity",
+      "color_label": "[TODO-LOCALE] Color"
     },
     "StickyBar": {
       "final_price_label": "최종 혜택가",
