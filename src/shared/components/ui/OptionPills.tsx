@@ -35,10 +35,17 @@ export default function OptionPills({
   return (
     <div className="space-y-4">
       <div>
-        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6B7280]">
+        <p
+          id="option-pills-capacity-label"
+          className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6B7280]"
+        >
           {capacityLabel}
         </p>
-        <div className="flex flex-wrap gap-2">
+        <div
+          role="group"
+          aria-labelledby="option-pills-capacity-label"
+          className="flex flex-wrap gap-2"
+        >
           {capacities.map((c) => {
             const active = c.value === selectedCapacity;
             return (
@@ -62,10 +69,17 @@ export default function OptionPills({
       </div>
 
       <div>
-        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6B7280]">
+        <p
+          id="option-pills-color-label"
+          className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6B7280]"
+        >
           {colorLabel}
         </p>
-        <ul className="scrollbar-hide flex gap-3 overflow-x-auto pb-1">
+        <ul
+          role="group"
+          aria-labelledby="option-pills-color-label"
+          className="scrollbar-hide flex gap-3 overflow-x-auto pb-1"
+        >
           {colors.map((c) => {
             const active = c.value === selectedColor;
             return (
@@ -74,7 +88,7 @@ export default function OptionPills({
                   type="button"
                   onClick={() => onSelectColor(c.value)}
                   disabled={c.isSoldOut}
-                  aria-pressed={active}
+                  aria-pressed={c.isSoldOut ? undefined : active}
                   className={
                     'flex shrink-0 flex-col items-center gap-1 rounded-2xl border p-2 transition ' +
                     (active ? 'border-[#0055D4] bg-[#F0F7FF]' : 'border-[#E5E8EB] bg-white') +

@@ -17,6 +17,7 @@ export default function WhyCheapCard() {
       <button
         type="button"
         aria-expanded={open}
+        aria-controls="why-cheap-panel"
         onClick={() => setOpen(!open)}
         className="flex w-full items-center justify-between gap-3 min-h-[44px]"
       >
@@ -36,7 +37,7 @@ export default function WhyCheapCard() {
       </button>
 
       {open && (
-        <>
+        <div id="why-cheap-panel" role="region">
           {t.has('subtitle') && (
             <p className="mt-2 text-xs text-[#6B7280]">{t('subtitle')}</p>
           )}
@@ -51,7 +52,7 @@ export default function WhyCheapCard() {
               </li>
             ))}
           </ul>
-        </>
+        </div>
       )}
     </section>
   );

@@ -53,10 +53,11 @@ export default function ReviewCardList({ items, filterModel, autoGrid = true }: 
           <div
             ref={scrollerRef}
             tabIndex={0}
-            role="group"
+            role="region"
+            aria-roledescription="carousel"
             aria-label={t.has('scroller_aria') ? t('scroller_aria') : 'Review list — use left/right arrow keys to scroll'}
             onKeyDown={onKeyDown}
-            className="scrollbar-hide mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto outline-none focus:ring-2 focus:ring-[#0055D4]/40 rounded-[20px]"
+            className="scrollbar-hide mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto outline-none focus:ring-2 focus:ring-[#0055D4]/60 rounded-[20px]"
           >
             {filtered.map((r) => <ReviewCard key={r.id} review={r} />)}
           </div>

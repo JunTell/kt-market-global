@@ -35,7 +35,8 @@ export default function ProductImageCarousel({ urls, altBase = 'Product image', 
         ref={mainRef}
         className="scrollbar-hide flex w-full snap-x snap-mandatory overflow-x-auto rounded-[20px] bg-[#F9FAFB]"
         tabIndex={0}
-        role="group"
+        role="region"
+        aria-roledescription="carousel"
         aria-label={`${altBase} gallery`}
       >
         {urls.map((url, i) => (

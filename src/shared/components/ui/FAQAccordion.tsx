@@ -54,6 +54,7 @@ export default function FAQAccordion({ namespace = 'Home.FAQ' }: Props) {
                 <button
                   type="button"
                   aria-expanded={isOpen}
+                  aria-controls={`faq-panel-${it.id}`}
                   onClick={() => setOpenId(isOpen ? null : it.id)}
                   className="flex w-full items-center justify-between gap-4 py-4 text-left min-h-[48px]"
                 >
@@ -66,7 +67,11 @@ export default function FAQAccordion({ namespace = 'Home.FAQ' }: Props) {
                   />
                 </button>
                 {isOpen && (
-                  <div className="pb-4 pr-8 text-sm leading-6 text-[#4B5563] break-keep">
+                  <div
+                    id={`faq-panel-${it.id}`}
+                    role="region"
+                    className="pb-4 pr-8 text-sm leading-6 text-[#4B5563] break-keep"
+                  >
                     {it.a}
                   </div>
                 )}
