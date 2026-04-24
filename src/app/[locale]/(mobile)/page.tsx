@@ -35,6 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: 'KT Market Global',
       locale: locale === 'en' ? 'en_US' : locale,
       type: 'website',
+      // TODO-ASSET: /images/og-image-en.jpg does not exist yet — Phase 4 lands it.
       images: [{
         url: locale === 'en' ? '/images/og-image-en.jpg' : '/images/logo.svg',
         width: 1200, height: 630,

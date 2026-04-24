@@ -18,12 +18,19 @@ export default function FAQAccordion({ namespace = 'Home.FAQ' }: Props) {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const hash = window.location.hash.replace(/^#faq-/, '');
-    if (hash && items.some((it) => it.id === hash)) {
-      setOpenId(hash);
-      const el = document.getElementById(`faq-${hash}`);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+
+    const apply = () => {
+      const hash = window.location.hash.replace(/^#faq-/, '');
+      if (hash && items.some((it) => it.id === hash)) {
+        setOpenId(hash);
+        const el = document.getElementById(`faq-${hash}`);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+
+    apply();
+    window.addEventListener('hashchange', apply);
+    return () => window.removeEventListener('hashchange', apply);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
