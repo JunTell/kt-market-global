@@ -17,7 +17,7 @@ export default async function PartnerLogoGrid() {
     <section
       className="px-5 py-10 md:py-14"
       style={{ backgroundColor: 'var(--paper-blue)' }}
-      aria-label="Partner logos"
+      aria-label={t.has('partners_aria') ? t('partners_aria') : 'Partner logos'}
     >
       <div className="mx-auto max-w-layout-max">
         <p className="mb-4 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-[#6B7280]">

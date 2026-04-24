@@ -11,7 +11,7 @@ export default async function TrustStatsStrip() {
     <section
       className="px-5 py-6 md:py-8"
       style={{ backgroundColor: 'var(--paper-blue)' }}
-      aria-label="Trust statistics"
+      aria-label={t.has('stats_aria') ? t('stats_aria') : 'Trust statistics'}
     >
       <div className="mx-auto grid max-w-layout-max grid-cols-3 gap-3 text-center">
         {items.map(({ id, label, value }) => (

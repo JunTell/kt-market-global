@@ -109,7 +109,9 @@
           { "id": "deposit", "label": "Deposit required",  "value": "0 KRW" }
         ]
       },
+      "stats_aria": "Trust statistics",
       "partners_title": "Trusted partners & certifications",
+      "partners_aria": "Partner logos",
       "partners_alt": {
         "kt": "KT",
         "samsung": "Samsung",

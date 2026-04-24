@@ -109,7 +109,9 @@
           { "id": "deposit", "label": "[TODO-LOCALE] Deposit required",  "value": "[TODO-LOCALE] 0 KRW" }
         ]
       },
+      "stats_aria": "[TODO-LOCALE] Trust statistics",
       "partners_title": "[TODO-LOCALE] Trusted partners & certifications",
+      "partners_aria": "[TODO-LOCALE] Partner logos",
       "partners_alt": {
         "kt": "[TODO-LOCALE] KT",
         "samsung": "[TODO-LOCALE] Samsung",
