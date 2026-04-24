@@ -16,6 +16,7 @@ export interface FAQItem {
 }
 
 export interface TrustStat {
+  id: string;
   label: string;
   value: string;
 }

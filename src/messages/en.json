@@ -103,12 +103,11 @@
       "ribbon": "★ Official KT Partner · Licensed Since 2018 · Biz No. 123-45-67890",
       "ribbon_short": "★ Official KT Partner",
       "stats": {
-        "helped_label": "Foreigners helped",
-        "helped_value": "88,000+",
-        "langs_label": "Languages",
-        "langs_value": "4 (EN·JA·ZH·KO)",
-        "deposit_label": "Deposit required",
-        "deposit_value": "0 KRW"
+        "items": [
+          { "id": "helped",  "label": "Foreigners helped", "value": "88,000+" },
+          { "id": "langs",   "label": "Languages",         "value": "4 (EN·JA·ZH·KO)" },
+          { "id": "deposit", "label": "Deposit required",  "value": "0 KRW" }
+        ]
       },
       "partners_title": "Trusted partners & certifications",
       "partners_alt": {

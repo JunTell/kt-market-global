@@ -103,12 +103,11 @@
       "ribbon": "[TODO-LOCALE] ★ Official KT Partner · Licensed Since 2018 · Biz No. 123-45-67890",
       "ribbon_short": "[TODO-LOCALE] ★ Official KT Partner",
       "stats": {
-        "helped_label": "[TODO-LOCALE] Foreigners helped",
-        "helped_value": "[TODO-LOCALE] 88,000+",
-        "langs_label": "[TODO-LOCALE] Languages",
-        "langs_value": "[TODO-LOCALE] 4 (EN·JA·ZH·KO)",
-        "deposit_label": "[TODO-LOCALE] Deposit required",
-        "deposit_value": "[TODO-LOCALE] 0 KRW"
+        "items": [
+          { "id": "helped",  "label": "[TODO-LOCALE] Foreigners helped", "value": "[TODO-LOCALE] 88,000+" },
+          { "id": "langs",   "label": "[TODO-LOCALE] Languages",         "value": "[TODO-LOCALE] 4 (EN·JA·ZH·KO)" },
+          { "id": "deposit", "label": "[TODO-LOCALE] Deposit required",  "value": "[TODO-LOCALE] 0 KRW" }
+        ]
       },
       "partners_title": "[TODO-LOCALE] Trusted partners & certifications",
       "partners_alt": {
