@@ -3,6 +3,7 @@
 - **Date:** 2026-04-24
 - **Scope (1차):** 홈(/) 재구성 · 기기 상세(/phone) 재구성 · 신뢰 요소 전역 도입
 - **Out of scope:** 주문/결과(`/phone/order`, `/phone/result`), 회사소개(`/company`), 문의(`/inquiry`), 정책(`/policy`), 어드민(`/admin/*`), 상품 리스트 카드 내부(`GongguDealCard`), Supabase 스키마
+- **관련 문서:** `DESIGN-FIXES.md` (레포 루트) — 기존 디자인 리뷰 findings(FINDING-001~014). 이 스펙은 그중 FINDING-001·003·005·013·014를 흡수하고, 002·004·006~012는 구현 PR에서 기회가 있을 때 곁들여 처리한다.
 
 ---
 
@@ -65,7 +66,7 @@ Framer 참조(`/Users/mike/Documents/GitHub/KT-Market/framer/phone/*`)의 컴포
 
 | 파일 | 변경 |
 |---|---|
-| `HeroSection.tsx` | stat 카드 3개 제거, ARC 이미지 제거, 우측 panel 제거 → 헤드라인 + CTA 2개 + 폰 이미지 (또는 ARC 유지 대체) |
+| `HeroSection.tsx` | 내부 **stat 카드 3개**(`No Korean` / `Zero deposit` / `88 handled`) 제거, ARC 이미지 제거, 우측 panel 제거 → 헤드라인 + **트러스트 배지 3개**(`badge_official` / `badge_postpaid` / `badge_specialist`, 유지) + CTA 2개 + 폰 이미지 (또는 ARC 유지 대체) |
 | `ConversionHighlights.tsx` | 좌측 통계 3개 제거, 하이라이트 4→3 축약, 우측 3-step 유지 |
 | `PhoneDetailClient.tsx` | step 1/2 분리 제거 → 단일 스크롤. "Purchase Ready" 박스 + highlight 3개 삭제. Modal 기반 옵션을 인라인 pills로. `WhyCheapCard` · `ReviewCardList` · `FAQAccordion` 추가. Sticky CTA 유지 |
 | `ModelListClient.tsx` | 헤더/필터 유지, 카드 내부는 건드리지 않음 |
@@ -221,7 +222,7 @@ spacing
 
 순서:
 1. **PartnerRibbon** — navy-700, 24px, 중앙정렬, 11px, 1줄. 375px에서는 "★ Official KT Partner" 만 (md: 이상은 full).
-2. **HeroSection (리팩)** — 배경 그라데이션/그리드 overlay 유지. 좌측: 트러스트 배지 3개 → H1 → subtitle → CTA 2개 (주=Check Eligibility 빨강, 부=Shop Phones 보더). 우측: hero-phones.webp 또는 현재 ARC 유지. 하단 "No Hidden Conditions" 배지 유지.
+2. **HeroSection (리팩)** — 배경 그라데이션/그리드 overlay 유지. 좌측: 트러스트 배지 3개(`badge_official`/`badge_postpaid`/`badge_specialist`, 기존 요소 유지) → H1 → subtitle → CTA 2개 (주=Check Eligibility 빨강, 부=Shop Phones 보더). 내부 stat 카드 3개(`No Korean`/`Zero deposit`/`88 handled`)는 제거하고 그 내용은 `TrustStatsStrip`(섹션 3)으로 이동. 우측: hero-phones.webp 또는 현재 ARC 유지. 하단 "No Hidden Conditions" 배지 유지.
 3. **TrustStatsStrip** — 배경 paper-blue, py-24. 3-cell flex, big number + uppercase label.
 4. **ReviewCardList** — 배경 paper, py-56/80. 헤더(eyebrow "★★★★★ 4.9/5 · 1,200+ reviews" + h2 + subtitle) + 가로 overflow-x-auto snap-x, 카드 280px, gap 12.
 5. **ModelListContainer** — 배경 paper-blue, 기존 컴포넌트 유지.
