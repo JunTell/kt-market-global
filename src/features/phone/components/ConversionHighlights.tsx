@@ -1,15 +1,14 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { BadgeCheck, CreditCard, Globe2, PackageCheck, ShieldCheck, Sparkles } from 'lucide-react';
+import { BadgeCheck, CreditCard, Globe2, ShieldCheck, Sparkles } from 'lucide-react';
 
-const ICONS = [ShieldCheck, CreditCard, Globe2, PackageCheck];
+const ICONS = [ShieldCheck, CreditCard, Globe2];
 
 export default function ConversionHighlights() {
   const t = useTranslations('Home.Conversion');
-  const heroT = useTranslations('Home.Hero');
 
-  const highlightKeys = ['item1', 'item2', 'item3', 'item4'] as const;
+  const highlightKeys = ['item1', 'item2', 'item3'] as const;
   const stepKeys = ['step1', 'step2', 'step3'] as const;
 
   return (
@@ -18,12 +17,12 @@ export default function ConversionHighlights() {
         className="absolute inset-0 opacity-70"
         style={{
           background:
-            'radial-gradient(circle at top left, rgba(0, 85, 212, 0.08), transparent 32%), radial-gradient(circle at bottom right, rgba(255, 176, 32, 0.12), transparent 28%)',
+            'radial-gradient(circle at top left, rgba(0,85,212,.08), transparent 32%), radial-gradient(circle at bottom right, rgba(255,176,32,.12), transparent 28%)',
         }}
       />
 
       <div className="relative mx-auto grid w-full max-w-layout-max gap-6 md:grid-cols-[1.1fr_0.9fr]">
-        <div className="rounded-[32px] border border-white/70 bg-white/90 p-6 shadow-[0_20px_60px_rgba(17,28,46,0.08)] backdrop-blur md:p-8">
+        <div className="rounded-[32px] border border-white/70 bg-white/90 p-6 shadow-[0_20px_60px_rgba(17,28,46,.08)] backdrop-blur md:p-8">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-[#eaf2ff] px-3 py-1.5 text-xs font-bold text-[#0055d4]">
             <Sparkles className="h-3.5 w-3.5" />
             <span>{t('eyebrow')}</span>
@@ -32,47 +31,16 @@ export default function ConversionHighlights() {
           <h2 className="mb-3 text-2xl font-bold text-[#111827] md:text-[32px] md:leading-tight">
             {t('title')}
           </h2>
-          <p className="mb-8 max-w-2xl text-sm leading-6 text-[#4b5563] md:text-base">
+          <p className="mb-6 max-w-2xl text-sm leading-6 text-[#4b5563] md:text-base">
             {t('description')}
           </p>
 
-          <div className="mb-6 rounded-[24px] border border-[#d9e7fb] bg-[#edf4ff] px-4 py-4">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#5c6f91] md:text-[11px]">
-              {heroT('consultation_label')}
-            </p>
-            <div className="mt-2 flex flex-col gap-1 md:flex-row md:items-end md:justify-between">
-              <p className="text-lg font-bold text-[#111827] md:text-xl">
-                {heroT('consultation_value')}
-              </p>
-              <p className="hidden text-xs leading-5 text-[#5b6578] md:block md:max-w-sm md:text-sm">
-                {heroT('consultation_desc')}
-              </p>
-            </div>
-          </div>
-
-          <div className="mb-8 grid gap-3 md:grid-cols-3">
-            {(['stat1', 'stat2', 'stat3'] as const).map((key) => (
-              <div key={key} className="rounded-[22px] border border-[#e5edf8] bg-[#f8fbff] px-4 py-4">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#7b8794] md:text-[11px]">
-                  {t(`${key}_label`)}
-                </p>
-                <p className="mt-2 text-xl font-bold text-[#111827] md:text-lg">
-                  {t(`${key}_value`)}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="grid gap-3 md:grid-cols-2">
-            {highlightKeys.map((key, index) => {
-              const Icon = ICONS[index];
-
+          <div className="grid gap-3 md:grid-cols-3">
+            {highlightKeys.map((key, i) => {
+              const Icon = ICONS[i];
               return (
-                <div
-                  key={key}
-                  className="rounded-[24px] border border-[#e5edf8] bg-[#fbfdff] p-4 shadow-sm"
-                >
-                  <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#edf4ff] text-[#0055d4]">
+                <div key={key} className="rounded-[24px] border border-[#e5edf8] bg-[#fbfdff] p-4 shadow-sm">
+                  <div className="mb-3 text-[#0055d4]">
                     <Icon className="h-5 w-5" />
                   </div>
                   <h3 className="mb-1 text-sm font-bold text-[#111827] md:text-base">
@@ -87,7 +55,7 @@ export default function ConversionHighlights() {
           </div>
         </div>
 
-        <div className="rounded-[32px] bg-[#0f172a] p-6 text-white shadow-[0_20px_70px_rgba(15,23,42,0.28)] md:p-8">
+        <div className="rounded-[32px] bg-[#0f172a] p-6 text-white shadow-[0_20px_70px_rgba(15,23,42,.28)] md:p-8">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-white/90">
             <BadgeCheck className="h-3.5 w-3.5 text-[#7dd3fc]" />
             <span>{t('journey_eyebrow')}</span>
@@ -101,10 +69,10 @@ export default function ConversionHighlights() {
           <div className="space-y-4">
             {stepKeys.map((key, index) => (
               <div key={key} className="rounded-[24px] border border-white/10 bg-white/5 p-4">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-white text-sm font-bold text-[#111827]">
-                  {index + 1}
+                <div className="mb-2 text-[11px] font-bold tracking-[0.18em] text-white/50 uppercase">
+                  Step {index + 1}
                 </div>
-                <h4 className="mb-1 text-sm font-bold md:text-base">{t(`${key}.title`)}</h4>
+                <h3 className="mb-1 text-sm font-bold md:text-base">{t(`${key}.title`)}</h3>
                 <p className="text-xs leading-5 text-white/70 md:text-sm">{t(`${key}.desc`)}</p>
               </div>
             ))}

@@ -4,13 +4,14 @@ import { Metadata } from 'next';
 import HeroSection from '@/features/phone/components/HeroSection';
 import ModelListContainer from '@/features/phone/components/ModelListContainer';
 import Footer from '@/shared/components/layout/Footer';
-import EligibilityCheckerWrapper from '@/features/phone/components/EligibilityCheckerWrapper';
 import ConversionHighlights from '@/features/phone/components/ConversionHighlights';
 import ChatBotWrapper from '@/features/inquiry/components/ChatBotWrapper';
+import TrustStatsStrip from '@/shared/components/ui/TrustStatsStrip';
+import ReviewCardList from '@/shared/components/ui/ReviewCardList';
+import FAQAccordion from '@/shared/components/ui/FAQAccordion';
+import PartnerLogoGrid from '@/shared/components/ui/PartnerLogoGrid';
 
-type Props = {
-  params: Promise<{ locale: string }>;
-};
+type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -21,14 +22,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: t('description'),
     keywords: t.has('keywords') ? (t.raw('keywords') as string[]) : [],
     robots: {
-      index: true,
-      follow: true,
+      index: true, follow: true,
       googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
+        index: true, follow: true,
+        'max-video-preview': -1, 'max-image-preview': 'large', 'max-snippet': -1,
       },
     },
     openGraph: {
@@ -38,14 +35,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: 'KT Market Global',
       locale: locale === 'en' ? 'en_US' : locale,
       type: 'website',
-      images: [
-        {
-          url: locale === 'en' ? '/images/og-image-en.jpg' : '/images/logo.svg',
-          width: 1200,
-          height: 630,
-          alt: 'Global KT Market - Mobile Service for Foreigners',
-        },
-      ],
+      images: [{
+        url: locale === 'en' ? '/images/og-image-en.jpg' : '/images/logo.svg',
+        width: 1200, height: 630,
+        alt: 'Global KT Market - Mobile Service for Foreigners',
+      }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -53,9 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: t.has('twitter_description') ? t('twitter_description') : t('og_description'),
       images: [locale === 'en' ? '/images/og-image-en.jpg' : '/images/logo.svg'],
     },
-    alternates: {
-      canonical: `https://global.ktmarket.co.kr/${locale}`,
-    },
+    alternates: { canonical: `https://global.ktmarket.co.kr/${locale}` },
   };
 }
 
@@ -65,10 +57,10 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white font-sans max-w-[940px] mx-auto">
       <HeroSection />
+      <TrustStatsStrip />
+      <ReviewCardList />
 
-      <ConversionHighlights />
-
-      <section id="products-section" className="px-4 py-14 md:py-20">
+      <section id="products-section" className="px-4 py-14 md:py-20 bg-[#f4f8fc]">
         <div className="mb-8 text-center">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.24em] text-[#0055D4]">
             {t('Phone.ModelList.eyebrow')}
@@ -80,31 +72,12 @@ export default function Home() {
             {t('Phone.ModelList.section_desc')}
           </p>
         </div>
-        <ModelListContainer
-          sectionTitle=""
-          planId="ppllistobj_0808"
-        />
+        <ModelListContainer sectionTitle="" planId="ppllistobj_0808" />
       </section>
 
-      <section
-        id="eligibility-section"
-        className="border-y border-grey-200 bg-base px-4 py-14 md:px-12 md:py-20"
-      >
-        <div className="w-full max-w-layout-max mx-auto">
-          <div className="max-w-md mx-auto text-center mb-6 md:mb-8">
-            <span className="text-primary font-bold tracking-wider uppercase text-[10px] md:text-xs mb-1.5 block">
-              {t('Home.Eligibility.badge')}
-            </span>
-            <h2 className="text-xl md:text-3xl font-bold text-grey-900 mb-2 md:mb-3">
-              {t('Home.Eligibility.title')}
-            </h2>
-            <p className="text-grey-700 text-xs md:text-sm whitespace-pre-line leading-relaxed">
-              {t('Home.Eligibility.desc')}
-            </p>
-          </div>
-          <EligibilityCheckerWrapper />
-        </div>
-      </section>
+      <ConversionHighlights />
+      <FAQAccordion namespace="Home.FAQ" />
+      <PartnerLogoGrid />
 
       <Footer />
       <ChatBotWrapper />

@@ -1,14 +1,14 @@
 import ChatBot from '@/features/inquiry/components/ChatBot';
-import Header from "@/shared/components/layout/Header";
-import ScrollToTop from "@/shared/components/ui/ScrollToTop";
+import Header from '@/shared/components/layout/Header';
+import ScrollToTop from '@/shared/components/ui/ScrollToTop';
+import PartnerRibbon from '@/shared/components/ui/PartnerRibbon';
+import ConsultationBar from '@/shared/components/ui/ConsultationBar';
 
 type Props = {
   children: React.ReactNode;
 };
 
-export default function MobileLayout({
-  children,
-}: Props) {
+export default function MobileLayout({ children }: Props) {
   return (
     <div
       id="main-scroll-container"
@@ -16,10 +16,10 @@ export default function MobileLayout({
     >
       <ScrollToTop />
 
+      <PartnerRibbon />
       <Header />
-      <main>
-        {children}
-      </main>
+      <main>{children}</main>
+      <ConsultationBar />
       <ChatBot />
     </div>
   );
