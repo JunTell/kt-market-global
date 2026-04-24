@@ -13,7 +13,7 @@ export default function WhyCheapCard() {
   if (items.length === 0) return null;
 
   return (
-    <section className="my-4 rounded-[20px] border border-[#FFCC80] bg-[#FFF7ED] p-4">
+    <section className="rounded-[20px] border border-[#FFCC80] bg-[#FFF7ED] p-4">
       <button
         type="button"
         aria-expanded={open}

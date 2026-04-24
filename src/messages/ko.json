@@ -142,6 +142,7 @@
     "FAQ": {
       "title": "[TODO-LOCALE] Frequently asked questions",
       "subtitle": "[TODO-LOCALE] Answers to the questions foreigners ask us most",
+      "aria_region": "[TODO-LOCALE] Frequently asked questions",
       "items": [
         { "id": "is-kt-official", "q": "[TODO-LOCALE] Is this really KT official?", "a": "[TODO-LOCALE] Yes. We are a KT-licensed partner since 2018, registered as KT Market (Biz No. 123-45-67890). Your line is activated directly on the KT network." },
         { "id": "documents", "q": "[TODO-LOCALE] What documents do I need?", "a": "[TODO-LOCALE] ARC (Alien Registration Card) and a Korean bank account or an international credit card are typically enough. We review your documents before activation so there are no surprises." },
@@ -647,6 +648,7 @@
     },
     "FAQ": {
       "title": "[TODO-LOCALE] Questions about this phone",
+      "aria_region": "[TODO-LOCALE] Phone FAQ",
       "items": [
         { "id": "phone-warranty", "q": "[TODO-LOCALE] Is the phone brand new and under KT warranty?", "a": "[TODO-LOCALE] Yes. Every device is brand new, sealed, and carries the standard KT manufacturer warranty." },
         { "id": "phone-unlock", "q": "[TODO-LOCALE] Is the phone unlocked?", "a": "[TODO-LOCALE] KT devices are unlocked and work with any carrier after your KT contract ends." },

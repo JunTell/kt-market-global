@@ -30,7 +30,10 @@ export default function FAQAccordion({ namespace = 'Home.FAQ' }: Props) {
   if (items.length === 0) return null;
 
   return (
-    <section className="bg-white px-5 py-14 md:py-20" aria-label="FAQ">
+    <section
+      className="bg-white px-5 py-14 md:py-20"
+      aria-label={t.has('aria_region') ? t('aria_region') : 'FAQ'}
+    >
       <div className="mx-auto max-w-[720px]">
         <h2 className="mb-2 text-[22px] md:text-[28px] font-bold text-[#111827]">{t('title')}</h2>
         {t.has('subtitle') && (
