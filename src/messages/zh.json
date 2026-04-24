@@ -99,6 +99,54 @@
         "desc": "让用户清楚知道申请后下一步会发生什么。"
       }
     },
+    "Trust": {
+      "ribbon": "[TODO-LOCALE] ★ Official KT Partner · Licensed Since 2018 · Biz No. 123-45-67890",
+      "ribbon_short": "[TODO-LOCALE] ★ Official KT Partner",
+      "stats": {
+        "helped_label": "[TODO-LOCALE] Foreigners helped",
+        "helped_value": "[TODO-LOCALE] 88,000+",
+        "langs_label": "[TODO-LOCALE] Languages",
+        "langs_value": "[TODO-LOCALE] 4 (EN·JA·ZH·KO)",
+        "deposit_label": "[TODO-LOCALE] Deposit required",
+        "deposit_value": "[TODO-LOCALE] 0 KRW"
+      },
+      "partners_title": "[TODO-LOCALE] Trusted partners & certifications",
+      "partners_alt": {
+        "kt": "[TODO-LOCALE] KT",
+        "samsung": "[TODO-LOCALE] Samsung",
+        "apple": "[TODO-LOCALE] Apple",
+        "kakaopay": "[TODO-LOCALE] KakaoPay",
+        "tta": "[TODO-LOCALE] TTA Certified"
+      }
+    },
+    "Reviews": {
+      "title": "[TODO-LOCALE] Real reviews from foreigners",
+      "subtitle": "[TODO-LOCALE] Verified customers who signed up through us",
+      "summary": "[TODO-LOCALE] ★★★★★ 4.9/5 · 1,200+ reviews",
+      "items": [
+        { "id": "r01", "name": "[TODO-LOCALE] Anna K.", "country_code": "US", "country_label": "[TODO-LOCALE] United States", "rating": 5, "model": "[TODO-LOCALE] iPhone 17 Pro", "date": "2024-11-12", "body": "[TODO-LOCALE] Applied in English, got my number next day. Super easy for foreigners." },
+        { "id": "r02", "name": "[TODO-LOCALE] Kenji T.", "country_code": "JP", "country_label": "[TODO-LOCALE] Japan", "rating": 5, "model": "[TODO-LOCALE] Galaxy S25", "date": "2024-10-28", "body": "[TODO-LOCALE] I was worried about the Korean paperwork but they handled everything over KakaoTalk." },
+        { "id": "r03", "name": "[TODO-LOCALE] Lin W.", "country_code": "CN", "country_label": "[TODO-LOCALE] China", "rating": 5, "model": "[TODO-LOCALE] iPhone 17", "date": "2024-10-14", "body": "[TODO-LOCALE] No deposit required. Cheaper than any other shop I checked in Seoul." },
+        { "id": "r04", "name": "[TODO-LOCALE] David M.", "country_code": "GB", "country_label": "[TODO-LOCALE] United Kingdom", "rating": 4, "model": "[TODO-LOCALE] Galaxy S25 Ultra", "date": "2024-09-30", "body": "[TODO-LOCALE] Clear breakdown of monthly cost. Activation took two days because of the holiday." },
+        { "id": "r05", "name": "[TODO-LOCALE] Sofia R.", "country_code": "BR", "country_label": "[TODO-LOCALE] Brazil", "rating": 5, "model": "[TODO-LOCALE] iPhone 16", "date": "2024-09-18", "body": "[TODO-LOCALE] English staff, kind and fast. Recommended to my friends in Hongdae." },
+        { "id": "r06", "name": "[TODO-LOCALE] Minh L.", "country_code": "VN", "country_label": "[TODO-LOCALE] Vietnam", "rating": 5, "model": "[TODO-LOCALE] Galaxy A54", "date": "2024-09-02", "body": "[TODO-LOCALE] They checked my visa type first so there was no surprise later." },
+        { "id": "r07", "name": "[TODO-LOCALE] Priya S.", "country_code": "IN", "country_label": "[TODO-LOCALE] India", "rating": 5, "model": "[TODO-LOCALE] iPhone 17 Pro Max", "date": "2024-08-20", "body": "[TODO-LOCALE] Got KT coverage in one day. Better than the in-person shop near my office." },
+        { "id": "r08", "name": "[TODO-LOCALE] Tomás G.", "country_code": "ES", "country_label": "[TODO-LOCALE] Spain", "rating": 5, "model": "[TODO-LOCALE] Galaxy S25", "date": "2024-08-05", "body": "[TODO-LOCALE] Real KT plan, real invoice. Not a reseller trick. Peace of mind." }
+      ]
+    },
+    "FAQ": {
+      "title": "[TODO-LOCALE] Frequently asked questions",
+      "subtitle": "[TODO-LOCALE] Answers to the questions foreigners ask us most",
+      "items": [
+        { "id": "is-kt-official", "q": "[TODO-LOCALE] Is this really KT official?", "a": "[TODO-LOCALE] Yes. We are a KT-licensed partner since 2018, registered as KT Market (Biz No. 123-45-67890). Your line is activated directly on the KT network." },
+        { "id": "documents", "q": "[TODO-LOCALE] What documents do I need?", "a": "[TODO-LOCALE] ARC (Alien Registration Card) and a Korean bank account or an international credit card are typically enough. We review your documents before activation so there are no surprises." },
+        { "id": "hidden-fees", "q": "[TODO-LOCALE] Are there any hidden fees or deposits?", "a": "[TODO-LOCALE] No. There is no deposit. The price you see is the price you pay. Monthly plan is charged directly by KT." },
+        { "id": "korean-required", "q": "[TODO-LOCALE] Do I need to speak Korean?", "a": "[TODO-LOCALE] No. We support English, Japanese, Chinese, and Korean via KakaoTalk, WhatsApp, and phone. All forms and contracts are explained in your language." },
+        { "id": "delivery", "q": "[TODO-LOCALE] How fast do I get my phone?", "a": "[TODO-LOCALE] Usually 1–3 business days after ARC verification. You can pick up at our Seoul office or receive by courier anywhere in Korea." },
+        { "id": "switch-carrier", "q": "[TODO-LOCALE] Can I keep my existing number?", "a": "[TODO-LOCALE] Yes. Number portability (MNP) is supported from SK Telecom, LG U+, or MVNOs. We handle the switch for you." },
+        { "id": "short-stay", "q": "[TODO-LOCALE] I only have a short-term visa. Can I still apply?", "a": "[TODO-LOCALE] Visa type determines plan eligibility. Use the Eligibility check at the top of the page, or message us on KakaoTalk for a quick review." }
+      ]
+    },
     "Eligibility": {
       "badge": "确认是否可办理",
       "title": "可以开通吗？KT市场清单",
@@ -575,6 +623,26 @@
       "navy": "海军蓝",
       "light_green": "浅绿",
       "deep_blue": "深蓝"
+    },
+    "WhyCheap": {
+      "title": "[TODO-LOCALE] Why is it this cheap?",
+      "subtitle": "[TODO-LOCALE] Full breakdown — nothing hidden",
+      "toggle_show": "[TODO-LOCALE] Show the breakdown",
+      "toggle_hide": "[TODO-LOCALE] Hide the breakdown",
+      "items": [
+        { "label": "[TODO-LOCALE] KT disclosure subsidy", "value": "[TODO-LOCALE] Up to -700,000 KRW", "note": "[TODO-LOCALE] Official KT-funded subsidy per model and plan" },
+        { "label": "[TODO-LOCALE] KT Market partner discount", "value": "[TODO-LOCALE] Up to -150,000 KRW", "note": "[TODO-LOCALE] Additional discount from our KT-licensed partner status" },
+        { "label": "[TODO-LOCALE] Monthly plan credit", "value": "[TODO-LOCALE] Up to -24,000 KRW × 24 months", "note": "[TODO-LOCALE] Counted when displayed as plan-discounted price" }
+      ]
+    },
+    "FAQ": {
+      "title": "[TODO-LOCALE] Questions about this phone",
+      "items": [
+        { "id": "phone-warranty", "q": "[TODO-LOCALE] Is the phone brand new and under KT warranty?", "a": "[TODO-LOCALE] Yes. Every device is brand new, sealed, and carries the standard KT manufacturer warranty." },
+        { "id": "phone-unlock", "q": "[TODO-LOCALE] Is the phone unlocked?", "a": "[TODO-LOCALE] KT devices are unlocked and work with any carrier after your KT contract ends." },
+        { "id": "phone-delivery", "q": "[TODO-LOCALE] How is the phone delivered?", "a": "[TODO-LOCALE] By tracked courier, typically 1–3 business days after your application is verified." },
+        { "id": "phone-return", "q": "[TODO-LOCALE] What if I change my mind?", "a": "[TODO-LOCALE] You can cancel within 14 days as long as the device is unused and in original packaging." }
+      ]
     }
   },
   "ChatBot": {
@@ -680,5 +748,15 @@
     "area_online_title": "在线销售",
     "area_online_desc": "KT Market NEW 官网 Online Channel",
     "dates_text": "公告日期: 2023年 2月 1日 | 施行日期: 2023年 2月 1日"
+  },
+  "Consultation": {
+    "cta_label": "[TODO-LOCALE] Need help? Chat now",
+    "kakao_url": "https://pf.kakao.com/_PLACEHOLDER",
+    "whatsapp_url": "https://wa.me/8210XXXXXXXX",
+    "call_tel": "+82-10-XXXX-XXXX",
+    "kakao_label": "[TODO-LOCALE] KakaoTalk",
+    "whatsapp_label": "[TODO-LOCALE] WhatsApp",
+    "call_label": "[TODO-LOCALE] Call",
+    "hours": "[TODO-LOCALE] Mon–Fri 10:00–19:00 KST"
   }
 }

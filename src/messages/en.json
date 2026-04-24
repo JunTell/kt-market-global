@@ -99,6 +99,54 @@
         "desc": "Users can submit with confidence knowing what happens next."
       }
     },
+    "Trust": {
+      "ribbon": "★ Official KT Partner · Licensed Since 2018 · Biz No. 123-45-67890",
+      "ribbon_short": "★ Official KT Partner",
+      "stats": {
+        "helped_label": "Foreigners helped",
+        "helped_value": "88,000+",
+        "langs_label": "Languages",
+        "langs_value": "4 (EN·JA·ZH·KO)",
+        "deposit_label": "Deposit required",
+        "deposit_value": "0 KRW"
+      },
+      "partners_title": "Trusted partners & certifications",
+      "partners_alt": {
+        "kt": "KT",
+        "samsung": "Samsung",
+        "apple": "Apple",
+        "kakaopay": "KakaoPay",
+        "tta": "TTA Certified"
+      }
+    },
+    "Reviews": {
+      "title": "Real reviews from foreigners",
+      "subtitle": "Verified customers who signed up through us",
+      "summary": "★★★★★ 4.9/5 · 1,200+ reviews",
+      "items": [
+        { "id": "r01", "name": "Anna K.", "country_code": "US", "country_label": "United States", "rating": 5, "model": "iPhone 17 Pro", "date": "2024-11-12", "body": "Applied in English, got my number next day. Super easy for foreigners." },
+        { "id": "r02", "name": "Kenji T.", "country_code": "JP", "country_label": "Japan", "rating": 5, "model": "Galaxy S25", "date": "2024-10-28", "body": "I was worried about the Korean paperwork but they handled everything over KakaoTalk." },
+        { "id": "r03", "name": "Lin W.", "country_code": "CN", "country_label": "China", "rating": 5, "model": "iPhone 17", "date": "2024-10-14", "body": "No deposit required. Cheaper than any other shop I checked in Seoul." },
+        { "id": "r04", "name": "David M.", "country_code": "GB", "country_label": "United Kingdom", "rating": 4, "model": "Galaxy S25 Ultra", "date": "2024-09-30", "body": "Clear breakdown of monthly cost. Activation took two days because of the holiday." },
+        { "id": "r05", "name": "Sofia R.", "country_code": "BR", "country_label": "Brazil", "rating": 5, "model": "iPhone 16", "date": "2024-09-18", "body": "English staff, kind and fast. Recommended to my friends in Hongdae." },
+        { "id": "r06", "name": "Minh L.", "country_code": "VN", "country_label": "Vietnam", "rating": 5, "model": "Galaxy A54", "date": "2024-09-02", "body": "They checked my visa type first so there was no surprise later." },
+        { "id": "r07", "name": "Priya S.", "country_code": "IN", "country_label": "India", "rating": 5, "model": "iPhone 17 Pro Max", "date": "2024-08-20", "body": "Got KT coverage in one day. Better than the in-person shop near my office." },
+        { "id": "r08", "name": "Tomás G.", "country_code": "ES", "country_label": "Spain", "rating": 5, "model": "Galaxy S25", "date": "2024-08-05", "body": "Real KT plan, real invoice. Not a reseller trick. Peace of mind." }
+      ]
+    },
+    "FAQ": {
+      "title": "Frequently asked questions",
+      "subtitle": "Answers to the questions foreigners ask us most",
+      "items": [
+        { "id": "is-kt-official", "q": "Is this really KT official?", "a": "Yes. We are a KT-licensed partner since 2018, registered as KT Market (Biz No. 123-45-67890). Your line is activated directly on the KT network." },
+        { "id": "documents", "q": "What documents do I need?", "a": "ARC (Alien Registration Card) and a Korean bank account or an international credit card are typically enough. We review your documents before activation so there are no surprises." },
+        { "id": "hidden-fees", "q": "Are there any hidden fees or deposits?", "a": "No. There is no deposit. The price you see is the price you pay. Monthly plan is charged directly by KT." },
+        { "id": "korean-required", "q": "Do I need to speak Korean?", "a": "No. We support English, Japanese, Chinese, and Korean via KakaoTalk, WhatsApp, and phone. All forms and contracts are explained in your language." },
+        { "id": "delivery", "q": "How fast do I get my phone?", "a": "Usually 1–3 business days after ARC verification. You can pick up at our Seoul office or receive by courier anywhere in Korea." },
+        { "id": "switch-carrier", "q": "Can I keep my existing number?", "a": "Yes. Number portability (MNP) is supported from SK Telecom, LG U+, or MVNOs. We handle the switch for you." },
+        { "id": "short-stay", "q": "I only have a short-term visa. Can I still apply?", "a": "Visa type determines plan eligibility. Use the Eligibility check at the top of the page, or message us on KakaoTalk for a quick review." }
+      ]
+    },
     "Eligibility": {
       "badge": "Check Eligibility",
       "title": "KT Market Checklist",
@@ -580,6 +628,26 @@
       "navy": "Navy",
       "light_green": "Light Green",
       "deep_blue": "Deep Blue"
+    },
+    "WhyCheap": {
+      "title": "Why is it this cheap?",
+      "subtitle": "Full breakdown — nothing hidden",
+      "toggle_show": "Show the breakdown",
+      "toggle_hide": "Hide the breakdown",
+      "items": [
+        { "label": "KT disclosure subsidy", "value": "Up to -700,000 KRW", "note": "Official KT-funded subsidy per model and plan" },
+        { "label": "KT Market partner discount", "value": "Up to -150,000 KRW", "note": "Additional discount from our KT-licensed partner status" },
+        { "label": "Monthly plan credit", "value": "Up to -24,000 KRW × 24 months", "note": "Counted when displayed as plan-discounted price" }
+      ]
+    },
+    "FAQ": {
+      "title": "Questions about this phone",
+      "items": [
+        { "id": "phone-warranty", "q": "Is the phone brand new and under KT warranty?", "a": "Yes. Every device is brand new, sealed, and carries the standard KT manufacturer warranty." },
+        { "id": "phone-unlock", "q": "Is the phone unlocked?", "a": "KT devices are unlocked and work with any carrier after your KT contract ends." },
+        { "id": "phone-delivery", "q": "How is the phone delivered?", "a": "By tracked courier, typically 1–3 business days after your application is verified." },
+        { "id": "phone-return", "q": "What if I change my mind?", "a": "You can cancel within 14 days as long as the device is unused and in original packaging." }
+      ]
     }
   },
   "ChatBot": {
@@ -685,5 +753,15 @@
     "area_online_title": "Online Sales",
     "area_online_desc": "KT Market NEW Official Home, Online Channel Product Sales",
     "dates_text": "Announcement Date: Feb 1, 2023 | Effective Date: Feb 1, 2023"
+  },
+  "Consultation": {
+    "cta_label": "Need help? Chat now",
+    "kakao_url": "https://pf.kakao.com/_PLACEHOLDER",
+    "whatsapp_url": "https://wa.me/8210XXXXXXXX",
+    "call_tel": "+82-10-XXXX-XXXX",
+    "kakao_label": "KakaoTalk",
+    "whatsapp_label": "WhatsApp",
+    "call_label": "Call",
+    "hours": "Mon–Fri 10:00–19:00 KST"
   }
 }

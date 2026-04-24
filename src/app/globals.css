@@ -54,6 +54,9 @@
   --bg-pressed: #F2F4F6;
   /* Pressed State */
 
+  /* 3.4 Paper Blue (section rhythm) */
+  --paper-blue: #F4F8FC;
+
   /* 4. Colors - Brand & Functional */
   --primary-default: #3182F6;
   /* Toss Blue */
@@ -151,6 +154,7 @@
   --color-bg-grouped: var(--bg-grouped);
   --color-bg-input: var(--bg-input);
   --color-bg-pressed: var(--bg-pressed);
+  --color-paper-blue: var(--paper-blue);
 
   --color-overlay: var(--overlay);
 
@@ -335,4 +339,9 @@ body {
 /* Safe Area Utility */
 @utility pb-safe {
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Tabular numerals for price alignment */
+@utility tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
